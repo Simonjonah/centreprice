@@ -38,9 +38,19 @@
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
+                    <th>Tract ID</th>
                     <th>Roots</th>
                     <th>Category</th>
+                    <th>Sub Category</th>
+                    <th>Product Name</th>
+                    <th>Image</th>
+                    <th>Amount</th>
+                    <th>Percent</th>
+                    <th>Status</th>
+                    <th>Approve</th>
+                    <th>Suspend</th>
                     <th>Edit</th>
+
                     <th>Delete</th>
                     <th>Date</th>
                   </tr>
@@ -56,21 +66,47 @@
                   <div class="alert alert-danger">
                   {{ Session::get('fail') }}
                   @endif
-                  @foreach ($view_categories as $view_categorie)
+                  @foreach ($view_products as $view_product)
                     <tr>
-                        <td>{{ $view_categorie->root['rootname'] }}</td>
-                        <td>{{ $view_categorie->category }}</td>
-                        <td><a href="{{ url('admin/editcategory/'.$view_categorie->id) }}"
-                          class='btn btn-info'>
-                           <i class="far fa-edit"></i>
+                        <td>{{ $view_product->ref_no }}</td>
+                        <td>{{ $view_product->subcategory->category->root['rootname'] }}</td>
+                        <td>{{ $view_product->subcategory->category['category'] }}</td>
+                        <td>{{ $view_product->subcategory['subcategory'] }}</td>
+                        <td>{{ $view_product->productname }}</td>
+                        <td><img style="width: auto; height: 30px;" src="{{ URL::asset("/public/../$view_product->images1")}}" alt=""></td>
+                        <td>{{ $view_product->amount }}</td>
+                        <td>{{ $view_product->percent }}</td>
+                        <td>@if ($view_product->status == null)
+                            <span class="badge badge-warning"> Not Approved Yet</span>
+                          @elseif($view_product->status == 'suspend')
+                          <span class="badge badge-danger"> Suspended</span>
+                          @elseif($view_product->status == 'reject')
+                          <span class="badge badge-danger"> Rejected</span>
+                          @elseif($view_product->status == 'approved')
+                          <span class="badge badge-success"> Approved</span>
+                          @elseif($view_product->status == 'admitted')
+                          
+                          <span class="badge badge-success">Admitted</span>
+                          @endif</td>
+                        <td><a href="{{ url('admin/approveproduct/'.$view_product->slug) }}"
+                          class='btn btn-success'>
+                           <i class="far fa-user"></i>
                        </a></td>
+                       <td><a href="{{ url('admin/suspendproduct/'.$view_product->slug) }}"
+                        class='btn btn-warning'>
+                         <i class="far fa-bell"></i>
+                     </a></td>
+                       <td><a href="{{ url('admin/editproduct/'.$view_product->slug) }}"
+                        class='btn btn-info'>
+                         <i class="far fa-edit"></i>
+                     </a></td>
                        
                          
-                       <td><a href="{{ url('admin/deletecategory/'.$view_categorie->id) }}"
+                       <td><a href="{{ url('admin/deleteproduct/'.$view_product->slug) }}"
                         class='btn btn-danger'>
                          <i class="far fa-trash-alt"></i>
                      </a></td>
-                     <td>{{ $view_categorie->created_at->format('D d, M Y, H:i')}}</td>
+                     <td>{{ $view_product->created_at->format('D d, M Y, H:i')}}</td>
                     </tr>
                     @endforeach
                   </tbody>
@@ -78,6 +114,9 @@
                   <tr>
                     <th>Root</th>
                     <th>Category</th>
+                    <th>Sub Category</th>
+                    <th>Description</th>
+
                     <th>Edit</th>
                     <th>Delete</th>
                     <th>Date</th>

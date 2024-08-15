@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('productname')->nullable();
             $table->text('images1')->nullable();
             $table->text('images2')->nullable();
+            $table->text('body')->nullable();
             $table->text('images3')->nullable();
             $table->text('images4')->nullable();
             $table->text('images5')->nullable();

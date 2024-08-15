@@ -10,12 +10,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Add Subcategory</h1>
+            <h1>Edit Subcategory of <b>{{ $edit_subcategories->category->root['rootname'] }}</b> <b>{{ $edit_subcategories->category['category'] }}</b> </h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Add Subcategory</li>
+              <li class="breadcrumb-item active">Edit Subcategory  {{ $edit_subcategories->category->root['rootname'] }}</li>
             </ol>
           </div>
         </div>
@@ -35,9 +35,9 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form action="{{ url('admin/createsubcategory') }}" method="post" enctype="multipart/form-data">
+              <form action="{{ url('admin/updatesubcategory/'.$edit_subcategories->slug) }}" method="post" enctype="multipart/form-data">
                   @csrf
-                  {{-- @method('PUT') --}}
+                  @method('PUT')
                   @if (Session::get('success'))
                   <div class="alert alert-success">
                       {{ Session::get('success') }}
@@ -72,7 +72,7 @@
                 <div class="form-group">
                     <label for="">Sub Category Name</label>
                     <input name="subcategory" type="text" @error('subcategory') is-invalid @enderror"
-                    value="{{ old('subcategory') }}" class="form-control" id="" placeholder="Enter subcategory Name">
+                    value="{{ $edit_subcategories->subcategory }}" class="form-control" id="" placeholder="Enter subcategory Name">
                 </div>
                 @error('subcategory')
                     <span class="text-danger">{{ $message }}</span>
@@ -81,8 +81,8 @@
 
                 <div class="form-group">
                     <textarea name="body" id="compose-textarea" @error('body') is-invalid @enderror"
-                    value="{{ old('body') }}" class="form-control" style="height: 300px">
-                     
+                    value="{!! $edit_subcategories->body !!}" class="form-control" style="height: 300px">
+                    {!! $edit_subcategories->body !!}
                     </textarea>
                 </div>
                 @error('body')

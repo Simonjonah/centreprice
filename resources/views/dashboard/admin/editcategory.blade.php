@@ -49,6 +49,20 @@
                   @endif
                     @method('PUT')
                 <div class="card-body">
+                  
+                  <div class="form-group">
+                    <label>Select Root</label>
+                    <select name="root_id" class="form-control select2" style="width: 100%;">
+                      <option value="{{ $edit_categories->root_id }}">{{ $edit_categories->root['rootname'] }}</option>
+                      @foreach ($view_roots as $view_roots)
+                        <option value="{{ $view_roots->id }}">{{ $view_roots->rootname }}</option>
+                      @endforeach
+                      
+                    </select>
+                  </div>
+                  @error('root_id')
+                      <span class="text-danger">{{ $message }}</span>
+                  @enderror
                   <div class="form-group">
                     <label for="">Product Category</label>
                     <input name="category" type="text"@error('category') is-invalid @enderror"

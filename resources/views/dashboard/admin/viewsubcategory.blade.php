@@ -40,6 +40,8 @@
                   <tr>
                     <th>Roots</th>
                     <th>Category</th>
+                    <th>Sub Category</th>
+                    <th>Description</th>
                     <th>Edit</th>
                     <th>Delete</th>
                     <th>Date</th>
@@ -56,21 +58,23 @@
                   <div class="alert alert-danger">
                   {{ Session::get('fail') }}
                   @endif
-                  @foreach ($view_categories as $view_categorie)
+                  @foreach ($view_subcategories as $view_subcategorie)
                     <tr>
-                        <td>{{ $view_categorie->root['rootname'] }}</td>
-                        <td>{{ $view_categorie->category }}</td>
-                        <td><a href="{{ url('admin/editcategory/'.$view_categorie->id) }}"
+                        <td>{{ $view_subcategorie->category->root['rootname'] }}</td>
+                        <td>{{ $view_subcategorie->category['category'] }}</td>
+                        <td>{{ $view_subcategorie->subcategory }}</td>
+                        <td>{{ $view_subcategorie->body }}</td>
+                        <td><a href="{{ url('admin/editsubcategory/'.$view_subcategorie->slug) }}"
                           class='btn btn-info'>
                            <i class="far fa-edit"></i>
                        </a></td>
                        
                          
-                       <td><a href="{{ url('admin/deletecategory/'.$view_categorie->id) }}"
+                       <td><a href="{{ url('admin/deletesubcategory/'.$view_subcategorie->slug) }}"
                         class='btn btn-danger'>
                          <i class="far fa-trash-alt"></i>
                      </a></td>
-                     <td>{{ $view_categorie->created_at->format('D d, M Y, H:i')}}</td>
+                     <td>{{ $view_subcategorie->created_at->format('D d, M Y, H:i')}}</td>
                     </tr>
                     @endforeach
                   </tbody>
@@ -78,6 +82,9 @@
                   <tr>
                     <th>Root</th>
                     <th>Category</th>
+                    <th>Sub Category</th>
+                    <th>Description</th>
+
                     <th>Edit</th>
                     <th>Delete</th>
                     <th>Date</th>

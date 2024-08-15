@@ -10,12 +10,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Add Roots</h1>
+            <h1>Add Photo</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Add Roots</li>
+              <li class="breadcrumb-item active">Add Photo</li>
             </ol>
           </div>
         </div>
@@ -35,8 +35,9 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form action="{{ url('admin/createroot') }}" method="post" enctype="multipart/form-data">
+              <form action="{{ url('admin/add2ndphoto/'.$add_product->ref_no) }}" method="post" enctype="multipart/form-data">
                   @csrf
+                  @method('PUT')
                   @if (Session::get('success'))
                   <div class="alert alert-success">
                       {{ Session::get('success') }}
@@ -50,22 +51,14 @@
 
                 <div class="card-body">
                   <div class="form-group">
-                    <label for="">Root</label>
-                    <input name="rootname" type="text"@error('rootname') is-invalid @enderror"
-                    value="{{ old('rootname') }}" class="form-control" id="" placeholder="Enter rootname">
+                    <label for="">Images 2</label>
+                    <input name="images2" type="file"@error('images2') is-invalid @enderror"
+                    value="{{ old('images2') }}" class="form-control" id="">
                   </div>
-                  @error('rootname')
+                  @error('images2')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
 
-                    <!-- <div class="form-group">
-                    <label for="">Senatarial District</label>
-                    <input name="senate" type="text"@error('senate') is-invalid @enderror"
-                    value="{{ old('senate') }}" class="form-control" id="" placeholder="Enter Senatarial District">
-                  </div>
-                  @error('senate')
-                    <span class="text-danger">{{ $message }}</span>
-                    @enderror -->
                   </div>
                 </div>
 

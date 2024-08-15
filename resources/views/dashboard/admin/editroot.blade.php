@@ -35,8 +35,9 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form action="{{ url('admin/createroot') }}" method="post" enctype="multipart/form-data">
+              <form action="{{ url('admin/updatreroot/'.$edit_root->slug) }}" method="post" enctype="multipart/form-data">
                   @csrf
+                  @method('PUT')
                   @if (Session::get('success'))
                   <div class="alert alert-success">
                       {{ Session::get('success') }}
@@ -52,7 +53,7 @@
                   <div class="form-group">
                     <label for="">Root</label>
                     <input name="rootname" type="text"@error('rootname') is-invalid @enderror"
-                    value="{{ old('rootname') }}" class="form-control" id="" placeholder="Enter rootname">
+                    value="{{ $edit_root->rootname }}" class="form-control" id="" placeholder="Enter rootname">
                   </div>
                   @error('rootname')
                     <span class="text-danger">{{ $message }}</span>

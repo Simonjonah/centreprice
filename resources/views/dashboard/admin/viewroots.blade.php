@@ -38,8 +38,7 @@
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
-                    <th>Roots</th>
-                    <th>Category</th>
+                    <th>Name</th>
                     <th>Edit</th>
                     <th>Delete</th>
                     <th>Date</th>
@@ -56,28 +55,26 @@
                   <div class="alert alert-danger">
                   {{ Session::get('fail') }}
                   @endif
-                  @foreach ($view_categories as $view_categorie)
+                  @foreach ($view_roots as $view_root)
                     <tr>
-                        <td>{{ $view_categorie->root['rootname'] }}</td>
-                        <td>{{ $view_categorie->category }}</td>
-                        <td><a href="{{ url('admin/editcategory/'.$view_categorie->id) }}"
+                        <td>{{ $view_root->rootname }}</td>
+                        <td><a href="{{ url('admin/editroot/'.$view_root->slug) }}"
                           class='btn btn-info'>
                            <i class="far fa-edit"></i>
                        </a></td>
                        
                          
-                       <td><a href="{{ url('admin/deletecategory/'.$view_categorie->id) }}"
+                       <td><a href="{{ url('admin/deleteroots/'.$view_root->slug) }}"
                         class='btn btn-danger'>
                          <i class="far fa-trash-alt"></i>
                      </a></td>
-                     <td>{{ $view_categorie->created_at->format('D d, M Y, H:i')}}</td>
+                     <td>{{ $view_root->created_at->format('D d, M Y, H:i')}}</td>
                     </tr>
                     @endforeach
                   </tbody>
                   <tfoot>
                   <tr>
-                    <th>Root</th>
-                    <th>Category</th>
+                    <th>Name</th>
                     <th>Edit</th>
                     <th>Delete</th>
                     <th>Date</th>

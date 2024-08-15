@@ -9,6 +9,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\MilestoneController;
 use App\Http\Controllers\FlutterwaveController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RootController;
 use App\Http\Controllers\SubcategoryController;
 use App\Models\Admin;
 
@@ -64,6 +66,33 @@ Route::prefix('admin')->name('admin.')->group(function() {
         Route::post('/createcategory', [CategoryController::class, 'createcategory'])->name('createcategory');
         Route::get('/addsubcategory', [SubcategoryController::class, 'addsubcategory'])->name('addsubcategory');
         Route::post('/createsubcategory', [SubcategoryController::class, 'createsubcategory'])->name('createsubcategory');
+        Route::get('/viewsubcategory', [SubcategoryController::class, 'viewsubcategory'])->name('viewsubcategory');
+        Route::get('/editsubcategory/{slug}', [SubcategoryController::class, 'editsubcategory'])->name('editsubcategory');
+        Route::put('/updatesubcategory/{slug}', [SubcategoryController::class, 'updatesubcategory'])->name('updatesubcategory');
+        
+        Route::get('/addproducts', [ProductController::class, 'addproducts'])->name('addproducts');
+        Route::get('/firstphoto/{ref_no}', [ProductController::class, 'firstphoto'])->name('firstphoto');
+        Route::post('/createproduct', [ProductController::class, 'createproduct'])->name('createproduct');
+        Route::put('/add2ndphoto/{ref_no}', [ProductController::class, 'add2ndphoto'])->name('add2ndphoto');
+        Route::get('/thirdphoto/{ref_no}', [ProductController::class, 'thirdphoto'])->name('thirdphoto');
+        Route::put('/add3photo/{ref_no}', [ProductController::class, 'add3photo'])->name('add3photo');
+        
+        Route::get('/fourthphoto/{ref_no}', [ProductController::class, 'fourthphoto'])->name('fourthphoto');
+        Route::put('/add4photo/{ref_no}', [ProductController::class, 'add4photo'])->name('add4photo');
+        Route::get('/fifthphoto/{ref_no}', [ProductController::class, 'fifthphoto'])->name('fifthphoto');
+        Route::put('/add5photo/{ref_no}', [ProductController::class, 'add5photo'])->name('add5photo');
+        Route::get('/approveproduct/{slug}', [ProductController::class, 'approveproduct'])->name('approveproduct');
+        Route::get('/suspendproduct/{slug}', [ProductController::class, 'suspendproduct'])->name('suspendproduct');
+        Route::get('/editproduct/{slug}', [ProductController::class, 'editproduct'])->name('editproduct');
+        Route::get('/viewproducts', [ProductController::class, 'viewproducts'])->name('viewproducts');
+        
+        Route::post('/createroot', [RootController::class, 'createroot'])->name('createroot');
+        Route::get('/addroots', [RootController::class, 'addroots'])->name('addroots');
+        Route::get('/viewroots', [RootController::class, 'viewroots'])->name('viewroots');
+        Route::get('/editroot/{slug}', [RootController::class, 'editroot'])->name('editroot');
+        Route::put('/updatreroot/{slug}', [RootController::class, 'updatreroot'])->name('updatreroot');
+        Route::get('/deleteroots/{slug}', [RootController::class, 'deleteroots'])->name('deleteroots');
+        
         
         
         // Route::get('/viewusers', [UserController::class, 'viewusers'])->name('viewusers');
