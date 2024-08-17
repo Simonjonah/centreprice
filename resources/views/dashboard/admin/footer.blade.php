@@ -9,7 +9,7 @@
 </div>
 
 <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('assets/') }}"></script>
 <script src="{{ asset('assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
 <script src="{{ asset('assets/dist/js/adminlte.js') }}"></script>
 <script src="{{ asset('assets/dist/js/demo.js') }}"></script>
@@ -61,6 +61,10 @@
 <!-- Summernote -->
 <script src="{{ asset('assets/plugins/summernote/summernote-bs4.min.js') }}"></script>
 <!-- Page Script -->
+
+<script src="{{ asset('assets/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/ekko-lightbox/ekko-lightbox.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/filterizr/jquery.filterizr.min.js') }}"></script>
 
 <script type="text/javascript">
   $(function () {
@@ -160,6 +164,8 @@ $(function () {
     //Add text editor
     $('#compose-textarea').summernote()
   })
+
+
 </script>
 
 </body>

@@ -56,12 +56,18 @@ class Ngstate extends Model
 
     public function lgas(): HasMany
     {
-        return $this->hasMany(Lga::class, 'state');
+        return $this->hasMany(Lga::class);
     }
    
     public function districts(): HasMany 
     {
         return $this->hasMany(District::class);
+    }
+
+
+    public function users(): HasMany
+    {
+        return $this->hasMany(User::class);
     }
 
 }

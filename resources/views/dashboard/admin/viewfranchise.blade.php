@@ -39,13 +39,16 @@
                   <thead>
                   <tr>
                     <th>Tract ID</th>
-                    <th>Roots</th>
-                    <th>Category</th>
-                    <th>Sub Category</th>
-                    {{-- <th>Product Name</th> --}}
+                    <th>Name</th>
+                    <th>Role</th>
+                    <th>Phone</th>
+                    <th>Email</th>
                     <th>Image</th>
                     <th>Amount</th>
                     <th>Percent</th>
+                    <th>State</th>
+                    <th>Districts</th>
+                    <th>LGA</th>
                     <th>View</th>
                     <th>Status</th>
                     <th>Approve</th>
@@ -67,74 +70,86 @@
                   <div class="alert alert-danger">
                   {{ Session::get('fail') }}
                   @endif
-                  @foreach ($view_products as $view_product)
+                  @foreach ($view_franchise as $view_franchis)
                     <tr>
-                        <td>{{ $view_product->ref_no }}</td>
-                        <td>{{ $view_product->subcategory->category->root['rootname'] }}</td>
-                        <td>{{ $view_product->subcategory->category['category'] }}</td>
-                        <td>{{ $view_product->subcategory['subcategory'] }}</td>
-                        {{-- <td>{{ $view_product->productname }}</td> --}}
-                        <td><img style="width: auto; height: 30px;" src="{{ URL::asset("/public/../$view_product->images1")}}" alt=""></td>
-                        <td>{{ $view_product->amount }}</td>
-                        <td>{{ $view_product->percent }}</td>
+                        <td>{{ $view_franchis->ref_no }}</td>
+                        <td>{{ $view_franchis->name }}</td>
+                        <td>@if ($view_franchis->role == '1')
+                            <span class="badge badge-dark"> Franchise</span>
+                          @else
+                          <span class="badge badge-success">Admin</span>
+                          @endif</td>
+                        <td>{{ $view_franchis->phone }}</td>
+                        <td>{{ $view_franchis->email }}</td>
+                        <td><img style="width: auto; height: 30px;" src="{{ URL::asset("/public/../$edit_franchise->images")}}" alt=""></td>
+                        
+                        {{-- <td><img style="width: auto; height: 30px;" src="{{ URL::asset("/public/../$view_franchis->images1")}}" alt=""></td> --}}
+                        <td>{{ $view_franchis->amount }}</td>
+                        <td>{{ $view_franchis->percent }}</td>
+                        <td>{{ $view_franchis->ngstate['state'] }}</td>
+                        <td>{{ $view_franchis->Lga->district['districts'] }}</td>
+                        <td>{{ $view_franchis->Lga['lga'] }}</td>
 
-                        <td><a href="{{ url('admin/viewsingleproduct/'.$view_product->ref_no) }}"
+                        <td><a href="{{ url('admin/viewsinglefranchise/'.$view_franchis->ref_no) }}"
                           class='btn btn-info'>
                            <i class="far fa-eye"></i>
                        </a></td>
-                        <td>@if ($view_product->status == null)
+                        <td>@if ($view_franchis->status == null)
                             <span class="badge badge-warning"> Not Approved Yet</span>
-                          @elseif($view_product->status == 'suspend')
+                          @elseif($view_franchis->status == 'suspend')
                           <span class="badge badge-danger"> Suspended</span>
-                          @elseif($view_product->status == 'reject')
+                          @elseif($view_franchis->status == 'reject')
                           <span class="badge badge-danger"> Rejected</span>
-                          @elseif($view_product->status == 'approved')
+                          @elseif($view_franchis->status == 'approved')
                           <span class="badge badge-success"> Approved</span>
-                          @elseif($view_product->status == 'admitted')
+                          @elseif($view_franchis->status == 'admitted')
                           
                           <span class="badge badge-success">Admitted</span>
                           @endif</td>
-                        <td><a href="{{ url('admin/approveproduct/'.$view_product->ref_no) }}"
+                        <td><a href="{{ url('admin/approvefranchise/'.$view_franchis->ref_no) }}"
                           class='btn btn-success'>
                            <i class="far fa-user"></i>
                        </a></td>
-                       <td><a href="{{ url('admin/suspendproduct/'.$view_product->ref_no) }}"
+                       <td><a href="{{ url('admin/suspendfranchise/'.$view_franchis->ref_no) }}"
                         class='btn btn-warning'>
                          <i class="far fa-bell"></i>
                      </a></td>
-                       <td><a href="{{ url('admin/editproduct/'.$view_product->ref_no) }}"
+                       <td><a href="{{ url('admin/editfranchise/'.$view_franchis->ref_no) }}"
                         class='btn btn-info'>
                          <i class="far fa-edit"></i>
                      </a></td>
                        
                          
-                       <td><a href="{{ url('admin/deleteproduct/'.$view_product->ref_no) }}"
+                       <td><a href="{{ url('admin/deletefranchise/'.$view_franchis->ref_no) }}"
                         class='btn btn-danger'>
                          <i class="far fa-trash-alt"></i>
                      </a></td>
-                     <td>{{ $view_product->created_at->format('D d, M Y, H:i')}}</td>
+                     <td>{{ $view_franchis->created_at->format('D d, M Y, H:i')}}</td>
                     </tr>
                     @endforeach
                   </tbody>
                   <tfoot>
                     <tr>
-                      <th>Tract ID</th>
-                      <th>Roots</th>
-                      <th>Category</th>
-                      <th>Sub Category</th>
-                      {{-- <th>Product Name</th> --}}
-                      <th>Image</th>
-                      <th>Amount</th>
-                      <th>Percent</th>
-                      <th>View</th>
-                      <th>Status</th>
-                      <th>Approve</th>
-                      <th>Suspend</th>
-                      <th>Edit</th>
-  
-                      <th>Delete</th>
-                      <th>Date</th>
-                    </tr>
+                    <th>Tract ID</th>
+                    <th>Name</th>
+                    <th>Role</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Image</th>
+                    <th>Amount</th>
+                    <th>Percent</th>
+                    <th>State</th>
+                    <th>Districts</th>
+                    <th>LGA</th>
+                    <th>View</th>
+                    <th>Status</th>
+                    <th>Approve</th>
+                    <th>Suspend</th>
+                    <th>Edit</th>
+
+                    <th>Delete</th>
+                    <th>Date</th>
+                  </tr>
                   </tfoot>
                 </table>
               </div>

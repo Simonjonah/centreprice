@@ -81,10 +81,13 @@ Route::prefix('admin')->name('admin.')->group(function() {
         Route::put('/add4photo/{ref_no}', [ProductController::class, 'add4photo'])->name('add4photo');
         Route::get('/fifthphoto/{ref_no}', [ProductController::class, 'fifthphoto'])->name('fifthphoto');
         Route::put('/add5photo/{ref_no}', [ProductController::class, 'add5photo'])->name('add5photo');
-        Route::get('/approveproduct/{slug}', [ProductController::class, 'approveproduct'])->name('approveproduct');
-        Route::get('/suspendproduct/{slug}', [ProductController::class, 'suspendproduct'])->name('suspendproduct');
-        Route::get('/editproduct/{slug}', [ProductController::class, 'editproduct'])->name('editproduct');
+        Route::get('/approveproduct/{ref_no}', [ProductController::class, 'approveproduct'])->name('approveproduct');
+        Route::get('/suspendproduct/{ref_no}', [ProductController::class, 'suspendproduct'])->name('suspendproduct');
+        Route::get('/editproduct/{ref_no}', [ProductController::class, 'editproduct'])->name('editproduct');
         Route::get('/viewproducts', [ProductController::class, 'viewproducts'])->name('viewproducts');
+        Route::put('/updateproduct/{ref_no}', [ProductController::class, 'updateproduct'])->name('updateproduct');
+        Route::get('/deleteproduct/{ref_no}', [ProductController::class, 'deleteproduct'])->name('deleteproduct');
+        Route::get('/viewsingleproduct/{ref_no}', [ProductController::class, 'viewsingleproduct'])->name('viewsingleproduct');
         
         Route::post('/createroot', [RootController::class, 'createroot'])->name('createroot');
         Route::get('/addroots', [RootController::class, 'addroots'])->name('addroots');
@@ -95,8 +98,13 @@ Route::prefix('admin')->name('admin.')->group(function() {
         
         
         
-        // Route::get('/viewusers', [UserController::class, 'viewusers'])->name('viewusers');
-        // Route::get('/contactdelete/{id}', [ContactmeController::class, 'contactdelete'])->name('contactdelete');
+        Route::get('/viewfranchise', [UserController::class, 'viewfranchise'])->name('viewfranchise');
+        Route::get('/viewsinglefranchise/{ref_no}', [UserController::class, 'viewsinglefranchise'])->name('viewsinglefranchise');
+        Route::get('/approvefranchise/{ref_no}', [UserController::class, 'approvefranchise'])->name('approvefranchise');
+        Route::get('/suspendfranchise/{ref_no}', [UserController::class, 'suspendfranchise'])->name('suspendfranchise');
+        Route::get('/editfranchise/{ref_no}', [UserController::class, 'editfranchise'])->name('editfranchise');
+        Route::put('/updatefranchise/{ref_no}', [UserController::class, 'updatefranchise'])->name('updatefranchise');
+        Route::get('/deletefranchise/{ref_no}', [UserController::class, 'deletefranchise'])->name('deletefranchise');
         Route::view('/home','dashboard.admin.home')->name('home');
         
         Route::get('/addmilestone', [MilestoneController::class, 'addmilestone'])->name('addmilestone');
@@ -140,7 +148,7 @@ Route::get('/registervendor/{lga}/{state}/ref={referral}', [UserController::clas
 Route::prefix('web')->name('web.')->group(function() {
 
     Route::middleware(['guest:web'])->group(function() {
-        Route::post('/create', [UserController::class, 'create'])->name('create');
+        Route::post('/createfranchise', [UserController::class, 'createfranchise'])->name('createfranchise');
         Route::post('/check', [UserController::class, 'check'])->name('check');
 
 

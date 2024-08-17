@@ -53,8 +53,8 @@
                   
                 <div class="form-group">
                   <label>Select State</label>
-                  <select name="state" class="form-control select2" style="width: 100%;">
-                    <option value="{{ $edit_dists->state }}">{{ $edit_dists->state }}</option>
+                  <select name="ngstate_id" class="form-control select2" style="width: 100%;">
+                    <option value="{{ $edit_dists->id }}">{{ $edit_dists->ngstate['state'] }}</option>
                     @foreach ($view_states as $view_state)
                       <option value="{{ $view_state->state }}">{{ $view_state->state }}</option>
                     @endforeach
@@ -64,20 +64,6 @@
                 @error('state')
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
-
-                <div class="form-group">
-                  <label>Select Lga</label>
-                  <select name="lga" class="form-control select2" style="width: 100%;">
-                    <option value="{{ $edit_dists->lga }}">{{ $edit_dists->lga }}</option>
-                    @foreach ($view_lgas as $view_lga)
-                      <option value="{{ $view_lga->lga }}">{{ $view_lga->lga }}</option>
-                    @endforeach
-                    
-                  </select>
-                </div>
-                @error('lga')
-                    <span class="text-danger">{{ $message }}</span>
-                    @enderror
 
 
                 <div class="form-group">

@@ -19,8 +19,8 @@ return new class extends Migration
 
             $table->string('district_id')->nullable();
             $table->string('ngstate_id')->nullable();
-            $table->string('state')->nullable();
-            $table->string('districts')->nullable();
+            // $table->string('state')->nullable();
+            // $table->string('districts')->nullable();
             $table->string('lga');
             $table->timestamps();
         });

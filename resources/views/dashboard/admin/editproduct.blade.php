@@ -35,9 +35,9 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form action="{{ url('admin/updateproduct/'.$edit_product->slug) }}" method="post" enctype="multipart/form-data">
+              <form action="{{ url('admin/updateproduct/'.$edit_product->ref_no) }}" method="post" enctype="multipart/form-data">
                   @csrf
-                  {{-- @method('PUT') --}}
+                  @method('PUT')
                   @if (Session::get('success'))
                   <div class="alert alert-success">
                       {{ Session::get('success') }}
@@ -56,7 +56,7 @@
                       <div class="form-group">
                         <label>Select SubCategory</label>
                         <select name="subcategory_id" class="form-control select2" style="width: 100%;">
-                          <option value="{{ $edit_product- }}">Select SubCategory</option>
+                          <option value="{{ $edit_product->subcategory['id'] }}">{{ $edit_product->subcategory['subcategory'] }}</option>
                           @foreach ($view_subcategories as $view_subcategorie)
                             <option value="{{ $view_subcategorie->id }}">{{ $view_subcategorie->subcategory }}</option>
                           @endforeach
@@ -67,20 +67,20 @@
                           <span class="text-danger">{{ $message }}</span>
                       @enderror
                       <!-- /.form-group -->
-                      <div class="form-group">
+                      {{-- <div class="form-group">
                         <label for="">Product Name</label>
                         <input name="productname" type="text" @error('productname') is-invalid @enderror"
-                        value="{{ old('productname') }}" class="form-control" id="" placeholder="Product Name">
+                        value="{{ $edit_product->productname }}" class="form-control" id="" placeholder="Product Name">
                     </div>
                     @error('productname')
                         <span class="text-danger">{{ $message }}</span>
-                    @enderror
+                    @enderror --}}
 
 
                     <div class="form-group">
                       <textarea name="body" id="compose-textarea" @error('body') is-invalid @enderror"
                       value="{{ old('body') }}" class="form-control" style="height: 300px">
-                       
+                       {!! $edit_product->subcategory['body'] !!}
                       </textarea>
                   </div>
                   @error('body')
@@ -94,7 +94,7 @@
                       <div class="form-group">
                         <label for="">Amount</label>
                         <input name="amount" type="number" @error('amount') is-invalid @enderror"
-                        value="{{ old('amount') }}" class="form-control" id="" placeholder="Price">
+                        value="{{ $edit_product->amount }}" class="form-control" id="" placeholder="Price">
                     </div>
                     @error('amount')
                         <span class="text-danger">{{ $message }}</span>
@@ -105,13 +105,15 @@
                       <div class="form-group">
                         <label for="">Percent</label>
                         <input name="percent" type="number" @error('percent') is-invalid @enderror"
-                        value="{{ old('percent') }}" class="form-control" id="" placeholder="Percent">
+                        value="{{ $edit_product->percent }}" class="form-control" id="" placeholder="Percent">
                     </div>
                     @error('percent')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                       <!-- /.form-group -->
                       <div class="form-group">
+                        <td><img style="width: auto; height: 30px;" src="{{ URL::asset("/public/../$edit_product->images1")}}" alt=""></td>
+
                         <label for="">Image</label>
                         <input name="images1" type="file" @error('images1') is-invalid @enderror"
                         value="{{ old('images1') }}" class="form-control" id="" placeholder="Price">

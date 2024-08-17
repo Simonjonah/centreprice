@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('state')->nullable();
             $table->string('lga_id')->nullable();
             $table->string('district_id')->nullable();
-            $table->string('state_id')->nullable();
+            $table->string('ngstate_id')->nullable();
             $table->string('phone')->nullable();
             $table->string('ref_no')->nullable();
             $table->string('status')->nullable();

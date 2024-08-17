@@ -58,7 +58,7 @@
                   @endif
                   @foreach ($view_dists as $view_dist)
                     <tr>
-                        <td>{{ $view_dist->state }}</td>
+                        <td>{{ $view_dist->ngstate['state'] }}</td>
                         <td>{{ $view_dist->districts }}</td>
                         <td><a href="{{ url('admin/editdistricts/'.$view_dist->id) }}"
                           class='btn btn-info'>

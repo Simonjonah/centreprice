@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
 
 class User extends Authenticatable
 {
@@ -63,9 +65,20 @@ protected $appends = ['referral_link'];
  */
 public function getReferralLinkAttribute()
 {
-    return url('/registervendor/' . $this->lga . '/' . $this->state . '/ref=' . $this->ref_no);
+    return url('/registervendor/' . $this->ngstate['state'] . '/' . $this->Lga->district['districts'] . '/' . $this->Lga['lga'] . '/' . 'ref=' . $this->ref_no);
     // return $this->referral_link = route('registervendor', ['ref' => $this->ref_no]);
 }
 
+
+
+public function ngstate(): BelongsTo
+{
+    return $this->belongsTo(Ngstate::class);
+}
+
+    public function Lga(): BelongsTo
+    {
+        return $this->belongsTo(Lga::class, 'lga_id', 'id');
+    }
 
 }

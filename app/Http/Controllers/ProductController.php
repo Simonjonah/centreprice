@@ -7,7 +7,7 @@ use App\Models\Product;
 use App\Models\Subcategory;
 use Illuminate\Http\Request;
 use Spatie\FlareClient\View;
-use Cviebrock\EloquentSluggable\Services\SlugService;
+use Cviebrock\Eloquentref_nogable\Services\ref_noService;
 class ProductController extends Controller
 {
     public function addproducts(){
@@ -19,7 +19,7 @@ class ProductController extends Controller
     public function createproduct(Request $request){
         $request->validate([
             'subcategory_id' => ['required', 'string'],
-            'productname' => ['required', 'string'],
+            // 'productname' => ['required', 'string'],
             'body' => ['required', 'string'],
             'amount' => ['required', 'string'],
             'percent' => ['required', 'string'],
@@ -30,16 +30,17 @@ class ProductController extends Controller
         $add_product = new Product();
 
         if ($request->hasFile('images1')){
-
             $file = $request['images1'];
             $filename = 'SimonJonah-' . time() . '.' . $file->getClientOriginalExtension();
             $path = $request->file('images1')->storeAs('productimages', $filename);
 
+        }else{
+            $path = 'noimage.jpg';
         }
         $add_product['images1'] = $path;
-        $add_product->slug = SlugService::createSlug(Product::class, 'slug', $request->productname);
+        // $add_product->ref_no = ref_noService::createref_no(Product::class, 'ref_no', $request->productname);
         $add_product->subcategory_id = $request->subcategory_id;
-        $add_product->productname = $request->productname;
+        // $add_product->productname = $request->productname;
         $add_product->body = $request->body;
         $add_product->percent = $request->percent;
         $add_product->amount = $request->amount;
@@ -82,6 +83,14 @@ class ProductController extends Controller
     }
 
 
+
+    public function viewsingleproduct($ref_no){
+        $view_product = Product::where('ref_no', $ref_no)->first();
+        $view_subcategories = Subcategory::latest()->get();
+        return view('dashboard.admin.viewsingleproduct', compact('view_subcategories', 'view_product'));
+    }
+
+    
     public function add3photo(Request $request, $ref_no){
         $add_product = Product::where('ref_no', $ref_no)->first();
         $request->validate([
@@ -158,23 +167,65 @@ class ProductController extends Controller
         return view('dashboard.admin.viewproducts', compact('view_products'));
     }
 
-    public function approveproduct($slug){
-        $approve_product = Product::where('slug', $slug)->first();
+    public function approveproduct($ref_no){
+        $approve_product = Product::where('ref_no', $ref_no)->first();
         $approve_product->status = 'approved';
         $approve_product->save();
         return redirect()->back()->with('success', 'you have approved successfully');
     }
 
-    public function suspendproduct($slug){
-        $approve_product = Product::where('slug', $slug)->first();
+    public function suspendproduct($ref_no){
+        $approve_product = Product::where('ref_no', $ref_no)->first();
         $approve_product->status = 'suspend';
         $approve_product->save();
-        return redirect()->back()->with('success', 'you have approved successfully');
+        return redirect()->back()->with('success', 'you have suspended successfully');
     }
 
-    public function editproduct($slug){
-        $edit_product = Product::where('slug', $slug)->first();
+    public function editproduct($ref_no){
+        $edit_product = Product::where('ref_no', $ref_no)->first();
         $view_subcategories = Subcategory::latest()->get();
         return view('dashboard.admin.editproduct', compact('view_subcategories', 'edit_product'));
+    }
+
+
+    public function updateproduct(Request $request, $ref_no){
+        $edit_product = Product::where('ref_no', $ref_no)->first();
+
+        $request->validate([
+            'subcategory_id' => ['required', 'string'],
+            // 'productname' => ['required', 'string'],
+            'body' => ['required', 'string'],
+            'amount' => ['required', 'string'],
+            'percent' => ['required', 'string'],
+            'images1' => 'nullable|mimes:jpg,png,jpeg'
+        ]);
+        // dd($request->all());
+
+        
+
+        if ($request->hasFile('images1')){
+
+            $file = $request['images1'];
+            $filename = 'SimonJonah-' . time() . '.' . $file->getClientOriginalExtension();
+            $path = $request->file('images1')->storeAs('productimages', $filename);
+            $edit_product['images1'] = $path;
+
+        }
+        $edit_product->subcategory_id = $request->subcategory_id;
+        // $edit_product->productname = $request->productname;
+        $edit_product->body = $request->body;
+        $edit_product->percent = $request->percent;
+        $edit_product->amount = $request->amount;
+        $edit_product->update();
+        return redirect()->route('admin.firstphoto', ['ref_no' =>$edit_product->ref_no]); 
+
+    }
+
+    public function deleteproduct($ref_no){
+
+        $edit_product = Product::where('ref_no', $ref_no)->delete();
+        return redirect()->back()->with('success', 'You have deleted successfully');
+
+
     }
 }

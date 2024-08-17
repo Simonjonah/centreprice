@@ -10,12 +10,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Add LGA</h1>
+            <h1>Edit LGA</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Add LGA</li>
+              <li class="breadcrumb-item active">Edit LGA</li>
             </ol>
           </div>
         </div>
@@ -29,7 +29,7 @@
           <!-- left column -->
           <div class="col-md-6">
             <!-- general form elements -->
-            <div class="card card-primary">
+            <div class="card card-success">
               <div class="card-header">
                 <h3 class="card-title">Quick Example</h3>
               </div>
@@ -53,26 +53,31 @@
                 <div class="card-body">
                 <div class="form-group">
                   <label>Select State</label>
-                  <select name="state" class="form-control select2" style="width: 100%;">
-                    <option value="{{ $edit_lga->state }}">{{ $edit_lga->state }}</option>
-                    @foreach ($view_states as $view_state)
-                      <option value="{{ $view_state->state }}">{{ $view_state->state }}</option>
+                  <select name="district_id" class="form-control select2" style="width: 100%;">
+                    <option value="{{ $edit_lga->district_id }}">{{ $edit_lga->district['districts'] }}</option>
+                    @foreach ($view_dists as $view_dist)
+                      <option value="{{ $view_dist->id }}">{{ $view_dist->districts }}</option>
                     @endforeach
                     
                   </select>
                 </div>
-                @error('state')
+                @error('district_id')
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
                   
                 <div class="form-group">
                   <label for="">LGA</label>
-                  <input name="lga" type="text"@error('lga') is-invalid @enderror"
-                    value="{{ $edit_lga->lga }}" class="form-control" id="" placeholder="LGA">
+                  <select name="lga" class="form-control select2" style="width: 100%;">
+                    <option value="{{ $edit_lga->lga }}">{{ $edit_lga->lga }}</option>
+                    @foreach ($view_lgas as $view_lga)
+                      <option value="{{ $view_lga->lga }}">{{ $view_lga->lga }}</option>
+                    @endforeach
+                    
+                  </select>
                 </div>
-                  @error('lga')
+                @error('lga')
                     <span class="text-danger">{{ $message }}</span>
-                  @enderror
+                @enderror
 
                 </div>
                 <!-- /.card-body -->

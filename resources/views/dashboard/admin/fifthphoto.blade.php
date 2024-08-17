@@ -51,6 +51,8 @@
 
                 <div class="card-body">
                   <div class="form-group">
+                    <td><img style="width: auto; height: 30px;" src="{{ URL::asset("/public/../$add_product->images5")}}" alt=""></td>
+
                     <label for="">Images 5</label>
                     <input name="images5" type="file"@error('images5') is-invalid @enderror"
                     value="{{ old('images5') }}" class="form-control" id="">

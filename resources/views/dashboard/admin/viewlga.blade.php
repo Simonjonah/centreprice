@@ -39,6 +39,7 @@
                   <thead>
                   <tr>
                     <th>State</th>
+                    <th>Districts</th>
                     <th>Lga</th>
                     <th>Edit</th>
                     <th>Delete</th>
@@ -58,7 +59,8 @@
                   @endif
                   @foreach ($view_lgas as $view_lga)
                     <tr>
-                        <td>{{ $view_lga->state }}</td>
+                        <td>{{ $view_lga->district->ngstate['state'] }}</td>
+                        <td>{{ $view_lga->district['districts'] }}</td>
                         <td>{{ $view_lga->lga }}</td>
                         <td><a href="{{ url('admin/editlga/'.$view_lga->id) }}"
                           class='btn btn-info'>
@@ -75,13 +77,14 @@
                     @endforeach
                   </tbody>
                   <tfoot>
-                  <tr>
-                    <th>State</th>
-                    <th>Lga</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                    <th>Date</th>
-                  </tr>
+                    <tr>
+                      <th>State</th>
+                      <th>Districts</th>
+                      <th>Lga</th>
+                      <th>Edit</th>
+                      <th>Delete</th>
+                      <th>Date</th>
+                    </tr>
                   </tfoot>
                 </table>
               </div>

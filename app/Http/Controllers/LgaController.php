@@ -18,16 +18,13 @@ class LgaController extends Controller
     public function createlga(Request $request){
         // dd($request->all());
         $request->validate([
-            'state' => ['required', 'string', 'max:255'],
+            // 'ngstate_id' => ['required', 'string', 'max:255'],
             'lga' => ['required', 'string', 'max:255', 'unique:lgas'],
-            'districts' => ['nullable', 'string', 'max:255'],
             'district_id' => ['nullable', 'string', 'max:255'],
         ]);
         $addlga = new Lga();
-        $addlga->state = $request->state;
         $addlga->lga = $request->lga;
         $addlga->district_id = $request->district_id;
-        $addlga->districts = $request->districts;
         $addlga->save();
         return redirect()->back()->with('success', 'you have added successfully');
     }
@@ -39,10 +36,11 @@ class LgaController extends Controller
     }
 
     public function editlga($id){
+        $view_lgas = Lga::orderby('lga')->get();
         $edit_lga = Lga::find($id);
-        $view_states = Ngstate::orderby('state')->get();
+        $view_dists = District::all();
 
-        return view('dashboard.admin.editlga', compact('view_states', 'edit_lga'));
+        return view('dashboard.admin.editlga', compact('view_lgas', 'view_dists', 'edit_lga'));
     }
     public function deletelga($id){
         $edit_lga = Lga::where('id', $id)->delete();
@@ -50,18 +48,18 @@ class LgaController extends Controller
     }
     
     public function updatetelga(Request $request, $id){
+
         $edit_lga = Lga::find($id);
+        // dd($request->all());
         $request->validate([
-            'state' => ['required', 'string', 'max:255'],
-            'lga' => ['required', 'string', 'max:255'],
-            'districts' => ['nullable', 'string', 'max:255'],
+            // 'ngstate_id' => ['required', 'string', 'max:255'],
+            'lga' => ['required', 'string', 'max:255', 'unique:lgas'],
             'district_id' => ['nullable', 'string', 'max:255'],
         ]);
         
-        $edit_lga->state = $request->state;
+        // $edit_lga->ngstate_id = $request->ngstate_id;
         $edit_lga->lga = $request->lga;
         $edit_lga->district_id = $request->district_id;
-        $edit_lga->districts = $request->districts;
         $edit_lga->update();
         return redirect()->back()->with('success', 'you have updated successfully');
     }

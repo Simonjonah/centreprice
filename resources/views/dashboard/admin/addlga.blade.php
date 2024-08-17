@@ -50,31 +50,31 @@
                   {{ Session::get('fail') }}
                   @endif
                 <div class="card-body">
-                <div class="form-group">
+                {{-- <div class="form-group">
                   <label>Select State</label>
-                  <select name="state" class="form-control select2" style="width: 100%;">
+                  <select name="ngstate_id" class="form-control select2" style="width: 100%;">
                     <option selected="selected">Select State</option>
                     @foreach ($view_states as $view_state)
-                      <option value="{{ $view_state->state }}">{{ $view_state->state }}</option>
+                      <option value="{{ $view_state->id }}">{{ $view_state->state }}</option>
                     @endforeach
                     
                   </select>
                 </div>
-                @error('state')
+                @error('ngstate_id')
                     <span class="text-danger">{{ $message }}</span>
-                @enderror
+                @enderror --}}
 
                 <div class="form-group">
                   <label>Select Senaterial District</label>
-                  <select name="district" class="form-control select2" style="width: 100%;">
+                  <select name="district_id" class="form-control select2" style="width: 100%;">
                     <option selected="selected">Select Senaterial District</option>
                     @foreach ($view_dists as $view_dist)
-                      <option value="{{ $view_dist->districts }}">{{ $view_dist->districts }}</option>
+                      <option value="{{ $view_dist->id }}">{{ $view_dist->districts }}</option>
                     @endforeach
                     
                   </select>
                 </div>
-                @error('district')
+                @error('districts')
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
                   

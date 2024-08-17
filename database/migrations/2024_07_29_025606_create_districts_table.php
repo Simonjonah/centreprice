@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             // $table->foreignIdFor(Ngstate::class)->constrained('ngstates')->onDelete('cascade')->update('cascade');
             $table->string('ngstate_id')->nullable();
-            $table->string('state')->nullable();
-            $table->string('lga')->nullable();
-            $table->string('lga_id')->nullable();
+            // $table->string('state')->nullable();
+            // $table->string('lga')->nullable();
+            // $table->string('lga_id')->nullable();
             $table->string('districts');
             $table->timestamps();
         });

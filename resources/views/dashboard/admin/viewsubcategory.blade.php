@@ -63,7 +63,7 @@
                         <td>{{ $view_subcategorie->category->root['rootname'] }}</td>
                         <td>{{ $view_subcategorie->category['category'] }}</td>
                         <td>{{ $view_subcategorie->subcategory }}</td>
-                        <td>{{ $view_subcategorie->body }}</td>
+                        <td>{!! $view_subcategorie->body !!}</td>
                         <td><a href="{{ url('admin/editsubcategory/'.$view_subcategorie->slug) }}"
                           class='btn btn-info'>
                            <i class="far fa-edit"></i>

@@ -52,33 +52,19 @@
                   
                 <div class="form-group">
                   <label>Select State</label>
-                  <select name="state" class="form-control select2" style="width: 100%;">
+                  <select name="ngstate_id" class="form-control select2" style="width: 100%;">
                     <option selected="selected">Select State</option>
                     @foreach ($view_states as $view_state)
-                      <option value="{{ $view_state->state }}">{{ $view_state->state }}</option>
+                      <option value="{{ $view_state->id }}">{{ $view_state->state }}</option>
                     @endforeach
                     
                   </select>
                 </div>
-                @error('state')
+                @error('ngstate_id')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
 
-                    
-                    <div class="form-group">
-                      <label>Select Lga</label>
-                      <select name="lga" class="form-control select2" style="width: 100%;">
-                        <option selected="selected">Select Lga</option>
-                        @foreach ($view_lgas as $view_lga)
-                          <option value="{{ $view_lga->lga }}">{{ $view_lga->lga }}</option>
-                        @endforeach
-                        
-                      </select>
-                    </div>
-                    @error('lga')
-                        <span class="text-danger">{{ $message }}</span>
-                        @enderror
-
+               
                     
 
                     <div class="form-group">

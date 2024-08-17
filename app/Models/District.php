@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-// use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 class District extends Model
 {
     use HasFactory;
@@ -20,7 +20,7 @@ class District extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'state',
+        'ngstate_id',
         'districts',
  
     ];
@@ -56,9 +56,9 @@ class District extends Model
 
 
 
-    // public function districts(): HasMany 
-    // {
-    //     return $this->hasMany(District::class);
-    // }
+    public function lga(): HasMany 
+    {
+        return $this->hasMany(Lga::class);
+    }
 
 }

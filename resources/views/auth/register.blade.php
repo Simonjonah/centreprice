@@ -38,7 +38,7 @@
     <div class="card-body register-card-body">
       <!-- <p class="login-box-msg">Register a new membership</p> -->
 
-      <form action="{{ route('web.create') }}" method="post">
+      <form action="{{ route('web.createfranchise') }}" method="post">
         @csrf
 
     @if (Session::get('success'))
@@ -71,12 +71,12 @@
 
         <label for="">Select State</label>
         <div class="input-group mb-3">
-          <select name="state" class="form-control">
+          <select name="ngstate_id" class="form-control">
           <option value="">Select State</option>
 
             @foreach ($view_states as $view_state)
 
-                <option value="{{ $view_state->state }}">{{ $view_state->state }}</option>
+                <option value="{{ $view_state->id }}">{{ $view_state->state }}</option>
             @endforeach
           </select>
            
@@ -86,16 +86,16 @@
             </div>
           </div>
         </div>
-        @error('state')
+        @error('ngstate_id')
         <span class="text-danger">{{ $message }}</span>
         @enderror
 
         <label for="">Select LGA</label>
         <div class="input-group mb-3">
-          <select name="lga" class="form-control">
+          <select name="lga_id" class="form-control">
                 <option value="">Select LGA</option>
                 @foreach ($view_lgas as $lga)
-                  <option value="{{ $lga->lga }}">{{ $lga->lga }}</option>
+                  <option value="{{ $lga->id }}">{{ $lga->lga }}</option>
                 @endforeach
           </select>
            
@@ -105,7 +105,7 @@
             </div>
           </div>
         </div>
-        @error('lga')
+        @error('lga_id')
         <span class="text-danger">{{ $message }}</span>
         @enderror
 
