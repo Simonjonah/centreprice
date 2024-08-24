@@ -109,6 +109,8 @@
         <span class="text-danger">{{ $message }}</span>
         @enderror
 
+       
+
 
         <div class="input-group mb-3">
           <input type="email" name="email" class="form-control"  @error('email') is-invalid @enderror"
@@ -122,9 +124,9 @@
         </div>
         @error('email')
             <span class="text-danger">{{ $message }}</span>
-          @enderror
+        @enderror
        
-        
+
           <div class="input-group mb-3">
             <input type="tel" name="phone" id="myInput" class="form-control"  @error('phone') is-invalid @enderror"
             value="{{ old('phone') }}" placeholder="Phone">
@@ -138,7 +140,51 @@
           @error('phone')
               <span class="text-danger">{{ $message }}</span>
           @enderror 
-             
+          <label for="">City</label>
+          <div class="input-group mb-3">
+            <input type="date" name="city" id="myInput" class="form-control"  @error('city') is-invalid @enderror"
+            value="{{ old('city') }}" placeholder="city">
+            
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-user"></span>
+              </div>
+            </div>
+          </div>
+          @error('city')
+              <span class="text-danger">{{ $message }}</span>
+          @enderror 
+          <label for="">Date Of Birth</label>
+          <div class="input-group mb-3">
+            <input type="date" name="dob" id="myInput" class="form-control"  @error('dob') is-invalid @enderror"
+            value="{{ old('dob') }}" placeholder="dob">
+            
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-user"></span>
+              </div>
+            </div>
+          </div>
+          @error('dob')
+              <span class="text-danger">{{ $message }}</span>
+          @enderror 
+
+         <label for="">Select Gender</label>
+        <div class="input-group mb-3">
+          <select name="gender" class="form-control">
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+          </select>
+           
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+        </div>
+        @error('gender')
+        <span class="text-danger">{{ $message }}</span>
+        @enderror     
 
         <div class="input-group mb-3">
           <input type="password" name="password" id="myInput" class="form-control"  @error('password') is-invalid @enderror"

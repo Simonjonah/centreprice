@@ -74,7 +74,7 @@
                     @error('productname')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror --}}
-
+{{-- 
 
                     <div class="form-group">
                       <textarea name="body" id="compose-textarea" @error('body') is-invalid @enderror"
@@ -84,7 +84,7 @@
                   </div>
                   @error('body')
                   <span class="text-danger">{{ $message }}</span>
-                  @enderror
+                  @enderror --}}
                     
                       <!-- /.form-group -->
                     </div>

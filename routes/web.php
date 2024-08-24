@@ -29,6 +29,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Route::get('/registerdistributor', function ($ref_no) {
+//     $view_franchise = User::where('ref_no', $ref_no)->first();
+//     return view('view.registerdistributor', compact('view_franchise'));
+// });
+
 
 Route::post('/pay', [FlutterwaveController::class, 'initialize'])->name('pay');
 // The callback url after a payment
@@ -98,6 +103,13 @@ Route::prefix('admin')->name('admin.')->group(function() {
         
         
         
+        Route::get('/deletedistributor/{ref_no2}', [UserController::class, 'deletedistributor'])->name('deletedistributor');
+        Route::get('/suspenddistributor/{ref_no2}', [UserController::class, 'suspenddistributor'])->name('suspenddistributor');
+        Route::get('/approvedistributor/{ref_no2}', [UserController::class, 'approvedistributor'])->name('approvedistributor');
+        Route::get('/viewsingledistributor/{ref_no2}', [UserController::class, 'viewsingledistributor'])->name('viewsingledistributor');
+        Route::put('/updatedistributor/{ref_no2}', [UserController::class, 'updatedistributor'])->name('updatedistributor');
+        Route::get('/editdistributor/{ref_no}', [UserController::class, 'editdistributor'])->name('editdistributor');
+        Route::get('/viewdistributorsadmin', [UserController::class, 'viewdistributorsadmin'])->name('viewdistributorsadmin');
         Route::get('/viewfranchise', [UserController::class, 'viewfranchise'])->name('viewfranchise');
         Route::get('/viewsinglefranchise/{ref_no}', [UserController::class, 'viewsinglefranchise'])->name('viewsinglefranchise');
         Route::get('/approvefranchise/{ref_no}', [UserController::class, 'approvefranchise'])->name('approvefranchise');
@@ -105,11 +117,19 @@ Route::prefix('admin')->name('admin.')->group(function() {
         Route::get('/editfranchise/{ref_no}', [UserController::class, 'editfranchise'])->name('editfranchise');
         Route::put('/updatefranchise/{ref_no}', [UserController::class, 'updatefranchise'])->name('updatefranchise');
         Route::get('/deletefranchise/{ref_no}', [UserController::class, 'deletefranchise'])->name('deletefranchise');
-        Route::view('/home','dashboard.admin.home')->name('home');
+        Route::get('/viewvendorsadmin', [UserController::class, 'viewvendorsadmin'])->name('viewvendorsadmin');
         
+        Route::get('/viewsinglevendors/{ref_no3}', [UserController::class, 'viewsinglevendors'])->name('viewsinglevendors');
+        Route::put('/updatevendor/{id}', [UserController::class, 'updatevendor'])->name('updatevendor');
+        Route::get('/approvevendors/{ref_no3}', [UserController::class, 'approvevendors'])->name('approvevendors');
+        Route::get('/suspendvendors/{ref_no3}', [UserController::class, 'suspendvendors'])->name('suspendvendors');
+        Route::get('/editvendors/{ref_no3}', [UserController::class, 'editvendors'])->name('editvendors');
+        Route::get('/deletevendors/{ref_no3}', [UserController::class, 'deletevendors'])->name('deletevendors');
+        Route::get('/deletesubcategory/{slug}', [SubcategoryController::class, 'deletesubcategory'])->name('deletesubcategory');
+        
+        Route::view('/home','dashboard.admin.home')->name('home');
         Route::get('/addmilestone', [MilestoneController::class, 'addmilestone'])->name('addmilestone');
         Route::get('/home', [AdminController::class, 'home'])->name('home');
-        Route::get('/profile', [AdminController::class, 'profile'])->name('profile');
         Route::get('/addstate', [NgstateController::class, 'addstate'])->name('addstate');
         Route::get('/addsenatarial', [DistrictController::class, 'addsenatarial'])->name('addsenatarial');
         Route::post('/createstate', [NgstateController::class, 'createstate'])->name('createstate');
@@ -143,45 +163,41 @@ Route::prefix('admin')->name('admin.')->group(function() {
 // Route::get('/registervendor', [UserController::class, 'registervendor'])->name('registervendor');
 // routes/web.php
 
-Route::get('/registervendor/{lga}/{state}/ref={referral}', [UserController::class, 'registervendor'])->name('registervendor');
+Route::get('/registerdistributor/{ref_no}', [UserController::class, 'registerdistributor'])->name('registerdistributor');
+Route::get('/registervendor/{ref_no2}', [UserController::class, 'registervendor'])->name('registerdistributor');
 
 Route::prefix('web')->name('web.')->group(function() {
 
     Route::middleware(['guest:web'])->group(function() {
         Route::post('/createfranchise', [UserController::class, 'createfranchise'])->name('createfranchise');
         Route::post('/check', [UserController::class, 'check'])->name('check');
-
+        // Route::get('/registerdistributor/{ref_no}', [UserController::class, 'registerdistributor'])->name('registerdistributor');
+        // Route::get('/registerdistributor/{ref_no}', [UserController::class, 'registervendor'])->name('registervendor');
+        Route::post('/createdistributor', [UserController::class, 'createdistributor'])->name('createdistributor');
+        Route::post('/createvendor', [UserController::class, 'createvendor'])->name('createvendor');
+        
 
     });
     
     Route::middleware(['auth:web'])->group(function() {
-       
-        
-        // Route::post('/createtestimony', [TestimonyController::class, 'createtestimony'])->name('createtestimony');
-        // Route::get('/addtestimony', [TestimonyController::class, 'addtestimony'])->name('addtestimony');
-        // Route::get('/viewtestimony', [TestimonyController::class, 'viewtestimony'])->name('viewtestimony');
-        // Route::get('/testimonyview/{id}', [TestimonyController::class, 'testimonyview'])->name('testimonyview');
-        // Route::get('/testimonyedit/{id}', [TestimonyController::class, 'testimonyedit'])->name('testimonyedit');
-        // Route::put('/updatetestimony/{id}', [TestimonyController::class, 'updatetestimony'])->name('updatetestimony');
-        // Route::get('/testimonyeapproved/{id}', [TestimonyController::class, 'testimonyeapproved'])->name('testimonyeapproved');
-        // Route::get('/testimonyesuspend/{id}', [TestimonyController::class, 'testimonyesuspend'])->name('testimonyesuspend');
-        // Route::get('/testimonyedelete/{id}', [TestimonyController::class, 'testimonyedelete'])->name('testimonyedelete');
-        // Route::get('/addevent', [CourseController::class, 'addevent'])->name('addevent');
-        // Route::post('/createteevent', [CourseController::class, 'createteevent'])->name('createteevent');
-        // Route::get('/viewevents', [CourseController::class, 'viewevents'])->name('viewevents');
-        // Route::get('/eventeapproved/{slug}', [CourseController::class, 'eventeapproved'])->name('eventeapproved');
-        // Route::get('/eventesuspend/{slug}', [CourseController::class, 'eventesuspend'])->name('eventesuspend');
-       
-        Route::view('/home','dashboard.admin.home')->name('home');
+        Route::get('/profile', [UserController::class, 'profile'])->name('profile');
+        Route::view('/home','dashboard.home')->name('home');
         Route::get('/home', [UserController::class, 'home'])->name('home');
-       
+        Route::put('/updateprofile/{ref_no}', [UserController::class, 'updateprofile'])->name('updateprofile');
+        Route::get('/mydistributors', [UserController::class, 'mydistributors'])->name('mydistributors'); 
+        Route::get('/viewsingledistributorbyfran/{ref_no2}', [UserController::class, 'viewsingledistributorbyfran'])->name('viewsingledistributorbyfran'); 
         
-        // Route::get('/profile', [UserController::class, 'profile'])->name('profile');
+        Route::get('/profile2', [UserController::class, 'profile2'])->name('profile2');
+        Route::get('/myvendors', [UserController::class, 'myvendors'])->name('myvendors');
+        Route::get('/viewsinglevendorfran/{ref_no3}', [UserController::class, 'viewsinglevendorfran'])->name('viewsinglevendorfran');
+        Route::put('/updateprofile2/{ref_no2}', [UserController::class, 'updateprofile2'])->name('updateprofile2');
+        Route::get('/referedby/{ref_no2}', [UserController::class, 'referedby'])->name('referedby');
+        Route::get('/myvendorsbydistributor', [UserController::class, 'myvendorsbydistributor'])->name('myvendorsbydistributor');
+        Route::get('/myproducts', [ProductController::class, 'myproducts'])->name('myproducts');
+        Route::get('/viewproductsbyvendor/{ref_no}', [ProductController::class, 'viewproductsbyvendor'])->name('viewproductsbyvendor');
         
+        Route::get('/logout', [UserController::class, 'logout'])->name('logout'); 
         
-        // Route::get('/logout', [UserController::class, 'logout'])->name('logout'); 
-        
-       
     });
 });
 

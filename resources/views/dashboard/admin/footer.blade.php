@@ -66,6 +66,9 @@
 <script src="{{ asset('assets/plugins/ekko-lightbox/ekko-lightbox.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/filterizr/jquery.filterizr.min.js') }}"></script>
 
+
+<script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
 <script type="text/javascript">
   $(function () {
     $("#example1").DataTable({

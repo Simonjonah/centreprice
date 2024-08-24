@@ -81,9 +81,9 @@
                           @endif</td>
                         <td>{{ $view_franchis->phone }}</td>
                         <td>{{ $view_franchis->email }}</td>
-                        <td><img style="width: auto; height: 30px;" src="{{ URL::asset("/public/../$edit_franchise->images")}}" alt=""></td>
+                        <td><img style="width: 50px; height: 50px;" src="{{ URL::asset("/public/../$view_franchis->images")}}" alt=""></td>
                         
-                        {{-- <td><img style="width: auto; height: 30px;" src="{{ URL::asset("/public/../$view_franchis->images1")}}" alt=""></td> --}}
+                        
                         <td>{{ $view_franchis->amount }}</td>
                         <td>{{ $view_franchis->percent }}</td>
                         <td>{{ $view_franchis->ngstate['state'] }}</td>

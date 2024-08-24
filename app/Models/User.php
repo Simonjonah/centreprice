@@ -57,6 +57,7 @@ class User extends Authenticatable
  * @var array
  */
 protected $appends = ['referral_link'];
+protected $ref = ['vendorreferral_link'];
 
 /**
  * Get the user's referral link.
@@ -65,8 +66,12 @@ protected $appends = ['referral_link'];
  */
 public function getReferralLinkAttribute()
 {
-    return url('/registervendor/' . $this->ngstate['state'] . '/' . $this->Lga->district['districts'] . '/' . $this->Lga['lga'] . '/' . 'ref=' . $this->ref_no);
-    // return $this->referral_link = route('registervendor', ['ref' => $this->ref_no]);
+    return url('/registerdistributor/'. $this->Lga['lga'] . '/' . $this->ngstate['state'] . '/' . $this->Lga->district['districts'] . '/' . $this->ref_no);
+}
+
+public function getVendorReferralLinkAttribute()
+{
+    return url('/registervendor/'. $this->Lga['lga'] . '/' . $this->ngstate['state'] . '/' . $this->Lga->district['districts'] . '/' . $this->ref_no2);
 }
 
 

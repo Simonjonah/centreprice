@@ -38,7 +38,12 @@ class SubcategoryController extends Controller
         return view('dashboard.admin.viewsubcategory', compact('view_subcategories'));
     }
 
+    public function deletesubcategory($slug){
+        $view_subcategories = Subcategory::where('slug', $slug)->delete();
+        return redirect()->back()->with('success', 'You have created successfully');
+    }
 
+    
     public function editsubcategory($slug){
         $edit_subcategories = Subcategory::where('slug', $slug)->first();
         $view_categories = Category::all();

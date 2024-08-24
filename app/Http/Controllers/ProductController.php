@@ -8,6 +8,11 @@ use App\Models\Subcategory;
 use Illuminate\Http\Request;
 use Spatie\FlareClient\View;
 use Cviebrock\Eloquentref_nogable\Services\ref_noService;
+
+use Illuminate\Support\Str;
+ 
+ 
+// The quick brown fox...
 class ProductController extends Controller
 {
     public function addproducts(){
@@ -20,7 +25,7 @@ class ProductController extends Controller
         $request->validate([
             'subcategory_id' => ['required', 'string'],
             // 'productname' => ['required', 'string'],
-            'body' => ['required', 'string'],
+            // 'body' => ['required', 'string'],
             'amount' => ['required', 'string'],
             'percent' => ['required', 'string'],
             'images1' => 'nullable|mimes:jpg,png,jpeg'
@@ -41,7 +46,7 @@ class ProductController extends Controller
         // $add_product->ref_no = ref_noService::createref_no(Product::class, 'ref_no', $request->productname);
         $add_product->subcategory_id = $request->subcategory_id;
         // $add_product->productname = $request->productname;
-        $add_product->body = $request->body;
+        // // $add_product->body = $request->body;
         $add_product->percent = $request->percent;
         $add_product->amount = $request->amount;
         $add_product->ref_no = substr(rand(0,time()),0, 9);
@@ -194,7 +199,7 @@ class ProductController extends Controller
         $request->validate([
             'subcategory_id' => ['required', 'string'],
             // 'productname' => ['required', 'string'],
-            'body' => ['required', 'string'],
+            // 'body' => ['required', 'string'],
             'amount' => ['required', 'string'],
             'percent' => ['required', 'string'],
             'images1' => 'nullable|mimes:jpg,png,jpeg'
@@ -213,7 +218,7 @@ class ProductController extends Controller
         }
         $edit_product->subcategory_id = $request->subcategory_id;
         // $edit_product->productname = $request->productname;
-        $edit_product->body = $request->body;
+        // // $edit_product->body = $request->body;
         $edit_product->percent = $request->percent;
         $edit_product->amount = $request->amount;
         $edit_product->update();
@@ -225,7 +230,20 @@ class ProductController extends Controller
 
         $edit_product = Product::where('ref_no', $ref_no)->delete();
         return redirect()->back()->with('success', 'You have deleted successfully');
-
-
     }
+    public function myproducts(){
+        $view_myprodocts = Product::latest()->get();
+        $view_categories = Category::latest()->get();
+        return view('dashboard.myproducts', compact('view_categories', 'view_myprodocts'));
+    }
+
+    public function viewproductsbyvendor($ref_no){
+        $view_myprodocts = Product::where('ref_no', $ref_no)->first();
+
+        $view_allprodocts = Product::latest()->take(6)->get();
+
+        return view('dashboard.viewproductsbyvendor', compact('view_allprodocts', 'view_myprodocts'));
+    }
+
+     
 }
