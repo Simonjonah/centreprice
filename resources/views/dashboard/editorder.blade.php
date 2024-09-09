@@ -35,9 +35,9 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form action="{{ url('web/createorders') }}" method="post" enctype="multipart/form-data">
+              <form action="{{ url('web/updateeorders/'.$edit_order->ref_no) }}" method="post" enctype="multipart/form-data">
                   @csrf
-                  {{-- @method('PUT') --}}
+                  @method('PUT')
                   @if (Session::get('success'))
                   <div class="alert alert-success">
                       {{ Session::get('success') }}
@@ -57,7 +57,7 @@
                       <div class="form-group">
                         <label> Root Name</label>
                         <select name="root_id" class="form-control" style="width: 100%;">
-                          <option value="{{ $order_products->root['id'] }}">{{ $order_products->root['rootname'] }}</option>
+                          <option value="{{ $edit_order->root['id'] }}">{{ $edit_order->root['rootname'] }}</option>
                         </select>
                       </div>
                       @error('root_id')
@@ -67,27 +67,25 @@
                       <div class="form-group">
                         <label>SubCategory</label>
                         <select name="category_id" class="form-control" style="width: 100%;">
-                          <option value="{{ $order_products->category['id'] }}">{{ $order_products->category['category'] }}</option>
+                          <option value="{{ $edit_order->category['id'] }}">{{ $edit_order->category['category'] }}</option>
                         </select>
                       </div>
                       @error('category_id')
                           <span class="text-danger">{{ $message }}</span>
                       @enderror
 
-                    <div class="form-group">
-                      <label for="">Quantity {{ $order_products->quantity }}</label>
+                    {{-- <div class="form-group">
+                      <label for="">Quantity {{ $edit_order->product['quantity'] }}</label>
                       
-                  </div>
-                  @error('quantity')
-                      <span class="text-danger">{{ $message }}</span>
-                  @enderror
+                  </div> --}}
+                 
                 </div>
                     <!-- /.col -->
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label for="">Quantity Assigned</label>
+                        <label for="">Quantity Ordered</label>
                         <input name="quantityordered" type="number" @error('quantityordered') is-invalid @enderror"
-                        value="{{ old('quantityordered') }}" class="form-control" id="" placeholder="Quantity Assigned">
+                        value="{{ $edit_order->quantityordered }}" class="form-control" id="" placeholder="Quantity Assigned">
                     </div>
                     @error('quantityordered')
                         <span class="text-danger">{{ $message }}</span>
@@ -96,7 +94,7 @@
                     <div class="form-group">
                       <label>Product</label>
                       <select name="subcategory_id" class="form-control" style="width: 100%;">
-                        <option value="{{ $order_products->subcategory['id'] }}">{{ $order_products->subcategory['subcategory'] }}</option>
+                        <option value="{{ $edit_order->subcategory['id'] }}">{{ $edit_order->subcategory['subcategory'] }}</option>
                       </select>
                     </div>
                     @error('subcategory_id')
@@ -119,18 +117,18 @@
 
                  
                     
-                    <input type="hidden" name="product_id" value="{{ $order_products->id }}">
+                    <input type="hidden" name="product_id" value="{{ $edit_order->id }}">
                     <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                    <input type="hidden" name="franchise_commission" value="{{ $order_products->franchise_commission }}">
-                    <input type="hidden" name="distributors_commission" value="{{ $order_products->distributors_commission }}">
-                    <input type="hidden" name="vendors_commission" value="{{ $order_products->vendors_commission }}">
-                    <input type="hidden" name="amount" value="{{ $order_products->amount }}">
-                    {{-- <input type="hidden" name="quantityassignened" value="{{ $order_products->quantityassignened }}"> --}}
-                    <input type="hidden" name="images1" value="{{ $order_products->images1 }}">
-                      <input type="hidden" name="images2" value="{{ $order_products->images2 }}">
-                      <input type="hidden" name="images3" value="{{ $order_products->images3 }}">
-                      <input type="hidden" name="images4" value="{{ $order_products->images4 }}">
-                      <input type="hidden" name="images5" value="{{ $order_products->images5 }}">
+                    <input type="hidden" name="franchise_commission" value="{{ $edit_order->franchise_commission }}">
+                    <input type="hidden" name="distributors_commission" value="{{ $edit_order->distributors_commission }}">
+                    <input type="hidden" name="vendors_commission" value="{{ $edit_order->vendors_commission }}">
+                    <input type="hidden" name="amount" value="{{ $edit_order->amount }}">
+                    {{-- <input type="hidden" name="quantityassignened" value="{{ $edit_order->quantityassignened }}"> --}}
+                    <input type="hidden" name="images1" value="{{ $edit_order->images1 }}">
+                      <input type="hidden" name="images2" value="{{ $edit_order->images2 }}">
+                      <input type="hidden" name="images3" value="{{ $edit_order->images3 }}">
+                      <input type="hidden" name="images4" value="{{ $edit_order->images4 }}">
+                      <input type="hidden" name="images5" value="{{ $edit_order->images5 }}">
                       <!-- /.form-group -->
                     </div>
                     <!-- /.col -->
@@ -139,6 +137,8 @@
                     <button type="submit" class="btn btn-primary">Submit</button>
                   </div>
               </form>
+
+              
             </div>
 
 

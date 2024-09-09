@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Lga;
 use App\Models\Ngstate;
+use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -105,7 +107,10 @@ class UserController extends Controller
     public function home(){
         $countfrancesedistributors = User::where('user_id', auth::guard('web')->id())->count();
         $viewmyfrancesedistributors = User::where('user_id', auth::guard('web')->id())->take(10)->get();
-        return view('dashboard.home', compact('viewmyfrancesedistributors', 'countfrancesedistributors'));
+       $view_orderedproducts = Order::where('user_id', auth::guard('web')->id())->take(10)->get();
+       
+       
+        return view('dashboard.home', compact('view_orderedproducts', 'viewmyfrancesedistributors', 'countfrancesedistributors'));
     }
 
     public function lockscreen(){

@@ -24,6 +24,8 @@ return new class extends Migration
             $table->decimal('vendors_commission', 8, 2)->default('0')->nullable();
             $table->decimal('percent', 8, 2)->default('0')->nullable();
             $table->string('quantityassigned')->nullable();
+            $table->string('quantityordered')->nullable();
+            
             $table->text('images1')->nullable();
             $table->text('images2')->nullable();
             $table->text('images3')->nullable();

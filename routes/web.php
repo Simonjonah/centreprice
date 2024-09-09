@@ -9,6 +9,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\MilestoneController;
 use App\Http\Controllers\FlutterwaveController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RootController;
 use App\Http\Controllers\SubcategoryController;
@@ -231,6 +232,11 @@ Route::prefix('web')->name('web.')->group(function() {
         Route::post('/renew/{id}', [TransactionController::class, 'renew'])->name('renew');
         Route::get('/viewsubscriptionpayment/{user_id}', [SubscriptionController::class, 'viewsubscriptionpayment'])->name('viewsubscriptionpayment');
         Route::get('/ordermyproducts/{ref_no}', [ProductController::class, 'ordermyproducts'])->name('ordermyproducts');
+        Route::post('/createorders', [OrderController::class, 'createorders'])->name('createorders');
+        Route::get('/myorderproducts', [OrderController::class, 'myorderproducts'])->name('myorderproducts');
+        Route::get('/suspendorder/{ref_no}', [OrderController::class, 'suspendorder'])->name('suspendorder');
+        Route::get('/editorder/{ref_no}', [OrderController::class, 'editorder'])->name('editorder');
+        Route::get('/viewsingleorder/{ref_no}', [OrderController::class, 'viewsingleorder'])->name('viewsingleorder');
         
     });
 });
