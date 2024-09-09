@@ -178,24 +178,24 @@
                 </a>
               </li>
 
-              <li class="nav-item">
+              {{-- <li class="nav-item">
                 <a href="{{ url('admin/addcategory') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Add Category</p>
                 </a>
-              </li>
+              </li> --}}
               <li class="nav-item">
                 <a href="{{ url('admin/viewcategory') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>View Category</p>
                 </a>
               </li>
-              <li class="nav-item">
+              {{-- <li class="nav-item">
                 <a href="{{ url('admin/addsubcategory') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Add SubCategory</p>
                 </a>
-              </li>
+              </li> --}}
               <li class="nav-item">
                 <a href="{{ url('admin/viewsubcategory') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -214,12 +214,12 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
+              {{-- <li class="nav-item">
                 <a href="{{ url('admin/addproducts') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Add Products</p>
                 </a>
-              </li>
+              </li> --}}
               <li class="nav-item">
                 <a href="{{ url('admin/viewproducts') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -286,110 +286,85 @@
           </li>
 
 
-          <li class="nav-header">EXAMPLES</li>
-          <li class="nav-item">
-            <a href="pages/calendar.html" class="nav-link">
-              <i class="nav-icon fas fa-calendar-alt"></i>
-              <p>
-                Calendar
-                <span class="badge badge-info right">2</span>
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="pages/gallery.html" class="nav-link">
-              <i class="nav-icon far fa-image"></i>
-              <p>
-                Gallery
-              </p>
-            </a>
-          </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon far fa-envelope"></i>
               <p>
-                Mailbox
+                Subscription
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="pages/mailbox/mailbox.html" class="nav-link">
+              {{-- <li class="nav-item">
+                <a href="{{ url('admin/addsubcription') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Inbox</p>
+                  <p>Add Subscription</p>
+                </a>
+              </li> --}}
+              <li class="nav-item">
+                <a href="{{ url('admin/viewsubcription') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>View Franchise Sub</p>
                 </a>
               </li>
+
               <li class="nav-item">
-                <a href="pages/mailbox/compose.html" class="nav-link">
+                <a href="{{ url('admin/distributorsubcription') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Compose</p>
+                  <p>View Distributor Sub</p>
                 </a>
               </li>
+              
               <li class="nav-item">
-                <a href="pages/mailbox/read-mail.html" class="nav-link">
+                <a href="{{ url('admin/vendorsubcription') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Read</p>
+                  <p>View Vendors Sub</p>
                 </a>
               </li>
             </ul>
           </li>
+
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-book"></i>
+              <i class="nav-icon fas fa-users"></i>
               <p>
-                Pages
+                Plans
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/examples/invoice.html" class="nav-link">
+                <a href="{{ url('admin/addplan') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Invoice</p>
+                  <p>Add Plan</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/examples/profile.html" class="nav-link">
+                <a href="{{ url('admin/viewplan') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Profile</p>
+                  <p>View Plan</p>
                 </a>
               </li>
+              
+            </ul>
+          </li>
+
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-book"></i>
+              <p>
+                Product Orders
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/examples/e-commerce.html" class="nav-link">
+                <a href="{{ url('admin/vieworders') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>E-commerce</p>
+                  <p>View Orders</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="pages/examples/projects.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Projects</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/examples/project-add.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Project Add</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/examples/project-edit.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Project Edit</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/examples/project-detail.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Project Detail</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/examples/contacts.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Contacts</p>
-                </a>
-              </li>
+              
             </ul>
           </li>
           <li class="nav-item has-treeview">

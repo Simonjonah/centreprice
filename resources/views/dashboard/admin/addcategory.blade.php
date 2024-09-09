@@ -51,12 +51,8 @@
                 <div class="card-body">
                   <div class="form-group">
                     <label>Select Root</label>
-                    <select name="root_id" class="form-control select2" style="width: 100%;">
-                      <option value="">Select Root</option>
-                      @foreach ($view_roots as $view_roots)
-                        <option value="{{ $view_roots->id }}">{{ $view_roots->rootname }}</option>
-                      @endforeach
-                      
+                    <select name="root_id" class="form-control" style="width: 100%;">
+                      <option value="{{ $view_roots->id }}">{{ $view_roots->rootname }}</option>
                     </select>
                   </div>
                   @error('root_id')

@@ -53,8 +53,8 @@
     </div>
   @endif
 
-  <input type="text" value="{{ $view_franchise->ref_no }}" name="ref_no" id="">
-  <input type="text" value="{{ $view_franchise->id }}" name="user_id" id="">
+  <input type="hidden" value="{{ $view_franchise->ref_no }}" name="ref_no" id="">
+  <input type="hidden" value="{{ $view_franchise->id }}" name="user_id" id="">
   {{-- <input type="text" value="{{ $view_franchise->lga_id }}" name="lga_id" id=""> --}}
   {{-- <input type="text" value="{{ $view_franchise->ngstate_id }}" name="ngstate_id" id=""> --}}
         <div class="input-group mb-3">
@@ -84,7 +84,7 @@
         @enderror
 
 
-        <label for="">Select State</label>
+        <label for="">Select State of Residence</label>
         <div class="input-group mb-3">
           <select name="ngstate_id" class="form-control">
           <option value="">Select State</option>
@@ -96,25 +96,11 @@
           </select>
         </div>
 
-          <label for="">Subscription Fee</label>
-        <div class="input-group mb-3">
-          <select name="subscription_fee" class="form-control">
-            {{-- <option value="">Subscription Fee</option> --}}
-            <option value="500,000">500,000</option>
-          </select>
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-user"></span>
-            </div>
-          </div>
-        </div>
-        @error('subscription_fee')
-        <span class="text-danger">{{ $message }}</span>
-        @enderror 
+       
 
         <label for="">City</label>
           <div class="input-group mb-3">
-            <input type="date" name="city" id="myInput" class="form-control"  @error('city') is-invalid @enderror"
+            <input type="text" name="city"  class="form-control"  @error('city') is-invalid @enderror"
             value="{{ old('city') }}" placeholder="city">
             
             <div class="input-group-append">
@@ -126,9 +112,24 @@
           @error('city')
               <span class="text-danger">{{ $message }}</span>
           @enderror 
+
+          <label for="">Address</label>
+          <div class="input-group mb-3">
+            <input type="text" name="address"  class="form-control"  @error('address') is-invalid @enderror"
+            value="{{ old('address') }}" placeholder="Address">
+            
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-user"></span>
+              </div>
+            </div>
+          </div>
+          @error('address')
+              <span class="text-danger">{{ $message }}</span>
+          @enderror 
           <label for="">Date Of Birth</label>
           <div class="input-group mb-3">
-            <input type="date" name="dob" id="myInput" class="form-control"  @error('dob') is-invalid @enderror"
+            <input type="date" name="dob" class="form-control"  @error('dob') is-invalid @enderror"
             value="{{ old('dob') }}" placeholder="dob">
             
             <div class="input-group-append">
@@ -194,7 +195,7 @@
        
         
           <div class="input-group mb-3">
-            <input type="tel" name="phone" id="myInput" class="form-control"  @error('phone') is-invalid @enderror"
+            <input type="tel" name="phone"  class="form-control"  @error('phone') is-invalid @enderror"
             value="{{ old('phone') }}" placeholder="Phone">
             
             <div class="input-group-append">
@@ -222,9 +223,34 @@
             <span class="text-danger">{{ $message }}</span>
         @enderror 
         
+        <label for="">Confirm Password</label>
+        
+        <div class="input-group mb-3">
+          <input type="password" name="confirm_password" id="myInmput" class="form-control"  @error('confirm_password') is-invalid @enderror"
+          value="{{ old('confirm_password') }}" placeholder="Confirm password">
+          
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        @error('confirm_password')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
         <div class="row">
           <div class="col-8">
-          <input type="checkbox" onclick="myFunction()">Show Password
+            <div class="icheck-primary">
+              <input type="checkbox" id="agreeTerms" name="terms" value="agree" required>
+              <label for="agreeTerms">
+               I agree to the <a href="#">terms</a>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8">
+            <input type="checkbox" onclick="myFunction()">Show Password
           </div>
        
           
@@ -235,19 +261,9 @@
         </div>
       </form>
 
-      <div class="social-auth-links text-center">
-        <p>- OR -</p>
-        <a href="#" class="btn btn-block btn-primary">
-          <i class="fab fa-facebook mr-2"></i>
-          Sign up using Facebook
-        </a>
-        <a href="#" class="btn btn-block btn-danger">
-          <i class="fab fa-google-plus mr-2"></i>
-          Sign up using Google+
-        </a>
-      </div>
+      
 
-      <a href="login.html" class="text-center">I already have a membership</a>
+      <a href="{{ url('login') }}" class="text-center">I already have a membership</a>
     </div>
     <!-- /.form-box -->
   </div><!-- /.card -->
@@ -262,30 +278,18 @@
 <script src="{{ asset('assets/dist/js/adminlte.min.js') }}"></script>
 
 
-<script type="text/javascript">
-        $(document).ready(function() {
-            $('#state').change(function() {
-                var stateID = $(this).val();
-                if(stateID) {
-                    $.ajax({
-                        url: '/register/'+stateID,
-                        type: "GET",
-                        dataType: "json",
-                        success:function(data) {
-                            $('#lga').empty();
-                            $('#lga').append('<option value="">Select Local Government</option>');
-                            $.each(data, function(key, value) {
-                                $('#lga').append('<option value="'+ key +'">'+ value +'</option>');
-                            });
-                        }
-                    });
-                } else {
-                    $('#lga').empty();
-                }
-            });
-        });
-    
-    </script>
 
-</body>
-</html>
+<script>
+  function myFunction() {
+  var x = document.getElementById("myInput");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+
+
+
+</script>
+      

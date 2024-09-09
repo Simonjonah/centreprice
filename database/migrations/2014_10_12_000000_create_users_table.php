@@ -17,12 +17,14 @@ return new class extends Migration
             $table->string('user_id')->nullable();
             $table->string('distributor_id')->nullable();
             $table->string('vendor_id')->nullable();
+            $table->string('fname')->nullable();
+            $table->string('lname')->nullable();
             $table->string('ref_no2')->nullable();
             $table->string('ref_no3')->nullable();
+            $table->string('ref_no4')->nullable();
             $table->string('gender')->nullable();
             $table->string('city')->nullable();
             $table->string('dob')->nullable();
-            
             $table->float('subscription_fee')->nullable();
             $table->string('email')->unique();
             $table->string('lga')->nullable();
@@ -33,17 +35,15 @@ return new class extends Migration
             $table->string('ngstate_id')->nullable();
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
-            $table->string('fname')->nullable();
-            $table->string('lname')->nullable();
             $table->string('ref_no')->nullable();
             $table->string('status')->nullable();
             $table->string('role')->nullable();
             $table->string('subscription')->nullable();
-            $table->float('bonuse')->default(0)->nullable();
-            $table->float('withdrawal')->default(0)->nullable();
-            $table->float('deposit')->default(0)->nullable();
+            $table->decimal('bonuse', 8, 2)->default(0)->nullable();
+            $table->decimal('withdrawal', 8, 2)->default(0)->nullable();
+            $table->decimal('deposit', 8, 2)->default(0)->nullable();
             $table->string('images')->nullable();
-
+            $table->string('terms')->nullable();
             $table->string('password');
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();

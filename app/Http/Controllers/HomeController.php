@@ -23,6 +23,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('dashboard/home');
+        // $countyourresults = Result::where('user_id', auth::guard('web')->id())->count();
+        return redirect('/web/home');
+        //return view('dashboard/home');
     }
 }

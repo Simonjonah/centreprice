@@ -5,6 +5,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MuserController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FlutterwaveController;
+use App\Http\Controllers\SubscriptionController;
+
+use App\Models\Subscription;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +27,11 @@ use App\Http\Controllers\AuthController;
 // Route::get('/', function(){
 //  return 'API';
 // });
+// Route::post('/pay', [FlutterwaveController::class, 'initialize'])->name('pay');
+Route::post('pay', [FlutterwaveController::class, 'initialize']);
+
+Route::get('/rave/callback', [FlutterwaveController::class, 'callback'])->name('callback');
+
 
 Route::apiResource('post', PostController::class);
 
@@ -30,6 +39,9 @@ Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 Route::post('logout', [AuthController::class, 'logout']);
 
-// Route::get('getusers', [MuserController::class, 'get_all_users']);
+Route::post('buy', [SubscriptionController::class, 'makeApiRequest']);
+
+
+// Route::post('/buyer', [SubscriptionController::class, 'buyProduct'])->name('buy.product');
 // Route::post('create', [MuserController::class, 'creat_user']);
 // Route::delete('delete/{id}', [MuserController::class, 'delete_user']);

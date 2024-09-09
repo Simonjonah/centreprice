@@ -35,7 +35,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form action="{{ url('admin/updatefranchise/'.$edit_franchise->ref_no) }}" method="post" enctype="multipart/form-data">
+              <form action="{{ url('admin/updatefranchise/'.$edit_franchise->id) }}" method="post" enctype="multipart/form-data">
                   @csrf
                   @method('PUT')
                   @if (Session::get('success'))
@@ -54,13 +54,33 @@
                   <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="">Name</label>
-                            <input name="name" type="text" @error('name') is-invalid @enderror"
-                            value="{{ $edit_franchise->name }}" class="form-control"  placeholder="name">
+                            <label for="">First Name</label>
+                            <input name="fname" type="text" @error('fname') is-invalid @enderror"
+                            value="{{ $edit_franchise->fname }}" class="form-control"  placeholder="First name">
                         </div>
-                        @error('name')
+                        @error('fname')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
+
+                        <div class="form-group">
+                          <label for="">First Name</label>
+                          <input name="lname" type="text" @error('lname') is-invalid @enderror"
+                          value="{{ $edit_franchise->lname }}" class="form-control"  placeholder="Last name">
+                      </div>
+                      @error('lname')
+                          <span class="text-danger">{{ $message }}</span>
+                      @enderror
+
+
+                      <div class="form-group">
+                        <label for="">City</label>
+                        <input name="city" type="text" @error('city') is-invalid @enderror"
+                        value="{{ $edit_franchise->city }}" class="form-control"  placeholder="City">
+                    </div>
+                    @error('city')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+
 
                         <div class="form-group">
                             <label for="">Email</label>
@@ -124,6 +144,24 @@
                               <span class="text-danger">{{ $message }}</span>
                           @enderror
 
+                          <div class="form-group">
+                            <label for="">Date</label>
+                            <input name="dob" type="date" @error('dob') is-invalid @enderror"
+                            value="{{ $edit_franchise->dob }}" class="form-control"  placeholder="Date">
+                        </div>
+                        @error('dob')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+      
+      
+                        <div class="form-group">
+                          <label for="">Address</label>
+                          <input name="address" type="text" @error('address') is-invalid @enderror"
+                          value="{{ $edit_franchise->address }}" class="form-control"  placeholder="Address">
+                      </div>
+                      @error('address')
+                          <span class="text-danger">{{ $message }}</span>
+                      @enderror
                    
 
                  

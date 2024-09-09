@@ -19,22 +19,32 @@ class UserController extends Controller
             'lga_id' => ['required', 'max:233'],
             'email' => ['required', 'email', 'unique:users'],
             'phone' => ['required', 'string', 'unique:users'],
-            'subscription_fee' => ['required', 'max:233'],
             'user_id' => ['required', 'max:233'],
             'ref_no' => ['required', 'max:233'],
+            'city' => ['required', 'max:233'],
+            'gender' => ['required', 'max:233'],
+            'address' => ['required', 'max:233'],
+            'dob' => ['required', 'max:233'],
+            'terms' => ['required', 'max:233'],
         ]);
         $add_franchise = new User();
         $add_franchise->lname = $request->lname;
         $add_franchise->fname = $request->fname;
+        $add_franchise->dob = $request->dob;
+        $add_franchise->gender = $request->gender;
+        $add_franchise->address = $request->address;
+        $add_franchise->fname = $request->fname;
         $add_franchise->role = 2;
         $add_franchise->email = $request->email;
         $add_franchise->phone = $request->phone;
+        $add_franchise->city = $request->city;
         $add_franchise->ngstate_id = $request->ngstate_id;
         $add_franchise->lga_id = $request->lga_id;
         $add_franchise->user_id = $request->user_id;
         $add_franchise->subscription_fee = $request->subscription_fee;
         $add_franchise->password = \Hash::make($request->password);
         $add_franchise->ref_no = $request->ref_no;
+        $add_franchise->terms = $request->terms;
         $add_franchise->ref_no2 = substr(rand(0,time()),0, 9);
         $add_franchise->save();
  
@@ -47,21 +57,37 @@ class UserController extends Controller
     }
 
     public function createfranchise(Request $request){
-        //dd($request->all());
 
         $request->validate([
-            'name' => 'required|string|max:255',
+            'lname' => 'required|string|max:255',
+            'fname' => 'required|string|max:255',
             'email' => 'required|string|max:255|unique:users',
             'phone' => 'required|string|max:255|unique:users',
-            'password' => 'required|string|max:20|min:3',
             'ngstate_id' => 'required|string',
+            'city' => 'required|string',
+            'gender' => 'required|string',
+            'address' => 'required|string',
+            'dob' => 'required|string',
             'lga_id' => 'required|string',
+            'terms' => 'required|string',
+            'password' => 'required|string|max:30|min:3',
+            'confirm_password' => 'required|min:3|max:30|same:password'          
+
         ]);
+        // dd($request->all());
+
         $add_franchise = new User();
-        $add_franchise->name = $request->name;
+        $add_franchise->fname = $request->fname;
+        $add_franchise->lname = $request->lname;
+        $add_franchise->terms = $request->terms;
+
         $add_franchise->role = 1;
         $add_franchise->email = $request->email;
         $add_franchise->phone = $request->phone;
+        $add_franchise->dob = $request->dob;
+        $add_franchise->address = $request->address;
+        $add_franchise->gender = $request->gender;
+        $add_franchise->city = $request->city;
         $add_franchise->ngstate_id = $request->ngstate_id;
         $add_franchise->lga_id = $request->lga_id;
         $add_franchise->password = \Hash::make($request->password);
@@ -77,10 +103,15 @@ class UserController extends Controller
     }
 
     public function home(){
-
-        return view('dashboard.home');
+        $countfrancesedistributors = User::where('user_id', auth::guard('web')->id())->count();
+        $viewmyfrancesedistributors = User::where('user_id', auth::guard('web')->id())->take(10)->get();
+        return view('dashboard.home', compact('viewmyfrancesedistributors', 'countfrancesedistributors'));
     }
 
+    public function lockscreen(){
+        return view('dashboard.lockscreen');
+    }
+    
 
     public function check(Request $request){
         $request->validate([
@@ -168,8 +199,8 @@ class UserController extends Controller
 
     
     
-    public function updatefranchise(Request $request, $ref_no){
-        $edit_franchise = User::where('ref_no', $ref_no)->first();
+    public function updatefranchise(Request $request, $id){
+        $edit_franchise = User::where('id', $id)->first();
         $request->validate([
             'fname' => 'required|string|max:255',
             'lname' => 'required|string|max:255',
@@ -178,6 +209,9 @@ class UserController extends Controller
             'ngstate_id' => 'required|string',
             'lga_id' => 'required|string',
             'address' => 'nullable|string',
+            'city' => 'nullable|string',
+            'gender' => 'nullable|string',
+            'dob' => 'nullable|string',
             'images' => 'nullable|mimes:jpg,png,jpeg'
         ]);
         // dd($request->all());
@@ -195,6 +229,9 @@ class UserController extends Controller
         $edit_franchise->lname = $request->lname;
         $edit_franchise->email = $request->email;
         $edit_franchise->phone = $request->phone;
+        $edit_franchise->dob = $request->dob;
+        $edit_franchise->city = $request->city;
+        $edit_franchise->gender = $request->gender;
         $edit_franchise->ngstate_id = $request->ngstate_id;
         $edit_franchise->lga_id = $request->lga_id;
         $edit_franchise->address = $request->address;
@@ -428,6 +465,7 @@ class UserController extends Controller
             'ref_no' => ['required', 'max:233'],
             'ref_no2' => ['required', 'max:233'],
             'distributor_id' => ['required', 'max:233'],
+            'terms' => ['required', 'max:233'],
         ]);
         $add_franchise = new User();
         $add_franchise->lname = $request->lname;
@@ -444,6 +482,8 @@ class UserController extends Controller
         $add_franchise->password = \Hash::make($request->password);
         $add_franchise->ref_no = $request->ref_no;
         $add_franchise->ref_no3 = substr(rand(0,time()),0, 9);
+        $add_franchise->terms = $request->terms;
+
         $add_franchise->save();
  
         if ($add_franchise) {
@@ -526,6 +566,26 @@ class UserController extends Controller
     public function logout(){
         Auth::guard('web')->logout();
         return redirect('login');
+    }
+
+    public function screenlogin(Request $request){
+        $request->validate([
+            // 'password' => ['required', 'string', 'max:255', 'exists:users'],
+            'password' => ['required', 'string', 'min:3']
+        ], [
+            'password.exist'=>'This email does not exist in the users table'
+        ]);
+        $creds = $request->only('password');
+        if (Auth::guard('web')->attempt($creds)) {
+            return redirect()->route('home')->with('success', 'You have successfully login');
+        }else{
+            return redirect()->route('login')->with('error', 'Failed to login');
+        }
+    }
+
+    public function viewdistributors($ref_no){
+        $view_distributors = User::where('ref_no', $ref_no)->get();
+        return view('dashboard.admin.viewdistributors', compact('view_distributors'));
     }
 
     // public function registervendor($lga, $state, $referral)

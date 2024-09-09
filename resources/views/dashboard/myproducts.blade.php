@@ -31,9 +31,11 @@
                   <div class="card" style="width: 18rem;">
                       <img style="width: 100%; height: 250px;" src="{{ URL::asset("/public/../$view_myprodoct->images1")}}" class="card-img-top" alt="...">
                       <div class="card-body">
-                        <h5 class="card-title"><b>{{ $view_myprodoct->subcategory['subcategory'] }}</b></h5>
-                        <p class="card-text">₦{{ $view_myprodoct->amount }}</p>
-                        <a href="{{ url('web/viewproductsbyvendor/'.$view_myprodoct->ref_no) }}" class="btn btn-primary">View Products</a>
+                        <h5 class="card-title"><b>{{ $view_myprodoct->subcategory['subcategory'] }} </b>Quantities {{ $view_myprodoct->quantity }}</b></h5>
+                        <p class="card-text">₦{{ $view_myprodoct->amount }} </p>
+                        <a href="{{ url('web/viewproductsbyvendor/'.$view_myprodoct->ref_no) }}" class="btn btn-primary">View Products</a> 
+                        <br> <br>
+                        <a href="{{ url('web/ordermyproducts/'.$view_myprodoct->ref_no) }}" class="btn btn-success">Order Products</a>
                       </div>
                     </div>
               </div>
@@ -49,7 +51,7 @@
               </div>
               <div class="card-body">
                 <div class="form-group">
-                  <label for="inputEstimatedDuration"><a href="{{ url('web/viewcatoryproduct/') }}">Estimated project duration</a></label>
+                  <label for="inputEstimatedDuration"><a href="{{ url('web/viewcatoryproduct/') }}">Categories</a></label>
                 </div>
               </div>
               <!-- /.card-body -->

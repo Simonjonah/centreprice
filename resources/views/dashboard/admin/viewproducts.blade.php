@@ -42,10 +42,10 @@
                     <th>Roots</th>
                     <th>Category</th>
                     <th>Sub Category</th>
-                    {{-- <th>Product Name</th> --}}
+                    <th>Quantity</th>
                     <th>Image</th>
                     <th>Amount</th>
-                    <th>Percent</th>
+                    <th>Discounts</th>
                     <th>View</th>
                     <th>Status</th>
                     <th>Approve</th>
@@ -73,7 +73,7 @@
                         <td>{{ $view_product->subcategory->category->root['rootname'] }}</td>
                         <td>{{ $view_product->subcategory->category['category'] }}</td>
                         <td>{{ $view_product->subcategory['subcategory'] }}</td>
-                        {{-- <td>{{ $view_product->productname }}</td> --}}
+                        <td>{{ $view_product->quantity }}</td>
                         <td><img style="width: auto; height: 30px;" src="{{ URL::asset("/public/../$view_product->images1")}}" alt=""></td>
                         <td>{{ $view_product->amount }}</td>
                         <td>{{ $view_product->percent }}</td>
@@ -122,10 +122,11 @@
                       <th>Roots</th>
                       <th>Category</th>
                       <th>Sub Category</th>
-                      {{-- <th>Product Name</th> --}}
+                    <th>Quantity</th>
+                      
                       <th>Image</th>
                       <th>Amount</th>
-                      <th>Percent</th>
+                      <th>Discounts</th>
                       <th>View</th>
                       <th>Status</th>
                       <th>Approve</th>

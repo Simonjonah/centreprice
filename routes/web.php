@@ -12,7 +12,13 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RootController;
 use App\Http\Controllers\SubcategoryController;
+use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\PlanController;
+use App\Http\Controllers\TransactionController;
 use App\Models\Admin;
+use App\Models\Subscription;
+use App\Models\Transaction;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,21 +35,23 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('/registerdistributor', function ($ref_no) {
-//     $view_franchise = User::where('ref_no', $ref_no)->first();
-//     return view('view.registerdistributor', compact('view_franchise'));
-// });
-
+Route::post('/pay', [App\Http\Controllers\PaymentController::class, 'redirectToGateway'])->name('pay');
+// Laravel 8 & 9
 
 Route::post('/pay', [FlutterwaveController::class, 'initialize'])->name('pay');
-// The callback url after a payment
+
 Route::get('/rave/callback', [FlutterwaveController::class, 'callback'])->name('callback');
 
+Route::post('buy', [TransactionController::class, 'makeApiRequest']);
+Route::post('cancel', [TransactionController::class, 'cancel']);
+// Route::get('/payment/callback', [App\Http\Controllers\TransactionController::class, 'handlePaystackCallback']);
+// Laravel 8 & 9
+
+Route::get('/payment/callback/{reference}', [TransactionController::class, 'handleGatewayCallback']);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-// Route::get('/addbooks1/{ref_no}', [CourseController::class, 'addbooks1'])->name('addbooks1');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
 
 Route::prefix('admin')->name('admin.')->group(function() {
 
@@ -56,7 +64,22 @@ Route::prefix('admin')->name('admin.')->group(function() {
     });
     
     Route::middleware(['auth:admin'])->group(function() {
+        Route::get('/addsubcription', [SubscriptionController::class, 'addsubcription'])->name('addsubcription');
+        Route::get('/viewsubcription', [SubscriptionController::class, 'viewsubcription'])->name('viewsubcription');
+        Route::post('/createsubcription', [SubscriptionController::class, 'createsubcription'])->name('createsubcription');
+        Route::get('/editsubscription/{id}', [SubscriptionController::class, 'editsubscription'])->name('editsubscription');
+        Route::put('/updatesubcription/{id}', [SubscriptionController::class, 'updatesubcription'])->name('updatesubcription');
+        Route::get('/deletesubscription/{id}', [SubscriptionController::class, 'deletesubscription'])->name('deletesubscription');
+        Route::get('/distributorsubcription', [SubscriptionController::class, 'distributorsubcription'])->name('distributorsubcription');
+        Route::get('/viewsubscriptionpayment/{user_id}', [SubscriptionController::class, 'viewsubscriptionpayment'])->name('viewsubscriptionpayment');
         
+        Route::get('/addplan', [PlanController::class, 'addplan'])->name('addplan');
+        Route::get('/viewplan', [PlanController::class, 'viewplan'])->name('viewplan');
+        Route::post('/createplan', [PlanController::class, 'createplan'])->name('createplan');
+        Route::get('/editplans/{id}', [PlanController::class, 'editplans'])->name('editplans');
+        Route::put('/updateplan/{id}', [PlanController::class, 'updateplan'])->name('updateplan');
+        Route::get('/deleteplan/{id}', [PlanController::class, 'deleteplan'])->name('deleteplan');
+
         Route::get('/addlga', [LgaController::class, 'addlga'])->name('addlga');
         Route::post('/createmilestone', [MilestoneController::class, 'createmilestone'])->name('createmilestone');
         Route::get('/viewmilestones', [MilestoneController::class, 'viewmilestones'])->name('viewmilestones');
@@ -67,15 +90,15 @@ Route::prefix('admin')->name('admin.')->group(function() {
         Route::put('/updatecategory/{id}', [CategoryController::class, 'updatecategory'])->name('updatecategory');
         Route::get('/editcategory/{id}', [CategoryController::class, 'editcategory'])->name('editcategory');
         Route::get('/viewcategory', [CategoryController::class, 'viewcategory'])->name('viewcategory');
-        Route::get('/addcategory', [CategoryController::class, 'addcategory'])->name('addcategory');
+        Route::get('/addcategory/{ref_no}', [RootController::class, 'addcategory'])->name('addcategory');
         Route::post('/createcategory', [CategoryController::class, 'createcategory'])->name('createcategory');
-        Route::get('/addsubcategory', [SubcategoryController::class, 'addsubcategory'])->name('addsubcategory');
+        Route::get('/addsubcategory/{ref_no}', [CategoryController::class, 'addsubcategory'])->name('addsubcategory');
         Route::post('/createsubcategory', [SubcategoryController::class, 'createsubcategory'])->name('createsubcategory');
         Route::get('/viewsubcategory', [SubcategoryController::class, 'viewsubcategory'])->name('viewsubcategory');
         Route::get('/editsubcategory/{slug}', [SubcategoryController::class, 'editsubcategory'])->name('editsubcategory');
         Route::put('/updatesubcategory/{slug}', [SubcategoryController::class, 'updatesubcategory'])->name('updatesubcategory');
         
-        Route::get('/addproducts', [ProductController::class, 'addproducts'])->name('addproducts');
+        Route::get('/addproducts/{ref_no}', [SubcategoryController::class, 'addproducts'])->name('addproducts');
         Route::get('/firstphoto/{ref_no}', [ProductController::class, 'firstphoto'])->name('firstphoto');
         Route::post('/createproduct', [ProductController::class, 'createproduct'])->name('createproduct');
         Route::put('/add2ndphoto/{ref_no}', [ProductController::class, 'add2ndphoto'])->name('add2ndphoto');
@@ -111,11 +134,12 @@ Route::prefix('admin')->name('admin.')->group(function() {
         Route::get('/editdistributor/{ref_no}', [UserController::class, 'editdistributor'])->name('editdistributor');
         Route::get('/viewdistributorsadmin', [UserController::class, 'viewdistributorsadmin'])->name('viewdistributorsadmin');
         Route::get('/viewfranchise', [UserController::class, 'viewfranchise'])->name('viewfranchise');
+        Route::get('/viewdistributors/{ref_no}', [UserController::class, 'viewdistributors'])->name('viewdistributors');
         Route::get('/viewsinglefranchise/{ref_no}', [UserController::class, 'viewsinglefranchise'])->name('viewsinglefranchise');
         Route::get('/approvefranchise/{ref_no}', [UserController::class, 'approvefranchise'])->name('approvefranchise');
         Route::get('/suspendfranchise/{ref_no}', [UserController::class, 'suspendfranchise'])->name('suspendfranchise');
         Route::get('/editfranchise/{ref_no}', [UserController::class, 'editfranchise'])->name('editfranchise');
-        Route::put('/updatefranchise/{ref_no}', [UserController::class, 'updatefranchise'])->name('updatefranchise');
+        Route::put('/updatefranchise/{id}', [UserController::class, 'updatefranchise'])->name('updatefranchise');
         Route::get('/deletefranchise/{ref_no}', [UserController::class, 'deletefranchise'])->name('deletefranchise');
         Route::get('/viewvendorsadmin', [UserController::class, 'viewvendorsadmin'])->name('viewvendorsadmin');
         
@@ -186,6 +210,8 @@ Route::prefix('web')->name('web.')->group(function() {
         Route::put('/updateprofile/{ref_no}', [UserController::class, 'updateprofile'])->name('updateprofile');
         Route::get('/mydistributors', [UserController::class, 'mydistributors'])->name('mydistributors'); 
         Route::get('/viewsingledistributorbyfran/{ref_no2}', [UserController::class, 'viewsingledistributorbyfran'])->name('viewsingledistributorbyfran'); 
+        Route::get('/lockscreen', [UserController::class, 'lockscreen'])->name('lockscreen'); 
+        Route::post('/screenlogin', [UserController::class, 'screenlogin'])->name('screenlogin'); 
         
         Route::get('/profile2', [UserController::class, 'profile2'])->name('profile2');
         Route::get('/myvendors', [UserController::class, 'myvendors'])->name('myvendors');
@@ -197,6 +223,14 @@ Route::prefix('web')->name('web.')->group(function() {
         Route::get('/viewproductsbyvendor/{ref_no}', [ProductController::class, 'viewproductsbyvendor'])->name('viewproductsbyvendor');
         
         Route::get('/logout', [UserController::class, 'logout'])->name('logout'); 
+        Route::get('/franchisesubscription', [PlanController::class, 'franchisesubscription'])->name('franchisesubscription');
+        Route::get('/mysubscriptions', [SubscriptionController::class, 'mysubscriptions'])->name('mysubscriptions');
+        Route::get('/cancelsubscription/{id}', [SubscriptionController::class, 'cancelsubscription'])->name('cancelsubscription');
+        Route::get('/mytransctions', [TransactionController::class, 'mytransctions'])->name('mytransctions');
+        Route::get('/printspayment/{id}', [TransactionController::class, 'printspayment'])->name('printspayment');
+        Route::post('/renew/{id}', [TransactionController::class, 'renew'])->name('renew');
+        Route::get('/viewsubscriptionpayment/{user_id}', [SubscriptionController::class, 'viewsubscriptionpayment'])->name('viewsubscriptionpayment');
+        Route::get('/ordermyproducts/{ref_no}', [ProductController::class, 'ordermyproducts'])->name('ordermyproducts');
         
     });
 });

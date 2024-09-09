@@ -26,7 +26,7 @@ class AdminController extends Controller
         ]);
         $registration = new Admin();
         $registration->name = $request->name;
-       $registration->role = 0;
+        $registration->role = 0;
         $registration->email = $request->email;
         $registration->password = \Hash::make($request->password);
         $registration->save();
@@ -101,8 +101,6 @@ class AdminController extends Controller
         return redirect()->back()->with('success', 'you have update successfully');
 
     }
-
-
 
     public function logout(){
         Auth::guard('admin')->logout();

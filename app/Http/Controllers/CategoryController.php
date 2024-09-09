@@ -10,10 +10,7 @@ use \Cviebrock\EloquentSluggable\Services\SlugService;
 class CategoryController extends Controller
 {
     //
-    public function addcategory(){
-        $view_roots = Root::all();
-        return view('dashboard.admin.addcategory', compact('view_roots'));
-    }
+    
 
     public function createcategory(Request $request){
         $request->validate([
@@ -27,10 +24,14 @@ class CategoryController extends Controller
         $add_category->ref_no = substr(rand(0,time()),0, 9);
 
         $add_category->save();
-        return redirect()->back()->with('success', 'You have created successfully');
+        return redirect()->route('admin.addsubcategory', ['ref_no' =>$add_category->ref_no]); 
+
         
     }
-
+    public function addsubcategory($ref_no){
+        $view_categories = Category::where('ref_no', $ref_no)->first();
+        return view('dashboard.admin.addsubcategory', compact('view_categories'));
+    }
     public function viewcategory(){
         $view_categories = Category::all();
         return view('dashboard.admin.viewcategory', compact('view_categories'));

@@ -44,8 +44,9 @@
                     <th>Phone</th>
                     <th>Email</th>
                     <th>Image</th>
-                    <th>Amount</th>
-                    <th>Percent</th>
+                    <th>ReferedBy</th>
+                    {{-- <th>Amount</th>
+                    <th>Percent</th> --}}
                     <th>State</th>
                     <th>Districts</th>
                     <th>LGA</th>
@@ -73,7 +74,7 @@
                   @foreach ($view_franchise as $view_franchis)
                     <tr>
                         <td>{{ $view_franchis->ref_no }}</td>
-                        <td>{{ $view_franchis->name }}</td>
+                        <td>{{ $view_franchis->fname }} {{ $view_franchis->lname }}</td>
                         <td>@if ($view_franchis->role == '1')
                             <span class="badge badge-dark"> Franchise</span>
                           @else
@@ -84,8 +85,10 @@
                         <td><img style="width: 50px; height: 50px;" src="{{ URL::asset("/public/../$view_franchis->images")}}" alt=""></td>
                         
                         
-                        <td>{{ $view_franchis->amount }}</td>
-                        <td>{{ $view_franchis->percent }}</td>
+                        <td><a href="{{ url('admin/viewdistributors/'.$view_franchis->ref_no) }}"
+                          class='btn btn-info'>
+                           <i class="far fa-eye">ReferedBy</i>
+                       </a></td>
                         <td>{{ $view_franchis->ngstate['state'] }}</td>
                         <td>{{ $view_franchis->Lga->district['districts'] }}</td>
                         <td>{{ $view_franchis->Lga['lga'] }}</td>
@@ -136,8 +139,7 @@
                     <th>Phone</th>
                     <th>Email</th>
                     <th>Image</th>
-                    <th>Amount</th>
-                    <th>Percent</th>
+                    <th>ReferedBy</th>
                     <th>State</th>
                     <th>Districts</th>
                     <th>LGA</th>

@@ -54,26 +54,55 @@
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
+                        <input type="hidden" name="category_id" value="{{ $view_subcategories->category['id'] }}">
+                        <input type="hidden" name="root_id" value="{{ $view_subcategories->category->root['id'] }}">
+                        {{-- <h2>S{{ $view_subcategories->id }}</h2> --}}
                         <label>Select SubCategory</label>
-                        <select name="subcategory_id" class="form-control select2" style="width: 100%;">
-                          <option value="">Select SubCategory</option>
-                          @foreach ($view_subcategories as $view_subcategorie)
-                            <option value="{{ $view_subcategorie->id }}">{{ $view_subcategorie->subcategory }}</option>
-                          @endforeach
+                        <select name="subcategory_id" class="form-control" style="width: 100%;">
+                          <option value="{{ $view_subcategories->id }}">{{ $view_subcategories->subcategory }}</option>
+                          
                           
                         </select>
                       </div>
                       @error('subcategory_id')
                           <span class="text-danger">{{ $message }}</span>
                       @enderror
-                      {{-- <div class="form-group">
-                        <label for="">Product Name</label>
-                        <input name="productname" type="text" @error('productname') is-invalid @enderror"
-                        value="{{ old('productname') }}" class="form-control" id="" placeholder="Product Name">
+
+                      <div class="form-group">
+                        <label for="">Distributor Commission</label>
+                        <input name="distributors_commission" type="text" @error('distributors_commission') is-invalid @enderror"
+                        value="{{ old('distributors_commission') }}" class="form-control" id="" placeholder="Distributor Commission">
                     </div>
-                    @error('productname')
+                    @error('distributors_commission')
                         <span class="text-danger">{{ $message }}</span>
-                    @enderror --}}
+                    @enderror
+
+                     <div class="form-group">
+                        <label for="">Franchise Commission</label>
+                        <input name="franchise_commission" type="text" @error('franchise_commission') is-invalid @enderror"
+                        value="{{ old('franchise_commission') }}" class="form-control" id="" placeholder="Franchise Commission">
+                    </div>
+                    @error('franchise_commission')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+
+                     <div class="form-group">
+                        <label for="">vendor Commission</label>
+                        <input name="vendors_commission" type="text" @error('vendors_commission') is-invalid @enderror"
+                        value="{{ old('vendors_commission') }}" class="form-control" id="" placeholder="vendor Commission">
+                    </div>
+                    @error('vendors_commission')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+
+                    <div class="form-group">
+                      <label for="">Quantity</label>
+                      <input name="quantity" type="text" @error('quantity') is-invalid @enderror"
+                      value="{{ old('quantity') }}" class="form-control" id="" placeholder="Quantity">
+                  </div>
+                  @error('quantity')
+                      <span class="text-danger">{{ $message }}</span>
+                  @enderror
 {{-- 
 
                     <div class="form-group">
@@ -93,7 +122,7 @@
                       <div class="form-group">
                         <label for="">Amount</label>
                         <input name="amount" type="number" @error('amount') is-invalid @enderror"
-                        value="{{ old('amount') }}" class="form-control" id="" placeholder="Price">
+                        value="{{ old('amount') }}" class="form-control" id="" placeholder="Amount">
                     </div>
                     @error('amount')
                         <span class="text-danger">{{ $message }}</span>
@@ -102,9 +131,9 @@
                     <!-- /.col -->
                    
                       <div class="form-group">
-                        <label for="">Percent</label>
+                        <label for="">Promo</label>
                         <input name="percent" type="number" @error('percent') is-invalid @enderror"
-                        value="{{ old('percent') }}" class="form-control" id="" placeholder="Percent">
+                        value="{{ old('percent') }}" class="form-control" id="" placeholder="Promo">
                     </div>
                     @error('percent')
                         <span class="text-danger">{{ $message }}</span>

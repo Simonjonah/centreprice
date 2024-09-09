@@ -41,13 +41,13 @@
                     <th>Tract ID</th>
                     <th>First name</th>
                     <th>Last name</th>
-                    <th>Subription Fee</th>
+                    {{-- <th>Subription Fee</th> --}}
                     <th>Role</th>
                     <th>Phone</th>
                     <th>Email</th>
                     <th>Image</th>
-                    <th>Amount</th>
-                    <th>Percent</th>
+                    {{-- <th>Amount</th>
+                    <th>Percent</th> --}}
                     <th>State</th>
                     <th>Districts</th>
                     <th>LGA</th>
@@ -77,7 +77,7 @@
                         <td>{{ $view_distributor->ref_no2 }}</td>
                         <td>{{ $view_distributor->fname }}</td>
                         <td>{{ $view_distributor->lname }}</td>
-                        <td>{{ $view_distributor->subscription_fee }}</td>
+                        {{-- <td>{{ $view_distributor->subscription_fee }}</td> --}}
                         <td>@if ($view_distributor->role == '2')
                             <span class="badge badge-info"> Distributor</span>
                           @else
@@ -88,8 +88,8 @@
                         <td><img style="width: 50px; height: 50px;" src="{{ URL::asset("/public/../$view_distributor->images")}}" alt=""></td>
                         
                         
-                        <td>{{ $view_distributor->amount }}</td>
-                        <td>{{ $view_distributor->percent }}</td>
+                        {{-- <td>{{ $view_distributor->amount }}</td>
+                        <td>{{ $view_distributor->percent }}</td> --}}
                         <td>{{ $view_distributor->ngstate['state'] }}</td>
                         <td>{{ $view_distributor->Lga->district['districts'] }}</td>
                         <td>{{ $view_distributor->Lga['lga'] }}</td>
@@ -137,13 +137,13 @@
                       <th>Tract ID</th>
                       <th>First name</th>
                       <th>Last name</th>
-                      <th>Subription Fee</th>
+                      {{-- <th>Subription Fee</th> --}}
                       <th>Role</th>
                       <th>Phone</th>
                       <th>Email</th>
                       <th>Image</th>
-                      <th>Amount</th>
-                      <th>Percent</th>
+                      {{-- <th>Amount</th>
+                      <th>Percent</th> --}}
                       <th>State</th>
                       <th>Districts</th>
                       <th>LGA</th>

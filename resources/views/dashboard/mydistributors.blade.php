@@ -41,18 +41,18 @@
                     <th>Tract ID</th>
                     <th>First Name</th>
                     <th>Last Name</th>
-                    <th>Subscription Fee</th>
+                    {{-- <th>Subscription Fee</th> --}}
                     <th>Role</th>
                     <th>Phone</th>
                     <th>Email</th>
                     <th>Image</th>
-                    <th>Amount</th>
-                    <th>Percent</th>
+                    
                     <th>State</th>
                     <th>Districts</th>
                     <th>LGA</th>
                     <th>View</th>
                     <th>Status</th>
+                    {{-- <th>Refered By</th> --}}
                     {{-- <th>Approve</th>
                     <th>Suspend</th>
                     <th>Edit</th>
@@ -77,7 +77,7 @@
                         <td>{{ $view_distributor->ref_no2 }}</td>
                         <td>{{ $view_distributor->fname }}</td>
                         <td>{{ $view_distributor->lname }}</td>
-                        <td>{{ $view_distributor->subscription_fee }}</td>
+                        {{-- <td>{{ $view_distributor->subscription_fee }}</td> --}}
                         <td>@if ($view_distributor->role == '2')
                             <span class="badge badge-dark"> Distributor</span>
                           @else
@@ -86,8 +86,7 @@
                         <td>{{ $view_distributor->phone }}</td>
                         <td>{{ $view_distributor->email }}</td>
                         <td><img style="width: 50px; height: 50px;" src="{{ URL::asset("/public/../$view_distributor->images")}}" alt=""></td>
-                        <td>{{ $view_distributor->amount }}</td>
-                        <td>{{ $view_distributor->percent }}</td>
+                       
                         <td>{{ $view_distributor->ngstate['state'] }}</td>
                         <td>{{ $view_distributor->Lga->district['districts'] }}</td>
                         <td>{{ $view_distributor->Lga['lga'] }}</td>
@@ -108,11 +107,11 @@
                           
                           <span class="badge badge-success">Admitted</span>
                           @endif</td>
-                       <td><a href="{{ url('web/referedby/'.$view_distributor->ref_no2) }}"
+                       {{-- <td><a href="{{ url('web/referedby/'.$view_distributor->ref_no2) }}"
                           class='btn btn-success'>
                            <i class="far fa-user"></i>
                            Check Referred
-                       </a></td>
+                       </a></td> --}}
                         {{-- <td><a href="{{ url('web/suspenddistributorbyfran/'.$view_distributor->ref_no) }}"
                         class='btn btn-warning'>
                          <i class="far fa-bell"></i>
@@ -136,18 +135,19 @@
                         <th>Tract ID</th>
                         <th>First Name</th>
                         <th>Last Name</th>
-                        <th>Subscription Fee</th>
+                        {{-- <th>Subscription Fee</th> --}}
                         <th>Role</th>
                         <th>Phone</th>
                         <th>Email</th>
                         <th>Image</th>
-                        <th>Amount</th>
-                        <th>Percent</th>
+                        
                         <th>State</th>
                         <th>Districts</th>
                         <th>LGA</th>
                         <th>View</th>
                         <th>Status</th>
+                        {{-- <th>Refered By</th> --}}
+
                         {{-- <th>Approve</th>
                         <th>Suspend</th>
                         <th>Edit</th>

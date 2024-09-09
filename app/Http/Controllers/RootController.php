@@ -23,11 +23,13 @@ class RootController extends Controller
         $add_roots->ref_no = substr(rand(0,time()),0, 9);
 
         $add_roots->save();
-        return redirect()->back()->with('success', 'You have created successfully');
-
+        return redirect()->route('admin.addcategory', ['ref_no' =>$add_roots->ref_no]); 
     }
 
-
+    public function addcategory($ref_no){
+        $view_roots = Root::where('ref_no', $ref_no)->first();
+        return view('dashboard.admin.addcategory', compact('view_roots'));
+    }
     public function viewroots(){
         $view_roots = Root::all();
         return view('dashboard.admin.viewroots', compact('view_roots'));

@@ -42,6 +42,7 @@
                     <th>Category</th>
                     <th>Sub Category</th>
                     <th>Description</th>
+                    <th>Add Products</th>
                     <th>Edit</th>
                     <th>Delete</th>
                     <th>Date</th>
@@ -64,10 +65,14 @@
                         <td>{{ $view_subcategorie->category['category'] }}</td>
                         <td>{{ $view_subcategorie->subcategory }}</td>
                         <td>{!! $view_subcategorie->body !!}</td>
-                        <td><a href="{{ url('admin/editsubcategory/'.$view_subcategorie->slug) }}"
+                        <td><a href="{{ url('admin/addproducts/'.$view_subcategorie->ref_no) }}"
                           class='btn btn-info'>
-                           <i class="far fa-edit"></i>
-                       </a></td>
+                           <i class="far fa-info"></i>
+                       Add Products</a></td>
+                       <td><a href="{{ url('admin/editsubcategory/'.$view_subcategorie->slug) }}"
+                        class='btn btn-success'>
+                         <i class="far fa-edit"></i>
+                     </a></td>
                        
                          
                        <td><a href="{{ url('admin/deletesubcategory/'.$view_subcategorie->slug) }}"
@@ -85,6 +90,7 @@
                     <th>Sub Category</th>
                     <th>Description</th>
 
+                    <th>Add Products</th>
                     <th>Edit</th>
                     <th>Delete</th>
                     <th>Date</th>

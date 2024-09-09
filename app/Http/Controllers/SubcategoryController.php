@@ -10,15 +10,12 @@ use \Cviebrock\EloquentSluggable\Services\SlugService;
 class SubcategoryController extends Controller
 {
     //
-    public function addsubcategory(){
-        $view_categories = Category::all();
-        return view('dashboard.admin.addsubcategory', compact('view_categories'));
-    }
+    
 
     public function createsubcategory(Request $request){
         $request->validate([
             'category_id' => ['required', 'string', 'max:255'],
-            'body' => ['required', 'string', 'max:255'],
+            'body' => ['required', 'string'],
 
             'subcategory' => ['required', 'string', 'max:255', 'unique:subcategories'],
             
@@ -30,7 +27,14 @@ class SubcategoryController extends Controller
         $add_subcategory->slug = SlugService::createSlug(Category::class, 'slug', $request->subcategory);
         $add_subcategory->ref_no = substr(rand(0,time()),0, 9);
         $add_subcategory->save();
-        return redirect()->back()->with('success', 'You have created successfully');
+        return redirect()->route('admin.addproducts', ['ref_no' =>$add_subcategory->ref_no]); 
+
+    }
+
+    public function addproducts($ref_no){
+        $view_categories = Category::all();
+        $view_subcategories = Subcategory::where('ref_no', $ref_no)->first();
+        return view('dashboard.admin.addproducts', compact('view_categories', 'view_subcategories'));
     }
 
     public function viewsubcategory(){

@@ -27,9 +27,63 @@
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
+    @php
+        use App\Models\Plan;
+        $view_subscriptions = Plan::all();
+        // $view_subscriptions = Subscription::where('user_id', auth()->user()->id)->get();
+    @endphp
 @if(Auth::guard('web')->user()->status == null)
-  <h2>Please wait for Approval</h2>
-@elseif(Auth::guard('web')->user()->status == 'suspend')
+ @foreach ($view_subscriptions as $view_subscription)
+ @if ($view_subscription->user_type == 'Franchise')
+ <h2>
+  <h1>Franchise Subscription Fee ₦{{ $view_subscription->amount  }}   @if (Auth::user()->role == '1')
+   
+ @elseif (Auth::user()->role == '2')
+ Distributor
+ @else
+ Vendor
+ @endif</h1>
+  
+  <form method="POST" action="{{ url('buy') }}" id="paymentForm">
+   @csrf
+   @if (Session::get('success'))
+   <div class="alert alert-success">
+       {{ Session::get('success') }}
+   </div>
+   @endif
+
+   @if (Session::get('fail'))
+   <div class="alert alert-danger">
+   {{ Session::get('fail') }}
+   @endif
+      {{ csrf_field() }}
+  
+      <input name="amount" type="hidden" value="{{ $view_subscription->amount  }}" placeholder="Name" />
+      <input name="email" type="hidden" value="{{ Auth::user()->email  }}" placeholder="Your Email" />
+      <input name="fname" type="hidden" value="{{ Auth::user()->fname  }}" placeholder="Your Email" />
+      <input name="lname" type="hidden" value="{{ Auth::user()->lname  }}" placeholder="Your Email" />
+      <input name="user_id" type="hidden" value="{{ Auth::user()->id  }}" placeholder="Your Email" />
+       @if (Auth::user()->role == '1')
+         <input name="user_type" type="hidden" value="Franchise" placeholder="Your Email" />
+       @elseif (Auth::user()->role == '2')
+         <input name="user_type" type="hidden" value="Distributor" placeholder="Your Email" />
+       @else
+         <input name="user_type" type="hidden" value="Vendor" placeholder="Your Email" />
+       @endif
+      <input name="phone" type="hidden" value="{{ Auth::user()->phone  }}" placeholder="Phone number" />
+      <input name="plan_id" type="hidden" value="{{ $view_subscription->id  }}" placeholder="Phone number" />
+  
+      <input type="submit" class="btn btn-primary" value="Subscribe" />
+  </form>
+  {{-- <a href="{{ url('pay') }}">{{ $view_subscription->user_type  }} Subscription Fee ₦{{ $view_subscription->amount  }}</a></h2> --}}
+ @else
+   
+ @endif
+  @endforeach
+
+
+
+  @elseif(Auth::guard('web')->user()->status == 'suspend')
   <h2>You have suspended </h2>
   
 @elseif (Auth::guard('web')->user()->status == 'approved' && Auth::guard('web')->user()->role == '1')
@@ -46,8 +100,7 @@
               <div class="info-box-content">
                 <span class="info-box-text">Earning</span>
                 <span class="info-box-number">
-                  10,000
-                  <small>N</small>
+                  ₦ 0
                 </span>
               </div>
               <!-- /.info-box-content -->
@@ -61,7 +114,7 @@
 
               <div class="info-box-content">
                 <span class="info-box-text">Withdrawal</span>
-                <span class="info-box-number">3000</span>
+                <span class="info-box-number">₦0</span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -72,7 +125,7 @@
           <!-- fix for small devices only -->
           <div class="clearfix hidden-md-up"></div>
 
-          <div class="col-12 col-sm-6 col-md-3">
+          {{-- <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box mb-3">
               <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
 
@@ -80,18 +133,16 @@
                 <span class="info-box-text">Distributors</span>
                 <span class="info-box-number">760</span>
               </div>
-              <!-- /.info-box-content -->
             </div>
-            <!-- /.info-box -->
-          </div>
-          <!-- /.col -->
+          </div> --}}
+
           <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box mb-3">
               <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">Vendors</span>
-                <span class="info-box-number">2,000</span>
+                <span class="info-box-text">Distributors</span>
+                <span class="info-box-number">{{ $countfrancesedistributors }}</span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -117,10 +168,10 @@
                 <!-- USERS LIST -->
                 <div class="card">
                   <div class="card-header">
-                    <h3 class="card-title">Latest Members</h3>
+                    <h3 class="card-title">Latest Distributors</h3>
 
                     <div class="card-tools">
-                      <span class="badge badge-danger">8 New Members</span>
+                      <span class="badge badge-danger">{{ $countfrancesedistributors }} New Distributors</span>
                       <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
                       </button>
                       <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i>
@@ -128,54 +179,23 @@
                     </div>
                   </div>
                   <!-- /.card-header -->
+                  
                   <div class="card-body p-0">
                     <ul class="users-list clearfix">
+                      @foreach ($viewmyfrancesedistributors as $viewmyfrancesedistributor)
                       <li>
-                        <img src="dist/img/user1-128x128.jpg" alt="User Image">
-                        <a class="users-list-name" href="#">Alexander Pierce</a>
-                        <span class="users-list-date">Today</span>
+                        <img src="{{ asset('/public/../'.$viewmyfrancesedistributor->images)}}" alt="User Image">
+                        <a class="users-list-name" href="{{ url('web/mydistributors') }}">{{ $viewmyfrancesedistributor->fname }}, {{ $viewmyfrancesedistributor->lname }}</a>
+                        <span class="users-list-date">{{ $viewmyfrancesedistributor->created_at->diffForHumans() }}</span>
                       </li>
-                      <li>
-                        <img src="dist/img/user8-128x128.jpg" alt="User Image">
-                        <a class="users-list-name" href="#">Norman</a>
-                        <span class="users-list-date">Yesterday</span>
-                      </li>
-                      <li>
-                        <img src="dist/img/user7-128x128.jpg" alt="User Image">
-                        <a class="users-list-name" href="#">Jane</a>
-                        <span class="users-list-date">12 Jan</span>
-                      </li>
-                      <li>
-                        <img src="dist/img/user6-128x128.jpg" alt="User Image">
-                        <a class="users-list-name" href="#">John</a>
-                        <span class="users-list-date">12 Jan</span>
-                      </li>
-                      <li>
-                        <img src="dist/img/user2-160x160.jpg" alt="User Image">
-                        <a class="users-list-name" href="#">Alexander</a>
-                        <span class="users-list-date">13 Jan</span>
-                      </li>
-                      <li>
-                        <img src="dist/img/user5-128x128.jpg" alt="User Image">
-                        <a class="users-list-name" href="#">Sarah</a>
-                        <span class="users-list-date">14 Jan</span>
-                      </li>
-                      <li>
-                        <img src="dist/img/user4-128x128.jpg" alt="User Image">
-                        <a class="users-list-name" href="#">Nora</a>
-                        <span class="users-list-date">15 Jan</span>
-                      </li>
-                      <li>
-                        <img src="dist/img/user3-128x128.jpg" alt="User Image">
-                        <a class="users-list-name" href="#">Nadia</a>
-                        <span class="users-list-date">15 Jan</span>
-                      </li>
+                      @endforeach
+                      
                     </ul>
                     <!-- /.users-list -->
                   </div>
                   <!-- /.card-body -->
                   <div class="card-footer text-center">
-                    <a href="javascript::">View All Users</a>
+                    <a href="{{ url('web/mydistributors') }}">View All Distributors</a>
                   </div>
                   <!-- /.card-footer -->
                 </div>
@@ -285,46 +305,7 @@
           <!-- /.col -->
 
           <div class="col-md-4">
-            <!-- Info Boxes Style 2 -->
-            <div class="info-box mb-3 bg-warning">
-              <span class="info-box-icon"><i class="fas fa-tag"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">Inventory</span>
-                <span class="info-box-number">5,200</span>
-              </div>
-              <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-            <div class="info-box mb-3 bg-success">
-              <span class="info-box-icon"><i class="far fa-heart"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">Mentions</span>
-                <span class="info-box-number">92,050</span>
-              </div>
-              <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-            <div class="info-box mb-3 bg-danger">
-              <span class="info-box-icon"><i class="fas fa-cloud-download-alt"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">Downloads</span>
-                <span class="info-box-number">114,381</span>
-              </div>
-              <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-            <div class="info-box mb-3 bg-info">
-              <span class="info-box-icon"><i class="far fa-comment"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">Direct Messages</span>
-                <span class="info-box-number">163,921</span>
-              </div>
-              <!-- /.info-box-content -->
-            </div>
+           
             
 
             <!-- PRODUCT LIST -->
@@ -426,10 +407,10 @@
               <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">Earning</span>
+                <span class="info-box-text">Earnings</span>
                 <span class="info-box-number">
-                  10,000
-                  <small>N</small>
+                  ₦ 0
+                  {{-- <small>N</small> --}}
                 </span>
               </div>
               <!-- /.info-box-content -->
@@ -443,7 +424,7 @@
 
               <div class="info-box-content">
                 <span class="info-box-text">Fund Wallet</span>
-                <span class="info-box-number">3000</span>
+                <span class="info-box-number">₦ 0</span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -459,7 +440,7 @@
               <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">Distributors</span>
+                <span class="info-box-text">Products</span>
                 <span class="info-box-number">760</span>
               </div>
               <!-- /.info-box-content -->
@@ -472,8 +453,8 @@
               <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">Vendors</span>
-                <span class="info-box-number">2,000</span>
+                <span class="info-box-text">Withdrawal</span>
+                <span class="info-box-number">₦ 0</span>
               </div>
               <!-- /.info-box-content -->
             </div>

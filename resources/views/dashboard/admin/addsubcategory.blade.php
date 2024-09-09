@@ -54,11 +54,8 @@
                 <div class="form-group">
                   <label>Select Category</label>
                   <select name="category_id" class="form-control select2" style="width: 100%;">
-                    <option value="">Select Category</option>
-                    @foreach ($view_categories as $view_categorie)
-                      <option value="{{ $view_categorie->id }}">{{ $view_categorie->category }}</option>
-                    @endforeach
-                    
+                    <option value="{{ $view_categories->id}}"> {{ $view_categories->category }}</option>
+                   
                   </select>
                 </div>
                 @error('category_id')

@@ -41,13 +41,13 @@
                     <th>Tract ID</th>
                     <th>First name</th>
                     <th>Last name</th>
-                    <th>Subription Fee</th>
+                    {{-- <th>Subription Fee</th> --}}
                     <th>Role</th>
                     <th>Phone</th>
                     <th>Email</th>
                     <th>Image</th>
-                    <th>Amount</th>
-                    <th>Percent</th>
+                    {{-- <th>Amount</th>
+                    <th>Percent</th> --}}
                     <th>State</th>
                     <th>Districts</th>
                     <th>LGA</th>
@@ -77,7 +77,7 @@
                         <td>{{ $view_distributor->ref_no2 }}</td>
                         <td>{{ $view_distributor->fname }}</td>
                         <td>{{ $view_distributor->lname }}</td>
-                        <td>{{ $view_distributor->subcription_fee }}</td>
+                        {{-- <td>{{ $view_distributor->subscription_fee }}</td> --}}
                         <td>@if ($view_distributor->role == '2')
                             <span class="badge badge-info"> Distributor</span>
                           @else
@@ -88,13 +88,13 @@
                         <td><img style="width: 50px; height: 50px;" src="{{ URL::asset("/public/../$view_distributor->images")}}" alt=""></td>
                         
                         
-                        <td>{{ $view_distributor->amount }}</td>
-                        <td>{{ $view_distributor->percent }}</td>
+                        {{-- <td>{{ $view_distributor->amount }}</td>
+                        <td>{{ $view_distributor->percent }}</td> --}}
                         <td>{{ $view_distributor->ngstate['state'] }}</td>
                         <td>{{ $view_distributor->Lga->district['districts'] }}</td>
                         <td>{{ $view_distributor->Lga['lga'] }}</td>
 
-                        <td><a href="{{ url('admin/viewsinglefranchise/'.$view_distributor->ref_no2) }}"
+                        <td><a href="{{ url('admin/viewsingledistributor/'.$view_distributor->ref_no2) }}"
                           class='btn btn-info'>
                            <i class="far fa-eye"></i>
                        </a></td>
@@ -110,21 +110,21 @@
                           
                           <span class="badge badge-success">Admitted</span>
                           @endif</td>
-                        <td><a href="{{ url('admin/approvefranchise/'.$view_distributor->ref_no2) }}"
+                        <td><a href="{{ url('admin/approvedistributor/'.$view_distributor->ref_no2) }}"
                           class='btn btn-success'>
                            <i class="far fa-user"></i>
                        </a></td>
-                       <td><a href="{{ url('admin/suspendfranchise/'.$view_distributor->ref_no2) }}"
+                       <td><a href="{{ url('admin/suspenddistributor/'.$view_distributor->ref_no2) }}"
                         class='btn btn-warning'>
                          <i class="far fa-bell"></i>
                      </a></td>
-                       <td><a href="{{ url('admin/editfranchise/'.$view_distributor->ref_no2) }}"
+                       <td><a href="{{ url('admin/editdistributor/'.$view_distributor->ref_no2) }}"
                         class='btn btn-info'>
                          <i class="far fa-edit"></i>
                      </a></td>
                        
                          
-                       <td><a href="{{ url('admin/deletefranchise/'.$view_distributor->ref_no2) }}"
+                       <td><a href="{{ url('admin/deletedistributor/'.$view_distributor->ref_no2) }}"
                         class='btn btn-danger'>
                          <i class="far fa-trash-alt"></i>
                      </a></td>
@@ -134,26 +134,28 @@
                   </tbody>
                   <tfoot>
                     <tr>
-                    <th>Tract ID</th>
-                    <th>Name</th>
-                    <th>Role</th>
-                    <th>Phone</th>
-                    <th>Email</th>
-                    <th>Image</th>
-                    <th>Amount</th>
-                    <th>Percent</th>
-                    <th>State</th>
-                    <th>Districts</th>
-                    <th>LGA</th>
-                    <th>View</th>
-                    <th>Status</th>
-                    <th>Approve</th>
-                    <th>Suspend</th>
-                    <th>Edit</th>
-
-                    <th>Delete</th>
-                    <th>Date</th>
-                  </tr>
+                      <th>Tract ID</th>
+                      <th>First name</th>
+                      <th>Last name</th>
+                      {{-- <th>Subription Fee</th> --}}
+                      <th>Role</th>
+                      <th>Phone</th>
+                      <th>Email</th>
+                      <th>Image</th>
+                      {{-- <th>Amount</th>
+                      <th>Percent</th> --}}
+                      <th>State</th>
+                      <th>Districts</th>
+                      <th>LGA</th>
+                      <th>View</th>
+                      <th>Status</th>
+                      <th>Approve</th>
+                      <th>Suspend</th>
+                      <th>Edit</th>
+  
+                      <th>Delete</th>
+                      <th>Date</th>
+                    </tr>
                   </tfoot>
                 </table>
               </div>

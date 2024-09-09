@@ -211,7 +211,15 @@
                       @enderror
                       <!-- /.form-group -->
                      
-
+                      <div class="form-group">
+                        <label for="">Quantity</label>
+                        <input name="quantity" type="number" @error('quantity') is-invalid @enderror"
+                        value="{{ $view_product->quantity }}" class="form-control" id="" placeholder="Quantity">
+                    </div>
+                    @error('quantity')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+        
 
                     <div class="form-group">
                       <textarea name="body" id="compose-textarea" @error('body') is-invalid @enderror"
@@ -246,6 +254,34 @@
                     @error('percent')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
+
+                    <div class="form-group">
+                      <label for="">Franchise Commission</label>
+                      <input name="franchise_commission" type="number" @error('franchise_commission') is-invalid @enderror"
+                      value="{{ $view_product->franchise_commission }}" class="form-control" id="" placeholder="franchise_commission">
+                  </div>
+                  @error('franchise_commission')
+                      <span class="text-danger">{{ $message }}</span>
+                  @enderror
+
+                  <div class="form-group">
+                    <label for="">Distributor Commission</label>
+                    <input name="distributors_commission" type="number" @error('distributors_commission') is-invalid @enderror"
+                    value="{{ $view_product->distributors_commission }}" class="form-control" id="" placeholder="distributors_commission">
+                </div>
+                @error('distributors_commission')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
+
+                <div class="form-group">
+                  <label for="">Vendor Commission</label>
+                  <input name="vendors_commission" type="number" @error('vendors_commission') is-invalid @enderror"
+                  value="{{ $view_product->vendors_commission }}" class="form-control" id="" placeholder="vendors_commission">
+              </div>
+              @error('vendors_commission')
+                  <span class="text-danger">{{ $message }}</span>
+              @enderror
+
                       <!-- /.form-group -->
                       <div class="form-group">
                         <td><img style="width: auto; height: 30px;" src="{{ asset('/public/../'.$view_product->images1)}}" alt=""></td>

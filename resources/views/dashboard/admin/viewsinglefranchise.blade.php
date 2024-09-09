@@ -125,9 +125,24 @@
                       </div>
                       <!-- /.user-block -->
                       <p>
+                        <b>Address:</b>
                         {{$edit_franchise->address }}
                       </p>
 
+                      <p>
+                        <b>City</b>
+                        {{$edit_franchise->city }}
+                      </p>
+
+                      <p>
+                        <b>Gender</b>
+                        {{$edit_franchise->gender }}
+                      </p>
+
+                      <p>
+                        <b>Date of Birth:</b>
+                        {{$edit_franchise->dob }}
+                      </p>
                      
                     </div>
                    
@@ -230,7 +245,7 @@
                   <!-- /.tab-pane -->
 
                   <div class="tab-pane" id="settings">
-                    <form action="{{ url('admin/updatefranchise/'.$edit_franchise->ref_no) }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ url('admin/updatefranchise/'.$edit_franchise->id) }}" method="post" enctype="multipart/form-data">
                       @csrf
                       @if (Session::get('success'))
                   <div class="alert alert-success">
@@ -245,9 +260,16 @@
                   @method('PUT')
                       
                       <div class="form-group row">
-                        <label for="inputName" class="col-sm-2 col-form-label">Name</label>
+                        <label for="inputName" class="col-sm-2 col-form-label">First Name</label>
                         <div class="col-sm-10">
-                          <input type="text" name="name" value="{{ $edit_franchise->name }}" class="form-control" id="inputName" placeholder="Name">
+                          <input type="text" name="fname" value="{{ $edit_franchise->fname }}" class="form-control" id="inputName" placeholder="Name">
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <label for="inputName" class="col-sm-2 col-form-label">Last Name</label>
+                        <div class="col-sm-10">
+                          <input type="text" name="lname" value="{{ $edit_franchise->lname }}" class="form-control" id="inputName" placeholder="Name">
                         </div>
                       </div>
                       <div class="form-group row">
@@ -263,6 +285,19 @@
                         </div>
                       </div>
                       <div class="form-group row">
+                        <label for="inputEmail" class="col-sm-2 col-form-label">Date Of Bith</label>
+                        <div class="col-sm-10">
+                          <input type="date" name="dob" value="{{ $edit_franchise->dob }}" class="form-control" id="inputEmail" placeholder="Email Number">
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <label for="inputEmail" class="col-sm-2 col-form-label">City</label>
+                        <div class="col-sm-10">
+                          <input type="text" name="city" value="{{ $edit_franchise->city }}" class="form-control" id="inputEmail" placeholder="Email Number">
+                        </div>
+                      </div>
+                      <div class="form-group row">
                         <label for="inputName2" class="col-sm-2 col-form-label">State</label>
                         <div class="col-sm-10">
                           <select name="ngstate_id" class="form-control select2" style="width: 100%;">
@@ -273,6 +308,20 @@
                           </select>
                         </div>
                         @error('ngstate_id')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                      </div>
+
+                      <div class="form-group row">
+                        <label for="inputName2" class="col-sm-2 col-form-label">Gender</label>
+                        <div class="col-sm-10">
+                          <select name="gender" class="form-control" style="width: 100%;">
+                            <option value="{{ $edit_franchise->gender }}">{{ $edit_franchise->gender }}</option>
+                            <option value="Male">Male</option>
+                              <option value="Female">Female</option>
+                          </select>
+                        </div>
+                        @error('gender')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                       </div>
