@@ -119,8 +119,12 @@
 
                  
                     
+                    <input type="hidden" name="productname" value="{{ $order_products->subcategory['subcategory'] }}">
                     <input type="hidden" name="product_id" value="{{ $order_products->id }}">
-                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                    <input type="hidden" name="distributor_id" value="{{ Auth::user()->id }}">
+                    <input type="hidden" name="user_id" value="{{ Auth::user()->user_id }}">
+                    <input type="hidden" name="franchise_id" value="{{ Auth::user()->user_id }}">
+                    
                     <input type="hidden" name="franchise_commission" value="{{ $order_products->franchise_commission }}">
                     <input type="hidden" name="distributors_commission" value="{{ $order_products->distributors_commission }}">
                     <input type="hidden" name="vendors_commission" value="{{ $order_products->vendors_commission }}">

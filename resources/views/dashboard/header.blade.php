@@ -49,7 +49,7 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="index3.html" class="nav-link">Home</a>
+        <a href="{{ url('web/home') }}" class="nav-link">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
@@ -86,79 +86,59 @@
                   Logout
                   <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
                 </h3>
-                <p class="text-sm">{{ Auth::guard('web')->user()->name}}</p>
+                <p class="text-sm">{{ Auth::guard('web')->user()->fname}}</p>
                 {{-- <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p> --}}
               </div>
             </div>
             <!-- Message End -->
           </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <div class="media">
-              <img src="dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-              <div class="media-body">
-                <h3 class="dropdown-item-title">
-                  John Pierce
-                  <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
-                </h3>
-                <p class="text-sm">I got your message bro</p>
-                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-              </div>
-            </div>
-            <!-- Message End -->
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <div class="media">
-              <img src="dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-              <div class="media-body">
-                <h3 class="dropdown-item-title">
-                  Nora Silvester
-                  <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
-                </h3>
-                <p class="text-sm">The subject goes here</p>
-                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-              </div>
-            </div>
-            <!-- Message End -->
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+          
         </div>
       </li>
       <!-- Notifications Dropdown Menu -->
       <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far fa-bell"></i>
-          <span class="badge badge-warning navbar-badge">15</span>
+        <a class="nav-link"  href="{{ url('web/viewcarts') }}">
+          <i class="fas fa-cart-plus fa-lg mr-2"></i>
+          <span class="badge badge-warning navbar-badge">0</span>
         </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <span class="dropdown-item dropdown-header">15 Notifications</span>
+
+        {{-- <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-envelope mr-2"></i> 4 new messages
-            <span class="float-right text-muted text-sm">3 mins</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-users mr-2"></i> 8 friend requests
-            <span class="float-right text-muted text-sm">12 hours</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-file mr-2"></i> 3 new reports
-            <span class="float-right text-muted text-sm">2 days</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button"><i
-            class="fas fa-th-large"></i></a>
-      </li>
+              @if(session('cart'))
+              <table class="table table-responsive table-bordered table-hover">
+                  <thead>
+                      <tr>
+                          <th style="margin-left: 20px;">Product</th>
+                          <th style="margin-left: 20px;">Quantity</th>
+                          <th style="margin-left: 20px;">Price</th>
+                          <th style="margin-left: 20px;">Total</th>
+                          <th style="margin-left: 20px;">Action</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    @php
+                        $total = 0;
+                    @endphp
+                      @foreach(session('cart') as $id => $details)
+                        @php
+                            $total +=$details['quantity'] * $details['amount']
+                        @endphp
+                          <tr>
+                              <td>{{ $details['productname'] }}</td>
+                              <td>{{ $details['quantity'] }}</td>
+                              <td>{{ $details['amount'] }}</td>
+                              <td>{{ $details['quantity'] * $details['amount'] }}</td>
+                              <td><a href="{{ route('web.remove', $id) }}"><i class="fas fa-trash mr-2"></i></a>
+                              </td>
+                          </tr>
+                      @endforeach
+                      <td>{{ $total }}</td>
+                  </tbody>
+              </table>
+          @else
+              <p>Your cart is empty</p>
+          @endif --}}
+      
     </ul>
   </nav>
   <!-- /.navbar -->

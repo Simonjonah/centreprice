@@ -157,7 +157,7 @@
           <img style="width: 50px; height: 50px;" src="{{ asset('/public/../'.Auth::guard('web')->user()->images)}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{ Auth::user()->name }}</a>
+          <a href="#" class="d-block">{{ Auth::user()->fname }} {{ Auth::user()->lname }}</a>
         </div>
       </div>
 
@@ -233,7 +233,7 @@
               
             </ul>
           </li>
-          <li class="nav-item has-treeview">
+          {{-- <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-chart-pie"></i>
               <p>
@@ -250,8 +250,27 @@
               </li>
               
             </ul>
+          </li> --}}
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon far fa-plus-square"></i>
+              <p>
+                Sign-Up Products Lines
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+             
+              <li class="nav-item">
+                <a href="{{ url('web/myproductliners') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>View Signup Products</p>
+                </a>
+              </li>
+
+              
+            </ul>
           </li>
-          
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon far fa-plus-square"></i>
@@ -261,18 +280,7 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              {{-- <li class="nav-item">
-                <a href="pages/examples/login.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Login</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/examples/register.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Register</p>
-                </a>
-              </li> --}}
+             
               <li class="nav-item">
                 <a href="{{ url('web/resetmypassword') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -463,18 +471,7 @@
                 </p>
               </a>
               <ul class="nav nav-treeview">
-                {{-- <li class="nav-item">
-                  <a href="pages/examples/login.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Login</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/examples/register.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Register</p>
-                  </a>
-                </li> --}}
+                
                 <li class="nav-item">
                   <a href="{{ url('web/resetmypassword') }}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
@@ -488,8 +485,6 @@
                     <p>Lockscreen</p>
                   </a>
                 </li>
-                
-                
               </ul>
             </li>
   
@@ -553,7 +548,7 @@
               <img style="width: 50px; height: 50px;" src="{{ asset('/public/../'.Auth::guard('web')->user()->images)}}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-              <a href="#" class="d-block">{{ Auth::user()->fname }}</a>
+              <a href="{{ url('web/profile3') }}" class="d-block">{{ Auth::user()->fname }}</a>
             </div>
           </div>
     
@@ -582,7 +577,7 @@
                 </ul>
               </li>
               <li class="nav-item">
-                <a href="{{ url('web/profile2') }}" class="nav-link">
+                <a href="{{ url('web/profile3') }}" class="nav-link">
                   <i class="nav-icon fas fa-th"></i>
                   <p>
                     Profile
@@ -603,7 +598,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="{{ url('web/myvendorsbydistributor') }}" class="nav-link">
+                    <a href="{{ url('web/myvendorsbyvendors') }}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>View My Vendors</p>
                     </a>
@@ -611,38 +606,59 @@
                   
                 </ul>
               </li>
-              <li class="nav-item has-treeview">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-chart-pie"></i>
-                  <p>
-                    Transactions
-                    <i class="right fas fa-angle-left"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="{{ url('web/mytransctions') }}" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>My Transactions</p>
-                    </a>
-                  </li>
-                  
-                </ul>
-              </li>
+              
   
               <li class="nav-item has-treeview">
                 <a href="#" class="nav-link">
                   <i class="nav-icon fas fa-table"></i>
                   <p>
-                    Products
+                    View Products
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="{{ url('web/myproducts') }}" class="nav-link">
+                    <a href="{{ url('web/myvendorproducts') }}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>View Products</p>
+                      <p>Buy Products</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ url('web/viewmypurchases') }}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>My Products</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              
+              <li class="nav-item has-treeview">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon far fa-plus-square"></i>
+                  <p>
+                    Subcriptions
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                 
+                  <li class="nav-item">
+                    <a href="{{ url('web/franchisesubscription') }}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Subscribe</p>
+                    </a>
+                  </li>
+    
+                  <li class="nav-item">
+                    <a href="{{ url('web/mysubscriptions') }}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>View Subscription</p>
+                    </a>
+                  </li>
+                   <li class="nav-item">
+                    <a href="{{ url('web/mytransctions') }}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Sub Payment</p>
                     </a>
                   </li>
                   
@@ -659,36 +675,18 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="pages/examples/login.html" class="nav-link">
+                    <a href="{{ url('web/resetmypassword') }}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>Login</p>
+                      <p>Reset Password</p>
                     </a>
                   </li>
+                 
                   <li class="nav-item">
-                    <a href="pages/examples/register.html" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Register</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="pages/examples/forgot-password.html" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Forgot Password</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="pages/examples/recover-password.html" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Recover Password</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="pages/examples/lockscreen.html" class="nav-link">
+                    <a href="{{ url('web/lockscreen') }}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Lockscreen</p>
                     </a>
                   </li>
-                  
                   
                 </ul>
               </li>

@@ -4,9 +4,11 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 
@@ -71,7 +73,7 @@ public function getReferralLinkAttribute()
 
 public function getVendorReferralLinkAttribute()
 {
-    return url('/registervendor/'. $this->Lga['lga'] . '/' . $this->ngstate['state'] . '/' . $this->Lga->district['districts'] . '/' . $this->ref_no2);
+    return url('/referregistervendor/'. $this->Lga['lga'] . '/' . $this->ngstate['state'] . '/' . $this->Lga->district['districts'] . '/' . $this->ref_no3);
 }
 
 
@@ -84,6 +86,17 @@ public function ngstate(): BelongsTo
     public function Lga(): BelongsTo
     {
         return $this->belongsTo(Lga::class, 'lga_id', 'id');
+    }
+
+
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function sales(): HasMany
+    {
+        return $this->hasMany(Sale::class);
     }
 
 }

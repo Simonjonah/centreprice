@@ -65,7 +65,7 @@
                   @endif
                   @foreach ($my_transactions as $my_transaction)
                     <tr>
-                        <td>{{ $my_transaction->user['ref_no'] }}</td>
+                        <td>{{ $my_transaction->user['ref_no3'] }}</td>
                         <td>{{ $my_transaction->user['fname'] }}</td>
                         <td>{{ $my_transaction->user['lname'] }}</td>
                         <td>{{ $my_transaction->subscription->plan['amount'] }}</td>

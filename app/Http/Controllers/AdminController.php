@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Admin;
 use App\Models\Event;
-
+use App\Models\Lga;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
@@ -57,8 +57,8 @@ class AdminController extends Controller
     }
 
     public function home(){
-       
-        return view('dashboard.admin.home');
+       $countlga = Lga::count();
+        return view('dashboard.admin.home', compact('countlga'));
     }
 
     public function profile() {

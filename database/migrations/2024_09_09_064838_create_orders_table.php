@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('product_id')->nullable();
             $table->string('user_id')->nullable();
+            $table->string('distributor_id')->nullable();
+            $table->string('franchise_id')->nullable();
+            $table->string('distributor_id')->nullable();
             $table->string('root_id')->nullable();
             $table->string('category_id')->nullable();
             $table->string('subcategory_id')->nullable();
@@ -25,6 +28,7 @@ return new class extends Migration
             $table->decimal('percent', 8, 2)->default('0')->nullable();
             $table->string('quantityassigned')->nullable();
             $table->string('quantityordered')->nullable();
+            $table->string('productname')->nullable();
             
             $table->text('images1')->nullable();
             $table->text('images2')->nullable();

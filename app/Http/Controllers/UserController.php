@@ -6,6 +6,7 @@ use App\Models\Lga;
 use App\Models\Ngstate;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\Sale;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -107,10 +108,36 @@ class UserController extends Controller
     public function home(){
         $countfrancesedistributors = User::where('user_id', auth::guard('web')->id())->count();
         $viewmyfrancesedistributors = User::where('user_id', auth::guard('web')->id())->take(10)->get();
-       $view_orderedproducts = Order::where('user_id', auth::guard('web')->id())->take(10)->get();
-       
-       
-        return view('dashboard.home', compact('view_orderedproducts', 'viewmyfrancesedistributors', 'countfrancesedistributors'));
+        $view_orderedproducts = Order::where('distributor_id', auth::guard('web')->id())->take(10)->get();
+        $count_orderedproducts = Order::where('distributor_id', auth::guard('web')->id())->count();
+        $view_latestproductssignup = Order::where('franchise_id', auth::guard('web')->id())->get();
+        $approvedproducts = Order::where('franchise_id', auth::guard('web')->id())->where('status', 'delivered')->count();
+        $countgoodsbought = Sale::where('vendor_id', auth::guard('web')->id())->where('status', 'success')->count();
+        $countsales = Sale::where('vendor_id', auth::guard('web')->id())->where('status', 'success')->sum('quantity');
+        $countsubvendors = User::where('subvendor_id', auth::guard('web')->id())->count();
+        $viewsubvendors = User::where('subvendor_id', auth::guard('web')->id())->latest()->take(6)->get();
+        $viewvendororders = Sale::where('vendor_id', auth::guard('web')->id())->latest()->take(10)->get();
+        
+
+        $view_distributorsales = Sale::where('distributor_id', auth::guard('web')->id())->where('status', 'success')->latest()->take(10)->get();
+        $count_sales = Sale::where('distributor_id', auth::guard('web')->id())->where('status', 'success')->count();
+        $count_quantitysales = Sale::where('distributor_id', auth::guard('web')->id())->where('status', 'success')->sum('quantity');
+        $countdistributors_ommission = Sale::where('distributor_id', auth::guard('web')->id())->where('status', 'success')->sum('distributors_commission');
+
+        $countvendorsommission = Sale::where('vendor_id', auth::guard('web')->id())
+        ->where('status', 'success')->sum('vendors_commission');
+        
+        $franchise_earnings = Sale::where('franchise_id', auth::guard('web')->id())
+        ->where('status', 'success')->sum('franchise_commission');
+        $franchise_sales = Sale::where('franchise_id', auth::guard('web')->id())
+        ->where('status', 'success')->count();
+        
+        $franchise_salesquantity = Sale::where('franchise_id', auth::guard('web')->id())
+        ->where('status', 'success')->sum('quantity');
+        $franchise_products = Sale::where('franchise_id', auth::guard('web')->id())
+        ->where('status', 'success')->latest()->take(10)->get();
+        
+        return view('dashboard.home', compact('franchise_products', 'franchise_salesquantity', 'franchise_sales', 'franchise_earnings', 'view_distributorsales', 'countdistributors_ommission', 'count_quantitysales', 'count_sales', 'countvendorsommission', 'countsales', 'viewvendororders', 'viewsubvendors', 'countsubvendors', 'countgoodsbought', 'approvedproducts', 'view_latestproductssignup', 'count_orderedproducts', 'view_orderedproducts', 'viewmyfrancesedistributors', 'countfrancesedistributors'));
     }
 
     public function lockscreen(){
@@ -142,9 +169,15 @@ class UserController extends Controller
         return view('dashboard.registerdistributor', compact('view_franchise'));
     }
 
-    public function registervendor($ref_no2){
-        $view_franchise = User::where('ref_no2', $ref_no2)->first();
-        return view('dashboard.registervendor', compact('view_franchise'));
+    public function referregistervendor($ref_no3){
+        $view_franchise = User::where('ref_no3', $ref_no3)->first();
+        return view('dashboard.referregistervendor', compact('view_franchise'));
+    }
+
+    
+    public function registervendor(){
+
+        return view('dashboard.registervendor');
     }
     
     
@@ -281,6 +314,14 @@ class UserController extends Controller
         return view('dashboard.profile2', compact('view_lgas', 'view_states'));
     }
 
+    public function profile3(){
+        $view_states = Ngstate::orderBy('state')->get();
+        $view_lgas = Lga::orderBy('lga')->get();
+        
+        return view('dashboard.profile3', compact('view_lgas', 'view_states'));
+    }
+    
+
     
     public function updateprofile(Request $request, $ref_no){
         $edit_profile = User::where('ref_no', $ref_no)->first();
@@ -321,8 +362,8 @@ class UserController extends Controller
     }
 
 
-    public function updateprofile2(Request $request, $ref_no2){
-        $edit_profile = User::where('ref_no2', $ref_no2)->first();
+    public function updateprofile2(Request $request, $id){
+        $edit_profile = User::find($id);
         $request->validate([
             'fname' => 'required|string|max:255',
             'lname' => 'required|string|max:255',
@@ -363,10 +404,7 @@ class UserController extends Controller
         return view('dashboard.mydistributors', compact('view_distributors'));
     }
 
-    public function myvendors(){
-        $view_vendors = User::where('user_id', auth::guard('web')->user()->id)->where('role', '3')->get();
-        return view('dashboard.myvendors', compact('view_vendors'));
-    }
+    
 
     
 
@@ -465,11 +503,11 @@ class UserController extends Controller
             'lga_id' => ['required', 'max:233'],
             'email' => ['required', 'email', 'unique:users'],
             'phone' => ['required', 'string', 'unique:users'],
-            'subscription_fee' => ['required', 'max:233'],
-            'user_id' => ['required', 'max:233'],
-            'ref_no' => ['required', 'max:233'],
-            'ref_no2' => ['required', 'max:233'],
-            'distributor_id' => ['required', 'max:233'],
+            'city' => ['required', 'max:233'],
+            'dob' => ['required', 'max:233'],
+            'gender' => ['required', 'max:233'],
+            'password' => 'required|string|max:30|min:3',
+            'confirm_password' => 'required|min:3|max:30|same:password',
             'terms' => ['required', 'max:233'],
         ]);
         $add_franchise = new User();
@@ -478,17 +516,56 @@ class UserController extends Controller
         $add_franchise->role = 3;
         $add_franchise->email = $request->email;
         $add_franchise->phone = $request->phone;
+        $add_franchise->gender = $request->gender;
         $add_franchise->ngstate_id = $request->ngstate_id;
         $add_franchise->lga_id = $request->lga_id;
-        $add_franchise->user_id = $request->user_id;
-        $add_franchise->distributor_id = $request->distributor_id;
-        $add_franchise->ref_no2 = $request->ref_no2;
-        $add_franchise->subscription_fee = $request->subscription_fee;
+        $add_franchise->city = $request->city;
+        $add_franchise->dob = $request->dob;
         $add_franchise->password = \Hash::make($request->password);
-        $add_franchise->ref_no = $request->ref_no;
         $add_franchise->ref_no3 = substr(rand(0,time()),0, 9);
         $add_franchise->terms = $request->terms;
+        $add_franchise->save();
+ 
+        if ($add_franchise) {
+            return redirect()->route('web.home')->with('success', 'you have successfully registered');
+                
+            }else{
+                return redirect()->back()->with('error', 'you have fail to registered');
+        }
+    }
 
+    public function createsubvendor(Request $request){
+        $request->validate([
+            'lga_id' => ['required', 'max:233'],
+            'ngstate_id' => ['required', 'max:233'],
+            'fname' => ['required', 'max:233'],
+            'lname' => ['required', 'max:233'],
+            'lga_id' => ['required', 'max:233'],
+            'email' => ['required', 'email', 'unique:users'],
+            'phone' => ['required', 'string', 'unique:users'],
+            'city' => ['required', 'max:233'],
+            'dob' => ['required', 'max:233'],
+            'gender' => ['required', 'max:233'],
+            'subvendor_id' => ['required', 'max:233'],
+            'password' => 'required|string|max:30|min:3',
+            'confirm_password' => 'required|min:3|max:30|same:password',
+            'terms' => ['required', 'max:233'],
+        ]);
+        $add_franchise = new User();
+        $add_franchise->subvendor_id = $request->subvendor_id;
+        $add_franchise->lname = $request->lname;
+        $add_franchise->fname = $request->fname;
+        $add_franchise->role = 3;
+        $add_franchise->email = $request->email;
+        $add_franchise->phone = $request->phone;
+        $add_franchise->gender = $request->gender;
+        $add_franchise->ngstate_id = $request->ngstate_id;
+        $add_franchise->lga_id = $request->lga_id;
+        $add_franchise->city = $request->city;
+        $add_franchise->dob = $request->dob;
+        $add_franchise->password = \Hash::make($request->password);
+        $add_franchise->ref_no3 = substr(rand(0,time()),0, 9);
+        $add_franchise->terms = $request->terms;
         $add_franchise->save();
  
         if ($add_franchise) {
@@ -504,6 +581,12 @@ class UserController extends Controller
         $view_vendors = User::where('distributor_id', auth::guard('web')->user()->id)->where('role', '3')->get();
         return view('dashboard.myvendorsbydistributor', compact('view_vendors'));
     }
+
+    public function myvendorsbyvendors(){
+        $view_vendor_vendors = User::where('subvendor_id', auth::guard('web')->user()->id)->latest()->get();
+        return view('dashboard.myvendorsbyvendors', compact('view_vendor_vendors'));
+    }
+    
 
     public function viewvendorsadmin(){
         $view_vendors = User::where('role', '3')->get();

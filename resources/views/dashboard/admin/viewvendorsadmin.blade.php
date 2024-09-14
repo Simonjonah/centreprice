@@ -41,13 +41,13 @@
                     <th>Tract ID</th>
                     <th>First name</th>
                     <th>Last name</th>
-                    <th>Subription Fee</th>
+                    <th>City</th>
                     <th>Role</th>
                     <th>Phone</th>
                     <th>Email</th>
                     <th>Image</th>
-                    <th>Amount</th>
-                    <th>Percent</th>
+                    <th>Dob</th>
+                    <th>Gender</th>
                     <th>State</th>
                     <th>Districts</th>
                     <th>LGA</th>
@@ -77,7 +77,7 @@
                         <td>{{ $view_vendor->ref_no3 }}</td>
                         <td>{{ $view_vendor->fname }}</td>
                         <td>{{ $view_vendor->lname }}</td>
-                        <td>{{ $view_vendor->subscription_fee }}</td>
+                        <td>{{ $view_vendor->city }}</td>
                         <td>@if ($view_vendor->role == '3')
                             <span class="badge badge-info"> Vendor</span>
                           @else
@@ -88,8 +88,8 @@
                         <td><img style="width: 50px; height: 50px;" src="{{ URL::asset("/public/../$view_vendor->images")}}" alt=""></td>
                         
                         
-                        <td>{{ $view_vendor->amount }}</td>
-                        <td>{{ $view_vendor->percent }}</td>
+                        <td>{{ $view_vendor->dob }}</td>
+                        <td>{{ $view_vendor->gender }}</td>
                         <td>{{ $view_vendor->ngstate['state'] }}</td>
                         <td>{{ $view_vendor->Lga->district['districts'] }}</td>
                         <td>{{ $view_vendor->Lga['lga'] }}</td>
@@ -137,7 +137,7 @@
                       <th>Tract ID</th>
                       <th>First name</th>
                       <th>Last name</th>
-                      <th>Subription Fee</th>
+                      <th>City</th>
                       <th>Role</th>
                       <th>Phone</th>
                       <th>Email</th>

@@ -166,5 +166,9 @@ class SubscriptionController extends Controller
         return redirect()->back()->with('success', 'you have approved successfully');
     }
     
+    public function vendorsubcription(){
+        $view_vendorsubs = Subscription::latest()->get();
+        return view('dashboard.admin.vendorsubcription', compact('view_vendorsubs'));
+    }
     
 }

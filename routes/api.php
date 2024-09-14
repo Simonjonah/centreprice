@@ -6,6 +6,7 @@ use App\Http\Controllers\MuserController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FlutterwaveController;
+use App\Http\Controllers\SaleController;
 use App\Http\Controllers\SubscriptionController;
 
 use App\Models\Subscription;
@@ -40,7 +41,9 @@ Route::post('login', [AuthController::class, 'login']);
 Route::post('logout', [AuthController::class, 'logout']);
 
 Route::post('buy', [SubscriptionController::class, 'makeApiRequest']);
+// Route::get('/payment/callback', [SaleController::class, 'paymentCallback']);
 
+// Route::post('makepayment', [SaleController::class, 'makepayments']);
 
 // Route::post('/buyer', [SubscriptionController::class, 'buyProduct'])->name('buy.product');
 // Route::post('create', [MuserController::class, 'creat_user']);

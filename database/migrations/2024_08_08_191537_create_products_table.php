@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('root_id')->nullable();
             $table->string('category_id')->nullable();
             $table->string('subcategory_id')->nullable();
+            $table->string('franchise_id')->nullable();
             $table->decimal('amount', 8, 2)->default('0')->nullable();
             $table->decimal('franchise_commission', 8, 2)->default('0')->nullable();
             $table->decimal('distributors_commission', 8, 2)->default('0')->nullable();
