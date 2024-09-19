@@ -188,6 +188,8 @@
           @error('phone')
               <span class="text-danger">{{ $message }}</span>
           @enderror 
+
+
              
 
           <div class="input-group mb-3">
@@ -219,6 +221,20 @@
           @error('confirm_password')
               <span class="text-danger">{{ $message }}</span>
           @enderror
+
+          <div class="input-group mb-3">
+            <input type="tel" name="phone"  class="form-control"  @error('phone') is-invalid @enderror"
+            value="{{ old('phone') }}" placeholder="Phone">
+            
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-phone"></span>
+              </div>
+            </div>
+          </div>
+          @error('phone')
+              <span class="text-danger">{{ $message }}</span>
+          @enderror 
           <div class="row">
             <div class="col-8">
               <div class="icheck-primary">

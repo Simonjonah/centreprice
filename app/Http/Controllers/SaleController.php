@@ -169,9 +169,9 @@ class SaleController extends Controller
             // dd($result);
             // Check if the payment was successful
             if ($result['status'] && $result['status'] == 'success') {
-                $result->status = 'success';
-                // $result->payment_date = now(); // Update payment date or other fields
-                $result->save();
+                // $result->status = 'success';
+                // // $result->payment_date = now(); // Update payment date or other fields
+                // $result->save();
                 // Payment was successful, handle your post-payment logic here
                 return redirect()->route('payment.success')->with('success', 'Payment successful!');
             } else {

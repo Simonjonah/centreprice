@@ -112,7 +112,6 @@ class UserController extends Controller
         $count_orderedproducts = Order::where('distributor_id', auth::guard('web')->id())->count();
         $view_latestproductssignup = Order::where('franchise_id', auth::guard('web')->id())->get();
         $approvedproducts = Order::where('franchise_id', auth::guard('web')->id())->where('status', 'delivered')->count();
-        $countgoodsbought = Sale::where('vendor_id', auth::guard('web')->id())->where('status', 'success')->count();
         $countsales = Sale::where('vendor_id', auth::guard('web')->id())->where('status', 'success')->sum('quantity');
         $countsubvendors = User::where('subvendor_id', auth::guard('web')->id())->count();
         $viewsubvendors = User::where('subvendor_id', auth::guard('web')->id())->latest()->take(6)->get();
@@ -136,6 +135,10 @@ class UserController extends Controller
         ->where('status', 'success')->sum('quantity');
         $franchise_products = Sale::where('franchise_id', auth::guard('web')->id())
         ->where('status', 'success')->latest()->take(10)->get();
+
+
+        $countgoodsbought = Sale::where('vendor_id', auth::guard('web')->id())->where('status', 'success')->sum('amount');
+
         
         return view('dashboard.home', compact('franchise_products', 'franchise_salesquantity', 'franchise_sales', 'franchise_earnings', 'view_distributorsales', 'countdistributors_ommission', 'count_quantitysales', 'count_sales', 'countvendorsommission', 'countsales', 'viewvendororders', 'viewsubvendors', 'countsubvendors', 'countgoodsbought', 'approvedproducts', 'view_latestproductssignup', 'count_orderedproducts', 'view_orderedproducts', 'viewmyfrancesedistributors', 'countfrancesedistributors'));
     }

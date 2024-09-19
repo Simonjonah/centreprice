@@ -35,7 +35,7 @@ use App\Models\Transaction;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcomes');
 });
 
 // Route::post('/pay', [App\Http\Controllers\PaymentController::class, 'redirectToGateway'])->name('pay');
