@@ -11,17 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('testimonies', function (Blueprint $table) {
+        Schema::create('blogs', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
-            $table->string('status')->nullable();
             $table->string('title')->nullable();
-            $table->string('position')->nullable();
-            
-            $table->text('messages')->nullable();
+            $table->string('body')->nullable();
             $table->text('images')->nullable();
-            $table->text('ref_no')->nullable();
-            $table->text('status')->nullable();
+            $table->string('slug')->nullable();
+            $table->string('ref_no')->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('testimonies');
+        Schema::dropIfExists('blogs');
     }
 };

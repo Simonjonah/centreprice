@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\LgaController;
 use App\Http\Controllers\NgstateController;
@@ -18,10 +19,19 @@ use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\SaleController;
+use App\Http\Controllers\TeamController;
+use App\Http\Controllers\TestimonyController;
 use App\Http\Controllers\TransactionController;
 use App\Models\Admin;
+use App\Models\Blog;
+use App\Models\Product;
+use App\Models\Root;
 use App\Models\Subscription;
+use App\Models\Team;
+use App\Models\Testimony;
 use App\Models\Transaction;
+use Illuminate\Support\Facades\DB;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -35,8 +45,94 @@ use App\Models\Transaction;
 */
 
 Route::get('/', function () {
-    return view('welcomes');
+    $view_roots = Root::take(4)->get();
+    $view_rootscates = Root::all();
+    $view_products = Product::latest()->get();
+    $view_blogs = Blog::latest()->take(3)->get();
+    $view_teams = Team::latest()->take(3)->get();
+    $view_testimonies = Testimony::latest()->take(3)->get();
+
+    return view('welcomes', compact('view_testimonies', 'view_teams', 'view_blogs', 'view_products', 'view_rootscates', 'view_roots'));
 });
+
+
+
+Route::get('/viewrootproducts/{id}', function ($id) {
+    // $view_roots = Root::where('id', $id)->first();
+    $view_rootsproducts = Product::where('root_id', $id)->get();
+    $view_rootsproductscount = Product::where('root_id', $id)->count();
+
+    return view('pages.viewrootproducts', compact('view_rootsproductscount', 'view_rootsproducts'));
+});
+
+Route::get('/products/productdetails/{ref_no}', function ($ref_no) {
+    $view_singleproducts = Product::where('ref_no', $ref_no)->first();
+
+    return view('pages.productdetails', compact('view_singleproducts'));
+});
+
+Route::get('/news/newsdetails/{slug}', function ($slug) {
+    $view_singleblog = Blog::where('slug', $slug)->first();
+    $archives = Blog::select(
+        DB::raw('YEAR(created_at) as year'),
+        DB::raw('MONTH(created_at) as month'),
+        DB::raw('COUNT(*) as post_count')
+    )
+    ->groupBy('year', 'month')
+    ->orderBy('year', 'desc')
+    ->orderBy('month', 'desc')
+    ->get();
+    $view_allblogs = Blog::latest()->take(3)->get();
+
+    return view('pages.newsdetails', compact('view_allblogs', 'archives', 'view_singleblog'));
+});
+
+
+Route::get('/teams/teamdetails/{ref_no}', function ($ref_no) {
+    $view_teamdetails = Team::where('ref_no', $ref_no)->first();
+
+    return view('pages.teamdetails', compact('view_teamdetails'));
+});
+
+
+Route::get('/products1', function () {
+    $view_products = Product::latest()->get();
+    $count_products = Product::count();
+
+    return view('pages.products1', compact('count_products', 'view_products'));
+});
+
+Route::get('/about', function () {
+    $view_teams = Team::latest()->take(3)->get();
+    $view_testimonies = Testimony::latest()->take(3)->get();
+    return view('pages.about', compact('view_teams', 'view_testimonies'));
+});
+
+Route::get('/services', function(){
+    $view_roots = Root::all();
+    return view('pages.services', compact('view_roots'));
+});
+
+Route::get('/becomemembers', function(){
+    $view_roots = Root::all();
+
+    return view('pages.becomemembers', compact('view_roots'));
+});
+
+Route::get('/contact', function(){
+
+    return view('pages.contact');
+});
+
+Route::get('/categories/categoryproducts/{id}', function ($id) {
+    $view_categoryproducts = Product::where('id', $id)->get();
+    $view_categoryproductcounts = Product::where('id', $id)->count();
+
+    return view('pages.categoryproducts', compact('view_categoryproductcounts', 'view_categoryproducts'));
+});
+
+
+
 
 // Route::post('/pay', [App\Http\Controllers\PaymentController::class, 'redirectToGateway'])->name('pay');
 // Laravel 8 & 9
@@ -83,6 +179,35 @@ Route::prefix('admin')->name('admin.')->group(function() {
     });
     
     Route::middleware(['auth:admin'])->group(function() {
+        Route::get('/addteam', [TeamController::class, 'addteam'])->name('addteam');
+        Route::post('/createteam', [TeamController::class, 'createteam'])->name('createteam');
+        Route::get('/viewteam', [TeamController::class, 'viewteam'])->name('viewteam');
+        Route::get('/deleteteam/{ref_no}', [TeamController::class, 'deleteteam'])->name('deleteteam');
+        Route::get('/editeam/{ref_no}', [TeamController::class, 'editeam'])->name('editeam');
+        Route::get('/teamsuspend/{ref_no}', [TeamController::class, 'teamsuspend'])->name('teamsuspend');
+        Route::get('/teamapprove/{ref_no}', [TeamController::class, 'teamapprove'])->name('teamapprove');
+        
+        Route::get('/addtestimony', [TestimonyController::class, 'addtestimony'])->name('addtestimony');
+        Route::post('/createtestimony', [TestimonyController::class, 'createtestimony'])->name('createtestimony');
+        Route::get('/viewtestimony', [TestimonyController::class, 'viewtestimony'])->name('viewtestimony');
+        Route::get('/editestimony/{ref_no}', [TestimonyController::class, 'editestimony'])->name('editestimony');
+        Route::put('/updatetestimony/{ref_no}', [TestimonyController::class, 'updatetestimony'])->name('updatetestimony');
+        
+        Route::get('/testimonyapprove/{ref_no}', [TestimonyController::class, 'testimonyapprove'])->name('testimonyapprove');
+        Route::get('/testimonysuspend/{ref_no}', [TestimonyController::class, 'testimonysuspend'])->name('testimonysuspend');
+        Route::get('/deletetestimony/{ref_no}', [TestimonyController::class, 'deletetestimony'])->name('deletetestimony');
+        
+        Route::get('/addblog', [BlogController::class, 'addblog'])->name('addblog');
+        Route::post('/createblog', [BlogController::class, 'createblog'])->name('createblog');
+        Route::get('/viewblog', [BlogController::class, 'viewblog'])->name('viewblog');
+        Route::get('/ediblog/{ref_no}', [BlogController::class, 'ediblog'])->name('ediblog');
+        Route::put('/updateblog/{slug}', [BlogController::class, 'updateblog'])->name('updateblog');
+        Route::get('/blogapprove/{ref_no}', [BlogController::class, 'blogapprove'])->name('blogapprove');
+        Route::get('/blogsuspend/{ref_no}', [BlogController::class, 'blogsuspend'])->name('blogsuspend');
+        Route::get('/deleteblog/{ref_no}', [BlogController::class, 'deleteblog'])->name('deleteblog');
+        
+        
+        
         Route::get('/addsubcription', [SubscriptionController::class, 'addsubcription'])->name('addsubcription');
         Route::get('/viewsubcription', [SubscriptionController::class, 'viewsubcription'])->name('viewsubcription');
         Route::post('/createsubcription', [SubscriptionController::class, 'createsubcription'])->name('createsubcription');
