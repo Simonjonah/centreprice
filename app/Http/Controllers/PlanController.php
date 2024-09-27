@@ -14,6 +14,10 @@ class PlanController extends Controller
         return view('dashboard.admin.addplan');
     }
 
+    public function deleteplans($id){
+        $deletes = Plan::where('id', $id)->delete();
+        return redirect()->back()->with('success', 'You have deleted the plan successfully');
+    }
     public function createplan (Request $request){
         $request->validate([
             'user_type' => ['required'],

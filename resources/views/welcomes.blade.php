@@ -6,18 +6,56 @@
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-12">
+
+                            <div class="testimonial-area-5 gap-lg-bottom-equal" style="margin-top: 20px; margin-bottom: -100px;">
+                                <div class="container">
+                                    <div class="row g-lg-5">
+                                        <div class="col-lg-4">
+                                            
+                                        </div>
+                                        <div class="col-lg-offset-4 col-lg-4">
+                                            <div class="swiper-testimonial-slider-wrapper swiper testimonial-coverflow">
+                                                <div class="swiper-wrapper">
+                                                    @foreach ($view_adverts as $view_advert)
+                                                    @if ($view_advert->status == 'approved')
+                                                    <div class="swiper-slide">
+                                                        <div class="testimonial-grid">
+                                                            <div class="thumbnailr">
+                                                                <a href="{{ url('advertisements/{slug}'.$view_advert->slug) }}"><img style="width: 100%;" src="{{ URL::asset("/public/../$view_advert->images1")}}" alt="Testimonial"></a>
+                                                            </div>
+                                                            <div class="content">
+                                                                <h5 class="title"><a href="{{ url('advertisements/{slug}'.$view_advert->slug) }}">{{ $view_advert->company_name }}</a></h5>
+                                                                <span class="subtitle"><a href="{{ url('advertisements/{slug}'.$view_advert->slug) }}">{{ $view_advert->title }}</a></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    @else
+                                                                    
+                                                    @endif
+                                                @endforeach
+                                                    
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+      
+
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
                         <div class="banner-content">
-                            <h1 class="title" data-sal-delay="100" data-sal="slide-up" data-sal-duration="1000">Center Prices</h1>
-                            <p data-sal-delay="200" data-sal="slide-up" data-sal-duration="1000">Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit.</p>
-                            {{-- <div class="banner-btn" data-sal-delay="400" data-sal="slide-up" data-sal-duration="1000">
-                                <a href="#" class="edu-btn">Find courses <i class="icon-4"></i></a>
-                            </div> --}}
+
+                        </div>
+                        
                             <div class="row">
                                 @foreach ($view_roots as $view_root)
                                 <div class="col" data-sal-delay="100" data-sal="slide-up" data-sal-duration="800">
                                     <div class="categorie-grid categorie-style-3 color-primary-style">
                                         <div class="icon">
-                                            <i class="icon-9"></i>
+                                            <img style="width: 50%; height: 50%;" src="{{ URL::asset("/public/../$view_advert->images1")}}" alt="">
                                         </div>
                                         <div class="content">
                                             <a href="{{ url('viewrootproducts/'.$view_root->id) }}">
@@ -30,7 +68,7 @@
 
                                
                                 <div style="margin-top: 60px;" class="banner-btn" data-sal-delay="400" data-sal="slide-up" data-sal-duration="1000">
-                                <a href="{{ url('registervendor') }}" class="edu-btn">Join Our Community <i class="icon-4"></i></a>
+                                <a href="{{ url('register') }}" class="edu-btn">Join Our Community <i class="icon-4"></i></a>
                             </div>
                                  
                             </div>
@@ -541,9 +579,7 @@
                                         
                                     @endif
                                 @endforeach
-                                
-                                
-                                {{--  --}}
+                            
                             </div>
                             <div class="swiper-pagination"></div>
                         </div>

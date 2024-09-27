@@ -63,11 +63,11 @@
                             <div class="text-block">
                                 <h4 class="title">The Benefits of Membership</h4>
                                 <ul>
-                                    <li><b>Low Startup Costs:</b> Begin your entrepreneurial journey without a significant financial burden (details on membership fees on Membership page).</li>
-                                    <li><b>Unlimited Earning Potential:</b> Your income grows with the expansion of your network (see Membership page for income projections).</li>
-                                    <li><b>Unlimited Earning Potential:</b> Your income grows with the expansion of your network (see Membership page for income projections).</li>
-                                    <li><b>Ongoing Support: </b>Receive comprehensive training, guidance, and mentorship from our team (refer to Membership page for support details).</li>
-                                    <li><b>Be Your Own Boss:</b>Enjoy the freedom and flexibility of running your own business (learn more about the benefits of being a distributor on the Membership page).</li>
+                                    <li><b>Low Startup Costs:</b> Begin your entrepreneurial journey without a significant financial burden <a style="color: green" href="{{ url('becomemember') }}">(details on membership fees on Membership page)</a>.</li>
+                                    <li><b>Unlimited Earning Potential:</b> Your income grows with the expansion of your network <a style="color: green" href="{{ url('becomemember') }}">(details on membership fees on Membership page)</a></li>
+                                    <li><b>Unlimited Earning Potential:</b> Your income grows with the expansion of your network <a style="color: green" href="{{ url('becomemember') }}">(details on membership fees on Membership page)</a></li>
+                                    <li><b>Ongoing Support: </b>Receive comprehensive training, guidance, and mentorship from our team <a style="color: green" href="{{ url('becomemember') }}">(details on membership fees on Membership page)</a>.</li>
+                                    <li><b>Be Your Own Boss:</b>Enjoy the freedom and flexibility of running your own business <a style="color: green" href="{{ url('becomemember') }}">(details on membership fees on Membership page)</a>.</li>
                                 </ul>
                             </div>
 
@@ -98,16 +98,7 @@
                                 </div>
                             </div>
                             <!-- End Single Widget  -->
-                            <!-- Start Single Widget  -->
-                            <div class="edu-blog-widget widget-action">
-                                <div class="inner">
-                                    <h4 class="title">Get Online Courses From <span>EduBlink</span></h4>
-                                    <span class="shape-line"><i class="icon-19"></i></span>
-                                    <p>Nostrud exer ciation laboris aliqup</p>
-                                    <a href="#" class="edu-btn btn-medium">Start Now <i class="icon-4"></i></a>
-                                </div>
-                            </div>
-                            <!-- End Single Widget  -->
+                            
                         </div>
                     </div>
                 </div>

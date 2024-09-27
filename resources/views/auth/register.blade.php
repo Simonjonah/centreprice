@@ -3,9 +3,11 @@
     use App\Models\Ngstate;
     use App\Models\District;
     use App\Models\Lga;
+    use App\Models\Plan;
     $view_states = Ngstate::orderby('state')->get();
     $view_dists = District::orderby('districts')->get();
     $view_lgas = Lga::orderby('lga')->get();
+    $view_plans = Plan::all();
 ?>
 
 <!DOCTYPE html>
@@ -31,14 +33,14 @@
 <body class="hold-transition register-page">
 <div class="register-box">
   <div class="register-logo">
-    <a href="#"><b>Franchise</b></a>
+    <a href="#"><b>Membership Registration</b></a>
   </div>
 
   <div class="card">
     <div class="card-body register-card-body">
       <!-- <p class="login-box-msg">Register a new membership</p> -->
 
-      <form action="{{ route('web.createfranchise') }}" method="post">
+      <form action="{{ route('createusers') }}" method="post">
         @csrf
 
     @if (Session::get('success'))
@@ -52,6 +54,9 @@
       {{ Session::get('fail') }}
     </div>
   @endif
+  @php
+      $reference = substr(rand(0,time()),0, 9);
+  @endphp
       <label for="">First Name</label>
         <div class="input-group mb-3">
           <input name="fname" type="text" class="form-control" @error('fname') is-invalid @enderror"
@@ -65,6 +70,7 @@
         @error('fname')
         <span class="text-danger">{{ $message }}</span>
         @enderror
+        
         <label for="">Last Name</label>
         <div class="input-group mb-3">
           <input name="lname" type="text" class="form-control" @error('lname') is-invalid @enderror"
@@ -101,6 +107,28 @@
         <span class="text-danger">{{ $message }}</span>
         @enderror
 
+        <label for="">Selecct Package</label>
+        <div class="input-group mb-3">
+          <select required id="yesNo" name="user_type" class="form-control">
+            <option value="">Select Package</option>
+            @foreach ($view_plans as $view_plan)
+              <option value="{{ $view_plan->user_type }}">{{ $view_plan->user_type }}</option>
+            @endforeach
+        </select>
+        </div>
+
+        <div id="additionalInfo" style="display: none;">
+          <label for="info">Vendor Registration Fee NGN 20,000</label>
+          <input type="text" class="form-control" name="amount" value="500">
+      </div>
+
+      <div id="additionaldis" style="display: none;">
+        <label for="info">Distributor Registration Fee NGN 500,000</label>
+        <input type="text" class="form-control"  name="amount" value="600">
+    </div>
+ 
+        
+  
         <label for="">Select LGA</label>
         <div class="input-group mb-3">
           <select name="lga_id" class="form-control">
@@ -181,6 +209,9 @@
               <span class="text-danger">{{ $message }}</span>
           @enderror 
 
+
+         
+
          <label for="">Select Gender</label>
         <div class="input-group mb-3">
           <select name="gender" class="form-control">
@@ -245,6 +276,7 @@
             <span class="text-danger">{{ $message }}</span>
         @enderror
 
+        <input type="text" name="reference" value="{{ $reference }}">
         <div class="row">
           <div class="col-8">
             <div class="icheck-primary">
@@ -288,6 +320,30 @@
 
 
 <script>
+
+document.getElementById('yesNo').addEventListener('change', function() {
+    var additionalInfo = document.getElementById('additionalInfo');
+    if (this.value === 'Vendor') {
+        additionalInfo.style.display = 'block';
+    } else {
+        additionalInfo.style.display = 'none';
+    }
+
+  });
+
+
+  document.getElementById('yesNo').addEventListener('change', function() {
+    var additionaldis = document.getElementById('additionaldis');
+    if (this.value === 'Distributor') {
+        additionaldis.style.display = 'block';
+    } else {
+        additionaldis.style.display = 'none';
+    }
+
+  });
+
+  
+
   function myFunction() {
   var x = document.getElementById("myInput");
   if (x.type === "password") {

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdvertController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\LgaController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\MilestoneController;
 use App\Http\Controllers\FlutterwaveController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RootController;
@@ -23,6 +25,7 @@ use App\Http\Controllers\TeamController;
 use App\Http\Controllers\TestimonyController;
 use App\Http\Controllers\TransactionController;
 use App\Models\Admin;
+use App\Models\Advert;
 use App\Models\Blog;
 use App\Models\Product;
 use App\Models\Root;
@@ -51,8 +54,9 @@ Route::get('/', function () {
     $view_blogs = Blog::latest()->take(3)->get();
     $view_teams = Team::latest()->take(3)->get();
     $view_testimonies = Testimony::latest()->take(3)->get();
+    $view_adverts = Advert::latest()->get();
 
-    return view('welcomes', compact('view_testimonies', 'view_teams', 'view_blogs', 'view_products', 'view_rootscates', 'view_roots'));
+    return view('welcomes', compact('view_adverts', 'view_testimonies', 'view_teams', 'view_blogs', 'view_products', 'view_rootscates', 'view_roots'));
 });
 
 
@@ -141,7 +145,12 @@ Route::post('/pay', [FlutterwaveController::class, 'initialize'])->name('pay');
 
 Route::get('/rave/callback', [FlutterwaveController::class, 'callback'])->name('callback');
 
-Route::post('buy', [TransactionController::class, 'makeApiRequest']);
+// Route::post('buy', [TransactionController::class, 'makeApiRequest']);
+
+
+Route::post('createusers', [TransactionController::class, 'createusers'])->name('createusers');
+
+
 Route::post('makepayment', [SaleController::class, 'makepayments']);
 
 
@@ -150,19 +159,22 @@ Route::post('makepayment', [SaleController::class, 'makepayments']);
 Route::get('/payment', [SaleController::class, 'showPaymentForm'])->name('payment.form');
 Route::post('/payment/process', [SaleController::class, 'processPayment'])->name('payment.process');
 Route::get('/payment/callback', [SaleController::class, 'paymentCallback'])->name('payment.callback');
+
 Route::get('/payment/success', function () {
     return 'Payment successful';
 })->name('payment.success');
+
 Route::get('/payment/failed', function () {
     return 'Payment failed';
 })->name('payment.failed');
 
 
+Route::post('createcontact', [ContactController::class, 'createcontact'])->name('createcontact');
 Route::post('cancel', [TransactionController::class, 'cancel']);
-// Route::get('/payment/callback', [App\Http\Controllers\TransactionController::class, 'handlePaystackCallback']);
+// Route::get('/transaction/trancallback', [TransactionController::class, 'handlePaystackCallback'])->name('transaction.trancallback');
 // Laravel 8 & 9
 
-Route::get('/payment/callback/{reference}', [TransactionController::class, 'handleGatewayCallback']);
+// Route::get('/payment/callback/{reference}', [TransactionController::class, 'handleGatewayCallback']);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -178,7 +190,29 @@ Route::prefix('admin')->name('admin.')->group(function() {
 
     });
     
+    
     Route::middleware(['auth:admin'])->group(function() {
+        
+        Route::get('deleteplans/{ref_no}', [PlanController::class, 'deleteplans'])->name('deleteplans');
+        Route::get('deleteadverts/{ref_no}', [AdvertController::class, 'deleteadverts'])->name('deleteadverts');
+        Route::put('updateadverts/{ref_no}', [AdvertController::class, 'updateadverts'])->name('updateadverts');
+        Route::get('editadverts/{ref_no}', [AdvertController::class, 'editadverts'])->name('editadverts');
+        Route::get('viewsingleadverts/{ref_no}', [AdvertController::class, 'viewsingleadverts'])->name('viewsingleadverts');
+        Route::get('suspendadverts/{ref_no}', [AdvertController::class, 'suspendadverts'])->name('suspendadverts');
+        Route::get('approveadverts/{ref_no}', [AdvertController::class, 'approveadverts'])->name('approveadverts');
+        Route::get('viewadvertments', [AdvertController::class, 'viewadvertments'])->name('viewadvertments');
+        Route::put('updateaddphoto5/{ref_no}', [AdvertController::class, 'updateaddphoto5'])->name('updateaddphoto5');
+        Route::get('addfouthphoto5/{ref_no}', [AdvertController::class, 'addfouthphoto5'])->name('addfouthphoto5');
+        Route::put('updateaddphoto4/{ref_no}', [AdvertController::class, 'updateaddphoto4'])->name('updateaddphoto4');
+        Route::get('addfouthphoto4/{ref_no}', [AdvertController::class, 'addfouthphoto4'])->name('addfouthphoto4');
+        Route::put('updateaddphoto2/{ref_no}', [AdvertController::class, 'updateaddphoto2'])->name('updateaddphoto2');
+        Route::get('addsecondphoto2/{ref_no}', [AdvertController::class, 'addsecondphoto2'])->name('addsecondphoto2');
+        Route::put('updateaddphoto/{ref_no}', [AdvertController::class, 'updateaddphoto'])->name('updateaddphoto');
+        Route::get('firstadvertphoto/{ref_no}', [AdvertController::class, 'firstadvertphoto'])->name('firstadvertphoto');
+        Route::post('createadverts', [AdvertController::class, 'createadverts'])->name('createadverts');
+        Route::get('addadverts', [AdvertController::class, 'addadverts'])->name('addadverts');
+        Route::get('deletecontact/{id}', [ContactController::class, 'deletecontact'])->name('deletecontact');
+        Route::get('viewcontact', [ContactController::class, 'viewcontact'])->name('viewcontact');
         Route::get('/addteam', [TeamController::class, 'addteam'])->name('addteam');
         Route::post('/createteam', [TeamController::class, 'createteam'])->name('createteam');
         Route::get('/viewteam', [TeamController::class, 'viewteam'])->name('viewteam');
@@ -343,11 +377,11 @@ Route::prefix('admin')->name('admin.')->group(function() {
 Route::get('/registerdistributor/{ref_no}', [UserController::class, 'registerdistributor'])->name('registerdistributor');
 Route::get('/registervendor', [UserController::class, 'registervendor'])->name('registervendor');
 Route::get('/referregistervendor/{ref_no3}', [UserController::class, 'referregistervendor'])->name('referregistervendor');
+Route::post('/createfranchise', [TransactionController::class, 'createfranchise'])->name('createfranchise');
 
 Route::prefix('web')->name('web.')->group(function() {
 
     Route::middleware(['guest:web'])->group(function() {
-        Route::post('/createfranchise', [UserController::class, 'createfranchise'])->name('createfranchise');
         Route::post('/check', [UserController::class, 'check'])->name('check');
         // Route::get('/registerdistributor/{ref_no}', [UserController::class, 'registerdistributor'])->name('registerdistributor');
         // Route::get('/registerdistributor/{ref_no}', [UserController::class, 'registervendor'])->name('registervendor');
@@ -415,3 +449,17 @@ Route::prefix('web')->name('web.')->group(function() {
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+
+// Route::get('/transaction/callback', [TransactionController::class, 'transactionCallback'])->name('transaction.callback');
+Route::get('/transaction/callback', [TransactionController::class, 'transactionCallback'])->name('transaction.callback');
+
+Route::get('/transaction/success', function () {
+    return 'transaction successful';
+})->name('transaction.success');
+
+Route::get('/transaction/failed', function () {
+    return 'transaction failed';
+})->name('transaction.failed');
+

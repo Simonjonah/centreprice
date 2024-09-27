@@ -19,10 +19,8 @@ class SaleController extends Controller
     }
 
     // Process Payment and Split Money
-    public function processPayment(Request $request)
-    {
+    public function processPayment(Request $request) {
       
-       
         try {
             // Initialize transaction on Paystack with split details
             $response = Http::withToken('sk_test_2480c735552c0c451064507cb47a75d736c5c969')

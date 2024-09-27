@@ -87,6 +87,22 @@
                                     </div>
                                 </div>
                             </div>
+
+
+
+                            
+                            <div class="edu-blog-widget widget-categories">
+                                <div class="inner">
+                                    <h4 class="widget-title">REGISTRATION FEES /MEMBERSHIP OPTIONS:</h4>
+                                    <div class="content">
+                                        <ul class="category-list">
+                                            <li>Franchise = N10,000,000.00</li>
+                                            <li>Distributors = N500,000.00</li>
+                                            <li>Vendors = N20,000.00</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                             <!-- End Single Widget  -->
                            
                         </div>
@@ -228,12 +244,12 @@
                                         <div class="accordion-item">
                                             <h5 class="accordion-header">
                                                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#question-8" aria-expanded="true">
-                                                    How long is my personal free trial?
+                                                    Is CSCC a pyramid scheme?
                                                 </button>
                                             </h5>
                                             <div id="question-8" class="accordion-collapse collapse show" data-bs-parent="#faq-accordion">
                                                 <div class="accordion-body">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt labore et dolore magna aliqua enim ad minim veniam quis nostrud exercitation ullamco qui laboris nis aliquip commodo consequat.</p>
+                                                    <p>How much capital is required to join?</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -245,7 +261,7 @@
                                             </h5>
                                             <div id="question-9" class="accordion-collapse collapse" data-bs-parent="#faq-accordion">
                                                 <div class="accordion-body">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt labore et dolore magna aliqua enim ad minim veniam quis nostrud exercitation ullamco qui laboris nis aliquip commodo consequat.</p>
+                                                    <p>CSCC offers a low-cost entry opportunity compared to traditional business models. The exact investment required depends on your chosen membership level.</p>
                                                 </div>
                                             </div>
                                         </div>
