@@ -120,30 +120,60 @@ class TransactionController extends Controller
    //}
 
     public function createusers(Request $request){
-        
+        $reference = substr(rand(0,time()),0, 9);
         try {
             $response = Http::withToken("sk_test_2480c735552c0c451064507cb47a75d736c5c969")->post('https://api.paystack.co/transaction/initialize', [
                 'amount' => $request->amount,
                  'currency' => 'NGN',
                  'phone' => $request->phone,
+                 'fname' => $request->fname,
+                 'lname' => $request->lname,
                  'email' => $request->email,
                  'user_id' => $request->id,
                  'user_type' => $request->user_type,
-                'callback_url' => route('transaction.callback'), 
-                 'reference' => $request->reference,
+                 'callback_url' => route('transaction.callback'), 
+                 'reference' => $reference,
                  'channels' => [
                      "card", "bank", "ussd", "qr", "mobile_money", "bank_transfer", "eft"
                  ]
              ]);
              $responseData = json_decode($response->getBody()->getContents(), true);
-            //  dd($responseData);
-            //  $plan = Plan::findOrFail($request->user_type);
+            
             $startDate = Carbon::now();
             $endDate = Carbon::now()->addDays(365);
+                $request->validate([
+                    'password' => ['required', 'string'],
+                    'email' => ['required', 'email', 'unique:users'],
+                    'phone' => ['required', 'string', 'unique:users'],
+                ]);
+                $user = User::create([
+                    'fname' => $request->fname,
+                    'lname' => $request->lname,
+                    'terms' => $request->terms,
+                    'reference' => $reference,
+                    'user_id' => $request->id,
+                    'user_type' => $request->user_type,
+                    'email' => $request->email,
+                    'phone' => $request->phone,
+                    'dob' => $request->dob,
+                    'address' => $request->address,
+                    'gender' => $request->gender,
+                    'city' => $request->city,
+                    'ngstate_id' => $request->ngstate_id,
+                    'lga_id' => $request->lga_id,
+                    'status' => 'pending',
+                    'amount' => $request->amount,
+                    'lga_id' => $request->lga_id,
+                    'user_type' => $request->user_type,
+                    'start_date' => $startDate,
+                    'end_date' => $endDate,
+                    'password' => \Hash::make($request->password),
+                    'ref_no' => substr(rand(0,time()),0, 9),
+                ]);
+
             $subscription = Subscription::create([
-                // 'user_id' => $request->id,
-                // 'plan_id' => $request->id,
                 'amount' => $request->amount,
+                'reference' => $reference,
                 'user_type' => $request->user_type,
                 'start_date' => $startDate,
                 'end_date' => $endDate,
@@ -158,7 +188,7 @@ class TransactionController extends Controller
             'user_type' => $request->user_type,
             'fname' => $request->fname,
             'lname' => $request->lname,
-            'reference' => $request->reference,
+            'reference' => $reference,
             'currency' => 'NGN',
             'channels' => $request->channels,
             // 'callback_url' => 'http://127.0.0.1:8000/web/thankyou',
@@ -390,11 +420,24 @@ class TransactionController extends Controller
              if ($transaction['status'] && $transaction['data']['status'] == 'success') {
                  
                 $transaction = Transaction::where('reference', $reference)->first();
+                $user = User::where('reference', $reference)->first();
+                $subscription = Subscription::where('reference', $reference)->first();
                 $transaction->update([
-                    'status' => 'success'
+                    'status' => 'success',
+                    'user_id' =>$user->id,
                 ]);
-                 
-                 return redirect()->route('payment.success')->with('success', 'Payment successful!');
+                $user->update([
+                    'status' => 'success',
+                    // 'user_id' =>$user->id,
+
+                ]);
+
+                $subscription->update([
+                    'status' => 'success',
+                    'user_id' =>$user->id,
+                ]);
+               
+                 return redirect()->route('login')->with('success', 'Payment successful!');
              } else {
                  return redirect()->route('payment.failed')->with('error', 'Payment failed. Please try again.');
              }

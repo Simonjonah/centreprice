@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-
+// use App\Jobs\DeletePendingUserJob;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 
@@ -25,6 +25,24 @@ class User extends Authenticatable
         'fname',
         'email',
         'password',
+        'lname',
+        'phone',
+        'terms',
+        'ref_no',
+        'reference',
+        'dob',
+        'status',
+        'user_id',
+        'user_type',
+        'lga_id',
+        'ngstate_id',
+        'address',
+        'gender',
+        'city',
+        'amount',
+        'end_date',
+        'start_date',
+        'agree',
     ];
 
     /**
@@ -99,4 +117,5 @@ public function ngstate(): BelongsTo
         return $this->hasMany(Sale::class);
     }
 
+    
 }

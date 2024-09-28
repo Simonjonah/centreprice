@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Models\User;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -65,4 +66,11 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
     ];
+
+    // protected function schedule(Schedule $schedule)
+    // {
+    //     $schedule->call(function () {
+    //         User::where('updated_at', '<', Carbon::now()->subDays(7))->delete();
+    //     })->weekly();
+    // }
 }

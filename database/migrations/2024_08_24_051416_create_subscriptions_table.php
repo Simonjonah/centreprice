@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('user_id')->nullable();
             $table->string('plan_id')->nullable();
+            $table->string('reference')->nullable();
             $table->string('user_type')->nullable();
             $table->decimal('amount', 8, 2)->nullable();
             $table->date('start_date')->nullable();

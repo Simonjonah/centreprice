@@ -118,13 +118,26 @@
         </div>
 
         <div id="additionalInfo" style="display: none;">
-          <label for="info">Vendor Registration Fee NGN 20,000</label>
-          <input type="text" class="form-control" name="amount" value="500">
+          <div class="form-group">
+            <label for="info">Vendor Registration Fee NGN 20,000</label>
+            <input type="text" class="form-control" disabled  value="500">
+            <input type="hidden" class="form-control" name="amount" value="500">
+          </div>
+          <div class="form-group">
+            <label for="info">Referral Code</label>
+            <input type="text" class="form-control" name="user_id" value="" placeholder="Referral Code">
+          </div>
+          
       </div>
+      {{-- <div id="additionalInfo" style="display: none;">
+        <label for="info">Referral Code</label>
+        <input type="text" class="form-control" name="user_id" value="" placeholder="Referral Code">
+    </div> --}}
 
       <div id="additionaldis" style="display: none;">
         <label for="info">Distributor Registration Fee NGN 500,000</label>
-        <input type="text" class="form-control"  name="amount" value="600">
+        <input type="text" class="form-control" disabled  value="500,000">
+        <input type="hidden" class="form-control"   name="amount" value="600">
     </div>
  
         
@@ -263,7 +276,7 @@
         <label for="">Confirm Password</label>
         
         <div class="input-group mb-3">
-          <input type="password" name="confirm_password" id="myInmput" class="form-control"  @error('confirm_password') is-invalid @enderror"
+          <input type="password" required name="confirm_password" id="myInmput" class="form-control"  @error('confirm_password') is-invalid @enderror"
           value="{{ old('confirm_password') }}" placeholder="Confirm password">
           
           <div class="input-group-append">
@@ -276,7 +289,9 @@
             <span class="text-danger">{{ $message }}</span>
         @enderror
 
-        <input type="text" name="reference" value="{{ $reference }}">
+
+
+        {{-- <input type="hidden" name="reference" value="{{ $reference }}"> --}}
         <div class="row">
           <div class="col-8">
             <div class="icheck-primary">

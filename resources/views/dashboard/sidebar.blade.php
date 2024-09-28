@@ -140,7 +140,7 @@
     <!-- /.sidebar -->
   </aside>
 
- @elseif (Auth::guard('web')->user()->status == 'approved' && Auth::guard('web')->user()->role == '1')
+ @elseif (Auth::guard('web')->user()->status == 'success' && Auth::guard('web')->user()->user_type == 'Franchise')
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{ url('web/home')}}" class="brand-link">
@@ -341,7 +341,7 @@
     <!-- /.sidebar -->
   </aside>
 
-  @elseif (Auth::guard('web')->user()->status == 'approved' && Auth::guard('web')->user()->role == '2')
+  @elseif (Auth::guard('web')->user()->status == 'success' && Auth::guard('web')->user()->user_type == 'Distributor')
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
       <a href="{{ url('web/home')}}" class="brand-link">
@@ -531,7 +531,7 @@
     </aside>
 
 
-    @elseif (Auth::guard('web')->user()->status == 'approved' && Auth::guard('web')->user()->role == '3')
+    @elseif (Auth::guard('web')->user()->status == 'success' && Auth::guard('web')->user()->user_type == 'Vendor')
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
         <a href="{{ url('web/home')}}" class="brand-link">

@@ -38,9 +38,9 @@
  @foreach ($view_subscriptions as $view_subscription)
  @if ($view_subscription->user_type == 'Franchise')
  <h2>
-  <h1>Franchise Subscription Fee ₦{{ $view_subscription->amount  }}   @if (Auth::user()->role == '1')
+  <h1>Franchise Subscription Fee ₦{{ $view_subscription->amount  }}   @if (Auth::user()->user_type == 'Franchise')
    
- @elseif (Auth::user()->role == '2')
+ @elseif (Auth::user()->user_type == 'Distributor')
  Distributor
  @else
  Vendor
@@ -88,7 +88,7 @@
   @elseif(Auth::guard('web')->user()->status == 'suspend')
   <h2>You have suspended </h2>
   
-@elseif (Auth::guard('web')->user()->status == 'approved' && Auth::guard('web')->user()->role == '1')
+@elseif (Auth::guard('web')->user()->status == 'success' && Auth::guard('web')->user()->user_type == 'Franchise')
 
 <!-- Main content -->
     <section class="content">
@@ -402,7 +402,7 @@
       </div><!--/. container-fluid -->
     </section>
     <!-- /.content -->
-    @elseif (Auth::guard('web')->user()->status == 'approved' && Auth::guard('web')->user()->role == '2')
+    @elseif (Auth::guard('web')->user()->status == 'success' && Auth::guard('web')->user()->user_type == 'Distributor')
           <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -692,7 +692,7 @@
     <!-- /.content -->
 
 
-    @elseif (Auth::guard('web')->user()->status == 'approved' && Auth::guard('web')->user()->role == '3')
+    @elseif (Auth::guard('web')->user()->status == 'success' && Auth::guard('web')->user()->user_type == 'Vendor')
           <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
