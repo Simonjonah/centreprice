@@ -17,7 +17,17 @@ class RootController extends Controller
         $request->validate([
             'rootname' => ['required', 'string', 'max:255', 'unique:roots'],
         ]);
+        if ($request->hasFile('images')){
+            $file = $request['images'];
+            $filename = 'SimonJonah-' . time() . '.' . $file->getClientOriginalExtension();
+            $path = $request->file('images')->storeAs('productimages', $filename);
+
+        }else{
+            $path = 'noimage.jpg';
+        }
+
         $add_roots = new Root();
+        $add_roots['images'] = $path;
         $add_roots->slug = SlugService::createSlug(Root::class, 'slug', $request->rootname);
         $add_roots->rootname = $request->rootname;
         $add_roots->ref_no = substr(rand(0,time()),0, 9);
@@ -47,7 +57,15 @@ class RootController extends Controller
         $request->validate([
             'rootname' => ['required', 'string', 'max:255'],
         ]);
-        
+        if ($request->hasFile('images')){
+            $file = $request['images'];
+            $filename = 'SimonJonah-' . time() . '.' . $file->getClientOriginalExtension();
+            $path = $request->file('images')->storeAs('productimages', $filename);
+            $edit_root['images'] = $path;
+
+        }else{
+            $path = 'noimage.jpg';
+        }
         $edit_root->rootname = $request->rootname;
         $edit_root->update();
         return redirect()->back()->with('success', 'You have created successfully');

@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -36,6 +38,7 @@ class User extends Authenticatable
         'user_type',
         'lga_id',
         'ngstate_id',
+        'subvendor_id',
         'address',
         'gender',
         'city',
@@ -117,5 +120,8 @@ public function ngstate(): BelongsTo
         return $this->hasMany(Sale::class);
     }
 
-    
+    public function isExpired()
+    {
+        return Carbon::now()->gt($this->end_date);
+    }
 }

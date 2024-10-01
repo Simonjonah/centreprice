@@ -44,7 +44,7 @@ return new class extends Migration
             $table->string('type')->nullable();
             $table->string('bearer_type')->nullable();
             $table->string('bearer_subaccount')->nullable();
-            // $table->string('original_share')->nullable();
+            $table->string('authorization_code')->nullable();
             $table->string('split_fees')->nullable();
             $table->string('share')->nullable();
             $table->string('subaccount_code')->nullable();
@@ -67,6 +67,11 @@ return new class extends Migration
             $table->string('images4')->nullable();
             $table->string('images5')->nullable();
             $table->string('productstatus')->nullable();
+            $table->string('currency')->nullable();
+            $table->string('bin')->nullable();
+            $table->string('currency')->nullable();
+            $table->string('currency')->nullable();
+            
             
             $table->timestamps();
         });

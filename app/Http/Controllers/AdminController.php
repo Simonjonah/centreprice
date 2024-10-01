@@ -26,7 +26,7 @@ class AdminController extends Controller
         ]);
         $registration = new Admin();
         $registration->name = $request->name;
-        $registration->role = 0;
+        // $registration->role  = '';
         $registration->email = $request->email;
         $registration->password = \Hash::make($request->password);
         $registration->save();
@@ -100,6 +100,11 @@ class AdminController extends Controller
 
         return redirect()->back()->with('success', 'you have update successfully');
 
+    }
+
+    public function viewroles(){
+        $view_roles = Admin::all();
+        return view('dashboard.admin.viewroles', compact('view_roles'));
     }
 
     public function logout(){

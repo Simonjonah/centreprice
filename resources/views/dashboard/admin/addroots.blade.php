@@ -58,14 +58,14 @@
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
 
-                    <!-- <div class="form-group">
-                    <label for="">Senatarial District</label>
-                    <input name="senate" type="text"@error('senate') is-invalid @enderror"
-                    value="{{ old('senate') }}" class="form-control" id="" placeholder="Enter Senatarial District">
+                   <div class="form-group">
+                    <label for="">Images</label>
+                    <input name="images" type="file"@error('images') is-invalid @enderror"
+                    value="{{ old('images') }}" class="form-control" id="" placeholder="Enter Senatarial District">
                   </div>
-                  @error('senate')
+                  @error('images')
                     <span class="text-danger">{{ $message }}</span>
-                    @enderror -->
+                    @enderror
                   </div>
                 </div>
 

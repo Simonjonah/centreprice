@@ -293,19 +293,20 @@
                   <div class="alert alert-danger">
                   {{ Session::get('error') }}
                   @endif
-                  <input type="text" name="order_id" value="{{ $view_myprodocts->id }}" id="">
+                  <input type="hidden" name="order_id" value="{{ $view_myprodocts->id }}" id="">
+                 <a href="{{ url('web/ordermyproducts/'.$view_myprodocts->ref_no) }}">
                   <button type="submit" class="btn btn-primary btn-lg btn-flat">
                     <i class="fas fa-cart-plus fa-lg mr-2"></i> 
-                    Add to Cart
-                  </button>
+                    Order
+                  </button></a>
                 </form>
                 
 
-                <div class="btn btn-default btn-lg btn-flat">
+                {{-- <div class="btn btn-default btn-lg btn-flat">
                   <i class="fas fa-heart fa-lg mr-2"></i> 
                   Add to Wishlist
                 </div>
-              </div>
+              </div> --}}
 
               <div class="mt-4 product-share">
                 <a href="#" class="text-gray">

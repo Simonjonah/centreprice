@@ -7,15 +7,15 @@
                     <div class="edu-footer-widget">
                         <div class="logo">
                             <a href="index.html">
-                                <img class="logo-light" src="assets/images/logo/logo-white.png" alt="Corporate Logo">
+                                <img style="width: 50px; height: 50px;" class="logo-light" src="{{ asset('front/assets/images/logo/logo.jpeg') }}" alt="Corporate Logo">
                             </a>
                         </div>
-                        <p class="description">Lorem ipsum dolor amet consecto adi pisicing elit sed eiusm tempor incidid unt labore dolore.</p>
+                        <p class="description">Use the information below and contact us.</p>
                         <div class="widget-information">
                             <ul class="information-list">
-                                <li><span>Add:</span>70-80 Upper St Norwich NR2</li>
-                                <li><span>Call:</span><a href="tel:+011235641231">+01 123 5641 231</a></li>
-                                <li><span>Email:</span><a href="mailto:info@edublink.com" target="_blank">info@edublink.com</a></li>
+                                <li><span>Add:</span>B3 Shelter Afrique Shopping Complex, Mbiaobong, Uyo. Akwa Ibom State.</li>
+                                <li><span>Call:</span><a href="tel:+2348068333055">+234 806 833 3055</a></li>
+                                <li><span>Email:</span><a href="mailto:centerpricesng@gmail.com" target="_blank">centerpricesng@gmail.com</a></li>
                             </ul>
                         </div>
                     </div>
@@ -25,12 +25,10 @@
                         <h4 class="widget-title">Online Platform</h4>
                         <div class="inner">
                             <ul class="footer-link link-hover">
-                                <li><a href="about-one.html">About</a></li>
-                                <li><a href="course-one.html">Courses</a></li>
-                                <li><a href="team-one.html">Instructor</a></li>
-                                <li><a href="event-grid.html">Events</a></li>
-                                <li><a href="team-details.html">Instructor Profile</a></li>
-                                <li><a href="purchase-guide.html">Purchase Guide</a></li>
+                                <li><a href="{{ url('about') }}">About</a></li>
+                                <li><a href="{{ url('services') }}">Services</a></li>
+                                <li><a href="{{ url('team') }}">Team</a></li>
+                                <li><a href="{{ url('averts') }}">Advertisements</a></li>
                             </ul>
                         </div>
                     </div>
@@ -40,12 +38,11 @@
                         <h4 class="widget-title">Links</h4>
                         <div class="inner">
                             <ul class="footer-link link-hover">
-                                <li><a href="contact-us.html">Contact Us</a></li>
-                                <li><a href="gallery-grid.html">Gallery</a></li>
-                                <li><a href="blog-standard.html">News & Articles</a></li>
-                                <li><a href="faq.html">FAQ's</a></li>
-                                <li><a href="my-account.html">Sign In/Registration</a></li>
-                                <li><a href="coming-soon.html">Coming Soon</a></li>
+                                <li><a href="{{ url('contact') }}">Contact Us</a></li>
+                                <li><a href="{{ url('blog') }}">News & Articles</a></li>
+                                {{-- <li><a href="faq.html">FAQ's</a></li> --}}
+                                <li><a href="{{ url('register') }}">Sign In/Registration</a></li>
+                                <li><a href="{{ url('members') }}">Membership</a></li>
                             </ul>
                         </div>
                     </div>
@@ -77,7 +74,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="inner text-center">
-                        <p>Copyright 2022 <a href="https://1.envato.market/5bQ022" target="_blank">EduBlink</a> Designed By <a href="https://themeforest.net/user/devsblink">DevsBlink</a>. All Rights Reserved</p>
+                        <p>Copyright 2024 <a href="https://centerprices.com/" target="_blank">Centerprices.com</a> Designed By <a href="https://web.facebook.com/?_rdc=1&_rdr">Simtechinnovations</a>. All Rights Reserved</p>
                     </div>
                 </div>
             </div>

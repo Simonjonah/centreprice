@@ -24,6 +24,8 @@ return new class extends Migration
             $table->decimal('percent', 8, 2)->default('0')->nullable();
             $table->string('coupon_code')->nullable();
             $table->string('quantity')->nullable();
+            $table->string('package')->nullable();
+            $table->string('package_no')->nullable();
             $table->text('images1')->nullable();
             $table->text('images2')->nullable();
             $table->text('images3')->nullable();
@@ -32,6 +34,7 @@ return new class extends Migration
             $table->string('slug')->nullable();
             $table->string('ref_no')->nullable();
             $table->string('status')->nullable();
+            $table->json('subaccounts')->nullable();
             $table->timestamps();
         });
     }

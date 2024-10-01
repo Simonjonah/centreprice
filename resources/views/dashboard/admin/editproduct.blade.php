@@ -113,14 +113,14 @@
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
 
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                       <label for="">Franchise Commission</label>
                       <input name="franchise_commission" type="number" @error('franchise_commission') is-invalid @enderror"
                       value="{{ $edit_product->franchise_commission }}" class="form-control" id="" placeholder="franchise_commission">
                   </div>
                   @error('franchise_commission')
                       <span class="text-danger">{{ $message }}</span>
-                  @enderror
+                  @enderror --}}
 
                   <div class="form-group">
                     <label for="">Distributor Commission</label>
@@ -131,6 +131,31 @@
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
 
+                
+                <div class="form-group">
+                  <label for="">Package</label>
+                  <select name="package" class="form-control">
+                    <option value="{{ $edit_product->package }}">{{ $edit_product->package }}</option>
+                    <option value="Cattons">Cattons</option>
+                    <option value="Half Catton">Half Catton</option>
+                    <option value="Cretes">Cretes</option>
+                  </select>
+              </div>
+              @error('package')
+                  <span class="text-danger">{{ $message }}</span>
+              @enderror
+
+                <div class="form-group">
+                  <label for="">Package_no</label>
+                  <input name="package_no" type="number" @error('package_no') is-invalid @enderror"
+                  value="{{ $edit_product->package_no }}" class="form-control" id="" placeholder="package_no">
+              </div>
+              @error('package_no')
+                  <span class="text-danger">{{ $message }}</span>
+              @enderror
+
+
+              
                     <div class="form-group">
                       <label for="">promo</label>
                       <input name="percent" type="number" @error('percent') is-invalid @enderror"

@@ -55,7 +55,12 @@
                                 <div class="col" data-sal-delay="100" data-sal="slide-up" data-sal-duration="800">
                                     <div class="categorie-grid categorie-style-3 color-primary-style">
                                         <div class="icon">
-                                            <img style="width: 50%; height: 50%;" src="{{ URL::asset("/public/../$view_advert->images1")}}" alt="">
+                                            @if ($view_root->images == null)
+                                            <i class="icon-9"></i>
+                                            @else
+                                            <img style="width: 50%; height: 50%;" src="{{ URL::asset("/public/../$view_root->images")}}" alt="">
+                                                
+                                            @endif
                                         </div>
                                         <div class="content">
                                             <a href="{{ url('viewrootproducts/'.$view_root->id) }}">
@@ -129,7 +134,12 @@
                     <div class="col" data-sal-delay="100" data-sal="slide-up" data-sal-duration="800">
                         <div class="categorie-grid categorie-style-3 color-primary-style">
                             <div class="icon">
+                                @if ($view_rootscate->images == null)
                                 <i class="icon-9"></i>
+                                @else
+                                <img style="width: 50%; height: 50%;" src="{{ URL::asset("/public/../$view_rootscate->images")}}" alt="">
+                                    
+                                @endif
                             </div>
                             <div class="content">
                                 <a href="{{ url('viewrootproducts/'.$view_rootscate->id) }}">
@@ -272,8 +282,8 @@
                                         <div class="product-hover-info">
                                             <ul>
                                                 <li><a data-bs-toggle="modal" href="#pro-quick-view" role="button"><i class="icon-2"></i></a></li>
-                                                <li><a href="{{ url('registervendor') }}"><i class="icon-22"></i></a></li>
-                                                <li><a href="{{ url('registervendor') }}"><i class="icon-3"></i></a></li>
+                                                <li><a href="{{ url('register') }}"><i class="icon-22"></i></a></li>
+                                                <li><a href="{{ url('register') }}"><i class="icon-3"></i></a></li>
                                             </ul>
                                         </div>
                                     </div>

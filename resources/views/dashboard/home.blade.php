@@ -11,10 +11,14 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-12">
-            @if (Auth::guard('web')->user()->role == '1')
+            @if (Auth::guard('web')->user()->user_type == 'Franchise')
             <h4 class="m-0 text-dark"><a href="{{ url('registerdistributor/'.Auth::guard('web')->user()->ref_no) }}">{{ Auth::user()->referral_link }}</a></h4>
-            @elseif (Auth::guard('web')->user()->role == '3')
-            <h4 class="m-0 text-dark"><a href="{{ url('referregistervendor/'.Auth::guard('web')->user()->ref_no3) }}">{{ Auth::user()->vendorreferral_link }}</a></h4>
+            @elseif (Auth::guard('web')->user()->user_type == 'Distributor')
+            {{-- <h4 class="m-0 text-dark"><a href="{{ url('referregistervendor/'.Auth::guard('web')->user()->ref_no3) }}">{{ Auth::user()->vendorreferral_link }}</a></h4> --}}
+            <h4 class="m-0 text-dark">Referral Code <a href="{{ url('referregistervendor/'.Auth::guard('web')->user()->ref_no) }}">{{ Auth::user()->ref_no }}</a></h4>
+         
+            @elseif (Auth::guard('web')->user()->user_type == 'Vendor')
+            <h4 class="m-0 text-dark">Referral Code <a href="{{ url('referregistervendor/'.Auth::guard('web')->user()->ref_no) }}">{{ Auth::user()->ref_no }}</a></h4>
             @else
 
             @endif

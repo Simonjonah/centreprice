@@ -6,6 +6,7 @@ use App\Models\Plan;
 use App\Models\Sale;
 use App\Models\Subscription;
 use App\Models\User;
+// use App\Models\Sale;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -146,30 +147,64 @@ class TransactionController extends Controller
                     'email' => ['required', 'email', 'unique:users'],
                     'phone' => ['required', 'string', 'unique:users'],
                 ]);
-                $user = User::create([
-                    'fname' => $request->fname,
-                    'lname' => $request->lname,
-                    'terms' => $request->terms,
-                    'reference' => $reference,
-                    'user_id' => $request->id,
-                    'user_type' => $request->user_type,
-                    'email' => $request->email,
-                    'phone' => $request->phone,
-                    'dob' => $request->dob,
-                    'address' => $request->address,
-                    'gender' => $request->gender,
-                    'city' => $request->city,
-                    'ngstate_id' => $request->ngstate_id,
-                    'lga_id' => $request->lga_id,
-                    'status' => 'pending',
-                    'amount' => $request->amount,
-                    'lga_id' => $request->lga_id,
-                    'user_type' => $request->user_type,
-                    'start_date' => $startDate,
-                    'end_date' => $endDate,
-                    'password' => \Hash::make($request->password),
-                    'ref_no' => substr(rand(0,time()),0, 9),
-                ]);
+                if ($request->user_id == null) {
+                    $user = User::create([
+                        'fname' => $request->fname,
+                        'lname' => $request->lname,
+                        'terms' => $request->terms,
+                        'reference' => $reference,
+                        'user_id' => '467603498',
+                        'user_type' => $request->user_type,
+                        'email' => $request->email,
+                        'phone' => $request->phone,
+                        'dob' => $request->dob,
+                        'address' => $request->address,
+                        'gender' => $request->gender,
+                        'city' => $request->city,
+                        'ngstate_id' => $request->ngstate_id,
+                        'lga_id' => $request->lga_id,
+                        'status' => 'pending',
+                        'subvendor_id' => $request->subvendor_id,
+
+                        'amount' => $request->amount,
+                        'lga_id' => $request->lga_id,
+                        'user_type' => $request->user_type,
+                        'start_date' => $startDate,
+                        'end_date' => $endDate,
+                        'password' => \Hash::make($request->password),
+                        'ref_no' => substr(rand(0,time()),0, 9),
+                    ]);
+                }else{
+                    $user = User::create([
+                        'fname' => $request->fname,
+                        'lname' => $request->lname,
+                        'terms' => $request->terms,
+                        'reference' => $reference,
+                        'user_id' => $request->user_id,
+                        'user_type' => $request->user_type,
+                        'email' => $request->email,
+                        'phone' => $request->phone,
+                        'dob' => $request->dob,
+                        'address' => $request->address,
+                        'gender' => $request->gender,
+                        'city' => $request->city,
+                        'ngstate_id' => $request->ngstate_id,
+                        'lga_id' => $request->lga_id,
+                        'status' => 'pending',
+                        'amount' => $request->amount,
+                        'lga_id' => $request->lga_id,
+                        'user_type' => $request->user_type,
+                        'subvendor_id' => $request->subvendor_id,
+                        
+                        'start_date' => $startDate,
+                        'end_date' => $endDate,
+                        'password' => \Hash::make($request->password),
+                        'ref_no' => substr(rand(0,time()),0, 9),
+                        'ref_no2' => substr(rand(0,time()),0, 9),
+                        'ref_no3' => substr(rand(0,time()),0, 9),
+                    ]);
+                }
+                
 
             $subscription = Subscription::create([
                 'amount' => $request->amount,

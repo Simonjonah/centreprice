@@ -450,7 +450,15 @@
               <p>View Contacts</p>
             </a>
           </li>
+
          
+          <li class="nav-item">
+            <a href="{{ url('admin/viewroles') }}" class="nav-link">
+              <i class="nav-icon far fa-circle text-warning"></i>
+              <p>View Roles</p>
+            </a>
+          </li>
+
           <li class="nav-item">
             <a href="{{ url('admin/logout') }}" class="nav-link">
               <i class="nav-icon far fa-circle text-warning"></i>

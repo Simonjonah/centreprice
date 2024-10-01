@@ -105,11 +105,30 @@ class UserController extends Controller
         }
     }
 
+    public function resetmypassword(){
+
+        return view('dashboard.resetmypassword');
+    }
+    public function changepassword(Request $request, $id){
+        $changelogdetails = User::find($id);
+        $request->validate([
+            'password' => ['required', 'string'],
+            'email' => ['required', 'string'],
+        ]);
+
+        $changelogdetails->email = $request->email;
+        $changelogdetails->password = \Hash::make($request->password);
+        $changelogdetails->update();
+
+        return redirect()->back()->with('success', 'You have change your login details successfully');
+        
+    }
+
     public function home(){
         $countfrancesedistributors = User::where('user_id', auth::guard('web')->id())->count();
         $viewmyfrancesedistributors = User::where('user_id', auth::guard('web')->id())->take(10)->get();
         $view_orderedproducts = Order::where('distributor_id', auth::guard('web')->id())->take(10)->get();
-        $count_orderedproducts = Order::where('distributor_id', auth::guard('web')->id())->count();
+        $count_orderedproducts = Order::where('distributor_id', auth::guard('web')->id())->sum('quantityordered');
         $view_latestproductssignup = Order::where('franchise_id', auth::guard('web')->id())->get();
         $approvedproducts = Order::where('franchise_id', auth::guard('web')->id())->where('status', 'delivered')->count();
         $countsales = Sale::where('vendor_id', auth::guard('web')->id())->where('status', 'success')->sum('quantity');
@@ -172,8 +191,8 @@ class UserController extends Controller
         return view('dashboard.registerdistributor', compact('view_franchise'));
     }
 
-    public function referregistervendor($ref_no3){
-        $view_franchise = User::where('ref_no3', $ref_no3)->first();
+    public function referregistervendor($ref_no){
+        $view_franchise = User::where('ref_no', $ref_no)->first();
         return view('dashboard.referregistervendor', compact('view_franchise'));
     }
 

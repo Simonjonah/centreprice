@@ -309,12 +309,12 @@
             </a>
             <ul class="nav nav-treeview">
              
-              <li class="nav-item">
+              {{-- <li class="nav-item">
                 <a href="{{ url('web/franchisesubscription') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Subscribe</p>
                 </a>
-              </li>
+              </li> --}}
 
               <li class="nav-item">
                 <a href="{{ url('web/mysubscriptions') }}" class="nav-link">
@@ -497,13 +497,13 @@
                 </p>
               </a>
               <ul class="nav nav-treeview">
-               
+{{--                
                 <li class="nav-item">
                   <a href="{{ url('web/franchisesubscription') }}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Subscribe</p>
                   </a>
-                </li>
+                </li> --}}
   
                 <li class="nav-item">
                   <a href="{{ url('web/mysubscriptions') }}" class="nav-link">
@@ -642,12 +642,12 @@
                 </a>
                 <ul class="nav nav-treeview">
                  
-                  <li class="nav-item">
+                  {{-- <li class="nav-item">
                     <a href="{{ url('web/franchisesubscription') }}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Subscribe</p>
                     </a>
-                  </li>
+                  </li> --}}
     
                   <li class="nav-item">
                     <a href="{{ url('web/mysubscriptions') }}" class="nav-link">

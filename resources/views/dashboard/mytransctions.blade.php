@@ -43,7 +43,7 @@
                     <th>Last Name</th>
                     <th>Amount</th>
                     <th>Expired Date</th>
-                    <th>Role</th>
+                    <th>user_type</th>
                     <th>Renewal</th>
                    
                    
@@ -65,16 +65,16 @@
                   @endif
                   @foreach ($my_transactions as $my_transaction)
                     <tr>
-                        <td>{{ $my_transaction->user['ref_no3'] }}</td>
+                        <td>{{ $my_transaction->user['ref_no'] }}</td>
                         <td>{{ $my_transaction->user['fname'] }}</td>
                         <td>{{ $my_transaction->user['lname'] }}</td>
-                        <td>{{ $my_transaction->subscription->plan['amount'] }}</td>
-                        <td>{{ $my_transaction->subscription['end_date'] }}</td>
-                        <td>@if ($my_transaction->user['role'] == '1')
+                        <td>{{ $my_transaction->amount }}</td>
+                        <td>{{ $my_transaction->user['end_date'] }}</td>
+                        <td>@if ($my_transaction->user['user_type'] == 'Franchise')
                             <span class="badge badge-primary"> Franchise</span>
-                            @elseif ($my_transaction->user['role'] == '2')
+                            @elseif ($my_transaction->user['user_type'] == 'Distributor')
                             <span class="badge badge-info"> Distributor</span>
-                            @elseif ($my_transaction->user['role'] == '3')
+                            @elseif ($my_transaction->user['user_type'] == 'Vendor')
                          
                           <span class="badge badge-success">Vendor</span>
                           @endif</td>
@@ -108,7 +108,7 @@
                         <th>Last Name</th>
                         <th>Amount</th>
                         <th>Expired Date</th>
-                        <th>Role</th>
+                        <th>user_type</th>
                         <th>Renewal</th>
                        
                         

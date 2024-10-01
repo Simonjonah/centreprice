@@ -23,10 +23,12 @@ class ProductController extends Controller
             'subcategory_id' => ['required', 'string'],
             'root_id' => ['required', 'string'],
             'category_id' => ['required', 'string'],
-            'franchise_commission' => ['required', 'string'],
+            // 'franchise_commission' => ['required', 'string'],
             'distributors_commission' => ['required', 'string'],
             'vendors_commission' => ['required', 'string'],
             'amount' => ['required', 'string'],
+            'package' => ['required', 'string'],
+            'package_no' => ['required', 'string'],
             'percent' => ['nullable', 'string'],
             'quantity' => ['nullable', 'string'],
             
@@ -49,10 +51,12 @@ class ProductController extends Controller
         $add_product->subcategory_id = $request->subcategory_id;
         $add_product->category_id = $request->category_id;
         $add_product->root_id = $request->root_id;
-        $add_product->franchise_commission = $request->franchise_commission;
+        // // $add_product->franchise_commission = $request->franchise_commission;
         $add_product->vendors_commission = $request->vendors_commission;
         $add_product->distributors_commission = $request->distributors_commission;
         $add_product->percent = $request->percent;
+        $add_product->package = $request->package;
+        $add_product->package_no = $request->package_no;
         $add_product->amount = $request->amount;
         $add_product->quantity = $request->quantity;
         $add_product->ref_no = substr(rand(0,time()),0, 9);
@@ -204,12 +208,14 @@ class ProductController extends Controller
 
         $request->validate([
             'subcategory_id' => ['required', 'string'],
-           'franchise_commission' => ['required', 'string'],
+        //    'franchise_commission' => ['required', 'string'],
             'distributors_commission' => ['required', 'string'],
             'vendors_commission' => ['required', 'string'],
             'amount' => ['required', 'string'],
             'percent' => ['required', 'string'],
             'quantity' => ['required', 'string'],
+            'package' => ['required', 'string'],
+            'package_no' => ['required', 'string'],
             'images1' => 'nullable|mimes:jpg,png,jpeg'
         ]);
         // dd($request->all());
@@ -225,12 +231,14 @@ class ProductController extends Controller
 
         }
         $edit_product->subcategory_id = $request->subcategory_id;
-        $edit_product->franchise_commission = $request->franchise_commission;
+        // // $edit_product->franchise_commission = $request->franchise_commission;
         $edit_product->distributors_commission = $request->distributors_commission;
         $edit_product->vendors_commission = $request->vendors_commission;
         $edit_product->quantity = $request->quantity;
         $edit_product->percent = $request->percent;
         $edit_product->amount = $request->amount;
+        $edit_product->package = $request->package;
+        $edit_product->package_no = $request->package_no;
         $edit_product->update();
         return redirect()->route('admin.firstphoto', ['ref_no' =>$edit_product->ref_no]); 
 

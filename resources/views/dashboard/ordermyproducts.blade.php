@@ -85,9 +85,9 @@
                     <!-- /.col -->
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label for="">Quantity Assigned</label>
+                        <label for="">Quantity </label>
                         <input name="quantityordered" type="number" @error('quantityordered') is-invalid @enderror"
-                        value="{{ old('quantityordered') }}" class="form-control" id="" placeholder="Quantity Assigned">
+                        value="{{ old('quantityordered') }}" class="form-control" id="" placeholder="Quantity">
                     </div>
                     @error('quantityordered')
                         <span class="text-danger">{{ $message }}</span>

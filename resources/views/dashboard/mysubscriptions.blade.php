@@ -43,8 +43,8 @@
                     <th>Last Name</th>
                     <th>Amount</th>
                     <th>Expired Date</th>
-                    <th>Role</th>
-                    <th>Renewal</th>
+                    <th>user_type</th>
+Franchise                  <th>Renewal</th>
                     <th>Canceled</th>
                    
                     <th>Status</th>
@@ -68,13 +68,13 @@
                         <td>{{ $view_mysub->user['ref_no'] }}</td>
                         <td>{{ $view_mysub->user['fname'] }}</td>
                         <td>{{ $view_mysub->user['lname'] }}</td>
-                        <td>{{ $view_mysub->plan['amount'] }}</td>
+                        <td>{{ $view_mysub->user['amount'] }}</td>
                         <td>{{ $view_mysub->end_date }}</td>
-                        <td>@if ($view_mysub->user['role'] == '1')
+                        <td>@if ($view_mysub->user['user_type'] == 'Franchise')
                             <span class="badge badge-primary"> Franchise</span>
-                            @elseif ($view_mysub->user['role'] == '2')
+                            @elseif ($view_mysub->user['user_type'] == 'Distributor')
                             <span class="badge badge-info"> Distributor</span>
-                            @elseif ($view_mysub->user['role'] == '3')
+                            @elseif ($view_mysub->user['user_type'] == 'Vendor')
                          
                           <span class="badge badge-success">Vendor</span>
                           @endif</td>
@@ -89,7 +89,7 @@
                         class='btn btn-warning'>
                          <i class="far fa-user">Canceled</i>
                      </a></td>
-                       <td>@if ($view_mysub->status == 'active')
+                       <td>@if ($view_mysub->status == 'success')
                         <span class="badge badge-success"> Active</span></td>
                        @elseif ($view_mysub->status == 'canceled')
                         <span class="badge badge-warning"> Canceled</span></td>
@@ -109,8 +109,8 @@
                         <th>Last Name</th>
                         <th>Amount</th>
                         <th>Expired Date</th>
-                        <th>Role</th>
-                        <th>Renewal</th>
+                        <th>user_type</th>
+Franchise                      <th>Renewal</th>
                         <th>Canceled</th>
                         
                         <th>Status</th>

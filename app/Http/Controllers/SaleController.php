@@ -25,12 +25,25 @@ class SaleController extends Controller
             // Initialize transaction on Paystack with split details
             $response = Http::withToken('sk_test_2480c735552c0c451064507cb47a75d736c5c969')
                 ->post('https://api.paystack.co/transaction/initialize', [
-                    'email' => $request->email,  // Customer's email
-                    'amount' => $request->amount,  // Amount to charge in kobo
+                    'email' => $request->email, 
+                    'amount' => $request->amount, 
                     'reference' => $request->reference,
                     'user_id' => $request->user_id,
-                    'first_name' => $request->fname,
+                    'first_name' => $request->first_name,
                     'last_name' => $request->lname,
+                    'user_id' => $request->user_id,
+                    'franchise_id' => $request->franchise_id,
+                    'distributor_id' => $request->distributor_id,
+                    'vendor_id' => $request->vendor_id,
+                    'product_id' => $request->product_id,
+                    'order_id' => $request->order_id,
+                    // 'vendor_id' => $request->vendor_id,
+                    'franchise_commission' => $request->franchise_commission,
+                    'distributors_commission' => $request->distributors_commission,
+                    'vendors_commission' => $request->vendors_commission,
+                    // 'first_name' => $request->fname,
+                    'phone' => $request->phone,
+                    // 'last_name' => $request->lname,
                     'callback_url' => route('payment.callback'),  // URL to redirect after payment
                     'split' => [
                         'type' => 'percentage', // or 'flat' if you want a fixed amount
@@ -48,7 +61,6 @@ class SaleController extends Controller
                 ]);
 
             $result = $response->json();
-           //  dd($result);
             Sale::create([
                 'quantity' => $request->quantity,
                 'ref_no' => substr(rand(0,time()),0, 9),
@@ -78,60 +90,10 @@ class SaleController extends Controller
                 'images3' => $request->images3,
                 'images4' => $request->images4,
                 'images5' => $request->images5,
-                'callback_url' => 'http://127.0.0.1:8000/payment/process/',
-
-                // 'domain' => ['data']['domain'],
-                // 'requested_amount' => ['data']['requested_amount'],
-                // 'paidAt' => ['data']['paidAt'],
-                // 'gateway_response' => ['data']['gateway_response'],
-                // 'channel' => ['data']['channel'],
-                // 'ip_address' => ['data']['ip_address'],
-                // 'fees' => ['data']['fees'],
-                // 'first_name' => ['customer']['first_name'],
-                // 'last_name' => ['customer']['last_name'],
-                // 'email' => ['customer']['email'],
-                // 'phone' => ['customer']['phone'],
-                // 'risk_action' => ['customer']['risk_action'],
-                // 'international_format_phone' => ['customer']['international_format_phone'],
-
-                // //SPLIT SECTION
-                // 'split_id' => ['split']['id'],
-                // 'name' => ['split']['name'],
-                // 'split_code' => ['split']['split_code'],
-                // 'type' => ['split']['formula']['type'],
-                // 'bearer_type' => ['split']['formula']['bearer_type'],
-                // 'bearer_subaccount' => ['split']['formula']['bearer_subaccount'],
-                // 'original_share' => ['split']['formula']['subaccounts']['original_share'],
-                // 'split_fees' => ['split']['formula']['subaccounts']['fees'],
-                // 'share' => ['split']['formula']['subaccounts']['share'],
-                // 'original_share' => ['split']['formula']['subaccounts']['original_share'],
-                // 'subaccount_code' => ['split']['formula']['subaccounts']['subaccount_code'],
-                // 'subaccount_id' => ['split']['formula']['subaccounts']['id'],
-                // 'subaccount_name' => ['split']['formula']['subaccounts']['name'],
-                // 'integration' => ['split']['formula']['subaccounts']['integration'],
-                
-
-                // 'paystack' => ['split']['shares']['paystack'],
-                // 'subaccount_amount' => ['split']['shares']['subaccounts']['amount'],
-                // 'original_share' => ['split']['shares']['subaccounts']['original_share'],
-                // 'shere_fees' => ['split']['shares']['subaccounts']['shere_fees'],
-                // 'shere_subaccount_code' => ['split']['shares']['subaccounts']['subaccount_code'],
-                // 'shere_id' => ['split']['shares']['subaccounts']['id'],
-                // 'share_integration' => ['split']['shares']['subaccounts']['integration'],
-
-                
-                // 'reference' => $request->reference,
-                // 'currency' => 'NGN',
-                // 'channels' => $request->channels,
-                // // 'callback_url' => 'https://brixtonnschools.com.ng/',
-                // 'user_id' => $user->id,
-                // 'subscription_id' => $subscription->id,
-                // 'amount' => $plan->amount,
                 'status' => 'pending',
-                
             ]);
+            //$result = json_decode($response->getBody()->getContents(), true);
             // dd($result);
-            // $result = json_decode($response->getBody()->getContents(), true);
 
             // Check if the payment initialization was successful
             if ($result['status']) {
@@ -161,17 +123,74 @@ class SaleController extends Controller
         try {
             $response = Http::withToken("sk_test_2480c735552c0c451064507cb47a75d736c5c969")
                 ->get('https://api.paystack.co/transaction/verify/' . $reference);
-
+                // dd($response);
             $result = $response->json();
+            // $result = json_decode($response->getBody()->getContents(), true);
+            
+
             $reference = $request->query('reference');
-            // dd($result);
-            // Check if the payment was successful
             if ($result['status'] && $result['status'] == 'success') {
-                // $result->status = 'success';
-                // // $result->payment_date = now(); // Update payment date or other fields
-                // $result->save();
-                // Payment was successful, handle your post-payment logic here
-                return redirect()->route('payment.success')->with('success', 'Payment successful!');
+            $payment = Sale::where('reference', $reference)->first();
+                
+               $payment->update([
+                    'status' => 'success',
+                    'domain' => $result['data']['domain'],
+                    'requested_amount' => $result['data']['requested_amount'],
+                    'paidAt' => $result['data']['paidAt'],
+                    'gateway_response' => $result['data']['gateway_response'],
+                    'channel' => $result['data']['channel'],
+                    'ip_address' => $result['data']['ip_address'],
+                    'channel' => $result['data']['channel'],
+                    'ip_address' => $result['data']['ip_address'],
+                    'split_id' => $result['data']['split']['id'],
+                    'name' => $result['data']['split']['name'],
+                    
+                    
+                    'authorization_code' => $result['data']['authorization']['authorization_code'],
+                    'bin' => $result['data']['authorization']['bin'],
+                    'last4' => $result['data']['authorization']['last4'],
+                    'exp_month' => $result['data']['authorization']['exp_month'],
+                    'channel' => $result['data']['authorization']['channel'],
+                    'card_type' => $result['data']['authorization']['card_type'],
+                    'bank' => $result['data']['authorization']['bank'],
+                    'country_code' => $result['data']['authorization']['country_code'],
+                    'brand' => $result['data']['authorization']['brand'],
+                    'reusable' => $result['data']['authorization']['reusable'],
+                    'signature' => $result['data']['authorization']['signature'],
+                    
+
+                    
+
+                    'split_code' => $result['data']['split']['split_code'],
+                    'type' => $result['data']['split']['formula']['type'],
+                    'bearer_type' => $result['data']['split']['formula']['bearer_type'],
+                    'bearer_subaccount' => $result['data']['split']['formula']['bearer_subaccount'],
+                    
+                    
+                    
+                    // 'original_share' => $result['data']['split']['formula']['subaccounts']['original_share'],
+                    // 'split_fees' => $result['data']['split']['formula']['subaccounts']['fees'],
+                // 'share' => ['split']['formula']['subaccounts']['share'],
+                // 'original_share' => ['split']['formula']['subaccounts']['original_share'],
+                // 'subaccount_code' => ['split']['formula']['subaccounts']['subaccount_code'],
+                // 'subaccount_id' => ['split']['formula']['subaccounts']['id'],
+                // 'subaccount_name' => ['split']['formula']['subaccounts']['name'],
+                // 'integration' => ['split']['formula']['subaccounts']['integration'],
+                
+
+                // 'paystack' => ['split']['shares']['paystack'],
+                // 'subaccount_amount' => ['split']['shares']['subaccounts']['amount'],
+                // 'original_share' => ['split']['shares']['subaccounts']['original_share'],
+                // 'shere_fees' => ['split']['shares']['subaccounts']['shere_fees'],
+                // 'shere_subaccount_code' => ['split']['shares']['subaccounts']['subaccount_code'],
+                // 'shere_id' => ['split']['shares']['subaccounts']['id'],
+                // 'share_integration' => ['split']['shares']['subaccounts']['integration'],
+
+                   
+               ]);
+               dd($result);
+               return redirect()->route('thankyou')->with('success', 'Payment successful!');
+            //    return redirect()->route('payment.success')->with('success', 'Payment successful!');
             } else {
                 return redirect()->route('payment.failed')->with('error', 'Payment failed. Please try again.');
             }
@@ -184,6 +203,10 @@ class SaleController extends Controller
 
     }
 
+    public function thankyou(){
+
+        return view('dashboard.thankyou');
+    }
 
     public function viewmypurchases(){
         $view_purchases = Sale::where('vendor_id', auth::guard('web')->id())->latest()->get();

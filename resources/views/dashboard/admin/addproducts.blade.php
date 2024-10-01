@@ -77,14 +77,14 @@
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
 
-                     <div class="form-group">
+                     {{-- <div class="form-group">
                         <label for="">Franchise Commission</label>
                         <input name="franchise_commission" type="text" @error('franchise_commission') is-invalid @enderror"
                         value="{{ old('franchise_commission') }}" class="form-control" id="" placeholder="Franchise Commission">
                     </div>
                     @error('franchise_commission')
                         <span class="text-danger">{{ $message }}</span>
-                    @enderror
+                    @enderror --}}
 
                      <div class="form-group">
                         <label for="">vendor Commission</label>
@@ -103,17 +103,7 @@
                   @error('quantity')
                       <span class="text-danger">{{ $message }}</span>
                   @enderror
-{{-- 
 
-                    <div class="form-group">
-                      <textarea name="body" id="compose-textarea" @error('body') is-invalid @enderror"
-                      value="{{ old('body') }}" class="form-control" style="height: 300px">
-                       
-                      </textarea>
-                  </div>
-                  @error('body')
-                  <span class="text-danger">{{ $message }}</span>
-                  @enderror --}}
                     
                       <!-- /.form-group -->
                     </div>
@@ -130,8 +120,30 @@
 
                     <!-- /.col -->
                    
-                      <div class="form-group">
-                        <label for="">Promo</label>
+
+                    <div class="form-group">
+                        <label for="">Package</label>
+                        <select  name="package"class="form-control">
+                          <option value="Cattons">Cattons</option>
+                          <option value="Half Catton">Half Catton</option>
+                          <option value="Cretes">Cretes</option>
+                      </select>
+                    </div>
+                    @error('package')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+
+                    <div class="form-group">
+                      <label for="">Package Number</label>
+                      <input name="package_no" type="number" @error('package_no') is-invalid @enderror"
+                      value="{{ old('package_no') }}" class="form-control" id="" placeholder="Package Number">
+                  </div>
+                  @error('package_no')
+                      <span class="text-danger">{{ $message }}</span>
+                  @enderror
+
+                    <div class="form-group">
+                        <label for="">Promo </label>
                         <input name="percent" type="number" @error('percent') is-invalid @enderror"
                         value="{{ old('percent') }}" class="form-control" id="" placeholder="Promo">
                     </div>

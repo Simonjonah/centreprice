@@ -15,8 +15,18 @@ class Transaction extends Model
         'subscription_id',
         'amount', 
         'amount', 
-        'status'
+        'status',
+        'product_id'
     ];
+
+    protected $casts = [
+        'subaccounts' => 'array',
+    ];
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 
     public function user()
     {
