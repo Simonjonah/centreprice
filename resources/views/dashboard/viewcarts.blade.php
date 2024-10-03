@@ -75,20 +75,15 @@
                     $total +=$details['quantity'] * $details['amount']
                 @endphp
                 <tr>
-                    {{-- <td>{{ $details['product_id'] }}</td>
-                    <td>{{ $details['user_id'] }}</td>
-                    <td>{{ $details['franchise_id'] }}</td>
-                    <td>{{ $details['distributor_id'] }}</td>
-                    <td>{{ $details['vendor_id'] }}</td>
                     
-                    <td>{{ $details['franchise_commission'] }}</td>
-                    <td>{{ $details['distributors_commission'] }}</td>
-                    <td>{{ $details['vendors_commission'] }}</td> --}}
+                  {{-- <img src="{{ asset('/public/../$details->images1')}}"> --}}
+                  {{-- <td><img style="width: auto; height: 30px;" src="{{ asset('/public/../$details['images1)}}" alt=""></td> --}}
+
+                    {{-- <td>{{ $details['images1'] }}</td> --}}
                     <td>{{ $details['productname'] }}</td>
                     <td>{{ $details['quantity'] }}</td>
                     <td> ₦ {{ $details['amount'] }}</td>
                     {{-- <td>{{ $details['images1'] }}</td> --}}
-                    {{-- <img src="{{ asset('/public/../.$view_distributor->images]')}}"> --}}
                     <td>{{ $details['quantity'] * $details['amount'] }}</td>
                     <td><a href="{{ route('web.remove', $id) }}"><i class="fas fa-trash mr-2"></i></a>
                 </tr>

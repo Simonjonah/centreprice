@@ -44,8 +44,8 @@
                     <th>Amount</th>
                     <th>Expired Date</th>
                     <th>user_type</th>
-Franchise                  <th>Renewal</th>
-                    <th>Canceled</th>
+                  <th>Renewal</th>
+                    {{-- <th>Canceled</th> --}}
                    
                     <th>Status</th>
                    
@@ -85,10 +85,10 @@ Franchise                  <th>Renewal</th>
                           @csrf
                           <button type="submit" class="btn btn-primary">Renew</button>
                         </form></td>
-                       <td><a href="{{ url('web/cancelsubscription/'.$view_mysub->id) }}"
+                       {{-- <td><a href="{{ url('web/cancelsubscription/'.$view_mysub->id) }}"
                         class='btn btn-warning'>
                          <i class="far fa-user">Canceled</i>
-                     </a></td>
+                     </a></td> --}}
                        <td>@if ($view_mysub->status == 'success')
                         <span class="badge badge-success"> Active</span></td>
                        @elseif ($view_mysub->status == 'canceled')
@@ -110,8 +110,8 @@ Franchise                  <th>Renewal</th>
                         <th>Amount</th>
                         <th>Expired Date</th>
                         <th>user_type</th>
-Franchise                      <th>Renewal</th>
-                        <th>Canceled</th>
+                      <th>Renewal</th>
+                        {{-- <th>Canceled</th> --}}
                         
                         <th>Status</th>
                         

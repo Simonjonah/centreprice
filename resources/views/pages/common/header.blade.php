@@ -55,8 +55,9 @@
                     <div class="header-top">
                         <div class="header-top-left">
                             <ul class="header-info">
-                                <li><a href="tel:+2348068333055"><i class="icon-phone"></i>Call: +234 806 833 3055</a></li>
-                                <li><a href="mailto:info@centerprices.com" target="_blank"><i class="icon-envelope"></i>Powered  By: Thamvos Products Manufacturers MPCS Ltd</a></li>
+                                <li><a href="tel:+2348080557395"><i class="icon-phone"></i>Call: +234 808 055 7395</a></li>
+                                <li><a href="mailto:info@centerprices.com" target="_blank"><i class="icon-house"></i>Powered  By: Thamvos Products Manufacturers MPCS Ltd
+                                   <br> <span style="font-size: 10px; font-style: italic;">... Turning Consumers into Entrepreneurs for Financial Success!</span></a></li>
                             </ul>
                         </div>
                         <div class="header-top-right">

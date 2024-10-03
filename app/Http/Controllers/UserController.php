@@ -339,8 +339,9 @@ class UserController extends Controller
     public function profile3(){
         $view_states = Ngstate::orderBy('state')->get();
         $view_lgas = Lga::orderBy('lga')->get();
+        $countsubvendor = User::where('subvendor_id', auth()->user()->id)->count();
         
-        return view('dashboard.profile3', compact('view_lgas', 'view_states'));
+        return view('dashboard.profile3', compact('countsubvendor', 'view_lgas', 'view_states'));
     }
     
 
@@ -445,8 +446,8 @@ class UserController extends Controller
         return view('dashboard.viewsingledistributorbyfran', compact('view_lgas', 'view_states', 'view_singdistributor'));
     }
 
-    public function viewsinglevendorfran($ref_no3){
-        $view_singdistributor = User::where('ref_no3', $ref_no3)->first();
+    public function viewsinglevendorfran($ref_no){
+        $view_singdistributor = User::where('ref_no', $ref_no)->first();
 
         $view_states = Ngstate::orderby('state')->get();
         $view_lgas = Lga::orderby('lga')->get();
@@ -697,6 +698,14 @@ class UserController extends Controller
         $view_distributors = User::where('ref_no', $ref_no)->get();
         return view('dashboard.admin.viewdistributors', compact('view_distributors'));
     }
+
+    public function viewmyvendorsales($id){
+        $view_purchases = User::where('id', $id)->first();
+        $view_purchases = Sale::where('vendor_id', $id)->get();
+        return view('dashboard.viewmyvendorsales', compact('view_purchases'));
+    }
+
+    
 
     // public function registervendor($lga, $state, $referral)
     // {

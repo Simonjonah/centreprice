@@ -42,7 +42,7 @@
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>City</th>
-                    <th>Role</th>
+                    <th>Status</th>
                     <th>Phone</th>
                     <th>Email</th>
                     <th>Image</th>
@@ -73,14 +73,16 @@
                   @endif
                   @foreach ($view_vendor_vendors as $view_vendor)
                     <tr>
-                        <td>{{ $view_vendor->ref_no3 }}</td>
+                        <td>{{ $view_vendor->ref_no }}</td>
                         <td>{{ $view_vendor->fname }}</td>
                         <td>{{ $view_vendor->lname }}</td>
                         <td>{{ $view_vendor->city }}</td>
-                        <td>@if ($view_vendor->role == '3')
-                            <span class="badge badge-primary"> Vendor</span>
+                        <td>@if ($view_vendor->status == 'success')
+                            <span class="badge badge-success"> Verified</span>
+                          @elseif ($view_vendor->status == 'pending')
+                            <span class="badge badge-warning">Pending</span>
                           @else
-                          <span class="badge badge-success">Admin</span>
+                          <span class="badge badge-danger">Failed</span>
                           @endif</td>
                         <td>{{ $view_vendor->phone }}</td>
                         <td>{{ $view_vendor->email }}</td>
@@ -90,9 +92,9 @@
                         <td>{{ $view_vendor->Lga->district['districts'] }}</td>
                         <td>{{ $view_vendor->Lga['lga'] }}</td>
 
-                        <td><a href="{{ url('web/viewsinglevendorfran/'.$view_vendor->ref_no3) }}"
+                        <td><a href="{{ url('web/viewsinglevendorfran/'.$view_vendor->ref_no) }}"
                           class='btn btn-info'>
-                           <i class="far fa-eye"></i>
+                           <i class="far fa-eye">View Activities</i>
                        </a></td>
                         <td>@if ($view_vendor->status == null)
                             <span class="badge badge-warning"> Not Approved Yet</span>
@@ -134,7 +136,7 @@
                         <th>First Name</th>
                         <th>Last Name</th>
                         <th>City</th>
-                        <th>Role</th>
+                        <th>Status</th>
                         <th>Phone</th>
                         <th>Email</th>
                         <th>Image</th>

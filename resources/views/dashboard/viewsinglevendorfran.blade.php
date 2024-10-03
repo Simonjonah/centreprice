@@ -37,17 +37,17 @@
                        alt="User profile picture">
                 </div>
 
-                <h3 class="profile-username text-center">{{ $view_singdistributor->name }}</h3>
+                <h3 class="profile-username text-center">{{ $view_singdistributor->fname }}</h3>
 
-                <p class="text-muted text-center">@if ($view_singdistributor->role == '1')
+                <p class="text-muted text-center">@if ($view_singdistributor->user_type == 'Franchise')
                   Franchise
-                @elseif ($view_singdistributor->role == '2')
+                @elseif ($view_singdistributor->user_type == 'Distributor')
                   Distributor
                 @else
                 Vendor
                 @endif</p>
 
-                <ul class="list-group list-group-unbordered mb-3">
+                {{-- <ul class="list-group list-group-unbordered mb-3">
                   <li class="list-group-item">
                     <b>Distributors</b> <a class="float-right">1,322</a>
                   </li>
@@ -57,9 +57,9 @@
                   <li class="list-group-item">
                     <b>Bonuses</b> <a class="float-right">13,287</a>
                   </li>
-                </ul>
+                </ul> --}}
 
-                <a href="#" class="btn btn-primary btn-block"><b>View Analysis</b></a>
+                {{-- <a href="#" class="btn btn-primary btn-block"><b>View Analysis</b></a> --}}
               </div>
               <!-- /.card-body -->
             </div>
@@ -82,10 +82,13 @@
                 <strong><i class="fas fa-pencil-alt mr-1"></i> Position</strong>
 
                 <p class="text-muted">
-                  @if ($view_singdistributor->role == '1')
+                  @if ($view_singdistributor->user_type == 'Franchise')
                   <span class="tag tag-danger">Franchise</span>
-                @elseif ($view_singdistributor->role == '2')
+                @elseif ($view_singdistributor->user_type == 'Distributor')
                 <span class="tag tag-danger">Distributor</span>
+               
+                @elseif ($view_singdistributor->user_type == 'Vendor')
+                <span class="tag tag-danger">Vendor</span>
                 @else
                 <span class="tag tag-danger">Vendor</span>
                 @endif
@@ -130,8 +133,8 @@
 
                      
                     </div>
-                   <a href="{{ url('web/viewmyvendors') }}" class="btn btn-primary">View Vendors</a>
-                   <a href="{{ url('web/viewmyvendorsales') }}" class="btn btn-success">View Sales</a>
+                   {{-- <a href="{{ url('web/viewmyvendors') }}" class="btn btn-primary">View Vendors</a> --}}
+                   <a href="{{ url('web/viewmyvendorsales/'.$view_singdistributor->id) }}" class="btn btn-success">View Sales</a>
                   </div>
                   <!-- /.tab-pane -->
                   <div class="tab-pane" id="timeline">

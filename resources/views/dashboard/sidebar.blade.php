@@ -626,7 +626,7 @@
                   <li class="nav-item">
                     <a href="{{ url('web/viewmypurchases') }}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>My Products</p>
+                      <p>My Purchases</p>
                     </a>
                   </li>
                 </ul>
@@ -655,12 +655,12 @@
                       <p>View Subscription</p>
                     </a>
                   </li>
-                   <li class="nav-item">
+                   {{-- <li class="nav-item">
                     <a href="{{ url('web/mytransctions') }}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Sub Payment</p>
                     </a>
-                  </li>
+                  </li> --}}
                   
                 </ul>
               </li>

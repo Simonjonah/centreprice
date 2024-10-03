@@ -48,15 +48,15 @@
                 @endif</p>
 
                 <ul class="list-group list-group-unbordered mb-3">
-                  <li class="list-group-item">
+                  {{-- <li class="list-group-item">
                     <b>Distributors</b> <a class="float-right">1,322</a>
-                  </li>
+                  </li> --}}
                   <li class="list-group-item">
-                    <b>Vendors</b> <a class="float-right">543</a>
+                    <b>My Vendors</b> <a class="float-right">{{ $countsubvendor }}</a>
                   </li>
-                  <li class="list-group-item">
+                  {{-- <li class="list-group-item">
                     <b>Bonuses</b> <a class="float-right">13,287</a>
-                  </li>
+                  </li> --}}
                 </ul>
 
                 <a href="#" class="btn btn-primary btn-block"><b>View Analysis</b></a>

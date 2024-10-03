@@ -420,7 +420,10 @@ Route::prefix('web')->name('web.')->group(function() {
         Route::get('/profile3', [UserController::class, 'profile3'])->name('profile3');
         Route::get('/profile2', [UserController::class, 'profile2'])->name('profile2');
         Route::get('/myvendors', [SaleController::class, 'myvendors'])->name('myvendors');
-        Route::get('/viewsinglevendorfran/{ref_no3}', [UserController::class, 'viewsinglevendorfran'])->name('viewsinglevendorfran');
+
+        Route::get('/viewmyvendorsales/{id}', [UserController::class, 'viewmyvendorsales'])->name('viewmyvendorsales');
+        
+        Route::get('/viewsinglevendorfran/{ref_no}', [UserController::class, 'viewsinglevendorfran'])->name('viewsinglevendorfran');
         Route::put('/updateprofile2/{id}', [UserController::class, 'updateprofile2'])->name('updateprofile2');
         Route::get('/referedby/{ref_no2}', [UserController::class, 'referedby'])->name('referedby');
         Route::get('/myvendorsbydistributor', [UserController::class, 'myvendorsbydistributor'])->name('myvendorsbydistributor');
