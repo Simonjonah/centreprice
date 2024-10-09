@@ -25,6 +25,7 @@ use App\Http\Controllers\SubaccountController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\TestimonyController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\TransportController;
 use App\Models\Admin;
 use App\Models\Advert;
 use App\Models\Blog;
@@ -105,6 +106,29 @@ Route::get('/products1', function () {
     $count_products = Product::count();
 
     return view('pages.products1', compact('count_products', 'view_products'));
+});
+
+
+Route::get('/adverts', function () {
+    $view_adverts = Advert::latest()->get();
+    $count_advert = Advert::count();
+
+    return view('pages.adverts', compact('count_advert', 'view_adverts'));
+});
+
+Route::get('/adverts/advertdetails/{slug}', function ($slug) {
+    $view_advertsdetails = Advert::where('slug', $slug)->first();
+    return view('pages.advertdetails', compact('view_advertsdetails'));
+});
+
+Route::get('/blog', function () {
+    $view_blogs = Blog::latest()->get();
+    return view('pages.blog', compact('view_blogs'));
+});
+
+Route::get('/team', function () {
+    $view_teams = Team::latest()->get();
+    return view('pages.team', compact('view_teams'));
 });
 
 Route::get('/about', function () {
@@ -359,6 +383,12 @@ Route::prefix('admin')->name('admin.')->group(function() {
         Route::get('/editdistricts/{id}', [DistrictController::class, 'editdistricts'])->name('editdistricts');
         Route::put('/updateedistricts/{id}', [DistrictController::class, 'updateedistricts'])->name('updateedistricts');
         Route::get('/deletedistricts/{id}', [DistrictController::class, 'deletedistricts'])->name('deletedistricts');
+        Route::get('/addtransport', [TransportController::class, 'addtransport'])->name('addtransport');
+        Route::post('/createtransport', [TransportController::class, 'createtransport'])->name('createtransport');
+        Route::get('/viewtransports', [TransportController::class, 'viewtransports'])->name('viewtransports');
+        Route::get('/edittransport/{ref_no}', [TransportController::class, 'edittransport'])->name('edittransport');
+        Route::put('/updatetransport/{ref_no}', [TransportController::class, 'updatetransport'])->name('updatetransport');
+        Route::get('/deletetrans/{ref_no}', [TransportController::class, 'deletetrans'])->name('deletetrans');
         
         Route::post('/createlga', [LgaController::class, 'createlga'])->name('createlga');
         Route::get('/viewlga', [LgaController::class, 'viewlga'])->name('viewlga');
@@ -429,7 +459,7 @@ Route::prefix('web')->name('web.')->group(function() {
         Route::get('/myvendorsbydistributor', [UserController::class, 'myvendorsbydistributor'])->name('myvendorsbydistributor');
         Route::get('/myproducts', [ProductController::class, 'myproducts'])->name('myproducts');
         Route::get('/addsubaccount', [SubaccountController::class, 'addsubaccount'])->name('addsubaccount');
-        Route::post('/createSubaccount', [SubaccountController::class, 'createSubaccount'])->name('createSubaccount');
+        Route::post('/createSubaccount', [SubaccountController::class, 'createWallet'])->name('createWallet');
         
         Route::get('/logout', [UserController::class, 'logout'])->name('logout'); 
         Route::get('/franchisesubscription', [PlanController::class, 'franchisesubscription'])->name('franchisesubscription');

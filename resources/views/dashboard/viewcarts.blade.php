@@ -75,11 +75,7 @@
                     $total +=$details['quantity'] * $details['amount']
                 @endphp
                 <tr>
-                    
-                  {{-- <img src="{{ asset('/public/../$details->images1')}}"> --}}
-                  {{-- <td><img style="width: auto; height: 30px;" src="{{ asset('/public/../$details['images1)}}" alt=""></td> --}}
-
-                    {{-- <td>{{ $details['images1'] }}</td> --}}
+                
                     <td>{{ $details['productname'] }}</td>
                     <td>{{ $details['quantity'] }}</td>
                     <td> ₦ {{ $details['amount'] }}</td>
@@ -105,8 +101,79 @@
         <div class="card-body">
           <div class="row">
             <div class="col-12 col-sm-6">
-             
+              <div class="form-group">
+                <label for="">Delivery Address</label>
+                <input name="delivery_address" type="text" @error('delivery_address') is-invalid @enderror"
+                  value="{{ old('delivery_address') }}" class="form-control" placeholder="Delivery Address">
             </div>
+            @error('delivery_address')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
+
+            <div class="form-group">
+              <label for="">Delivery Phone</label>
+              <input name="delivery_phone" type="text" @error('delivery_phone') is-invalid @enderror"
+                value="{{ old('delivery_phone') }}" class="form-control" placeholder="Delivery Phone">
+          </div>
+          @error('delivery_phone')
+              <span class="text-danger">{{ $message }}</span>
+          @enderror
+
+
+          <div class="form-group">
+            <label for="">Door Step</label>
+            <input name="delivery_pickup" type="checkox" @error('delivery_pickup') is-invalid @enderror"
+              value="{{ old('delivery_pickup') }}" class="form-control" placeholder="Delivery Phone">
+        </div>
+        @error('delivery_pickup')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
+
+        <div class="form-group">
+            <label for="">Door Step</label>
+            <input name="delivery_pickup" type="checkox" @error('delivery_pickup') is-invalid @enderror"
+              value="{{ old('delivery_pickup') }}" class="form-control" placeholder="Delivery Phone">
+        </div>
+        @error('delivery_pickup')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
+
+
+          <div class="form-group">
+                       
+            <label> Zones</label>
+              <select name="zone" type="text" @error('zone') is-invalid @enderror"
+              value="{{ old('zone') }}" class="form-control" id="">
+              <option value="North Central (NC)">North Central (NC)</option>
+              <option value="North East (NE)">North East (NE)</option>
+              <option value="North West (NW)">North West (NW)</option>
+              <option value="South West (SW)">South West (SW)</option>
+              <option value="South East (SE) ">South East (SE) </option>
+              <option value="South South (SS)">South South (SS)</option>
+            </select>
+          </div>
+          @error('zone')
+              <span class="text-danger">{{ $message }}</span>
+          @enderror
+
+          <div class="form-group">
+            <label for="">Select State</label>
+            <select name="state" type="text" @error('state') is-invalid @enderror"
+              value="{{ old('state') }}" class="form-control" id="">
+              @foreach ($view_states as $view_state)
+                <option value="{{ $view_state->state }}">{{ $view_state->state }}</option>
+              @endforeach
+              
+            </select>
+        </div>
+        @error('state')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
+
+        </div>
+        {{-- <!-- /.col -->
+        <div class="col-md-6"> --}}
+        
             <div class="col-12 col-sm-6">
               <h3 class="my-3">Cart Total</h3>
               <table class="table table-bordered">

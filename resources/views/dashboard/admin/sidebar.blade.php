@@ -392,6 +392,32 @@
               
             </ul>
           </li>
+
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-book"></i>
+              <p>
+                Transports
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ url('admin/addtransport') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add Transports</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="{{ url('admin/viewtransports') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>View Transports</p>
+                </a>
+              </li>
+              
+            </ul>
+          </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon far fa-plus-square"></i>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ngstate;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -12,7 +13,8 @@ class CartController extends Controller
    public function viewcarts()
    {
        $cart = session()->get('cart');
-       return view('dashboard.viewcarts', compact('cart'));
+       $view_states = Ngstate::orderBy('state')->get();
+       return view('dashboard.viewcarts', compact('view_states', 'cart'));
    }
 
 
@@ -40,7 +42,6 @@ class CartController extends Controller
                'franchise_commission' => $product->franchise_commission,
                'distributors_commission' => $product->distributors_commission,
                'vendors_commission' => $product->vendors_commission,
-               
                'productname' => $product->productname,
                'quantity' => $request->quantity,
                'amount' => $product->amount,

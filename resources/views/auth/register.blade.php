@@ -135,9 +135,9 @@
     </div> --}}
 
       <div id="additionaldis" style="display: none;">
-        <label for="info">Distributor Registration Fee NGN 500,000</label>
-        <input type="text" class="form-control" disabled  value="500,000">
-        <input type="hidden" class="form-control"   name="amount" value="600">
+        <label for="info">Distributor Registration Fee NGN 1000,000</label>
+        <input type="text" class="form-control" disabled  value="1000,000">
+        <input type="hidden" class="form-control"   name="amount" value="1000,000">
     </div>
  
         

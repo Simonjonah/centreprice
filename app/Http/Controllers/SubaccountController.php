@@ -36,14 +36,14 @@ class SubaccountController extends Controller
 //        // Make the request to Paystack's API
 //         // $response = $client->request('POST', 'https://api.paystack.co/subaccount', [
 //         //     'headers' => [
-//         //         'Authorization' => 'Bearer sk_test_2480c735552c0c451064507cb47a75d736c5c969',
+//         //         'Authorization' => 'Bearer sk_test_d320f1edcb2c172115da615043090c1580f9758f',
 //         //         'Content-Type' => 'application/json',
 //         //         'Accept' => 'application/json',
 //         //     ],
 //         //     'json' => $data,
 //         // ]);
 
-//         $response = Http::withToken("sk_test_2480c735552c0c451064507cb47a75d736c5c969")->post('https://api.paystack.co/subaccount', [
+//         $response = Http::withToken("sk_test_d320f1edcb2c172115da615043090c1580f9758f")->post('https://api.paystack.co/subaccount', [
 //             'business_name' => $request->business_name,
 //             'settlement_bank' => $request->settlement_bank,
 //             'account_number' => $request->account_number,
@@ -83,51 +83,65 @@ class SubaccountController extends Controller
 
     public function createWallet(Request $request)
     {
-        $secretKey = env('PAYSTACK_SECRET_KEY'); // Your Paystack secret key
+        $secretKey = getenv('PAYSTACK_SECRET_KEY'); // Your Paystack secret key
         $client = new Client();
+
+        $request->validate([
+            'phone' => 'required'
+        ]);
 
         try {
             // Step 1: Create Customer in Paystack
-            $customerResponse = $client->post('https://api.paystack.co/customer', [
-                'headers' => [
-                    'Authorization' => 'Bearer ' . $secretKey,
-                    'Content-Type' => 'application/json',
-                ],
-                'json' => [
+            // $customerResponse = $client->post('https://api.paystack.co/customer', [
+                // 'headers' => [
+                //     'Authorization' => 'Bearer ' . $secretKey,
+                //     'Content-Type' => 'application/json',
+                // ],
+                // 'json' => [
+                //     'email' => $request->input('email'),
+                //     'first_name' => $request->input('first_name'),
+                //     'last_name' => $request->input('last_name'),
+                //     'phone' => $request->input('phone'),
+                // ],
+                $customerResponse = Http::withToken("sk_test_d320f1edcb2c172115da615043090c1580f9758f")->post('https://api.paystack.co/customer', [
+
                     'email' => $request->input('email'),
                     'first_name' => $request->input('first_name'),
                     'last_name' => $request->input('last_name'),
                     'phone' => $request->input('phone'),
-                ],
+
             ]);
 
             $customerData = json_decode($customerResponse->getBody(), true);
-
+            // dd($customerData);
             // Check if customer creation was successful
-            if (!$customerData['status']) {
-                return response()->json([
-                    'success' => false,
-                    'message' => $customerData['message'],
-                ], 400);
-            }
+            // if (!$customerData['status']) {
+            //     return response()->json([
+            //         'success' => false,
+            //         'message' => $customerData['message'],
+            //     ], 400);
+            // }
 
             // Get the customer code from Paystack
             $customerCode = $customerData['data']['customer_code'];
-
+            // dd($customerCode);
             // Step 2: Create Virtual Account for the Customer
-            $virtualAccountResponse = $client->post('https://api.paystack.co/dedicated_account', [
-                'headers' => [
-                    'Authorization' => 'Bearer ' . $secretKey,
-                    'Content-Type' => 'application/json',
-                ],
-                'json' => [
-                    'customer' => $customerCode, // Customer code from Paystack
-                    'preferred_bank' => $request->input('preferred_bank'), // Optional: Preferred bank
-                ],
+            $virtualAccountResponse = Http::withToken("sk_test_d320f1edcb2c172115da615043090c1580f9758f")->post('https://api.paystack.co/dedicated_account', [
+                'customer' => $customerCode, // Customer code from Paystack
+                'preferred_bank' => $request->input('preferred_bank'),
+            // $virtualAccountResponse = $client->post('https://api.paystack.co/dedicated_account', [
+            //     'headers' => [
+            //         'Authorization' => 'Bearer ' . $secretKey,
+            //         'Content-Type' => 'application/json',
+            //     ],
+            //     'json' => [
+            //         'customer' => $customerCode, // Customer code from Paystack
+            //         'preferred_bank' => $request->input('preferred_bank'), // Optional: Preferred bank
+            //     ],
             ]);
 
             $virtualAccountData = json_decode($virtualAccountResponse->getBody(), true);
-
+            dd($virtualAccountData);
             if (!$virtualAccountData['status']) {
                 return response()->json([
                     'success' => false,

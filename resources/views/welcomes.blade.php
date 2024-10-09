@@ -21,11 +21,11 @@
                                                     <div class="swiper-slide">
                                                         <div class="testimonial-grid">
                                                             <div class="thumbnailr">
-                                                                <a href="{{ url('advertisements/{slug}'.$view_advert->slug) }}"><img style="width: 100%;" src="{{ URL::asset("/public/../$view_advert->images1")}}" alt="Testimonial"></a>
+                                                                <a href="{{ url('adverts/advertdetails/'.$view_advert->slug) }}"><img style="width: 100%;" src="{{ URL::asset("/public/../$view_advert->images1")}}" alt="Testimonial"></a>
                                                             </div>
                                                             <div class="content">
-                                                                <h5 class="title"><a href="{{ url('advertisements/{slug}'.$view_advert->slug) }}">{{ $view_advert->company_name }}</a></h5>
-                                                                <span class="subtitle"><a href="{{ url('advertisements/{slug}'.$view_advert->slug) }}">{{ $view_advert->title }}</a></span>
+                                                                <h5 class="title"><a href="{{ url('adverts/advertdetails/'.$view_advert->slug) }}">{{ $view_advert->company_name }}</a></h5>
+                                                                <span class="subtitle"><a href="{{ url('adverts/advertdetails/'.$view_advert->slug) }}">{{ $view_advert->title }}</a></span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -167,7 +167,7 @@
                 <div class="row g-5 align-items-center">
                     <div class="col-lg-6">
                         <div class="about-image-gallery">
-                            <img class="main-img-1" src="{{ asset('front/assets/images/about/center.jpeg') }}" alt="About Image">
+                            <img class="main-img-1" src="{{ asset('front/assets/images/about/ab.jpg') }}" alt="About Image">
                             <div class="author-box" data-parallax='{"x": 0, "y": -120}'>
                                 <div class="inner">
                                     <div class="thumb">
@@ -259,12 +259,7 @@
                 </ul>
             </div>
         </div>
-        <!-- End Course Area -->
-        <!--=====================================-->
-        <!--=      		Brand Area Start   		=-->
-        <!--=====================================-->
-         <!--=           Shop Area Start         =-->
-        <!--=====================================-->
+
         <section class="shop-page-area section-gap-equal">
             <div class="container">
                
@@ -543,7 +538,13 @@
                     @endforeach
                     
                 </div>
+                
             </div>
+            <div class="text-center">
+                <a style="margin-top: 20px;" href="{{ url('team') }}" class="edu-btn">More Team <i class="icon-4"></i></a>
+
+            </div>
+
         </div>
         <!-- End Team Area  -->
         <!--=====================================-->
@@ -646,6 +647,10 @@
                    
                     
                     <!-- End Event Grid  -->
+                    <div class="text-center">
+                        <a style="margin-top: 20px;" href="{{ url('blog') }}" class="edu-btn">View More <i class="icon-4"></i></a>
+        
+                    </div>
                 </div>
 
                 <ul class="shape-group">

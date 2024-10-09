@@ -85,10 +85,15 @@
                             <nav class="mainmenu-nav">
                                 <ul class="mainmenu">
                                     <li><a href="{{ url('/') }}">Home </a></li>
-                                    <li><a href="{{ url('about') }}">About Us </a></li>
-                                    
+                                    <li class="has-droupdown"><a href="#">About Us</a>
+                                        <ul class="submenu">
+                                            <li><a href="{{ url('about') }}"> About Us</a></li>
+                                            <li><a href="{{ url('adverts') }}">Adverts </a></li>
+                                        </ul>
+                                    </li>
                                     <li><a href="{{ url('register') }}">Register </a></li>
-                                    <li><a href="{{ url('products1') }}">Products </a></li>
+                                    <li><a href="{{ url('products1') }}">Shop </a></li>
+                                    
                                     <li><a href="{{ url('services') }}">Services </a></li>
                                     <li><a href="{{ url('contact') }}">Contact </a></li>
                                     
@@ -135,9 +140,14 @@
                     </div>
                     <ul class="mainmenu">
                         <li><a href="{{ url('/') }}">Home </a></li>
-                        <li><a href="{{ url('about') }}">About Us </a></li>
+                        <li class="has-droupdown"><a href="#">About Us</a>
+                            <ul class="submenu">
+                                <li><a href="{{ url('about') }}"> About Us</a></li>
+                                <li><a href="{{ url('adverts') }}">Adverts </a></li>
+                            </ul>
+                        </li>
                         <li><a href="{{ url('register') }}">Register </a></li>
-                        <li><a href="{{ url('products1') }}">Products1 </a></li>
+                        <li><a href="{{ url('products1') }}">Shop </a></li>
                         <li><a href="{{ url('services') }}">Services </a></li>
                         <li><a href="{{ url('contact') }}">Contact </a></li>
                     </ul>

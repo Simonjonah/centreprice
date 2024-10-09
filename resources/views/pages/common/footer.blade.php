@@ -40,7 +40,6 @@
                             <ul class="footer-link link-hover">
                                 <li><a href="{{ url('contact') }}">Contact Us</a></li>
                                 <li><a href="{{ url('blog') }}">News & Articles</a></li>
-                                {{-- <li><a href="faq.html">FAQ's</a></li> --}}
                                 <li><a href="{{ url('register') }}">Sign In/Registration</a></li>
                                 <li><a href="{{ url('members') }}">Membership</a></li>
                             </ul>

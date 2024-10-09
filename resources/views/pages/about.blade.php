@@ -58,7 +58,7 @@
                     </div>
                     <div class="col-lg-7">
                         <div class="about-image-gallery">
-                            <img class="main-img-1" src="{{ asset('front/assets/images/about/center.jpeg') }}" alt="About Image">
+                            <img class="main-img-1" src="{{ asset('front/assets/images/about/ab.jpg') }}" alt="About Image">
                             {{-- <img class="main-img-2" src="assets/images/about/about-12.webp" data-sal-delay="150" data-sal="slide-down" data-sal-duration="800" alt="About Image"> --}}
                             <ul class="shape-group">
                                 <li class="shape-1 scene" data-sal-delay="500" data-sal="fade" data-sal-duration="200">

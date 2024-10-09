@@ -53,81 +53,49 @@
                 <div class="card-body">
                   <div class="row">
                     <div class="col-md-6">
-                      
-
-                      {{-- <div class="form-group">
-                        <label for="">Account Name</label>
-                        <input name="business_name" type="text" @error('business_name') is-invalid @enderror"
-                        value="{{ old('business_name') }}" class="form-control" id="" placeholder="Account Name">
-                    </div>
-                    @error('business_name')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror --}}
-
-                    <div class="form-group">
-                      <label for="">Email</label>
-                      <input name="email" type="text" @error('email') is-invalid @enderror"
-                      value="{{ old('email') }}" class="form-control" id="" placeholder="Email">
-                  </div>
-                  @error('email')
-                      <span class="text-danger">{{ $message }}</span>
-                  @enderror
-
-                     <div class="form-group">
-                        <label for="">Bank Name</label>
-                        <select type="text" class="form-control" name="settlement_bank">
-                          <option selected>Choose</option>
-                          <option value="access">Access Bank</option>
-                          <option value="citibank">Citibank</option>
-                          <option value="diamond">Diamond Bank</option>
-                          <option value="ecobank">Ecobank</option>
-                          <option value="fidelity">Fidelity Bank</option>
-                          <option value="fcmb">First City Monument Bank (FCMB)</option>
-                          <option value="fsdh">FSDH Merchant Bank</option>
-                          <option value="gtb">Guarantee Trust Bank (GTB)</option>
-                          <option value="heritage">Heritage Bank</option>
-                          <option value="Keystone">Keystone Bank</option>
-                          <option value="rand">Rand Merchant Bank</option>
-                          <option value="skye">Skye Bank</option>
-                          <option value="stanbic">Stanbic IBTC Bank</option>
-                          <option value="standard">Standard Chartered Bank</option>
-                          <option value="sterling">Sterling Bank</option>
-                          <option value="suntrust">Suntrust Bank</option>
-                          <option value="union">Union Bank</option>
-                          <option value="uba">United Bank for Africa (UBA)</option>
-                          <option value="unity">Unity Bank</option>
-                          <option value="wema">Wema Bank</option>
-                          <option value="zenith">Zenith Bank</option>
-                          </select>
-                        {{-- <input name="settlement_bank" type="text" @error('settlement_bank') is-invalid @enderror"
-                        value="{{ old('settlement_bank') }}" class="form-control" id="" placeholder="Bank Name"> --}}
-                    </div>
-                    @error('settlement_bank')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
-
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-md-6">
+                     
                       <div class="form-group">
-                        <label for="">Percentage_charge</label>
-                        <input name="percentage_charge" type="text" @error('percentage_charge') is-invalid @enderror"
-                        value="{{ old('percentage_charge') }}" class="form-control" id="" placeholder="percentage_charge">
+                        <label for="">Email</label>
+                        <input name="email" type="text" @error('email') is-invalid @enderror"
+                        value="{{ Auth::user()->email }}" class="form-control" id="" placeholder="Email">
                     </div>
-                    @error('percentage_charge')
+                    @error('email')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
 
+                            <div class="form-group">
+                              <label for="">First Name</label>
+                              <input name="first_name" type="text" @error('first_name') is-invalid @enderror"
+                              value="{{ Auth::user()->fname }}" class="form-control" id="" placeholder="first name">
+                          </div>
+                          @error('first_name')
+                              <span class="text-danger">{{ $message }}</span>
+                          @enderror
+                     
+                    </div>
+                    <div class="col-md-6">
+
                     <!-- /.col -->
-                   
                     <div class="form-group">
-                      <label for="">Account Number</label>
-                      <input name="account_number" type="text" @error('account_number') is-invalid @enderror"
-                      value="{{ old('account_number') }}" class="form-control" id="" placeholder="account_number">
-                  </div>
-                  @error('account_number')
-                      <span class="text-danger">{{ $message }}</span>
-                  @enderror
+                        <label for="">Last Name</label>
+                        <input name="last_name" type="text" @error('last_name') is-invalid @enderror"
+                        value="{{ Auth::user()->lname }}" class="form-control" id="" placeholder="Last name">
+                    </div>
+                    @error('last_name')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+
+
+                    <div class="form-group">
+                        <label for="">Phone</label>
+                        <input name="phone" type="text" @error('phone') is-invalid @enderror"
+                        value="{{ Auth::user()->phone }}" class="form-control" id="" placeholder="Phone">
+                    </div>
+                    @error('phone')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+
+                  
 
                     </div>
                     <!-- /.col -->
