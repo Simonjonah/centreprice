@@ -53,7 +53,7 @@
                 <div class="card-body">
                   <div class="row">
                     <div class="col-md-6">
-                     
+                     <input type="text" name="user_id" value="{{ Auth::user()->id }}">
                       <div class="form-group">
                         <label for="">Email</label>
                         <input name="email" type="text" @error('email') is-invalid @enderror"
@@ -94,6 +94,16 @@
                     @error('phone')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
+
+
+                    <div class="form-group">
+                      <label for="">Bank</label>
+                      <input name="preferred_bank" type="text" @error('preferred_bank') is-invalid @enderror"
+                      value="{{ old('preferred_bank') }}" class="form-control" id="" placeholder="preferred_bank">
+                  </div>
+                  @error('preferred_bank')
+                      <span class="text-danger">{{ $message }}</span>
+                  @enderror
 
                   
 

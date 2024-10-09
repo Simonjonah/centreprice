@@ -23,7 +23,7 @@ class SaleController extends Controller
       
         try {
             // Initialize transaction on Paystack with split details
-            $response = Http::withToken('sk_test_2480c735552c0c451064507cb47a75d736c5c969')
+            $response = Http::withToken('sk_test_d320f1edcb2c172115da615043090c1580f9758f')
                 ->post('https://api.paystack.co/transaction/initialize', [
                     'email' => $request->email, 
                     'amount' => $request->amount, 
@@ -121,7 +121,7 @@ class SaleController extends Controller
 
         // Verify the payment using Paystack API
         try {
-            $response = Http::withToken("sk_test_2480c735552c0c451064507cb47a75d736c5c969")
+            $response = Http::withToken("sk_test_d320f1edcb2c172115da615043090c1580f9758f")
                 ->get('https://api.paystack.co/transaction/verify/' . $reference);
                 // dd($response);
             $result = $response->json();

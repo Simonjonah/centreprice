@@ -79,7 +79,7 @@ class SubscriptionController extends Controller
 
     public function makeApiRequest(Request $request){
     
-        $response = Http::withToken("sk_test_2480c735552c0c451064507cb47a75d736c5c969")->post('https://api.paystack.co/transaction/initialize', [
+        $response = Http::withToken("sk_test_d320f1edcb2c172115da615043090c1580f9758f")->post('https://api.paystack.co/transaction/initialize', [
            'amount' => $request->amount,
             'currency' => 'NGN',
             'phone' => $request->phone,

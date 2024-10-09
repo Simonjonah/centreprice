@@ -109,6 +109,9 @@ class SubaccountController extends Controller
                     'first_name' => $request->input('first_name'),
                     'last_name' => $request->input('last_name'),
                     'phone' => $request->input('phone'),
+                    'preferred_bank' => $request->input('preferred_bank'),
+                    'user_id' => $request->input('user_id'),
+                    
 
             ]);
 
@@ -129,19 +132,10 @@ class SubaccountController extends Controller
             $virtualAccountResponse = Http::withToken("sk_test_d320f1edcb2c172115da615043090c1580f9758f")->post('https://api.paystack.co/dedicated_account', [
                 'customer' => $customerCode, // Customer code from Paystack
                 'preferred_bank' => $request->input('preferred_bank'),
-            // $virtualAccountResponse = $client->post('https://api.paystack.co/dedicated_account', [
-            //     'headers' => [
-            //         'Authorization' => 'Bearer ' . $secretKey,
-            //         'Content-Type' => 'application/json',
-            //     ],
-            //     'json' => [
-            //         'customer' => $customerCode, // Customer code from Paystack
-            //         'preferred_bank' => $request->input('preferred_bank'), // Optional: Preferred bank
-            //     ],
             ]);
 
             $virtualAccountData = json_decode($virtualAccountResponse->getBody(), true);
-            dd($virtualAccountData);
+            // dd($virtualAccountData);
             if (!$virtualAccountData['status']) {
                 return response()->json([
                     'success' => false,
@@ -150,12 +144,15 @@ class SubaccountController extends Controller
             }
 
             // Return the virtual account details as the "wallet"
+           
             return response()->json([
                 'success' => true,
                 'message' => 'Wallet created successfully',
                 'data' => [
                     'customer' => $customerData['data'],
                     'virtual_account' => $virtualAccountData['data'],
+                    // 'balance' => $virtualAccountData['data']['balance'],
+
                 ],
             ], 200);
 
