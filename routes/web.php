@@ -390,6 +390,12 @@ Route::prefix('admin')->name('admin.')->group(function() {
         Route::put('/updatetransport/{ref_no}', [TransportController::class, 'updatetransport'])->name('updatetransport');
         Route::get('/deletetrans/{ref_no}', [TransportController::class, 'deletetrans'])->name('deletetrans');
         
+        Route::get('/deleterole/{ref_no}', [AdminController::class, 'deleterole'])->name('deleterole');
+        Route::get('/rolesuspend/{ref_no}', [AdminController::class, 'rolesuspend'])->name('rolesuspend');
+        Route::get('/roleapprove/{ref_no}', [AdminController::class, 'roleapprove'])->name('roleapprove');
+        Route::get('/assignroles/{ref_no}', [AdminController::class, 'assignroles'])->name('assignroles');
+        Route::put('/updateroles/{ref_no}', [AdminController::class, 'updateroles'])->name('updateroles');
+        
         Route::post('/createlga', [LgaController::class, 'createlga'])->name('createlga');
         Route::get('/viewlga', [LgaController::class, 'viewlga'])->name('viewlga');
         Route::get('/editlga/{id}', [LgaController::class, 'editlga'])->name('editlga');

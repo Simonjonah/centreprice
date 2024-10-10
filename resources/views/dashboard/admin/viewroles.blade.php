@@ -41,12 +41,9 @@
                     <th>Name</th>
                     <th>Email</th>
                     <th>Role</th>
-                   
-                    {{-- <th>Images</th> --}}
-                    <th>Assigned</th>
-                   
                     <th>Status</th>
-                    <th>Edit</th>
+                    <th>Assign Roles</th>
+                 
                     <th>Approve</th>
                     <th>Suspend</th>
                     <th>Delete</th>
@@ -69,9 +66,6 @@
                         <td>{{ $view_role->name }}</td>
                         <td>{{ $view_role->email }}</td>
                         
-                        {{-- <td><img style="width: auto; height: 30px;" src="{{ URL::asset("/public/../$view_role->images")}}" alt=""></td> --}}
-
-                     
                         <td>@if ($view_role->role == null)
                           <span class="badge badge-warning"> Not Assigned</span>
                         @elseif($view_role->role == '1')
@@ -97,23 +91,24 @@
                           
                           <span class="badge badge-success">Admitted</span>
                           @endif</td>
-                       <td><a href="{{ url('admin/ediblog/'.$view_role->ref_no) }}"
-                        class='btn btn-success'>
-                         <i class="far fa-edit"></i>
+                       <td><a href="{{ url('admin/assignroles/'.$view_role->ref_no) }}"
+                        class='btn btn-dark'>
+                         <i class="far fa-user"></i>
                      </a></td>
+                    
 
-                     <td><a href="{{ url('admin/blogapprove/'.$view_role->ref_no) }}"
+                     <td><a href="{{ url('admin/roleapprove/'.$view_role->ref_no) }}"
                         class='btn btn-info'>
                          <i class="far fa-user"></i>
                      </a></td>
 
-                     <td><a href="{{ url('admin/blogsuspend/'.$view_role->ref_no) }}"
+                     <td><a href="{{ url('admin/rolesuspend/'.$view_role->ref_no) }}"
                         class='btn btn-warning'>
                          <i class="far fa-edit"></i>
                      </a></td>
                        
                          
-                       <td><a href="{{ url('admin/deleteblog/'.$view_role->ref_no) }}"
+                       <td><a href="{{ url('admin/deleterole/'.$view_role->ref_no) }}"
                         class='btn btn-danger'>
                          <i class="far fa-trash-alt"></i>
                      </a></td>
@@ -123,20 +118,17 @@
                   </tbody>
                   <tfoot>
                     <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Role</th>
-                       
-                        {{-- <th>Images</th> --}}
-                        <th>Assigned</th>
-                       
-                        <th>Status</th>
-                        <th>Edit</th>
-                        <th>Approve</th>
-                        <th>Suspend</th>
-                        <th>Delete</th>
-                        <th>Date</th>
-                      </tr>
+                      <th>Name</th>
+                      <th>Email</th>
+                      <th>Role</th>
+                      <th>Status</th>
+                      <th>Assign Roles</th>
+                   
+                      <th>Approve</th>
+                      <th>Suspend</th>
+                      <th>Delete</th>
+                      <th>Date</th>
+                    </tr>
                   </tfoot>
                 </table>
               </div>

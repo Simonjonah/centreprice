@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('user_id')->nullable();
             $table->string('distributor_id')->nullable();
             $table->string('franchise_id')->nullable();
-            $table->string('distributor_id')->nullable();
+            // $table->string('distributor_id')->nullable();
             $table->string('root_id')->nullable();
             $table->string('category_id')->nullable();
             $table->string('subcategory_id')->nullable();

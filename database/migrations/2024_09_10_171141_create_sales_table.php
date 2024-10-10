@@ -69,8 +69,6 @@ return new class extends Migration
             $table->string('productstatus')->nullable();
             $table->string('currency')->nullable();
             $table->string('bin')->nullable();
-            $table->string('currency')->nullable();
-            $table->string('currency')->nullable();
             
             
             $table->timestamps();

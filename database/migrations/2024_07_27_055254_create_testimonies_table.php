@@ -21,7 +21,7 @@ return new class extends Migration
             $table->text('messages')->nullable();
             $table->text('images')->nullable();
             $table->text('ref_no')->nullable();
-            $table->text('status')->nullable();
+            // $table->text('status')->nullable();
             $table->timestamps();
         });
     }
