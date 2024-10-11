@@ -83,13 +83,13 @@
                            <i class="far fa-eye"></i>
                        </a></td>
                         <td>@if ($view_product->status == null)
-                            <span class="badge badge-warning"> Not Approved Yet</span>
+                            <span class="badge badge-warning">Unavailable</span>
                           @elseif($view_product->status == 'suspend')
                           <span class="badge badge-danger"> Suspended</span>
                           @elseif($view_product->status == 'reject')
                           <span class="badge badge-danger"> Rejected</span>
                           @elseif($view_product->status == 'approved')
-                          <span class="badge badge-success"> Approved</span>
+                          <span class="badge badge-success"> Available</span>
                           @elseif($view_product->status == 'admitted')
                           
                           <span class="badge badge-success">Admitted</span>
@@ -122,7 +122,7 @@
                       <th>Roots</th>
                       <th>Category</th>
                       <th>Sub Category</th>
-                    <th>Quantity</th>
+                      <th>Quantity</th>
                       
                       <th>Image</th>
                       <th>Amount</th>

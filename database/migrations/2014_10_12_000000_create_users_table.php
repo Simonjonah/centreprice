@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('subvendor_id')->nullable();
             
             $table->string('user_type')->nullable();
-            $table->decimal('amount', 8, 2)->nullable();
+            $table->string('reference')->nullable();
+            $table->text('amount')->nullable();
             $table->string('user_id')->nullable();
             $table->string('start_date')->nullable();
             $table->string('end_date')->nullable();

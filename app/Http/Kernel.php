@@ -3,6 +3,8 @@
 namespace App\Http;
 
 use App\Models\User;
+use Carbon\Carbon;
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -67,10 +69,8 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
     ];
 
-    // protected function schedule(Schedule $schedule)
-    // {
-    //     $schedule->call(function () {
-    //         User::where('updated_at', '<', Carbon::now()->subDays(7))->delete();
-    //     })->weekly();
-    // }
+    protected function schedule(Schedule $schedule)
+    {
+        $schedule->command('users:delete-pending')->daily();
+    }
 }

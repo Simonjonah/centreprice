@@ -124,4 +124,6 @@ public function ngstate(): BelongsTo
     {
         return Carbon::now()->gt($this->end_date);
     }
+ 
 }
+

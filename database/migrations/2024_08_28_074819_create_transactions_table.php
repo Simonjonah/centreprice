@@ -22,7 +22,15 @@ return new class extends Migration
             $table->string('subvendor_id')->nullable();
             $table->string('subaccounts')->nullable();
             $table->string('status')->default('pending'); 
-          
+            $table->text('amount')->nullable(); 
+            $table->string('email')->nullable(); 
+            $table->string('phone')->nullable(); 
+            $table->string('user_type')->nullable(); 
+            $table->string('fname')->nullable(); 
+            $table->string('lname')->nullable(); 
+            $table->string('reference')->nullable(); 
+            $table->string('currency')->nullable(); 
+            $table->string('channels')->nullable(); 
             $table->timestamps();
         });
     }

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('plan_id')->nullable();
             $table->string('reference')->nullable();
             $table->string('user_type')->nullable();
-            $table->decimal('amount', 8, 2)->nullable();
+            $table->text('amount')->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
             $table->boolean('is_active')->default(true);
