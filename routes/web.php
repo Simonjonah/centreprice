@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdvertController;
@@ -14,6 +15,7 @@ use App\Http\Controllers\FlutterwaveController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RootController;
 use App\Http\Controllers\SubcategoryController;
@@ -29,6 +31,7 @@ use App\Http\Controllers\TransportController;
 use App\Models\Admin;
 use App\Models\Advert;
 use App\Models\Blog;
+use App\Models\Partner;
 use App\Models\Product;
 use App\Models\Root;
 use App\Models\Subscription;
@@ -153,6 +156,18 @@ Route::get('/contact', function(){
     return view('pages.contact');
 });
 
+Route::get('/terms', function(){
+
+    return view('pages.terms');
+});
+
+
+
+Route::get('/partners', function(){
+    $view_partners = Partner::latest()->get();
+    return view('pages.partners', compact('view_partners'));
+});
+
 Route::get('/categories/categoryproducts/{id}', function ($id) {
     $view_categoryproducts = Product::where('id', $id)->get();
     $view_categoryproductcounts = Product::where('id', $id)->count();
@@ -221,6 +236,21 @@ Route::prefix('admin')->name('admin.')->group(function() {
     
     Route::middleware(['auth:admin'])->group(function() {
         
+        Route::get('deletepartner/{id}', [PartnerController::class, 'deletepartner'])->name('deletepartner');
+        Route::put('updatethepartners/{id}', [PartnerController::class, 'updatethepartners'])->name('updatethepartners');
+        Route::get('editpartner/{id}', [PartnerController::class, 'editpartner'])->name('editpartner');
+        Route::get('suspendpartner/{id}', [PartnerController::class, 'suspendpartner'])->name('suspendpartner');
+        Route::get('approvepartner/{id}', [PartnerController::class, 'approvepartner'])->name('approvepartner');
+        Route::get('viewpartners', [PartnerController::class, 'viewpartners'])->name('viewpartners');
+        Route::post('createthepartners', [PartnerController::class, 'createthepartners'])->name('createthepartners');
+        Route::get('addpartner', [PartnerController::class, 'addpartner'])->name('addpartner');
+        Route::get('deletebouts/{id}', [AboutController::class, 'deletebouts'])->name('deletebouts');
+        Route::put('updateabout/{id}', [AboutController::class, 'updateabout'])->name('updateabout');
+        Route::get('editbouts/{id}', [AboutController::class, 'editbouts'])->name('editbouts');
+        Route::get('deletebouts/{id}', [AboutController::class, 'deletebouts'])->name('deletebouts');
+        Route::post('createabout', [AboutController::class, 'createabout'])->name('createabout');
+        Route::get('viewabout', [AboutController::class, 'viewabout'])->name('viewabout');
+        Route::get('addabout', [AboutController::class, 'addabout'])->name('addabout');
         Route::get('viewroles', [AdminController::class, 'viewroles'])->name('viewroles');
         Route::get('deleteplans/{ref_no}', [PlanController::class, 'deleteplans'])->name('deleteplans');
         Route::get('deleteadverts/{ref_no}', [AdvertController::class, 'deleteadverts'])->name('deleteadverts');
