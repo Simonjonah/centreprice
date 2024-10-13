@@ -34,8 +34,8 @@
                         <h5 class="card-title"><b>{{ $view_myprodoct->subcategory['subcategory'] }} </b>Quantities {{ $view_myprodoct->quantity }}</b></h5>
                         <p class="card-text">₦{{ $view_myprodoct->amount }} </p>
                         <a href="{{ url('web/viewproductsbyvendor/'.$view_myprodoct->ref_no) }}" class="btn btn-primary">View Products</a> 
-                        <br> <br>
-                        <a href="{{ url('web/ordermyproducts/'.$view_myprodoct->ref_no) }}" class="btn btn-success">Order Products</a>
+                        {{-- <br> <br>
+                        <a href="{{ url('web/ordermyproducts/'.$view_myprodoct->ref_no) }}" class="btn btn-success">Order Products</a> --}}
                       </div>
                     </div>
               </div>

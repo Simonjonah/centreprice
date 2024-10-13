@@ -174,7 +174,7 @@
 
 
            <!-- /.col -->
-           <div class="col-12 col-sm-6 col-md-3">
+           {{-- <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box mb-3">
               <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
 
@@ -182,10 +182,8 @@
                 <span class="info-box-text">Vendors</span>
                 <span class="info-box-number">{{ $countvendor }}</span>
               </div>
-              <!-- /.info-box-content -->
             </div>
-            <!-- /.info-box -->
-          </div>
+          </div> --}}
           <!-- /.col -->
 
 
@@ -308,10 +306,10 @@
               
               <div class="card">
                 <div class="card-header">
-                  <h3 class="card-title">Latest Members</h3>
+                  <h3 class="card-title">Latest Distributors</h3>
 
                   <div class="card-tools">
-                    <span class="badge badge-danger"> Members</span>
+                    <span class="badge badge-danger"> Distributors</span>
                     <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
                     </button>
                     <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i>
@@ -321,46 +319,15 @@
                 <!-- /.card-header -->
                 <div class="card-body p-0">
                   <ul class="users-list clearfix">
+                    @foreach ($display_distributors as $display_distributor)
                     <li>
-                      <img src="dist/img/user1-128x128.jpg" alt="User Image">
-                      <a class="users-list-name" href="#">Alexander Pierce</a>
-                      <span class="users-list-date">Today</span>
+                      <img src="{{ URL::asset("/public/../$display_distributor->images")}}" alt="User Image">
+                      <a class="users-list-name" href="{{ url('admin/viewsingledistributor/'.$display_distributor->ref_no) }}">{{ $display_distributor->fname }} {{ $display_distributor->lname }}</a>
+                      <span class="users-list-date">{{ $display_distributor->created_at->diffForHumans() }}</span>
                     </li>
-                    <li>
-                      <img src="dist/img/user8-128x128.jpg" alt="User Image">
-                      <a class="users-list-name" href="#">Norman</a>
-                      <span class="users-list-date">Yesterday</span>
-                    </li>
-                    <li>
-                      <img src="dist/img/user7-128x128.jpg" alt="User Image">
-                      <a class="users-list-name" href="#">Jane</a>
-                      <span class="users-list-date">12 Jan</span>
-                    </li>
-                    <li>
-                      <img src="dist/img/user6-128x128.jpg" alt="User Image">
-                      <a class="users-list-name" href="#">John</a>
-                      <span class="users-list-date">12 Jan</span>
-                    </li>
-                    <li>
-                      <img src="dist/img/user2-160x160.jpg" alt="User Image">
-                      <a class="users-list-name" href="#">Alexander</a>
-                      <span class="users-list-date">13 Jan</span>
-                    </li>
-                    <li>
-                      <img src="dist/img/user5-128x128.jpg" alt="User Image">
-                      <a class="users-list-name" href="#">Sarah</a>
-                      <span class="users-list-date">14 Jan</span>
-                    </li>
-                    <li>
-                      <img src="dist/img/user4-128x128.jpg" alt="User Image">
-                      <a class="users-list-name" href="#">Nora</a>
-                      <span class="users-list-date">15 Jan</span>
-                    </li>
-                    <li>
-                      <img src="dist/img/user3-128x128.jpg" alt="User Image">
-                      <a class="users-list-name" href="#">Nadia</a>
-                      <span class="users-list-date">15 Jan</span>
-                    </li>
+                    @endforeach
+                    
+                    
                   </ul>
                   <!-- /.users-list -->
                 </div>

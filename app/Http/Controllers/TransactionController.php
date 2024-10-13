@@ -130,7 +130,7 @@ class TransactionController extends Controller
                  'fname' => $request->fname,
                  'lname' => $request->lname,
                  'email' => $request->email,
-                 'user_id' => $request->id,
+                //  'user_id' => $request->user_id,
                  'user_type' => $request->user_type,
                  'callback_url' => route('transaction.callback'), 
                  'reference' => $reference,
@@ -147,13 +147,13 @@ class TransactionController extends Controller
                     'email' => ['required', 'email', 'unique:users'],
                     'phone' => ['required', 'string', 'unique:users'],
                 ]);
-                if ($request->user_id == null) {
+                if ($request->user_type == 'Distributor') {
                     $user = User::create([
                         'fname' => $request->fname,
                         'lname' => $request->lname,
                         'terms' => $request->terms,
                         'reference' => $reference,
-                        'user_id' => '467603498',
+                        // 'user_id' => $request->user_id,
                         'user_type' => $request->user_type,
                         'email' => $request->email,
                         'phone' => $request->phone,
@@ -165,22 +165,51 @@ class TransactionController extends Controller
                         'lga_id' => $request->lga_id,
                         'status' => 'pending',
                         'subvendor_id' => $request->subvendor_id,
-
                         'amount' => $request->amount,
                         'lga_id' => $request->lga_id,
-                        'user_type' => $request->user_type,
+                        // 'ref_no' => $request->ref_no,
                         'start_date' => $startDate,
                         'end_date' => $endDate,
                         'password' => \Hash::make($request->password),
                         'ref_no' => substr(rand(0,time()),0, 9),
+                    ]);
+                }elseif($request->vendor_id == null){
+                    $user = User::create([
+                        'fname' => $request->fname,
+                        'lname' => $request->lname,
+                        'terms' => $request->terms,
+                        'user_id' => $request->user_id,
+                        'vendor_id' => '34',
+                        'reference' => $reference,
+                        'user_type' => $request->user_type,
+                        'email' => $request->email,
+                        'phone' => $request->phone,
+                        'dob' => $request->dob,
+                        'address' => $request->address,
+                        'gender' => $request->gender,
+                        'city' => $request->city,
+                        'ngstate_id' => $request->ngstate_id,
+                        'lga_id' => $request->lga_id,
+                        'status' => 'pending',
+                        'amount' => $request->amount,
+                        'lga_id' => $request->lga_id,
+                        'ref_no' => $request->ref_no,
+                        'subvendor_id' => $request->subvendor_id,
+                        'start_date' => $startDate,
+                        'end_date' => $endDate,
+                        'password' => \Hash::make($request->password),
+                        'ref_no2' => substr(rand(0,time()),0, 9),
+                        // 'ref_no3' => substr(rand(0,time()),0, 9),
                     ]);
                 }else{
+
                     $user = User::create([
                         'fname' => $request->fname,
                         'lname' => $request->lname,
                         'terms' => $request->terms,
-                        'reference' => $reference,
                         'user_id' => $request->user_id,
+                        'vendor_id' => $request->vendor_id,
+                        'reference' => $reference,
                         'user_type' => $request->user_type,
                         'email' => $request->email,
                         'phone' => $request->phone,
@@ -193,16 +222,15 @@ class TransactionController extends Controller
                         'status' => 'pending',
                         'amount' => $request->amount,
                         'lga_id' => $request->lga_id,
-                        'user_type' => $request->user_type,
+                        'ref_no' => $request->ref_no,
                         'subvendor_id' => $request->subvendor_id,
-                        
                         'start_date' => $startDate,
                         'end_date' => $endDate,
                         'password' => \Hash::make($request->password),
-                        'ref_no' => substr(rand(0,time()),0, 9),
                         'ref_no2' => substr(rand(0,time()),0, 9),
-                        'ref_no3' => substr(rand(0,time()),0, 9),
+                        // 'ref_no3' => substr(rand(0,time()),0, 9),
                     ]);
+
                 }
                 
 

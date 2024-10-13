@@ -74,11 +74,11 @@
                   @endif
                   @foreach ($view_distributors as $view_distributor)
                     <tr>
-                        <td>{{ $view_distributor->ref_no2 }}</td>
+                        <td>{{ $view_distributor->ref_no }}</td>
                         <td>{{ $view_distributor->fname }}</td>
                         <td>{{ $view_distributor->lname }}</td>
                         {{-- <td>{{ $view_distributor->subscription_fee }}</td> --}}
-                        <td>@if ($view_distributor->role == '2')
+                        <td>@if ($view_distributor->user_type == 'Distributor')
                             <span class="badge badge-info"> Distributor</span>
                           @else
                           <span class="badge badge-success">Admin</span>
@@ -94,7 +94,7 @@
                         <td>{{ $view_distributor->Lga->district['districts'] }}</td>
                         <td>{{ $view_distributor->Lga['lga'] }}</td>
 
-                        <td><a href="{{ url('admin/viewsingledistributor/'.$view_distributor->ref_no2) }}"
+                        <td><a href="{{ url('admin/viewsingledistributor/'.$view_distributor->ref_no) }}"
                           class='btn btn-info'>
                            <i class="far fa-eye"></i>
                        </a></td>
@@ -110,21 +110,21 @@
                           
                           <span class="badge badge-success">Admitted</span>
                           @endif</td>
-                        <td><a href="{{ url('admin/approvedistributor/'.$view_distributor->ref_no2) }}"
+                        <td><a href="{{ url('admin/approvedistributor/'.$view_distributor->ref_no) }}"
                           class='btn btn-success'>
                            <i class="far fa-user"></i>
                        </a></td>
-                       <td><a href="{{ url('admin/suspenddistributor/'.$view_distributor->ref_no2) }}"
+                       <td><a href="{{ url('admin/suspenddistributor/'.$view_distributor->ref_no) }}"
                         class='btn btn-warning'>
                          <i class="far fa-bell"></i>
                      </a></td>
-                       <td><a href="{{ url('admin/editdistributor/'.$view_distributor->ref_no2) }}"
+                       <td><a href="{{ url('admin/editdistributor/'.$view_distributor->ref_no) }}"
                         class='btn btn-info'>
                          <i class="far fa-edit"></i>
                      </a></td>
                        
                          
-                       <td><a href="{{ url('admin/deletedistributor/'.$view_distributor->ref_no2) }}"
+                       <td><a href="{{ url('admin/deletedistributor/'.$view_distributor->ref_no) }}"
                         class='btn btn-danger'>
                          <i class="far fa-trash-alt"></i>
                      </a></td>
@@ -138,8 +138,7 @@
                       <th>First name</th>
                       <th>Last name</th>
                       {{-- <th>Subription Fee</th> --}}
-                      <th>Role</th>
-                      <th>Phone</th>
+                      <th>user_type</th>                      <th>Phone</th>
                       <th>Email</th>
                       <th>Image</th>
                       {{-- <th>Amount</th>

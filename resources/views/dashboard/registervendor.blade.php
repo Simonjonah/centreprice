@@ -3,9 +3,11 @@
     use App\Models\Ngstate;
     use App\Models\District;
     use App\Models\Lga;
+    use App\Models\Plan;
     $view_states = Ngstate::orderby('state')->get();
     $view_dists = District::orderby('districts')->get();
     $view_lgas = Lga::orderby('lga')->get();
+    $view_plans = Plan::all();
 ?>
 
 <!DOCTYPE html>
@@ -31,14 +33,14 @@
 <body class="hold-transition register-page">
 <div class="register-box">
   <div class="register-logo">
-    <a href="#"><b>Vendors </b>Registration</a>
+    <a href="#"><b>Vendor Registration</b></a>
   </div>
 
   <div class="card">
     <div class="card-body register-card-body">
       <!-- <p class="login-box-msg">Register a new membership</p> -->
 
-      <form action="{{ route('web.createvendor') }}" method="post">
+      <form action="{{ route('createusers') }}" method="post">
         @csrf
 
     @if (Session::get('success'))
@@ -52,12 +54,14 @@
       {{ Session::get('fail') }}
     </div>
   @endif
-
- 
-  
+  @php
+      $reference = substr(rand(0,time()),0, 9);
+  @endphp
+      <label for="">First Name</label>
+      <input type="text" name="user_id" value="{{ $view_distributor->id }}">
         <div class="input-group mb-3">
           <input name="fname" type="text" class="form-control" @error('fname') is-invalid @enderror"
-          value="{{ old('fname') }}" placeholder="First Name">
+          value="{{ old('fname') }}" placeholder="First name">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -67,7 +71,8 @@
         @error('fname')
         <span class="text-danger">{{ $message }}</span>
         @enderror
-
+        
+        <label for="">Last Name</label>
         <div class="input-group mb-3">
           <input name="lname" type="text" class="form-control" @error('lname') is-invalid @enderror"
           value="{{ old('lname') }}" placeholder="Last name">
@@ -92,10 +97,112 @@
                 <option value="{{ $view_state->id }}">{{ $view_state->state }}</option>
             @endforeach
           </select>
+           
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+        </div>
+        @error('ngstate_id')
+        <span class="text-danger">{{ $message }}</span>
+        @enderror
+
+        <label for="">Select Package</label>
+        <div class="input-group mb-3">
+          <select required id="yesNo" name="user_type" class="form-control" required>
+            <option value="">Select Package</option>
+            <option value="Vendor">Vendor</option>
+            {{-- @foreach ($view_plans as $view_plan)
+              <option value="{{ $view_plan->user_type }}">{{ $view_plan->user_type }}</option>
+            @endforeach --}}
+        </select>
         </div>
 
+        <div id="additionalInfo" style="display: none;">
+          <div class="form-group">
+            <label for="info">Vendor Registration Fee NGN 20,000</label>
+            <input type="text" class="form-control" disabled  value="500">
+            <input type="hidden" class="form-control" name="amount" value="500">
+          </div>
+          <div class="form-group">
+            <label for="info">Distributor Shopping Code</label>
+            <input type="text" class="form-control" disabled value="{{ $view_distributor->ref_no }}" >
+            <input type="hidden" class="form-control" name="ref_no" value="{{ $view_distributor->ref_no }}" placeholder="Referral Code">
+          </div>
+          
+      </div>
+     
+      <div id="additionaldis" style="display: none;">
+        <label for="info">Distributor Registration Fee NGN 1,000,000</label>
+        <input type="text" class="form-control" disabled  value="1,000,000">
+        <input type="hidden" class="form-control"   name="amount" value="1000000">
+    </div>
+ 
+        
+  
+        <label for="">Select LGA</label>
+        <div class="input-group mb-3">
+          <select name="lga_id" class="form-control">
+                <option value="">Select LGA</option>
+                @foreach ($view_lgas as $lga)
+                  <option value="{{ $lga->id }}">{{ $lga->lga }}</option>
+                @endforeach
+          </select>
+           
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+        </div>
+        @error('lga_id')
+        <span class="text-danger">{{ $message }}</span>
+        @enderror
 
-        <label for="">City</label>
+       
+
+        <label for="">Email</label>
+        <div class="input-group mb-3">
+          <input type="email" name="email" class="form-control"  @error('email') is-invalid @enderror"
+          value="{{ old('email') }}" placeholder="email">
+          
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+        @error('email')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
+       
+
+        <label for="">Select Vendor</label>
+        <div class="input-group mb-3">
+          <select required id="yesNo" name="vendor_id" class="form-control" required>
+            <option value="">Select Vendor</option>
+            @foreach ($view_vendors as $view_vendor)
+              <option value="{{ $view_vendor->id }}">{{ $view_vendor->fname }} {{ $view_vendor->lname }}</option>
+            @endforeach
+        </select>
+        </div>
+
+        <label for="">Phone</label>
+          <div class="input-group mb-3">
+            <input type="tel" name="phone"  class="form-control"  @error('phone') is-invalid @enderror"
+            value="{{ old('phone') }}" placeholder="Phone">
+            
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-phone"></span>
+              </div>
+            </div>
+          </div>
+          @error('phone')
+              <span class="text-danger">{{ $message }}</span>
+          @enderror 
+          <label for="">City</label>
           <div class="input-group mb-3">
             <input type="text" name="city"  class="form-control"  @error('city') is-invalid @enderror"
             value="{{ old('city') }}" placeholder="city">
@@ -124,6 +231,9 @@
               <span class="text-danger">{{ $message }}</span>
           @enderror 
 
+
+         
+
          <label for="">Select Gender</label>
         <div class="input-group mb-3">
           <select name="gender" class="form-control">
@@ -139,154 +249,135 @@
         </div>
         @error('gender')
         <span class="text-danger">{{ $message }}</span>
-        @enderror
-        <label for="">Select LGA</label>
+        @enderror 
+        
+        <label for="">Address</label>
         <div class="input-group mb-3">
-          <select name="lga_id" class="form-control">
-                <option value="">Select LGA</option>
-                @foreach ($view_lgas as $lga)
-                  <option value="{{ $lga->id }}">{{ $lga->lga }}</option>
-                @endforeach
-          </select>
-           
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-user"></span>
-            </div>
-          </div>
-        </div>
-        @error('lga_id')
-        <span class="text-danger">{{ $message }}</span>
-        @enderror
-
-
-        <div class="input-group mb-3">
-          <input type="email" name="email" class="form-control"  @error('email') is-invalid @enderror"
-          value="{{ old('email') }}" placeholder="email">
+          <input type="text" name="address"  class="form-control"  @error('address') is-invalid @enderror"
+          value="{{ old('address') }}" placeholder="Residential Address">
           
           <div class="input-group-append">
             <div class="input-group-text">
-              <span class="fas fa-envelope"></span>
+              <span class="fas fa-lock"></span>
             </div>
           </div>
         </div>
-        @error('email')
+        @error('address')
             <span class="text-danger">{{ $message }}</span>
-          @enderror
+        @enderror 
+        
+        <label for="">Password</label>
+
+        <div class="input-group mb-3">
+          <input type="password" name="password" id="myInput" class="form-control"  @error('password') is-invalid @enderror"
+          value="{{ old('password') }}" placeholder="password">
+          
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        @error('password')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror 
+        
+        <label for="">Confirm Password</label>
+        
+        <div class="input-group mb-3">
+          <input type="password" required name="confirm_password" id="myInmput" class="form-control"  @error('confirm_password') is-invalid @enderror"
+          value="{{ old('confirm_password') }}" placeholder="Confirm password">
+          
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        @error('confirm_password')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
+
+
+
+        {{-- <input type="hidden" name="reference" value="{{ $reference }}"> --}}
+        <div class="row">
+          <div class="col-8">
+            <div class="icheck-primary">
+              <input type="checkbox" id="agreeTerms" name="terms" value="agree" required>
+              <label for="agreeTerms">
+               I agree to the <a href="{{ url('terms') }}">terms and Condition</a>
+              </label>
+            </div>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col-8">
+            <input type="checkbox" onclick="myFunction()">Show Password
+          </div>
        
-        
-          <div class="input-group mb-3">
-            <input type="tel" name="phone"  class="form-control"  @error('phone') is-invalid @enderror"
-            value="{{ old('phone') }}" placeholder="Phone">
-            
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-phone"></span>
-              </div>
-            </div>
-          </div>
-          @error('phone')
-              <span class="text-danger">{{ $message }}</span>
-          @enderror 
-
-
-             
-
-          <div class="input-group mb-3">
-            <input type="password" name="password" id="myInput" class="form-control"  @error('password') is-invalid @enderror"
-            value="{{ old('password') }}" placeholder="password">
-            
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-lock"></span>
-              </div>
-            </div>
-          </div>
-          @error('password')
-              <span class="text-danger">{{ $message }}</span>
-          @enderror 
           
-          <label for="">Confirm Password</label>
-          
-          <div class="input-group mb-3">
-            <input type="password" name="confirm_password" id="myInmput" class="form-control"  @error('confirm_password') is-invalid @enderror"
-            value="{{ old('confirm_password') }}" placeholder="Confirm password">
-            
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-lock"></span>
-              </div>
-            </div>
+          <div class="col-4">
+            <button type="submit" class="btn btn-primary btn-block">Register</button>
           </div>
-          @error('confirm_password')
-              <span class="text-danger">{{ $message }}</span>
-          @enderror
+          <!-- /.col -->
+        </div>
+      </form>
 
-          <div class="input-group mb-3">
-            <input type="tel" name="phone"  class="form-control"  @error('phone') is-invalid @enderror"
-            value="{{ old('phone') }}" placeholder="Phone">
-            
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-phone"></span>
-              </div>
-            </div>
-          </div>
-          @error('phone')
-              <span class="text-danger">{{ $message }}</span>
-          @enderror 
-          <div class="row">
-            <div class="col-8">
-              <div class="icheck-primary">
-                <input type="checkbox" id="agreeTerms" name="terms" value="agree" required>
-                <label for="agreeTerms">
-                 I agree to the <a href="#">terms</a>
-                </label>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-8">
-              <input type="checkbox" onclick="myFunction()">Show Password
-            </div>
-         
-            
-            <div class="col-4">
-              <button type="submit" class="btn btn-primary btn-block">Register</button>
-            </div>
-            <!-- /.col -->
-          </div>
-        </form>
-  
-        
-  
-        <a href="{{ url('login') }}" class="text-center">I already have a membership</a>
-      </div>
-      <!-- /.form-box -->
-    </div><!-- /.card -->
-  </div>
-  <!-- /.register-box -->
-  
-  <!-- jQuery -->
-  <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
-  <!-- Bootstrap 4 -->
-  <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-  <!-- AdminLTE App -->
-  <script src="{{ asset('assets/dist/js/adminlte.min.js') }}"></script>
-  
-  
-  
-  <script>
-    function myFunction() {
-    var x = document.getElementById("myInput");
-    if (x.type === "password") {
-      x.type = "text";
+      
+
+      <a href="{{ url('login') }}" class="text-center">I already have a membership</a>
+    </div>
+    <!-- /.form-box -->
+  </div><!-- /.card -->
+</div>
+<!-- /.register-box -->
+
+<!-- jQuery -->
+<script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
+<!-- Bootstrap 4 -->
+<script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<!-- AdminLTE App -->
+<script src="{{ asset('assets/dist/js/adminlte.min.js') }}"></script>
+
+
+
+<script>
+
+document.getElementById('yesNo').addEventListener('change', function() {
+    var additionalInfo = document.getElementById('additionalInfo');
+    if (this.value === 'Vendor') {
+        additionalInfo.style.display = 'block';
     } else {
-      x.type = "password";
+        additionalInfo.style.display = 'none';
     }
+
+  });
+
+
+  document.getElementById('yesNo').addEventListener('change', function() {
+    var additionaldis = document.getElementById('additionaldis');
+    if (this.value === 'Distributor') {
+        additionaldis.style.display = 'block';
+    } else {
+        additionaldis.style.display = 'none';
+    }
+
+  });
+
+  
+
+  function myFunction() {
+  var x = document.getElementById("myInput");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
   }
-  
-  
-  
-  </script>
-        
+}
+
+
+
+</script>
+      

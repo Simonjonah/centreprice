@@ -191,15 +191,17 @@ class UserController extends Controller
         return view('dashboard.registerdistributor', compact('view_franchise'));
     }
 
-    public function referregistervendor($ref_no){
-        $view_franchise = User::where('ref_no', $ref_no)->first();
+    public function referregistervendor($ref_no1){
+        $view_franchise = User::where('ref_no1', $ref_no1)->first();
         return view('dashboard.referregistervendor', compact('view_franchise'));
     }
 
     
-    public function registervendor(){
+    public function registervendor($ref_no){
+        $view_distributor = User::where('ref_no', $ref_no)->first();
+        $view_vendors = User::where('ref_no', $ref_no)->where('user_type', 'Vendor')->get();
 
-        return view('dashboard.registervendor');
+        return view('dashboard.registervendor', compact('view_vendors', 'view_distributor'));
     }
     
     
@@ -432,7 +434,7 @@ class UserController extends Controller
     
 
     public function viewdistributorsadmin(){
-        $view_distributors = User::where('role', '2')->get();
+        $view_distributors = User::where('user_type', 'Distributor')->get();
         return view('dashboard.admin.viewdistributorsadmin', compact('view_distributors'));
     }
 
@@ -501,8 +503,8 @@ class UserController extends Controller
 
     }
 
-    public function viewsingledistributor($ref_no2){
-        $view_distributors = User::where('ref_no2', $ref_no2)->first();
+    public function viewsingledistributor($ref_no){
+        $view_distributors = User::where('ref_no', $ref_no)->first();
         $view_states = Ngstate::orderBy('state')->get();
         $view_lgas = Lga::orderBy('lga')->get();
         return view('dashboard.admin.viewsingledistributor', compact('view_states', 'view_lgas', 'view_distributors'));

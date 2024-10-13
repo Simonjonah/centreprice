@@ -375,7 +375,7 @@ Route::prefix('admin')->name('admin.')->group(function() {
         Route::get('/deletedistributor/{ref_no2}', [UserController::class, 'deletedistributor'])->name('deletedistributor');
         Route::get('/suspenddistributor/{ref_no2}', [UserController::class, 'suspenddistributor'])->name('suspenddistributor');
         Route::get('/approvedistributor/{ref_no2}', [UserController::class, 'approvedistributor'])->name('approvedistributor');
-        Route::get('/viewsingledistributor/{ref_no2}', [UserController::class, 'viewsingledistributor'])->name('viewsingledistributor');
+        Route::get('/viewsingledistributor/{ref_no}', [UserController::class, 'viewsingledistributor'])->name('viewsingledistributor');
         Route::put('/updatedistributor/{ref_no2}', [UserController::class, 'updatedistributor'])->name('updatedistributor');
         Route::get('/editdistributor/{ref_no}', [UserController::class, 'editdistributor'])->name('editdistributor');
         Route::get('/viewdistributorsadmin', [UserController::class, 'viewdistributorsadmin'])->name('viewdistributorsadmin');
@@ -446,8 +446,8 @@ Route::prefix('admin')->name('admin.')->group(function() {
 // routes/web.php
 
 Route::get('/registerdistributor/{ref_no}', [UserController::class, 'registerdistributor'])->name('registerdistributor');
-Route::get('/registervendor', [UserController::class, 'registervendor'])->name('registervendor');
-Route::get('/referregistervendor/{ref_no}', [UserController::class, 'referregistervendor'])->name('referregistervendor');
+Route::get('/registervendor/{ref_no}', [UserController::class, 'registervendor'])->name('registervendor');
+Route::get('/referregistervendor/{ref_no1}', [UserController::class, 'referregistervendor'])->name('referregistervendor');
 Route::post('/createfranchise', [TransactionController::class, 'createfranchise'])->name('createfranchise');
 
 Route::prefix('web')->name('web.')->group(function() {
