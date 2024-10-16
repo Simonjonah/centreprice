@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Support\Facades\Http;
 use App\Models\Sale;
 use Illuminate\Http\Request;
@@ -20,67 +21,72 @@ class SaleController extends Controller
 
     // Process Payment and Split Money
     public function processPayment(Request $request) {
-      
+        $reference = substr(rand(0,time()),0, 9);
         try {
             // Initialize transaction on Paystack with split details
             $response = Http::withToken('sk_test_d320f1edcb2c172115da615043090c1580f9758f')
                 ->post('https://api.paystack.co/transaction/initialize', [
                     'email' => $request->email, 
                     'amount' => $request->amount, 
-                    'reference' => $request->reference,
-                    'user_id' => $request->user_id,
-                    'first_name' => $request->first_name,
-                    'last_name' => $request->lname,
-                    'user_id' => $request->user_id,
-                    'franchise_id' => $request->franchise_id,
-                    'distributor_id' => $request->distributor_id,
-                    'vendor_id' => $request->vendor_id,
-                    'product_id' => $request->product_id,
-                    'order_id' => $request->order_id,
+                    'reference' => $reference,
+                    // 'subvendor_id' => $request->subvendor_id,
+                    // 'first_name' => $request->first_name,
+                    // 'last_name' => $request->last_name,
+                    // 'distributor_email' => $request->distributor_email,
+                    // 'vendor_email' => $request->vendor_email,
+                    // 'distributor_id' => $request->distributor_id,
                     // 'vendor_id' => $request->vendor_id,
-                    'franchise_commission' => $request->franchise_commission,
-                    'distributors_commission' => $request->distributors_commission,
-                    'vendors_commission' => $request->vendors_commission,
-                    // 'first_name' => $request->fname,
-                    'phone' => $request->phone,
-                    // 'last_name' => $request->lname,
-                    'callback_url' => route('payment.callback'),  // URL to redirect after payment
-                    'split' => [
-                        'type' => 'percentage', // or 'flat' if you want a fixed amount
-                        'subaccounts' => [
-                            [
-                                'subaccount' => 'ACCT_ydm5cjexrm0d88c', 
-                                'share' => 50  
-                            ],
-                            [
-                                'subaccount' => 'ACCT_whkl6chr1tbvy8j',
-                                'share' => 50  
-                            ]
-                        ]
-                    ]
+                    // 'product_id' => $request->product_id,
+                    // 'vendor_id' => $request->vendor_id,
+                    // 'subvendor_commission' => $request->subvendor_commission,
+                    // 'distributors_commission' => $request->distributors_commission,
+                    // 'vendors_commission' => $request->vendors_commission,
+                    // 'phone' => $request->phone,
+                    // 'transport_id' => $request->transport_id,
+                    // 'delivery_address' => $request->delivery_address,
+                    // 'delivery_phone' => $request->delivery_phone,
+                    'callback_url' => route('payment.callback'), 
+                    // 'split' => [
+                    //     'type' => 'percentage', 
+                    //     'subaccounts' => [
+                    //         [
+                    //             'subaccount' => 'ACCT_ydm5cjexrm0d88c', 
+                    //             'share' => 50  
+                    //         ],
+                    //         [
+                    //             'subaccount' => 'ACCT_whkl6chr1tbvy8j',
+                    //             'share' => 50  
+                    //         ]
+                    //     ]
+                    // ]
                 ]);
 
-            $result = $response->json();
+            //$result = $response->json();
+            $result = json_decode($response->getBody()->getContents(), true);
+            return response()->json([
+                'payment' => $result
+            ]);
             Sale::create([
                 'quantity' => $request->quantity,
                 'ref_no' => substr(rand(0,time()),0, 9),
                 'amount' => $request->amount,
                 'email' => $request->email,
                 'phone' => $request->phone,
-                'user_id' => $request->user_id,
-                'franchise_id' => $request->franchise_id,
+                'subvendor_id' => $request->subvendor_id,
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'distributor_email' => $request->distributor_email,
+                'vendor_email' => $request->vendor_email,
                 'distributor_id' => $request->distributor_id,
                 'vendor_id' => $request->vendor_id,
                 'product_id' => $request->product_id,
-                'order_id' => $request->order_id,
-                // 'vendor_id' => $request->vendor_id,
-                'franchise_commission' => $request->franchise_commission,
+                
+                'subvendor_commission' => $request->subvendor_commission,
                 'distributors_commission' => $request->distributors_commission,
                 'vendors_commission' => $request->vendors_commission,
-                'first_name' => $request->fname,
                 'phone' => $request->phone,
-                'last_name' => $request->lname,
-                'reference' => $request->reference,
+                
+                'reference' => $reference,
                 'productname' => $request->productname,
                 'currency' => $request->currency,
                 'currency' => 'NGN',
@@ -129,9 +135,12 @@ class SaleController extends Controller
             
 
             $reference = $request->query('reference');
+            $product_id = $request->query('product_id');
             if ($result['status'] && $result['status'] == 'success') {
             $payment = Sale::where('reference', $reference)->first();
-                
+            $product = Product::where('id', $product_id)->first();
+            $product->quantity =- $request->quantity;
+            $product->update();  
                $payment->update([
                     'status' => 'success',
                     'domain' => $result['data']['domain'],

@@ -145,15 +145,11 @@ class UserController extends Controller
         $countvendorsommission = Sale::where('vendor_id', auth::guard('web')->id())
         ->where('status', 'success')->sum('vendors_commission');
         
-        $franchise_earnings = Sale::where('franchise_id', auth::guard('web')->id())
-        ->where('status', 'success')->sum('franchise_commission');
-        $franchise_sales = Sale::where('franchise_id', auth::guard('web')->id())
-        ->where('status', 'success')->count();
+        $franchise_earnings = Sale::all();
+        $franchise_sales = Sale::all();
         
-        $franchise_salesquantity = Sale::where('franchise_id', auth::guard('web')->id())
-        ->where('status', 'success')->sum('quantity');
-        $franchise_products = Sale::where('franchise_id', auth::guard('web')->id())
-        ->where('status', 'success')->latest()->take(10)->get();
+        $franchise_salesquantity = Sale::all();
+        $franchise_products = Sale::all();
 
 
         $countgoodsbought = Sale::where('vendor_id', auth::guard('web')->id())->where('status', 'success')->sum('amount');
@@ -183,7 +179,7 @@ class UserController extends Controller
     }
 
     public function viewfranchise(){
-        $view_franchise = User::where('role', '1')->latest()->get();
+        $view_franchise = User::where('user_type', 'Vendor')->latest()->get();
         return view('dashboard.admin.viewfranchise', compact('view_franchise'));
     }
     public function registerdistributor($ref_no){
@@ -191,9 +187,9 @@ class UserController extends Controller
         return view('dashboard.registerdistributor', compact('view_franchise'));
     }
 
-    public function referregistervendor($ref_no1){
-        $view_franchise = User::where('ref_no1', $ref_no1)->first();
-        return view('dashboard.referregistervendor', compact('view_franchise'));
+    public function referregistervendor($ref_no2){
+        $view_vendor = User::where('ref_no2', $ref_no2)->first();
+        return view('dashboard.referregistervendor', compact('view_vendor'));
     }
 
     
@@ -425,7 +421,7 @@ class UserController extends Controller
 
 
     public function mydistributors(){
-        $view_distributors = User::where('user_id', auth::guard('web')->user()->id)->where('role', '2')->get();
+        $view_distributors = User::where('user_id', auth::guard('web')->user()->id)->where('user_type', 'Vendor')->get();
         return view('dashboard.mydistributors', compact('view_distributors'));
     }
 
@@ -457,7 +453,7 @@ class UserController extends Controller
     }
 
     public function referedby($ref_no2){
-        $view_singvenders = User::where('ref_no2', $ref_no2)->where('role', '3')->get();
+        $view_singvenders = User::where('ref_no2', $ref_no2)->where('user_type', 'Vendor')->get();
 
         return view('dashboard.referedby', compact('view_singvenders'));
     }
@@ -603,7 +599,7 @@ class UserController extends Controller
 
 
     public function myvendorsbydistributor(){
-        $view_vendors = User::where('distributor_id', auth::guard('web')->user()->id)->where('role', '3')->get();
+        $view_vendors = User::where('user_id', auth::guard('web')->user()->id)->where('user_type', 'Vendor')->get();
         return view('dashboard.myvendorsbydistributor', compact('view_vendors'));
     }
 
@@ -614,7 +610,7 @@ class UserController extends Controller
     
 
     public function viewvendorsadmin(){
-        $view_vendors = User::where('role', '3')->get();
+        $view_vendors = User::where('user_type', 'Vendor')->get();
         return view('dashboard.admin.viewvendorsadmin', compact('view_vendors'));
     }
     

@@ -90,8 +90,9 @@ class AdminController extends Controller
        $countransport = Transport::count();
        $countblog = Blog::count();
        $display_distributors = User::where('user_type', 'Distributor')->take(10)->get();
+       $display_vendors = User::where('user_type', 'Vendor')->take(10)->get();
        
-        return view('dashboard.admin.home', compact('display_distributors', 'countblog', 'countransport', 'countteam', 'countorder', 'countcontact', 'countadvert', 'countdistributor', 'countvendor', 'countsales', 'countsub', 'countproduct', 'countsubcategory', 'countcategory', 'countroot', 'countdistrict', 'countstate', 'countlga'));
+        return view('dashboard.admin.home', compact('display_vendors', 'display_distributors', 'countblog', 'countransport', 'countteam', 'countorder', 'countcontact', 'countadvert', 'countdistributor', 'countvendor', 'countsales', 'countsub', 'countproduct', 'countsubcategory', 'countcategory', 'countroot', 'countdistrict', 'countstate', 'countlga'));
     }
 
     public function profile() {

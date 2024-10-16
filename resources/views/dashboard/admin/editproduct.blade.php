@@ -70,7 +70,14 @@
                    
                       
 
-                  
+                      <div class="form-group">
+                        <label for="">Sub Vendor Commission</label>
+                        <input name="subvendor_commission" type="number" @error('subvendor_commission') is-invalid @enderror"
+                        value="{{ $edit_product->subvendor_commission }}" class="form-control" id="" placeholder="Sub Vendor Commission">
+                    </div>
+                    @error('subvendor_commission')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
 
                 <div class="form-group">
                   <label for="">Vendor Commission</label>
@@ -90,7 +97,20 @@
                 <span class="text-danger">{{ $message }}</span>
             @enderror
 
-                    <div class="form-group">
+            <!-- /.form-group -->
+            <div class="form-group">
+              <td><img style="width: auto; height: 30px;" src="{{ URL::asset("/public/../$edit_product->images1")}}" alt=""></td>
+
+              <label for="">Image</label>
+              <input name="images1" type="file" @error('images1') is-invalid @enderror"
+              value="{{ old('images1') }}" class="form-control" id="" placeholder="Price">
+          </div>
+          @error('images1')
+              <span class="text-danger">{{ $message }}</span>
+          @enderror
+            <!-- /.form-group -->
+
+                    {{-- <div class="form-group">
                       <textarea name="body" id="compose-textarea" @error('body') is-invalid @enderror"
                       value="{{ old('body') }}" class="form-control" style="height: 300px">
                        {!! $edit_product->subcategory['body'] !!}
@@ -98,7 +118,7 @@
                   </div>
                   @error('body')
                   <span class="text-danger">{{ $message }}</span>
-                  @enderror
+                  @enderror --}}
                     
                       <!-- /.form-group -->
                     </div>
@@ -113,14 +133,7 @@
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
 
-                    {{-- <div class="form-group">
-                      <label for="">Franchise Commission</label>
-                      <input name="franchise_commission" type="number" @error('franchise_commission') is-invalid @enderror"
-                      value="{{ $edit_product->franchise_commission }}" class="form-control" id="" placeholder="franchise_commission">
-                  </div>
-                  @error('franchise_commission')
-                      <span class="text-danger">{{ $message }}</span>
-                  @enderror --}}
+                    
 
                   <div class="form-group">
                     <label for="">Distributor Commission</label>
@@ -164,18 +177,7 @@
                   @error('percent')
                       <span class="text-danger">{{ $message }}</span>
                   @enderror
-                      <!-- /.form-group -->
-                      <div class="form-group">
-                        <td><img style="width: auto; height: 30px;" src="{{ URL::asset("/public/../$edit_product->images1")}}" alt=""></td>
-
-                        <label for="">Image</label>
-                        <input name="images1" type="file" @error('images1') is-invalid @enderror"
-                        value="{{ old('images1') }}" class="form-control" id="" placeholder="Price">
-                    </div>
-                    @error('images1')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                      <!-- /.form-group -->
+                      
                     </div>
                     <!-- /.col -->
                   </div>

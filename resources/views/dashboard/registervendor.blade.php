@@ -58,7 +58,8 @@
       $reference = substr(rand(0,time()),0, 9);
   @endphp
       <label for="">First Name</label>
-      <input type="text" name="user_id" value="{{ $view_distributor->id }}">
+      <input type="hidden" name="user_id" value="{{ $view_distributor->id }}">
+      <input type="hidden" name="distributor_email" value="{{ $view_distributor->email }}">
         <div class="input-group mb-3">
           <input name="fname" type="text" class="form-control" @error('fname') is-invalid @enderror"
           value="{{ old('fname') }}" placeholder="First name">
@@ -108,22 +109,19 @@
         <span class="text-danger">{{ $message }}</span>
         @enderror
 
-        <label for="">Select Package</label>
+        <label for="">Select Packageb</label>
         <div class="input-group mb-3">
           <select required id="yesNo" name="user_type" class="form-control" required>
             <option value="">Select Package</option>
             <option value="Vendor">Vendor</option>
-            {{-- @foreach ($view_plans as $view_plan)
-              <option value="{{ $view_plan->user_type }}">{{ $view_plan->user_type }}</option>
-            @endforeach --}}
         </select>
         </div>
 
         <div id="additionalInfo" style="display: none;">
           <div class="form-group">
             <label for="info">Vendor Registration Fee NGN 20,000</label>
-            <input type="text" class="form-control" disabled  value="500">
-            <input type="hidden" class="form-control" name="amount" value="500">
+            <input type="text" class="form-control" disabled  value="20,000">
+            <input type="hidden" class="form-control" name="amount" value="20000">
           </div>
           <div class="form-group">
             <label for="info">Distributor Shopping Code</label>
@@ -180,8 +178,8 @@
 
         <label for="">Select Vendor</label>
         <div class="input-group mb-3">
-          <select required id="yesNo" name="vendor_id" class="form-control" required>
-            <option value="">Select Vendor</option>
+          <select id="yesNo" name="vendor_id" class="form-control">
+            {{-- <option value="">Select Vendor</option> --}}
             @foreach ($view_vendors as $view_vendor)
               <option value="{{ $view_vendor->id }}">{{ $view_vendor->fname }} {{ $view_vendor->lname }}</option>
             @endforeach

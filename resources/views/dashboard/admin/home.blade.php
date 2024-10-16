@@ -303,8 +303,6 @@
           <div class="col-md-8">
             <!-- MAP & BOX PANE -->
             <div class="card">
-              
-              <div class="card">
                 <div class="card-header">
                   <h3 class="card-title">Latest Distributors</h3>
 
@@ -333,13 +331,54 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer text-center">
-                  <a href="javascript::">View All Users</a>
+                  <a href="{{ url('admin/viewdistributorsadmin') }}">View All Distributors</a>
                 </div>
                 <!-- /.card-footer -->
               </div>
               <!--/.card -->
+            
+
+
+               <!-- MAP & BOX PANE -->
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Latest Vendors</h3>
+
+                <div class="card-tools">
+                  <span class="badge badge-danger"> Vendors</span>
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body p-0">
+                <ul class="users-list clearfix">
+                  @foreach ($display_vendors as $display_vendor)
+                  <li>
+                    <img src="{{ URL::asset("/public/../$display_vendor->images")}}" alt="User Image">
+                    <a class="users-list-name" href="{{ url('admin/viewsingledistributor/'.$display_vendor->ref_no) }}">{{ $display_vendor->fname }} {{ $display_vendor->lname }}</a>
+                    <span class="users-list-date">{{ $display_vendor->created_at->diffForHumans() }}</span>
+                  </li>
+                  @endforeach
+                  
+                  
+                </ul>
+                <!-- /.users-list -->
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer text-center">
+                <a href="{{ url('admin/viewvendorsadmin') }}">View All Vendors</a>
+              </div>
+              <!-- /.card-footer -->
             </div>
-            <!-- /.card -->
+            <!--/.card -->
+          
+
+
+
+            
             <div class="row">
              
 

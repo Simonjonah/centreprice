@@ -18,7 +18,7 @@
             <h4 class="m-0 text-dark">Shopping Code <a href="{{ url('registervendor/'.Auth::guard('web')->user()->ref_no) }}">{{ Auth::user()->ref_no }}</a></h4>
          
             @elseif (Auth::guard('web')->user()->user_type == 'Vendor')
-            <h4 class="m-0 text-dark">Referral Code <a href="{{ url('referregistervendor/'.Auth::guard('web')->user()->ref_no1) }}">{{ Auth::user()->ref_no1 }}</a></h4>
+            <h4 class="m-0 text-dark">Referral Code <a href="{{ url('referregistervendor/'.Auth::guard('web')->user()->ref_no2) }}">{{ Auth::user()->ref_no2 }}</a></h4>
             @else
 
             @endif

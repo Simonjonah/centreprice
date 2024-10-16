@@ -131,14 +131,18 @@
                   <div class="alert alert-danger">
                   {{ Session::get('error') }}
                   @endif
-                  <input type="hidden" name="product_id" value="{{ $viewprodbyvendors->id }}" id="">
-                  <input type="hidden" name="franchise_id" value="{{ $viewprodbyvendors->franchise_id }}" id="">
-                  <input type="hidden" name="distributor_id" value="{{ $viewprodbyvendors->distributor_id }}" id="">
-                  <input type="hidden" name="product_id" value="{{ $viewprodbyvendors->product_id }}" id="">
-                  <input type="hidden" name="vendor_id" value="{{ Auth::user()->id }}" id="">
-                  <input type="hidden" name="franchise_commission" value="{{ $viewprodbyvendors->franchise_commission }}" id="">
-                  <input type="hidden" name="distributors_commission" value="{{ $viewprodbyvendors->distributors_commission }}" id="">
-                  <input type="hidden" name="vendors_commission" value="{{ $viewprodbyvendors->vendors_commission }}" id="">
+                  
+                  <input type="text" name="product_id" value="{{ $viewprodbyvendors->id }}" id="">
+                  <input type="text" name="productname" value="{{ $viewprodbyvendors->subcategory['subcategory'] }}" id="">
+                  <input type="text" name="distributor_id" value="{{ Auth::user()->user_id }}" id="">
+                  <input type="text" name="subvendor_commission" value="{{ $viewprodbyvendors->subvendor_commission }}" id="">
+                  <input type="text" name="vendor_id" value="{{ Auth::user()->id }}" id="">
+                  {{-- <input type="text" name="franchise_commission" value="{{ $viewprodbyvendors->franchise_commission }}" id=""> --}}
+                  <input type="text" name="distributors_commission" value="{{ $viewprodbyvendors->distributors_commission }}" id="">
+                  <input type="text" name="distributor_email" value="{{ Auth::user()->distributor_email }}" id="">
+                  <input type="text" name="vendor_email" value="{{ Auth::user()->subvendor_email }}" id="">
+                  <input type="text" name="email" value="{{ Auth::user()->email }}" >
+                  <input type="text" name="vendors_commission" value="{{ $viewprodbyvendors->vendors_commission }}" id="">
                   <input type="text" class="form-control" required name="quantity" value="" placeholder="Quantity">
                   <div class="form-group" style="margin-top: 20px">
                     <button type="submit" class="btn btn-primary btn-lg btn-flat">

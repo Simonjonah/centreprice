@@ -77,14 +77,14 @@
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
 
-                     {{-- <div class="form-group">
-                        <label for="">Franchise Commission</label>
-                        <input name="franchise_commission" type="text" @error('franchise_commission') is-invalid @enderror"
-                        value="{{ old('franchise_commission') }}" class="form-control" id="" placeholder="Franchise Commission">
+                     <div class="form-group">
+                        <label for="">Sub Vendors Commission</label>
+                        <input name="subvendor_commission" type="text" @error('subvendor_commission') is-invalid @enderror"
+                        value="{{ old('subvendor_commission') }}" class="form-control" id="" placeholder="Sub Vendors Commission">
                     </div>
-                    @error('franchise_commission')
+                    @error('subvendor_commission')
                         <span class="text-danger">{{ $message }}</span>
-                    @enderror --}}
+                    @enderror
 
                      <div class="form-group">
                         <label for="">vendor Commission</label>

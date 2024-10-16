@@ -41,13 +41,13 @@
                     <th>Tract ID</th>
                     <th>First Name</th>
                     <th>Last Name</th>
-                    <th>Subscription Fee</th>
+                    
                     <th>Role</th>
                     <th>Phone</th>
                     <th>Email</th>
                     <th>Image</th>
                     <th>Amount</th>
-                    <th>Percent</th>
+                    
                     <th>State</th>
                     <th>Districts</th>
                     <th>LGA</th>
@@ -74,58 +74,39 @@
                   @endif
                   @foreach ($view_vendors as $view_vendor)
                     <tr>
-                        <td>{{ $view_vendor->ref_no3 }}</td>
+                        <td>{{ $view_vendor->ref_no2 }}</td>
                         <td>{{ $view_vendor->fname }}</td>
                         <td>{{ $view_vendor->lname }}</td>
-                        <td>{{ $view_vendor->subscription_fee }}</td>
-                        <td>@if ($view_vendor->role == '3')
-                            <span class="badge badge-primary"> Vendor</span>
+                        <td>@if ($view_vendor->user_type == 'Vendor')
+                            <span class="badge badge-success"> Vendor</span>
                           @else
-                          <span class="badge badge-success">Admin</span>
+                          <span class="badge badge-danger">Admin</span>
                           @endif</td>
                         <td>{{ $view_vendor->phone }}</td>
                         <td>{{ $view_vendor->email }}</td>
                         <td><img style="width: 50px; height: 50px;" src="{{ URL::asset("/public/../$view_vendor->images")}}" alt=""></td>
                         <td>{{ $view_vendor->amount }}</td>
-                        <td>{{ $view_vendor->percent }}</td>
                         <td>{{ $view_vendor->ngstate['state'] }}</td>
                         <td>{{ $view_vendor->Lga->district['districts'] }}</td>
                         <td>{{ $view_vendor->Lga['lga'] }}</td>
 
-                        <td><a href="{{ url('web/viewsinglevendorfran/'.$view_vendor->ref_no3) }}"
+                        <td><a href="{{ url('web/viewsinglevendorfran/'.$view_vendor->ref_no) }}"
                           class='btn btn-info'>
                            <i class="far fa-eye"></i>
                        </a></td>
                         <td>@if ($view_vendor->status == null)
                             <span class="badge badge-warning"> Not Approved Yet</span>
-                          @elseif($view_vendor->status == 'suspend')
-                          <span class="badge badge-danger"> Suspended</span>
-                          @elseif($view_vendor->status == 'reject')
-                          <span class="badge badge-danger"> Rejected</span>
-                          @elseif($view_vendor->status == 'approved')
-                          <span class="badge badge-success"> Approved</span>
+                          @elseif($view_vendor->status == 'pending')
+                          <span class="badge badge-danger"> Pending</span>
+                          @elseif($view_vendor->status == 'declined')
+                          <span class="badge badge-danger"> Declined</span>
+                          @elseif($view_vendor->status == 'success')
+                          <span class="badge badge-success"> Verified</span>
                           @elseif($view_vendor->status == 'admitted')
                           
                           <span class="badge badge-success">Admitted</span>
                           @endif</td>
-                        {{-- <td><a href="{{ url('web/approvedistributorbyfran/'.$view_vendor->ref_no) }}"
-                          class='btn btn-success'>
-                           <i class="far fa-user"></i>
-                       </a></td>
-                       <td><a href="{{ url('web/suspenddistributorbyfran/'.$view_vendor->ref_no) }}"
-                        class='btn btn-warning'>
-                         <i class="far fa-bell"></i>
-                     </a></td>
-                       <td><a href="{{ url('web/editdistributorbyfran/'.$view_vendor->ref_no) }}"
-                        class='btn btn-info'>
-                         <i class="far fa-edit"></i>
-                     </a></td>
-                       
-                         
-                       <td><a href="{{ url('web/deletedistributorbyfran/'.$view_vendor->ref_no) }}"
-                        class='btn btn-danger'>
-                         <i class="far fa-trash-alt"></i>
-                     </a></td> --}}
+                        
                      <td>{{ $view_vendor->created_at->format('D d, M Y, H:i')}}</td>
                     </tr>
                     @endforeach
@@ -135,13 +116,13 @@
                         <th>Tract ID</th>
                         <th>First Name</th>
                         <th>Last Name</th>
-                        <th>Subscription Fee</th>
+                        
                         <th>Role</th>
                         <th>Phone</th>
                         <th>Email</th>
                         <th>Image</th>
                         <th>Amount</th>
-                        <th>Percent</th>
+                        
                         <th>State</th>
                         <th>Districts</th>
                         <th>LGA</th>

@@ -16,15 +16,20 @@ return new class extends Migration
             $table->string('order_id')->nullable();
             $table->string('product_id')->nullable();
             $table->string('user_id')->nullable();
-            $table->string('franchise_id')->nullable();
+            $table->string('subvendor_id')->nullable();
             $table->string('distributor_id')->nullable();
             $table->string('vendor_id')->nullable();
             $table->decimal('requested_amount')->nullable();
             $table->decimal('amount', 8, 2)->nullable();
-            $table->decimal('franchise_commission', 8, 2)->nullable();
+            $table->decimal('subvendor_commission', 8, 2)->nullable();
             $table->decimal('distributors_commission', 8, 2)->nullable();
             $table->decimal('vendors_commission', 8, 2)->nullable();
             $table->string('email')->nullable();
+
+            $table->string('subvendor_email')->nullable();
+            $table->string('distributor_email')->nullable();
+            $table->string('vendor_email')->nullable();
+
             $table->string('phone')->nullable();
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();

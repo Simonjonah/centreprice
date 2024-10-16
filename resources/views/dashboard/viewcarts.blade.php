@@ -40,15 +40,6 @@
                   <thead>
                   <tr>
                     <tr>
-                        {{-- <th>Product_id</th> --}}
-                        {{-- <th>User_id</th> --}}
-                        {{-- <th>franchise_id</th> --}}
-                        {{-- <th>distributors_id</th> --}}
-                        {{-- <th>vendor_id</th> --}}
-                        {{-- <th>franchise_comm</th>
-                        <th>distributor_comm</th>
-                        <th>vendor_com</th> --}}
-                        
                         <th>Product</th>
                         <th>Quantity</th>
                         <th>Price</th>
@@ -58,6 +49,10 @@
                   </thead>
                   @php
                     $total = 0;
+                    $cartTotal = 0;
+                    $totp = 0;
+                    $paid_total = 0;
+                    
                 @endphp
                   <tbody>
                   @if (Session::get('success'))
@@ -79,7 +74,7 @@
                     <td>{{ $details['productname'] }}</td>
                     <td>{{ $details['quantity'] }}</td>
                     <td> ₦ {{ $details['amount'] }}</td>
-                    {{-- <td>{{ $details['images1'] }}</td> --}}
+                    {{-- <td>{{ $details['product_id'] }}</td> --}}
                     <td>{{ $details['quantity'] * $details['amount'] }}</td>
                     <td><a href="{{ route('web.remove', $id) }}"><i class="fas fa-trash mr-2"></i></a>
                 </tr>
@@ -95,12 +90,57 @@
 
                  <!-- Main content -->
      <section class="content">
-
+      
       <!-- Default box -->
       <div class="card card-solid">
         <div class="card-body">
           <div class="row">
             <div class="col-12 col-sm-6">
+              <label for="">Select Delivery Method</label>
+        <div class="input-group mb-3">
+          <select required id="yesNo" name="user_type" class="form-control">
+            <option value="">Select Delivery Method</option>
+            <option value="No">Without Transport Cost</option>
+            <option value="Yes">With transport Cost</option>
+            
+        </select>
+        </div>
+
+        <div id="additionalInfo" style="display: none;">
+          <div class="form-group">
+            {{-- <form id="locationForm"> --}}
+              <label for="location">Select State:</label>
+              <select required name="transport_id" class="form-control" id="location">
+                  <option value="">-- Select Location --</option>
+                  @foreach($view_transports as $view_transport)
+                      <option value="{{ $view_transport->id }}" data-cost="{{ $view_transport->fee }}">{{ $view_transport->state }} NGN {{ $view_transport->fee }}</option>
+                  @php
+                    $totp = $view_transport->fee;
+                    
+                  @endphp
+                      @endforeach
+              </select>
+        
+          </div>
+        
+      </div>
+
+      <div id="additionaldis" style="display: none;">
+        <label for="location">Select State:</label>
+        <select name="transport_id" class="form-control" id="location">
+            <option value="">-- Select Location --</option>
+            @foreach($view_transports as $view_transport)
+                <option value="{{ $view_transport->id }}" data-cost="{{ $view_transport->fee }}">{{ $view_transport->state }}</option>
+            @endforeach
+        </select>
+    </div>
+    
+
+    
+
+
+
+
               <div class="form-group">
                 <label for="">Delivery Address</label>
                 <input name="delivery_address" type="text" @error('delivery_address') is-invalid @enderror"
@@ -119,57 +159,7 @@
               <span class="text-danger">{{ $message }}</span>
           @enderror
 
-
-          <div class="form-group">
-            <label for="">Door Step</label>
-            <input name="delivery_pickup" type="checkox" @error('delivery_pickup') is-invalid @enderror"
-              value="{{ old('delivery_pickup') }}" class="form-control" placeholder="Delivery Phone">
-        </div>
-        @error('delivery_pickup')
-            <span class="text-danger">{{ $message }}</span>
-        @enderror
-
-        <div class="form-group">
-            <label for="">Door Step</label>
-            <input name="delivery_pickup" type="checkox" @error('delivery_pickup') is-invalid @enderror"
-              value="{{ old('delivery_pickup') }}" class="form-control" placeholder="Delivery Phone">
-        </div>
-        @error('delivery_pickup')
-            <span class="text-danger">{{ $message }}</span>
-        @enderror
-
-
-          <div class="form-group">
-                       
-            <label> Zones</label>
-              <select name="zone" type="text" @error('zone') is-invalid @enderror"
-              value="{{ old('zone') }}" class="form-control" id="">
-              <option value="North Central (NC)">North Central (NC)</option>
-              <option value="North East (NE)">North East (NE)</option>
-              <option value="North West (NW)">North West (NW)</option>
-              <option value="South West (SW)">South West (SW)</option>
-              <option value="South East (SE) ">South East (SE) </option>
-              <option value="South South (SS)">South South (SS)</option>
-            </select>
-          </div>
-          @error('zone')
-              <span class="text-danger">{{ $message }}</span>
-          @enderror
-
-          <div class="form-group">
-            <label for="">Select State</label>
-            <select name="state" type="text" @error('state') is-invalid @enderror"
-              value="{{ old('state') }}" class="form-control" id="">
-              @foreach ($view_states as $view_state)
-                <option value="{{ $view_state->state }}">{{ $view_state->state }}</option>
-              @endforeach
-              
-            </select>
-        </div>
-        @error('state')
-            <span class="text-danger">{{ $message }}</span>
-        @enderror
-
+        
         </div>
         {{-- <!-- /.col -->
         <div class="col-md-6"> --}}
@@ -183,49 +173,54 @@
                   <th>Subtotal</th>
                     <td> ₦ {{ $total }}</td>
                 </tr>
-                <tr>
-                  <th>Order Total</th>
-                    <td> ₦ {{ $total }}</td>
-                </tr>
-               
+                <form action="{{ url('payment/process') }}" method="post">
+                @csrf
+                
                   </tbody>
                 </table>
                 @php
                     $reference = substr(rand(0,time()),0, 9);
                 @endphp
               <div class="mt-4">
-                <form action="{{ url('payment/process') }}" method="post">
-                  @csrf
+               
+                  {{-- <td id="cartTotal">
+                    <span id="totalAmount">
+                      <select class="form-control" name="amount">
+                        <option value="{{ $total + $cartTotal }}">{{ $total + $cartTotal }}</option>
+                      </select>
+                    </span>
+                    
+                </td> --}}
+                  <input type="text" class="form-control" value="{{ $total }}">
+
+                  <input type="text" class="form-control"  name="product_id" value="{{ $details['product_id'] }}">
+                  {{-- <input type="text" class="form-control"  name="franchise_id" value="{{ $details['franchise_id'] }}"> --}}
+                  <input type="text" class="form-control"  name="distributor_id" value="{{ $details['distributor_id'] }} ">
+                  <input type="text" class="form-control"  name="email" value="{{ Auth::guard('web')->user()->email }}" placeholder="Quantity">
+                  <input type="text" class="form-control"  name="first_name" value="{{ Auth::guard('web')->user()->fname }}" placeholder="Quantity">
+                  <input type="text" class="form-control"  name="last_name" value="{{ Auth::guard('web')->user()->lname }}" placeholder="Quantity">
+                  <input type="text" class="form-control"  name="vendor_id" value="{{ Auth::guard('web')->user()->id }}" placeholder="Quantity">
+                  {{-- <input type="text" class="form-control"  name="user_id" value="{{ $details['user_id']  }}" placeholder="Quantity"> --}}
+                  <input type="text" class="form-control"  name="phone" value="{{ Auth::guard('web')->user()->phone }}" placeholder="Quantity">
+                  <input type="text" class="form-control"  name="reference" value="{{ $reference }}" placeholder="Quantity">
+                  {{-- <input type="text" class="form-control"  name="franchise_commission" value="{{ $details['franchise_commission'] }}" placeholder="Quantity"> --}}
+                  <input type="text" class="form-control"  name="distributors_commission" value="{{ $details['distributors_commission'] }}" placeholder="Quantity">
+                  <input type="text" class="form-control"  name="vendors_commission" value="{{ $details['vendors_commission'] }}" placeholder="Quantity">
+                  <input type="text" class="form-control"  name="subvendor_commission" value="{{ $details['subvendor_commission'] }}" placeholder="Quantity">
+                  <input type="text" class="form-control"  name="quantity" value="{{ $details['quantity'] }}" placeholder="Quantity">
+                  <input type="text" class="form-control"  name="productname" value="{{ $details['productname'] }}" placeholder="Quantity">
+                  {{-- <input type="text" class="form-control"  name="order_id" value="{{ $details['order_id'] }}" placeholder="Quantity"> --}}
+                  {{-- <input type="text" class="form-control"  name="" value="{{ $details['quantity'] }}" placeholder="Quantity"> --}}
                   
-                  {{-- <input type="text" class="form-control" required name="amount" value="{{ $details[''] }}" placeholder="Quantity"> --}}
-                  <input type="hidden" class="form-control"  name="amount" value="{{ $total }}">
-                  <input type="hidden" class="form-control"  name="product_id" value="{{ $details['product_id'] }}">
-                  {{-- <input type="hidden" class="form-control"  name="order_id" value="{{ $details['order_id'] }}"> --}}
-                  <input type="hidden" class="form-control"  name="franchise_id" value="{{ $details['franchise_id'] }}">
-                  <input type="hidden" class="form-control"  name="distributor_id" value="{{ $details['distributor_id'] }} ">
-                  <input type="hidden" class="form-control"  name="email" value="{{ Auth::guard('web')->user()->email }}" placeholder="Quantity">
-                  <input type="hidden" class="form-control"  name="first_name" value="{{ Auth::guard('web')->user()->fname }}" placeholder="Quantity">
-                  <input type="hidden" class="form-control"  name="last_name" value="{{ Auth::guard('web')->user()->lname }}" placeholder="Quantity">
-                  {{-- <input type="hidden" class="form-control"  name="phone" value="{{ Auth::guard('web')->user()->phone }}" placeholder="Quantity"> --}}
-                  <input type="hidden" class="form-control"  name="vendor_id" value="{{ Auth::guard('web')->user()->id }}" placeholder="Quantity">
-                  <input type="hidden" class="form-control"  name="user_id" value="{{ $details['user_id']  }}" placeholder="Quantity">
-                  <input type="hidden" class="form-control"  name="phone" value="{{ Auth::guard('web')->user()->phone }}" placeholder="Quantity">
-                  <input type="hidden" class="form-control"  name="reference" value="{{ $reference }}" placeholder="Quantity">
-                  <input type="hidden" class="form-control"  name="franchise_commission" value="{{ $details['franchise_commission'] }}" placeholder="Quantity">
-                  <input type="hidden" class="form-control"  name="distributors_commission" value="{{ $details['distributors_commission'] }}" placeholder="Quantity">
-                  <input type="hidden" class="form-control"  name="vendors_commission" value="{{ $details['vendors_commission'] }}" placeholder="Quantity">
-                  <input type="hidden" class="form-control"  name="quantity" value="{{ $details['quantity'] }}" placeholder="Quantity">
-                  <input type="hidden" class="form-control"  name="productname" value="{{ $details['productname'] }}" placeholder="Quantity">
-                  {{-- <input type="hidden" class="form-control"  name="order_id" value="{{ $details['order_id'] }}" placeholder="Quantity"> --}}
-                  {{-- <input type="hidden" class="form-control"  name="" value="{{ $details['quantity'] }}" placeholder="Quantity"> --}}
+                  <input type="text" class="form-control"  name="distributor_email" value="{{ Auth::guard('web')->user()->distributor_email }}" placeholder="Quantity">
+                  <input type="text" class="form-control"  name="subvendor_email" value="{{ Auth::guard('web')->user()->subvendor_email }}" placeholder="Quantity">
                   
                   
-                  
-                  <input type="hidden" class="form-control"  name="images1" value="{{ $details['images1'] }}" placeholder="Quantity">
-                  <input type="hidden" class="form-control"  name="images2" value="{{ $details['images2'] }}" placeholder="Quantity">
-                  <input type="hidden" class="form-control"  name="images3" value="{{ $details['images3'] }}" placeholder="Quantity">
-                  <input type="hidden" class="form-control"  name="images4" value="{{ $details['images4'] }}" placeholder="Quantity">
-                  <input type="hidden" class="form-control"  name="images5" value="{{ $details['images5'] }}" placeholder="Quantity">
+                  <input type="text" class="form-control"  name="images1" value="{{ $details['images1'] }}" placeholder="Quantity">
+                  <input type="text" class="form-control"  name="images2" value="{{ $details['images2'] }}" placeholder="Quantity">
+                  <input type="text" class="form-control"  name="images3" value="{{ $details['images3'] }}" placeholder="Quantity">
+                  <input type="text" class="form-control"  name="images4" value="{{ $details['images4'] }}" placeholder="Quantity">
+                  <input type="text" class="form-control"  name="images5" value="{{ $details['images5'] }}" placeholder="Quantity">
                   
                   
                   <div class="form-group" style="margin-top: 20px">
@@ -275,6 +270,44 @@
 <!-- ./wrapper -->
 
 @include('dashboard.footer')
+
+<script>
+
+  
+document.getElementById('yesNo').addEventListener('change', function() {
+    var additionalInfo = document.getElementById('additionalInfo');
+    if (this.value === 'Yes') {
+        additionalInfo.style.display = 'block';
+    } else {
+        additionalInfo.style.display = 'none';
+    }
+
+  });
+
+
+  document.getElementById('yesNo').addEventListener('change', function() {
+    var additionaldis = document.getElementById('additionaldis');
+    if (this.value === 'No') {
+        additionaldis.style.display = 'block';
+    } else {
+        additionaldis.style.display = 'none';
+    }
+
+  });
+
+
+
+  document.getElementById('location').addEventListener('change', function() {
+    let transportCost = parseFloat(this.options[this.selectedIndex].getAttribute('data-cost'));
+    let cartTotal = parseFloat(document.getElementById('totalAmount').innerText);
+
+    // Add transport cost to cart total
+    let newTotal = cartTotal + transportCost;
+
+    // Update the total display
+    document.getElementById('totalAmount').innerText = newTotal.toFixed(2);
+});
+</script>
 <!-- <script>
   $(function () {
     $("#example1").DataTable({

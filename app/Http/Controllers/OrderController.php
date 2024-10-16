@@ -14,15 +14,19 @@ class OrderController extends Controller
     public function createorders(Request $request){
         $request->validate([
             'distributor_id' => ['required', 'string'],
+            'vendor_id' => ['required', 'string'],
+            'distribtor_email' => ['required', 'string'],
+            'vendor_email' => ['required', 'string'],
+            'subvendor_email' => ['nullable', 'string'],
+            'transport_id' => ['required', 'string'],
             'product_id' => ['required', 'string'],
             'subcategory_id' => ['required', 'string'],
             'root_id' => ['required', 'string'],
             'category_id' => ['required', 'string'],
-            'franchise_commission' => ['required', 'string'],
             'distributors_commission' => ['required', 'string'],
             'vendors_commission' => ['required', 'string'],
+            'subvendor_commission' => ['nullable', 'string'],
             'amount' => ['required', 'string'],
-            'franchise_id' => ['required', 'string'],
             'productname' => ['required', 'string'],
             'user_id' => ['required', 'string'],
             
@@ -126,17 +130,17 @@ class OrderController extends Controller
       return view('dashboard.myproductliners', compact('franchise_products'));
     }
 
-    public function myvendorproducts(){
-        $franchise_products = Order::where('status', 'delivered')->get();
-      return view('dashboard.myvendorproducts', compact('franchise_products'));
-    }
+    // public function myvendorproducts(){
+    //     $franchise_products = Order::where('status', 'delivered')->get();
+    //   return view('dashboard.myvendorproducts', compact('franchise_products'));
+    // }
 
-    public function viewproductsbyvendoronly($ref_no){
-        $viewprodbyvendors = Order::where('ref_no', $ref_no)->first();
-        $view_allprodocts = Order::where('status', 'delivered')->get();
+    // public function viewproductsbyvendoronly($ref_no){
+    //     $viewprodbyvendors = Order::where('ref_no', $ref_no)->first();
+    //     $view_allprodocts = Order::where('status', 'delivered')->get();
         
-      return view('dashboard.viewproductsbyvendoronly', compact('view_allprodocts', 'viewprodbyvendors'));
-    }
+    //   return view('dashboard.viewproductsbyvendoronly', compact('view_allprodocts', 'viewprodbyvendors'));
+    // }
 
   
     

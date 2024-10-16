@@ -17,7 +17,7 @@ class TransportController extends Controller
     public function createtransport(Request $request){
         $request->validate([
             'zone' => ['required'],
-            'state' => ['required'],
+            'state' => ['required', 'unique:transports'],
             'fee' => ['required'],
         ]);
 

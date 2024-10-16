@@ -447,7 +447,7 @@ Route::prefix('admin')->name('admin.')->group(function() {
 
 Route::get('/registerdistributor/{ref_no}', [UserController::class, 'registerdistributor'])->name('registerdistributor');
 Route::get('/registervendor/{ref_no}', [UserController::class, 'registervendor'])->name('registervendor');
-Route::get('/referregistervendor/{ref_no1}', [UserController::class, 'referregistervendor'])->name('referregistervendor');
+Route::get('/referregistervendor/{ref_no2}', [UserController::class, 'referregistervendor'])->name('referregistervendor');
 Route::post('/createfranchise', [TransactionController::class, 'createfranchise'])->name('createfranchise');
 
 Route::prefix('web')->name('web.')->group(function() {
@@ -513,13 +513,13 @@ Route::prefix('web')->name('web.')->group(function() {
         Route::get('/viewsingleorder/{ref_no}', [OrderController::class, 'viewsingleorder'])->name('viewsingleorder');
         Route::get('/deleteorder/{ref_no}', [OrderController::class, 'deleteorder'])->name('deleteorder');
         Route::get('/myproductliners', [OrderController::class, 'myproductliners'])->name('myproductliners');
-        Route::get('/myvendorproducts', [OrderController::class, 'myvendorproducts'])->name('myvendorproducts');
+        Route::get('/myvendorproducts', [ProductController::class, 'myvendorproducts'])->name('myvendorproducts');
         Route::get('/addtocart/{id}', [CartController::class, 'addtocart'])->name('addtocart');
         
         Route::get('/viewcarts', [CartController::class, 'viewcarts'])->name('viewcarts');
         Route::get('/viewcart', [CartController::class, 'viewcart'])->name('viewcart');
         Route::get('/viewproductsbyvendor/{ref_no}', [ProductController::class, 'viewproductsbyvendor'])->name('viewproductsbyvendor');
-        Route::get('/viewproductsbyvendoronly/{ref_no}', [OrderController::class, 'viewproductsbyvendoronly'])->name('viewproductsbyvendoronly');
+        Route::get('/viewproductsbyvendoronly/{ref_no}', [ProductController::class, 'viewproductsbyvendoronly'])->name('viewproductsbyvendoronly');
         
         //Route::get('/cart/add/{id}', [CartController::class, 'addToCart'])->name('cart.add');
         Route::get('/remove/{id}', [CartController::class, 'remove'])->name('remove');

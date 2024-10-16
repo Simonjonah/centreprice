@@ -57,9 +57,12 @@
   @php
       $reference = substr(rand(0,time()),0, 9);
   @endphp
-
-  <input type="hidden" name="subvendor_id" value="{{ $view_franchise->id }}">
       <label for="">First Name</label>
+      <input type="hidden" name="user_id" value="{{ $view_vendor->user_id }}">
+      <input type="hidden" name="distributor_id" value="{{ $view_vendor->user_id }}">
+      <input type="hidden" name="distributor_email" value="{{ $view_vendor->distributor_email }}">
+      <input type="hidden" name="vendor_email" value="{{ $view_vendor->email }}">
+      <input type="hidden" name="vendor_id" value="{{ $view_vendor->id }}">
         <div class="input-group mb-3">
           <input name="fname" type="text" class="form-control" @error('fname') is-invalid @enderror"
           value="{{ old('fname') }}" placeholder="First name">
@@ -109,37 +112,32 @@
         <span class="text-danger">{{ $message }}</span>
         @enderror
 
-        <label for="">Selecct Package</label>
+        <label for="">Select Packageb</label>
         <div class="input-group mb-3">
-          <select required id="yesNo" name="user_type" class="form-control">
+          <select required id="yesNo" name="user_type" class="form-control" required>
             <option value="">Select Package</option>
-            @foreach ($view_plans as $view_plan)
-              <option value="{{ $view_plan->user_type }}">{{ $view_plan->user_type }}</option>
-            @endforeach
+            <option value="Vendor">Vendor</option>
         </select>
         </div>
 
         <div id="additionalInfo" style="display: none;">
           <div class="form-group">
             <label for="info">Vendor Registration Fee NGN 20,000</label>
-            <input type="text" class="form-control" disabled  value="500">
-            <input type="hidden" class="form-control" name="amount" value="500">
+            <input type="text" class="form-control" disabled  value="20,000">
+            <input type="hidden" class="form-control" name="amount" value="20000">
           </div>
           <div class="form-group">
-            <label for="info">Referral Code</label>
-            <input type="text" value="{{ $view_franchise->ref_no }}" class="form-control" name="user_id" value="" placeholder="Referral Code">
+            <label for="info">Vendor Referral Code</label>
+            <input type="text" class="form-control" disabled value="{{ $view_vendor->ref_no2 }}" >
+            <input type="hidden" class="form-control" name="ref_no2" value="{{ $view_vendor->ref_no2 }}" placeholder="Referral Code">
           </div>
           
       </div>
-      {{-- <div id="additionalInfo" style="display: none;">
-        <label for="info">Referral Code</label>
-        <input type="text" class="form-control" name="user_id" value="" placeholder="Referral Code">
-    </div> --}}
-
+     
       <div id="additionaldis" style="display: none;">
-        <label for="info">Distributor Registration Fee NGN 500,000</label>
-        <input type="text" class="form-control" disabled  value="500,000">
-        <input type="hidden" class="form-control"   name="amount" value="600">
+        <label for="info">Distributor Registration Fee NGN 1,000,000</label>
+        <input type="text" class="form-control" disabled  value="1,000,000">
+        <input type="hidden" class="form-control"   name="amount" value="1000000">
     </div>
  
         
@@ -166,7 +164,6 @@
        
 
         <label for="">Email</label>
-
         <div class="input-group mb-3">
           <input type="email" name="email" class="form-control"  @error('email') is-invalid @enderror"
           value="{{ old('email') }}" placeholder="email">
@@ -181,6 +178,16 @@
             <span class="text-danger">{{ $message }}</span>
         @enderror
        
+
+        {{-- <label for="">Select Vendor</label>
+        <div class="input-group mb-3">
+          <select id="yesNo" name="vendor_id" class="form-control">
+            @foreach ($view_vendors as $view_vendor)
+              <option value="{{ $view_vendor->id }}">{{ $view_vendor->fname }} {{ $view_vendor->lname }}</option>
+            @endforeach
+        </select>
+        </div> --}}
+
         <label for="">Phone</label>
           <div class="input-group mb-3">
             <input type="tel" name="phone"  class="form-control"  @error('phone') is-invalid @enderror"
@@ -292,23 +299,6 @@
         @enderror
 
 
-        {{-- <label for="">Referal Code</label>
-        
-        <div class="input-group mb-3">
-          <input type="number" required name="ref_no"  class="form-control"  @error('ref_no') is-invalid @enderror"
-          value="{{ $view_franchise->ref_no }}">
-          
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
-            </div>
-          </div>
-        </div>
-        @error('ref_no')
-            <span class="text-danger">{{ $message }}</span>
-        @enderror --}}
-
-
 
         {{-- <input type="hidden" name="reference" value="{{ $reference }}"> --}}
         <div class="row">
@@ -316,7 +306,7 @@
             <div class="icheck-primary">
               <input type="checkbox" id="agreeTerms" name="terms" value="agree" required>
               <label for="agreeTerms">
-               I agree to the <a href="#">terms</a>
+               I agree to the <a href="{{ url('terms') }}">terms and Condition</a>
               </label>
             </div>
           </div>

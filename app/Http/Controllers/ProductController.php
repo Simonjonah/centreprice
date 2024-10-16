@@ -23,7 +23,7 @@ class ProductController extends Controller
             'subcategory_id' => ['required', 'string'],
             'root_id' => ['required', 'string'],
             'category_id' => ['required', 'string'],
-            // 'franchise_commission' => ['required', 'string'],
+            'subvendor_commission' => ['required', 'string'],
             'distributors_commission' => ['required', 'string'],
             'vendors_commission' => ['required', 'string'],
             'amount' => ['required', 'string'],
@@ -51,7 +51,7 @@ class ProductController extends Controller
         $add_product->subcategory_id = $request->subcategory_id;
         $add_product->category_id = $request->category_id;
         $add_product->root_id = $request->root_id;
-        // // $add_product->franchise_commission = $request->franchise_commission;
+        $add_product->subvendor_commission = $request->subvendor_commission;
         $add_product->vendors_commission = $request->vendors_commission;
         $add_product->distributors_commission = $request->distributors_commission;
         $add_product->percent = $request->percent;
@@ -208,7 +208,7 @@ class ProductController extends Controller
 
         $request->validate([
             'subcategory_id' => ['required', 'string'],
-        //    'franchise_commission' => ['required', 'string'],
+            'subvendor_commission' => ['required', 'string'],
             'distributors_commission' => ['required', 'string'],
             'vendors_commission' => ['required', 'string'],
             'amount' => ['required', 'string'],
@@ -231,7 +231,7 @@ class ProductController extends Controller
 
         }
         $edit_product->subcategory_id = $request->subcategory_id;
-        // // $edit_product->franchise_commission = $request->franchise_commission;
+        $edit_product->subvendor_commission = $request->subvendor_commission;
         $edit_product->distributors_commission = $request->distributors_commission;
         $edit_product->vendors_commission = $request->vendors_commission;
         $edit_product->quantity = $request->quantity;
@@ -253,6 +253,16 @@ class ProductController extends Controller
         $view_myprodocts = Product::latest()->get();
         $view_categories = Category::latest()->get();
         return view('dashboard.myproducts', compact('view_categories', 'view_myprodocts'));
+    }
+    public function myvendorproducts(){
+        $franchise_products = Product::where('status', 'approved')->get();
+      return view('dashboard.myvendorproducts', compact('franchise_products'));
+    }
+    public function viewproductsbyvendoronly($ref_no){
+        $viewprodbyvendors = Product::where('ref_no', $ref_no)->first();
+        $view_allprodocts = Product::where('status', 'approved')->get();
+        
+      return view('dashboard.viewproductsbyvendoronly', compact('view_allprodocts', 'viewprodbyvendors'));
     }
 
     public function viewproductsbyvendor($ref_no){
