@@ -351,6 +351,11 @@ public function deleteorderadmin($ref_no){
     return redirect()->back()->with('success', 'You have deleted successfully');
 }
 
+
+public function myorderproducts (){
+    $view_orders = Sale::where('distributor_id', auth::user()->id)->get();
+    return view('dashboard.myorderproducts', compact('view_orders'));
+}
     
 }
 

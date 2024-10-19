@@ -489,7 +489,7 @@ Route::prefix('web')->name('web.')->group(function() {
 
         Route::get('/viewmyvendorsales/{id}', [UserController::class, 'viewmyvendorsales'])->name('viewmyvendorsales');
         
-        Route::get('/viewsinglevendorfran/{ref_no}', [UserController::class, 'viewsinglevendorfran'])->name('viewsinglevendorfran');
+        Route::get('/viewsinglevendorfran/{id}', [UserController::class, 'viewsinglevendorfran'])->name('viewsinglevendorfran');
         Route::put('/updateprofile2/{id}', [UserController::class, 'updateprofile2'])->name('updateprofile2');
         Route::get('/referedby/{ref_no2}', [UserController::class, 'referedby'])->name('referedby');
         Route::get('/myvendorsbydistributor', [UserController::class, 'myvendorsbydistributor'])->name('myvendorsbydistributor');
@@ -507,7 +507,7 @@ Route::prefix('web')->name('web.')->group(function() {
         Route::get('/viewsubscriptionpayment/{user_id}', [SubscriptionController::class, 'viewsubscriptionpayment'])->name('viewsubscriptionpayment');
         Route::get('/ordermyproducts/{ref_no}', [ProductController::class, 'ordermyproducts'])->name('ordermyproducts');
         Route::post('/createorders', [OrderController::class, 'createorders'])->name('createorders');
-        Route::get('/myorderproducts', [OrderController::class, 'myorderproducts'])->name('myorderproducts');
+        Route::get('/myorderproducts', [SaleController::class, 'myorderproducts'])->name('myorderproducts');
         Route::get('/suspendorder/{ref_no}', [OrderController::class, 'suspendorder'])->name('suspendorder');
         Route::get('/editorder/{ref_no}', [OrderController::class, 'editorder'])->name('editorder');
         Route::get('/viewsingleorder/{ref_no}', [OrderController::class, 'viewsingleorder'])->name('viewsingleorder');

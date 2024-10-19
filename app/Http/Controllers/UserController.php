@@ -125,6 +125,7 @@ class UserController extends Controller
     }
 
     public function home(){
+        $thisview_vendors = User::where('user_id', auth::guard('web')->id())->take(10)->get();
         $countfrancesedistributors = User::where('user_id', auth::guard('web')->id())->count();
         $viewmyfrancesedistributors = User::where('user_id', auth::guard('web')->id())->take(10)->get();
         $view_orderedproducts = Order::where('distributor_id', auth::guard('web')->id())->take(10)->get();
@@ -155,7 +156,7 @@ class UserController extends Controller
         $countgoodsbought = Sale::where('vendor_id', auth::guard('web')->id())->where('status', 'success')->sum('amount');
 
         
-        return view('dashboard.home', compact('franchise_products', 'franchise_salesquantity', 'franchise_sales', 'franchise_earnings', 'view_distributorsales', 'countdistributors_ommission', 'count_quantitysales', 'count_sales', 'countvendorsommission', 'countsales', 'viewvendororders', 'viewsubvendors', 'countsubvendors', 'countgoodsbought', 'approvedproducts', 'view_latestproductssignup', 'count_orderedproducts', 'view_orderedproducts', 'viewmyfrancesedistributors', 'countfrancesedistributors'));
+        return view('dashboard.home', compact('thisview_vendors', 'franchise_products', 'franchise_salesquantity', 'franchise_sales', 'franchise_earnings', 'view_distributorsales', 'countdistributors_ommission', 'count_quantitysales', 'count_sales', 'countvendorsommission', 'countsales', 'viewvendororders', 'viewsubvendors', 'countsubvendors', 'countgoodsbought', 'approvedproducts', 'view_latestproductssignup', 'count_orderedproducts', 'view_orderedproducts', 'viewmyfrancesedistributors', 'countfrancesedistributors'));
     }
 
     public function lockscreen(){
@@ -444,8 +445,8 @@ class UserController extends Controller
         return view('dashboard.viewsingledistributorbyfran', compact('view_lgas', 'view_states', 'view_singdistributor'));
     }
 
-    public function viewsinglevendorfran($ref_no){
-        $view_singdistributor = User::where('ref_no', $ref_no)->first();
+    public function viewsinglevendorfran($id){
+        $view_singdistributor = User::where('id', $id)->first();
 
         $view_states = Ngstate::orderby('state')->get();
         $view_lgas = Lga::orderby('lga')->get();

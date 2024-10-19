@@ -39,11 +39,11 @@
                   <thead>
                   <tr>
                     <th>Tract ID</th>
-                    <th>Roots</th>
-                    <th>Category</th>
+                    <th>Product Name</th>
+                    <th>Image</th>
+                   
                     <th>Sub Category</th>
                     <th>Quantity Ordered</th>
-                    <th>Image</th>
                     <th>Amount</th>
                     <th>Total Amount</th>
                     <th>View</th>
@@ -70,10 +70,10 @@
                   @foreach ($view_orders as $view_order)
                     <tr>
                         <td>{{ $view_order->ref_no }}</td>
-                        <td>{{ $view_order->subcategory->category->root['rootname'] }}</td>
-                        <td>{{ $view_order->subcategory->category['category'] }}</td>
-                        <td>{{ $view_order->subcategory['subcategory'] }}</td>
-                        <td>{{ $view_order->quantityordered }}</td>
+                        <td>{{ $view_order->productname }}</td>
+                        {{-- <td>{{ $view_order->subcategory->category['category'] }}</td> --}}
+                        {{-- <td>{{ $view_order->subcategory['subcategory'] }}</td> --}}
+                        {{-- <td>{{ $view_order->quantityordered }}</td> --}}
                         <td><img style="width: auto; height: 30px;" src="{{ URL::asset("/public/../$view_order->images1")}}" alt=""></td>
                         <td>{{ $view_order->amount }}</td>
                         <td>{{ $view_order->amountordered }}</td>
@@ -120,7 +120,7 @@
                     <tr>
                       <th>Tract ID</th>
                       <th>Roots</th>
-                      <th>Category</th>
+                     
                       <th>Sub Category</th>
                     <th>Quantity</th>
                       

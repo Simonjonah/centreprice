@@ -72,10 +72,10 @@ class OrderController extends Controller
 
     }
 
-    public function myorderproducts (){
+    <!-- public function myorderproducts (){
         $view_orders = Order::where('distributor_id', auth::user()->id)->get();
         return view('dashboard.myorderproducts', compact('view_orders'));
-    }
+    } -->
 
     public function deliveredorder($ref_no){
         $approve_order = Order::where('ref_no', $ref_no)->first();

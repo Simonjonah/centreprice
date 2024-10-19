@@ -512,10 +512,10 @@
                 <!-- USERS LIST -->
                 <div class="card">
                   <div class="card-header">
-                    <h3 class="card-title">Latest Ordered Products</h3>
+                    <h3 class="card-title">Latest Vendors</h3>
 
                     <div class="card-tools">
-                      <span class="badge badge-danger">Latest Ordered Products</span>
+                      <span class="badge badge-danger">Latest Vendors</span>
                       <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
                       </button>
                       <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i>
@@ -525,11 +525,11 @@
                   <!-- /.card-header -->
                   <div class="card-body p-0">
                     <ul class="users-list clearfix">
-                      @foreach ($view_orderedproducts as $view_orderedproduct)
+                      @foreach ($thisview_vendors as $thisview_vendor)
                       <li>
-                        <img style="width: 100px; height: 100px;" src="{{ asset('/public/../'.$view_orderedproduct->images1)}}" alt="User Image">
-                        <a class="users-list-name" href="#">{{ $view_orderedproduct->subcategory['subcategory'] }}</a>
-                        <span class="users-list-date">{{ $view_orderedproduct->created_at->diffForHumans() }}</span>
+                        <img style="width: 100px; height: 100px;" src="{{ asset('/public/../'.$thisview_vendor->images)}}" alt="User Image">
+                        <a class="users-list-name" href="#">{{ $thisview_vendor->fname }} {{ $thisview_vendor->lname }}</a>
+                        <span class="users-list-date">{{ $thisview_vendor->created_at->diffForHumans() }}</span>
                       </li>
                       @endforeach
                       
@@ -539,7 +539,7 @@
                   </div>
                   <!-- /.card-body -->
                   <div class="card-footer text-center">
-                    <a href="{{ url('web/myorderproducts') }}">View All Product</a>
+                    <a href="{{ url('web/myvendorsbydistributor') }}">View All Vendors</a>
                   </div>
                   <!-- /.card-footer -->
                 </div>

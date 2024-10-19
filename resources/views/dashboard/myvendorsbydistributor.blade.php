@@ -90,7 +90,7 @@
                         <td>{{ $view_vendor->Lga->district['districts'] }}</td>
                         <td>{{ $view_vendor->Lga['lga'] }}</td>
 
-                        <td><a href="{{ url('web/viewsinglevendorfran/'.$view_vendor->ref_no) }}"
+                        <td><a href="{{ url('web/viewsinglevendorfran/'.$view_vendor->id) }}"
                           class='btn btn-info'>
                            <i class="far fa-eye"></i>
                        </a></td>
@@ -128,11 +128,7 @@
                         <th>LGA</th>
                         <th>View</th>
                         <th>Status</th>
-                        {{-- <th>Approve</th>
-                        <th>Suspend</th>
-                        <th>Edit</th>
-    
-                        <th>Delete</th> --}}
+                   
                         <th>Date</th>
                       </tr>
                   </tfoot>
