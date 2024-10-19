@@ -52,7 +52,7 @@ return new class extends Migration
             $table->string('images')->nullable();
             $table->string('terms')->nullable();
             $table->string('distributor_email')->nullable();
-            $table->string('subvendor_email')->nullable();
+            $table->string('vendor_email')->nullable();
             // $table->string('terms')->nullable();
             $table->string('password');
             $table->timestamp('email_verified_at')->nullable();

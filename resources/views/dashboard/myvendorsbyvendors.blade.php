@@ -73,7 +73,7 @@
                   @endif
                   @foreach ($view_vendor_vendors as $view_vendor)
                     <tr>
-                        <td>{{ $view_vendor->ref_no }}</td>
+                        <td>{{ $view_vendor->ref_no3 }}</td>
                         <td>{{ $view_vendor->fname }}</td>
                         <td>{{ $view_vendor->lname }}</td>
                         <td>{{ $view_vendor->city }}</td>
@@ -92,7 +92,7 @@
                         <td>{{ $view_vendor->Lga->district['districts'] }}</td>
                         <td>{{ $view_vendor->Lga['lga'] }}</td>
 
-                        <td><a href="{{ url('web/viewsinglevendorfran/'.$view_vendor->ref_no) }}"
+                        <td><a href="{{ url('web/viewsinglevendorfran/'.$view_vendor->ref_no3) }}"
                           class='btn btn-info'>
                            <i class="far fa-eye">View Activities</i>
                        </a></td>

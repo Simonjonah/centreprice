@@ -6,6 +6,7 @@ use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Support\Facades\Http;
 use App\Models\Sale;
+use App\Models\Subaccount;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
@@ -30,21 +31,32 @@ class SaleController extends Controller
                     'amount' => $request->amount, 
                     'reference' => $reference,
                     // 'subvendor_id' => $request->subvendor_id,
-                    // 'first_name' => $request->first_name,
-                    // 'last_name' => $request->last_name,
-                    // 'distributor_email' => $request->distributor_email,
-                    // 'vendor_email' => $request->vendor_email,
-                    // 'distributor_id' => $request->distributor_id,
-                    // 'vendor_id' => $request->vendor_id,
-                    // 'product_id' => $request->product_id,
-                    // 'vendor_id' => $request->vendor_id,
-                    // 'subvendor_commission' => $request->subvendor_commission,
-                    // 'distributors_commission' => $request->distributors_commission,
-                    // 'vendors_commission' => $request->vendors_commission,
-                    // 'phone' => $request->phone,
-                    // 'transport_id' => $request->transport_id,
-                    // 'delivery_address' => $request->delivery_address,
-                    // 'delivery_phone' => $request->delivery_phone,
+                    'first_name' => $request->first_name,
+                    'last_name' => $request->last_name,
+                    'distributor_email' => $request->distributor_email,
+                    'vendor_email' => $request->vendor_email,
+                    'distributor_id' => $request->distributor_id,
+                    'vendor_id' => $request->vendor_id,
+                    'product_id' => $request->product_id,
+
+                    'subvendor_commission' => $request->subvendor_commission,
+                    'distributors_commission' => $request->distributors_commission,
+                    'vendors_commission' => $request->vendors_commission,
+                    'phone' => $request->phone,
+
+                    'transport_id' => $request->transport_id,
+                    'delivery_address' => $request->delivery_address,
+                    'delivery_phone' => $request->delivery_phone,
+                    'metadata' => [
+                        'custom_fields' => [
+                            [
+                                'quantity' => $request->quantity,
+                                'product_id' => $request->product_id,
+                            ],
+                            
+                        ],
+                    ],
+
                     'callback_url' => route('payment.callback'), 
                     // 'split' => [
                     //     'type' => 'percentage', 
@@ -61,11 +73,11 @@ class SaleController extends Controller
                     // ]
                 ]);
 
-            //$result = $response->json();
-            $result = json_decode($response->getBody()->getContents(), true);
-            return response()->json([
-                'payment' => $result
-            ]);
+            $result = $response->json();
+            // $result = json_decode($response->getBody()->getContents(), true);
+            // return response()->json([
+            //     'payment' => $result
+            // ]);
             Sale::create([
                 'quantity' => $request->quantity,
                 'ref_no' => substr(rand(0,time()),0, 9),
@@ -81,9 +93,9 @@ class SaleController extends Controller
                 'vendor_id' => $request->vendor_id,
                 'product_id' => $request->product_id,
                 
-                'subvendor_commission' => $request->subvendor_commission,
-                'distributors_commission' => $request->distributors_commission,
-                'vendors_commission' => $request->vendors_commission,
+                'subvendor_commission' => $request->subvendor_commission * $request->quantity,
+                'distributors_commission' => $request->distributors_commission * $request->quantity,
+                'vendors_commission' => $request->vendors_commission * $request->quantity,
                 'phone' => $request->phone,
                 
                 'reference' => $reference,
@@ -130,17 +142,38 @@ class SaleController extends Controller
             $response = Http::withToken("sk_test_d320f1edcb2c172115da615043090c1580f9758f")
                 ->get('https://api.paystack.co/transaction/verify/' . $reference);
                 // dd($response);
-            $result = $response->json();
-            // $result = json_decode($response->getBody()->getContents(), true);
+            //$result = $response->json();
+            $result = json_decode($response->getBody()->getContents(), true);
             
-
+            // return response()->json([
+            //     'result' => $result,
+                
+            // ]);
             $reference = $request->query('reference');
-            $product_id = $request->query('product_id');
+            
             if ($result['status'] && $result['status'] == 'success') {
             $payment = Sale::where('reference', $reference)->first();
-            $product = Product::where('id', $product_id)->first();
-            $product->quantity =- $request->quantity;
-            $product->update();  
+            $product = Product::findOrFail($payment->product_id)->first();
+            $product->quantity -= $payment->quantity;
+            $product->update();
+           
+            // dd($payment->product_id);
+            // if (isset($payment->product_id)) {
+            //     // dd($product);
+            //     $result->update([
+            //         'quantity' => $product->quantity,
+            //     ]);
+            // } else {
+            //     // Handle the case where product_id is missing
+            //     $product = Product::find($result['data']['metadata']['custom_fields']['product_id']);
+            //     dd($product);
+
+            //     $result->update([
+            //         'quantity' => $product['data']['metadata']['custom_fields']['quantity'],
+            //     ]);
+            // }
+            
+             
                $payment->update([
                     'status' => 'success',
                     'domain' => $result['data']['domain'],
@@ -151,8 +184,7 @@ class SaleController extends Controller
                     'ip_address' => $result['data']['ip_address'],
                     'channel' => $result['data']['channel'],
                     'ip_address' => $result['data']['ip_address'],
-                    'split_id' => $result['data']['split']['id'],
-                    'name' => $result['data']['split']['name'],
+                    // 
                     
                     
                     'authorization_code' => $result['data']['authorization']['authorization_code'],
@@ -169,11 +201,12 @@ class SaleController extends Controller
                     
 
                     
-
-                    'split_code' => $result['data']['split']['split_code'],
-                    'type' => $result['data']['split']['formula']['type'],
-                    'bearer_type' => $result['data']['split']['formula']['bearer_type'],
-                    'bearer_subaccount' => $result['data']['split']['formula']['bearer_subaccount'],
+                    //'split_id' => $result['data']['split']['id'],
+                    // 'name' => $result['data']['split']['name'],
+                    // 'split_code' => $result['data']['split']['split_code'],
+                    // 'type' => $result['data']['split']['formula']['type'],
+                    // 'bearer_type' => $result['data']['split']['formula']['bearer_type'],
+                    // 'bearer_subaccount' => $result['data']['split']['formula']['bearer_subaccount'],
                     
                     
                     
@@ -197,9 +230,23 @@ class SaleController extends Controller
 
                    
                ]);
-               dd($result);
+            //    return response()->json([
+            //         'result' => $result
+            //    ]);
+            //    dd($result);
+
+
+             // Update the customer wallet with their share
+                $customer = Subaccount::where('email', $result['data']['customer']['email'])
+                ->where('distributor_email', $result['data']['customer']['email'])
+                ->where('venemail', $result['data']['customer']['email'])->first();
+                
+                $customer->wallet += $product->vendors_commission; 
+                // $customer->wallet += $result['data']['amount'] / 100; 
+                // $customer->wallet += $result['data']['amount'] / 100; 
+                $customer->save();
                return redirect()->route('thankyou')->with('success', 'Payment successful!');
-            //    return redirect()->route('payment.success')->with('success', 'Payment successful!');
+            // return redirect()->route('payment.success')->with('success', 'Payment successful!');
             } else {
                 return redirect()->route('payment.failed')->with('error', 'Payment failed. Please try again.');
             }
@@ -233,7 +280,7 @@ class SaleController extends Controller
 
     public function viewgoodsbyvendor($ref_no){
         $view_purchse = Sale::where('ref_no', $ref_no)->first();
-        $view_allprodocts = Order::where('status', 'delivered')->latest()->get();
+        $view_allprodocts = Sale::where('status', 'delivered')->latest()->get();
 
         return view('dashboard.viewgoodsbyvendor', compact('view_allprodocts', 'view_purchse'));
     }
@@ -251,6 +298,59 @@ class SaleController extends Controller
         $suspend_franchise->save();
         return redirect()->back()->with('success', 'you have recieve successfully');
     }
+
+
+    public function vieworders(){
+        $view_orders = Sale::orderBy('created_at', 'DESC')->get();
+      return view('dashboard.admin.vieworders', compact('view_orders'));
+  }
+
+
+
+
+
+  public function deliveredorder($ref_no){
+    $approve_order = Sale::where('ref_no', $ref_no)->first();
+    $approve_order->productstatus = 'delivered';
+    $approve_order->save();
+    return redirect()->back()->with('success', 'you have delivered the products successfully');
+}
+
+
+public function suspendorderadmin($ref_no){
+    $approve_order = Sale::where('ref_no', $ref_no)->first();
+    $approve_order->productstatus = 'suspend';
+    $approve_order->save();
+    return redirect()->back()->with('success', 'you have suspended the products successfully');
+}
+public function suspendorder($ref_no){
+    $approve_order = Sale::where('ref_no', $ref_no)->first();
+    $approve_order->productstatus = 'suspend';
+    $approve_order->save();
+    return redirect()->back()->with('success', 'you have suspended the products successfully');
+}
+
+public function viewsingleorder($ref_no){
+    $view_order = Sale::where('ref_no', $ref_no)->first();
+    return view('dashboard.viewsingleorder', compact('view_order'));
+}
+
+public function viewsingleorderadmin($ref_no){
+    $view_order = Sale::where('ref_no', $ref_no)->first();
+    return view('dashboard.admin.viewsingleorderadmin', compact('view_order'));
+}
+
+public function deleteorder($ref_no){
+    $delete_order = Sale::where('ref_no', $ref_no)->delete();
+    return redirect()->back()->with('success', 'You have deleted successfully');
+}
+
+
+public function deleteorderadmin($ref_no){
+    $delete_order = Sale::where('ref_no', $ref_no)->delete();
+    return redirect()->back()->with('success', 'You have deleted successfully');
+}
+
     
 }
 

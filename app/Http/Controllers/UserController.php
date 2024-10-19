@@ -604,7 +604,7 @@ class UserController extends Controller
     }
 
     public function myvendorsbyvendors(){
-        $view_vendor_vendors = User::where('subvendor_id', auth::guard('web')->user()->id)->latest()->get();
+        $view_vendor_vendors = User::where('vendor_id', auth::guard('web')->user()->id)->latest()->get();
         return view('dashboard.myvendorsbyvendors', compact('view_vendor_vendors'));
     }
     

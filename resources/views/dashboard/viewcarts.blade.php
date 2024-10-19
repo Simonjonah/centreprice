@@ -49,7 +49,7 @@
                   </thead>
                   @php
                     $total = 0;
-                    $cartTotal = 0;
+                    $totalAmount = 0;
                     $totp = 0;
                     $paid_total = 0;
                     
@@ -182,16 +182,19 @@
                     $reference = substr(rand(0,time()),0, 9);
                 @endphp
               <div class="mt-4">
-               
-                  {{-- <td id="cartTotal">
+                  <td id="cartTotal">
                     <span id="totalAmount">
+                    
+
                       <select class="form-control" name="amount">
-                        <option value="{{ $total + $cartTotal }}">{{ $total + $cartTotal }}</option>
+                        <option value="{{ $total + $totalAmount }}">{{ $total + $totp }}</option>
                       </select>
                     </span>
-                    
-                </td> --}}
-                  <input type="text" class="form-control" value="{{ $total }}">
+                   
+                </td>
+
+                
+                  {{-- <input type="text" name="amount" class="form-control" value="{{ $total }}"> --}}
 
                   <input type="text" class="form-control"  name="product_id" value="{{ $details['product_id'] }}">
                   {{-- <input type="text" class="form-control"  name="franchise_id" value="{{ $details['franchise_id'] }}"> --}}

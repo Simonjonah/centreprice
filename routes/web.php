@@ -311,13 +311,13 @@ Route::prefix('admin')->name('admin.')->group(function() {
         Route::get('/vendorsubcription', [SubscriptionController::class, 'vendorsubcription'])->name('vendorsubcription');
         
         Route::get('/viewsubscriptionpayment/{user_id}', [SubscriptionController::class, 'viewsubscriptionpayment'])->name('viewsubscriptionpayment');
-        Route::get('/vieworders', [OrderController::class, 'vieworders'])->name('vieworders');
-        Route::get('/viewsingleorderadmin/{ref_no}', [OrderController::class, 'viewsingleorderadmin'])->name('viewsingleorderadmin');
-        Route::get('/deliveredorder/{ref_no}', [OrderController::class, 'deliveredorder'])->name('deliveredorder');
-        Route::get('/suspendorder/{ref_no}', [OrderController::class, 'suspendorder'])->name('suspendorder');
-        Route::get('/suspendorderadmin/{ref_no}', [OrderController::class, 'suspendorderadmin'])->name('suspendorderadmin');
-        Route::get('/deleteorderadmin/{ref_no}', [OrderController::class, 'deleteorderadmin'])->name('deleteorderadmin');
-        Route::get('/deleteorderadmin/{ref_no}', [OrderController::class, 'deleteorderadmin'])->name('deleteorderadmin');
+        Route::get('/vieworders', [SaleController::class, 'vieworders'])->name('vieworders');
+        Route::get('/viewsingleorderadmin/{ref_no}', [SaleController::class, 'viewsingleorderadmin'])->name('viewsingleorderadmin');
+        Route::get('/deliveredorder/{ref_no}', [SaleController::class, 'deliveredorder'])->name('deliveredorder');
+        Route::get('/suspendorder/{ref_no}', [SaleController::class, 'suspendorder'])->name('suspendorder');
+        Route::get('/suspendorderadmin/{ref_no}', [SaleController::class, 'suspendorderadmin'])->name('suspendorderadmin');
+        Route::get('/deleteorderadmin/{ref_no}', [SaleController::class, 'deleteorderadmin'])->name('deleteorderadmin');
+        Route::get('/deleteorderadmin/{ref_no}', [SaleController::class, 'deleteorderadmin'])->name('deleteorderadmin');
         
         Route::get('/addplan', [PlanController::class, 'addplan'])->name('addplan');
         Route::get('/viewplan', [PlanController::class, 'viewplan'])->name('viewplan');

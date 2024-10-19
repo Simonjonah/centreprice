@@ -120,10 +120,7 @@ class OrderController extends Controller
     }
 
      
-    public function vieworders(){
-          $view_orders = Order::orderBy('created_at', 'DESC')->get();
-        return view('dashboard.admin.vieworders', compact('view_orders'));
-    }
+   
 
     public function myproductliners(){
         $franchise_products = Order::where('franchise_id', auth::guard('web')->user()->id)->latest()->get();

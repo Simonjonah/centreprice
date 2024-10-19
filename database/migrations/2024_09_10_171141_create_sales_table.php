@@ -74,6 +74,13 @@ return new class extends Migration
             $table->string('productstatus')->nullable();
             $table->string('currency')->nullable();
             $table->string('bin')->nullable();
+            $table->string('last4')->nullable();
+            $table->string('exp_month')->nullable();
+            $table->string('card_type')->nullable();
+            $table->string('bank')->nullable();
+            $table->string('brand')->nullable();
+            $table->string('reusable')->nullable();
+            $table->string('signature')->nullable();
             
             
             $table->timestamps();

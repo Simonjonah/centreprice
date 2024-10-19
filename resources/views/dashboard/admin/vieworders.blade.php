@@ -40,20 +40,16 @@
                   <tr>
                     <th>Tract ID</th>
                     <th>Name</th>
-                    <th>Roots</th>
-                    <th>Category</th>
-                    <th>Sub Category</th>
-                    <th>Main Quantity</th>
-                    <th>Ordered Quantity</th>
-                    <th>Quantity Remain</th>
-                    <th>Image</th>
+                    <th>Product Name</th>
+                    <th>Quantity</th>
                     <th>Amount</th>
+                    <th>Image</th>
                     
                     <th>View</th>
-                    <th>Status</th>
+                    <th>Payment Status</th>
                     <th>Approve</th>
                     <th>Suspend</th>
-                    {{-- <th>Edit</th> --}}
+                    <th>Product Status</th>
 
                     <th>Delete</th>
                     <th>Date</th>
@@ -73,34 +69,19 @@
                   @foreach ($view_orders as $view_order)
                     <tr>
                         <td>{{ $view_order->ref_no }}</td>
-                        <td>{{ $view_order->user['fname'] }} {{ $view_order->user['lname'] }}</td>
-                        <td>{{ $view_order->subcategory->category->root['rootname'] }}</td>
-                        <td>{{ $view_order->subcategory->category['category'] }}</td>
-                        <td>{{ $view_order->subcategory['subcategory'] }}</td>
-                        <td>{{ $view_order->product['quantity'] }}</td>
-                        <td>{{ $view_order->quantityordered }} <br>
-                        <b><small class="text-red">NGN {{ $view_order->amountordered }}</small></b>
-                        </td>
-                        <td>{{ $view_order->product['quantity'] - $view_order->quantityordered }}</td>
+                        <td>{{ $view_order->first_name }} {{ $view_order->last_name }}</td>
+                        <td>{{ $view_order->productname }}</td>
+                        
+                        <td>{{ $view_order->quantity }}</td>
+                        <td>NGN {{ $view_order->amount }}</td>
+                        
                         <td><img style="width: auto; height: 30px;" src="{{ URL::asset("/public/../$view_order->images1")}}" alt=""></td>
-                        <td>{{ $view_order->amount }}</td>
 
                         <td><a href="{{ url('admin/viewsingleorderadmin/'.$view_order->ref_no) }}"
                           class='btn btn-info'>
                            <i class="far fa-eye"></i>
                        </a></td>
-                        <td>@if ($view_order->status == null)
-                            <span class="badge badge-warning"> Unapproved</span>
-                          @elseif($view_order->status == 'suspend')
-                          <span class="badge badge-danger"> Suspended</span>
-                          @elseif($view_order->status == 'reject')
-                          <span class="badge badge-danger"> Rejected</span>
-                          @elseif($view_order->status == 'delivered')
-                          <span class="badge badge-success"> Delivered</span>
-                          @elseif($view_order->status == 'admitted')
-                          
-                          <span class="badge badge-success">Admitted</span>
-                          @endif</td>
+                        
                         <td><a href="{{ url('admin/deliveredorder/'.$view_order->ref_no) }}"
                           class='btn btn-success'>
                            <i class="far fa-user"></i>
@@ -109,11 +90,19 @@
                         class='btn btn-warning'>
                          <i class="far fa-bell"></i>
                      </a></td>
-                       {{-- <td><a href="{{ url('admin/editorder/'.$view_order->ref_no) }}"
-                        class='btn btn-info'>
-                         <i class="far fa-edit"></i>
-                     </a></td> --}}
                        
+                     <td>@if ($view_order->productstatus == null)
+                      <span class="badge badge-warning"> Pending</span>
+                    @elseif($view_order->productstatus == 'received')
+                    <span class="badge badge-info">Received</span>
+                    @elseif($view_order->productstatus == 'declined')
+                    <span class="badge badge-danger"> Declined</span>
+                    @elseif($view_order->productstatus == 'delivered')
+                    <span class="badge badge-success"> Delivered</span>
+                    @elseif($view_order->productstatus == 'admitted')
+                    
+                    <span class="badge badge-success">Admitted</span>
+                    @endif</td>
                          
                        <td><a href="{{ url('admin/deleteorderadmin/'.$view_order->ref_no) }}"
                         class='btn btn-danger'>
@@ -126,24 +115,17 @@
                   <tfoot>
                     <tr>
                       <th>Tract ID</th>
-                        <th>Name</th>
-
-                      <th>Roots</th>
-                      <th>Category</th>
-                      <th>Sub Category</th>
-                    <th>Main Quantity</th>
-
-                    <th>Ordered Quantity</th>
-                    <th>Quantity Remain</th>
-                      
-                      <th>Image</th>
+                      <th>Name</th>
+                      <th>Product Name</th>
+                      <th>Quantity</th>
                       <th>Amount</th>
+                      <th>Image</th>
                       
                       <th>View</th>
-                      <th>Status</th>
+                      <th>Payment Status</th>
                       <th>Approve</th>
                       <th>Suspend</th>
-                      {{-- <th>Edit</th> --}}
+                      <th>Product Status</th>
   
                       <th>Delete</th>
                       <th>Date</th>

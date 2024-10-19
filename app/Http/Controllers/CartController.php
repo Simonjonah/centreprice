@@ -16,6 +16,7 @@ class CartController extends Controller
    {
        $cart = session()->get('cart');
        $view_transports = Transport::orderBy('state')->get();
+    //    $cartTotal = session()->getTotal();
        return view('dashboard.viewcarts', compact('view_transports', 'cart'));
    }
 

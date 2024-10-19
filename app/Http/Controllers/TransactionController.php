@@ -184,7 +184,7 @@ class TransactionController extends Controller
                         'reference' => $reference,
                         
                         'distributor_email' => $request->distributor_email,
-                        'subvendor_email' => $request->subvendor_email,
+                        'vendor_email' => $request->vendor_email,
                         'user_type' => $request->user_type,
                         'email' => $request->email,
                         'phone' => $request->phone,

@@ -29,7 +29,7 @@
           <!-- left column -->
           <div class="col-md-12">
             <!-- general form elements -->
-            <div class="card card-success">
+            <div class="card card-primary">
               <div class="card-header">
                 <h3 class="card-title">Create Account</h3>
               </div>
@@ -47,24 +47,29 @@
                   @if (Session::get('fail'))
                   <div class="alert alert-danger">
                   {{ Session::get('fail') }}
+                  </div>
                   @endif
 
                   <!-- /.card-header -->
                 <div class="card-body">
                   <div class="row">
                     <div class="col-md-6">
-                     <input type="text" name="user_id" value="{{ Auth::user()->id }}">
+                     <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                     <input type="hidden" name="distributor_id" value="{{ Auth::user()->user_id }}">
+                     <input type="hidden" name="vendor_id" value="{{ Auth::user()->vendor_id }}">
+                     <input type="hidden" name="distributor_email" value="{{ Auth::user()->distributor_email }}">
+                      <input type="hidden" name="vendor_email" value="{{ Auth::user()->vendor_email }}">
                       <div class="form-group">
-                        <label for="">Email</label>
-                        <input name="email" type="text" @error('email') is-invalid @enderror"
+                        <input name="email" type="hidden" @error('email') is-invalid @enderror"
                         value="{{ Auth::user()->email }}" class="form-control" id="" placeholder="Email">
                     </div>
                     @error('email')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
 
-                            <div class="form-group">
-                              <label for="">First Name</label>
+                        <div class="form-group">
+                        <label for="">First Name</label>
+
                               <input name="first_name" type="text" @error('first_name') is-invalid @enderror"
                               value="{{ Auth::user()->fname }}" class="form-control" id="" placeholder="first name">
                           </div>
@@ -87,8 +92,8 @@
 
 
                     <div class="form-group">
-                        <label for="">Phone</label>
-                        <input name="phone" type="text" @error('phone') is-invalid @enderror"
+                        {{-- <label for="">Phone</label> --}}
+                        <input name="phone" type="hidden" @error('phone') is-invalid @enderror"
                         value="{{ Auth::user()->phone }}" class="form-control" id="" placeholder="Phone">
                     </div>
                     @error('phone')
@@ -96,14 +101,14 @@
                     @enderror
 
 
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                       <label for="">Bank</label>
                       <input name="preferred_bank" type="text" @error('preferred_bank') is-invalid @enderror"
                       value="{{ old('preferred_bank') }}" class="form-control" id="" placeholder="preferred_bank">
                   </div>
                   @error('preferred_bank')
                       <span class="text-danger">{{ $message }}</span>
-                  @enderror
+                  @enderror --}}
 
                   
 
