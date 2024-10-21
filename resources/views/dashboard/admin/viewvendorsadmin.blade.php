@@ -75,10 +75,10 @@
                   @foreach ($view_vendors as $view_vendor)
                     <tr>
                         <td>{{ $view_vendor->ref_no3 }}</td>
-                        <td>{{ $view_vendor->fname }}</td>
+                        <td><a href="{{ url('admin/viewsubscriptionpaymentprint/'.$view_vendor->id) }}">{{ $view_vendor->fname }} View Payment</a> </td>
                         <td>{{ $view_vendor->lname }}</td>
                         <td>{{ $view_vendor->city }}</td>
-                        <td>@if ($view_vendor->role == '3')
+                        <td>@if ($view_vendor->user_type == 'Vendor')
                             <span class="badge badge-info"> Vendor</span>
                           @else
                           <span class="badge badge-success">Admin</span>

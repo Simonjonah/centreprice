@@ -70,19 +70,18 @@
                   {{ Session::get('fail') }}
                   @endif
                   @foreach ($view_vendorsubs as $view_vendorsub)
-                    @if ($view_vendorsub->user['role'] === '3')
+                    @if ($view_vendorsub->user_type === 'Vendor')
                     <tr>
-                      <td>{{ $view_vendorsub->user['ref_no'] }}</td>
-                      <td>{{ $view_vendorsub->user['fname'] }}</td>
+                      <td>{{ $view_vendorsub->user['ref_no3'] }}</td>
+                      <td> {{ $view_vendorsub->user['fname'] }}</td>
                       <td>{{ $view_vendorsub->user['lname'] }}</td>
-                      <td>{{ $view_vendorsub->plan['amount'] }}</td>
-                      <td>@if ($view_vendorsub->user['role'] === '1')
-                          <span class="badge badge-info"> Franchise</span>
-                          @elseif ($view_vendorsub->user['role'] === '2')
-                          <span class="badge badge-primary"> Distributor</span>
+                      <td>{{ $view_vendorsub->amount }}</td>
+                      <td>@if ($view_vendorsub->user_type === 'Distributor')
+                          <span class="badge badge-info"> Distributor</span>
+                          @elseif ($view_vendorsub->user_type === 'Vendor')
+                          <span class="badge badge-success">Vendor</span>
 
                         @else
-                        <span class="badge badge-success">Vendor</span>
                         @endif</td>
                       <td>{{ $view_vendorsub->user['phone'] }}</td>
                       <td>{{ $view_vendorsub->user['email'] }}</td>
@@ -102,17 +101,17 @@
                         class='btn btn-success'>
                          <i class="far fa-eye">View Payment</i>
                      </a></td>
-                      <td>@if ($view_vendorsub->status == 'active')
-                          <span class="badge badge-info"> Active</span>
+                      <td>@if ($view_vendorsub->status == 'pending')
+                          <span class="badge badge-warning"> Pending</span>
                         @elseif($view_vendorsub->status == 'canceled')
                         <span class="badge badge-danger"> Canceled</span>
                         @elseif($view_vendorsub->status == 'reject')
                         <span class="badge badge-danger"> Rejected</span>
                         @elseif($view_vendorsub->status == 'approved')
                         <span class="badge badge-success"> Approved</span>
-                        @elseif($view_vendorsub->status == 'admitted')
+                        @elseif($view_vendorsub->status == 'success')
                         
-                        <span class="badge badge-success">Admitted</span>
+                        <span class="badge badge-success">Paid</span>
                         @endif</td>
                      
                  

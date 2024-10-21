@@ -58,6 +58,7 @@
       $reference = substr(rand(0,time()),0, 9);
   @endphp
       <label for="">First Name</label>
+      <input type="hidden" name="ref_no" value="{{ $view_vendor->ref_no }}">
       <input type="hidden" name="user_id" value="{{ $view_vendor->user_id }}">
       <input type="hidden" name="distributor_id" value="{{ $view_vendor->user_id }}">
       <input type="hidden" name="distributor_email" value="{{ $view_vendor->distributor_email }}">

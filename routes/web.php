@@ -310,14 +310,14 @@ Route::prefix('admin')->name('admin.')->group(function() {
         Route::get('/distributorsubcription', [SubscriptionController::class, 'distributorsubcription'])->name('distributorsubcription');
         Route::get('/vendorsubcription', [SubscriptionController::class, 'vendorsubcription'])->name('vendorsubcription');
         
-        Route::get('/viewsubscriptionpayment/{user_id}', [SubscriptionController::class, 'viewsubscriptionpayment'])->name('viewsubscriptionpayment');
+        // Route::get('/viewsubscriptionpayment/{id}', [SubscriptionController::class, 'viewsubscriptionpayment'])->name('viewsubscriptionpayment');
         Route::get('/vieworders', [SaleController::class, 'vieworders'])->name('vieworders');
         Route::get('/viewsingleorderadmin/{ref_no}', [SaleController::class, 'viewsingleorderadmin'])->name('viewsingleorderadmin');
         Route::get('/deliveredorder/{ref_no}', [SaleController::class, 'deliveredorder'])->name('deliveredorder');
         Route::get('/suspendorder/{ref_no}', [SaleController::class, 'suspendorder'])->name('suspendorder');
         Route::get('/suspendorderadmin/{ref_no}', [SaleController::class, 'suspendorderadmin'])->name('suspendorderadmin');
         Route::get('/deleteorderadmin/{ref_no}', [SaleController::class, 'deleteorderadmin'])->name('deleteorderadmin');
-        Route::get('/deleteorderadmin/{ref_no}', [SaleController::class, 'deleteorderadmin'])->name('deleteorderadmin');
+        Route::get('/viewdistributorsale/{id}', [UserController::class, 'viewdistributorsale'])->name('viewdistributorsale');
         
         Route::get('/addplan', [PlanController::class, 'addplan'])->name('addplan');
         Route::get('/viewplan', [PlanController::class, 'viewplan'])->name('viewplan');
@@ -425,6 +425,12 @@ Route::prefix('admin')->name('admin.')->group(function() {
         Route::get('/roleapprove/{ref_no}', [AdminController::class, 'roleapprove'])->name('roleapprove');
         Route::get('/assignroles/{ref_no}', [AdminController::class, 'assignroles'])->name('assignroles');
         Route::put('/updateroles/{ref_no}', [AdminController::class, 'updateroles'])->name('updateroles');
+       
+        Route::get('/viewmyonlyvendors/{id}', [UserController::class, 'viewmyonlyvendors'])->name('viewmyonlyvendors');
+        
+        Route::get('/viewsubscriptionpaymentprint/{id}', [UserController::class, 'viewsubscriptionpaymentprint'])->name('viewsubscriptionpaymentprint');
+        Route::get('/viewsubscriptionpayment/{id}', [SubscriptionController::class, 'viewsubscriptionpayment'])->name('viewsubscriptionpayment');
+        Route::get('/printsub/{reference}', [SubscriptionController::class, 'printsub'])->name('printsub');
         
         Route::post('/createlga', [LgaController::class, 'createlga'])->name('createlga');
         Route::get('/viewlga', [LgaController::class, 'viewlga'])->name('viewlga');
@@ -504,7 +510,9 @@ Route::prefix('web')->name('web.')->group(function() {
         Route::get('/mytransctions', [TransactionController::class, 'mytransctions'])->name('mytransctions');
         Route::get('/printspayment/{id}', [TransactionController::class, 'printspayment'])->name('printspayment');
         Route::post('/renew/{id}', [TransactionController::class, 'renew'])->name('renew');
-        Route::get('/viewsubscriptionpayment/{user_id}', [SubscriptionController::class, 'viewsubscriptionpayment'])->name('viewsubscriptionpayment');
+        Route::get('/viewsubscriptionpayment/{id}', [SubscriptionController::class, 'viewsubscriptionpayment'])->name('viewsubscriptionpayment');
+        Route::get('/printsub/{reference}', [SubscriptionController::class, 'printsub'])->name('printsub');
+        
         Route::get('/ordermyproducts/{ref_no}', [ProductController::class, 'ordermyproducts'])->name('ordermyproducts');
         Route::post('/createorders', [OrderController::class, 'createorders'])->name('createorders');
         Route::get('/myorderproducts', [SaleController::class, 'myorderproducts'])->name('myorderproducts');

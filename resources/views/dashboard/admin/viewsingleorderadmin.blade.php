@@ -1,7 +1,7 @@
 
 
-@include('dashboard.header')
-@include('dashboard.sidebar')
+@include('dashboard.admin.header')
+@include('dashboard.admin.sidebar')
 
   
   <!-- Content Wrapper. Contains page content -->
@@ -55,34 +55,27 @@
                   <div class="row">
                     <div class="col-md-6">
 
-                      <div class="form-group">
+                      {{-- <div class="form-group">
                         <label>Root</label>
                         <select name="subcategory_id" class="form-control select2" style="width: 100%;">
                           <option value="{{ $view_order->root['id'] }}">{{ $view_order->root['rootname'] }}</option>
-                          {{-- @foreach ($view_subcategories as $view_subcategorie)
-                            <option value="{{ $view_subcategorie->id }}">{{ $view_subcategorie->subcategory }}</option>
-                          @endforeach --}}
-                          
                         </select>
                       </div>
                       @error('root_id')
                           <span class="text-danger">{{ $message }}</span>
-                      @enderror
+                      @enderror --}}
                       <!-- /.form-group -->
 
-                      <div class="form-group">
+                      {{-- <div class="form-group">
                         <label>Category</label>
                         <select name="category_id" class="form-control select2" style="width: 100%;">
                           <option value="{{ $view_order->category['id'] }}">{{ $view_order->category['category'] }}</option>
-                          {{-- @foreach ($view_subcategories as $view_subcategorie)
-                            <option value="{{ $view_subcategorie->id }}">{{ $view_subcategorie->subcategory }}</option>
-                          @endforeach --}}
-                          
+                         
                         </select>
                       </div>
                       @error('category_id')
                           <span class="text-danger">{{ $message }}</span>
-                      @enderror
+                      @enderror --}}
                       <!-- /.form-group -->
 
                      
@@ -92,7 +85,7 @@
                       <div class="form-group">
                         <label for="">Quantity Odered</label>
                         <input name="quantity" type="number" @error('quantity') is-invalid @enderror"
-                        value="{{ $view_order->quantityordered }}" class="form-control" id="" placeholder="Quantity">
+                        value="{{ $view_order->quantity }}" class="form-control" id="" placeholder="Quantity">
                     </div>
                     @error('quantity')
                         <span class="text-danger">{{ $message }}</span>
@@ -111,7 +104,7 @@
                     @error('amount')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                       <label> SubCategory</label>
                       <select name="category_id" class="form-control select2" style="width: 100%;">
                         <option value="{{ $view_order->subcategory['id'] }}">{{ $view_order->subcategory['subcategory'] }}</option>
@@ -119,7 +112,7 @@
                     </div>
                     @error('category_id')
                         <span class="text-danger">{{ $message }}</span>
-                    @enderror
+                    @enderror --}}
                     <!-- /.form-group -->
                     
 

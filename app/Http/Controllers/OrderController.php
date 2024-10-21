@@ -72,60 +72,60 @@ class OrderController extends Controller
 
     }
 
-    <!-- public function myorderproducts (){
-        $view_orders = Order::where('distributor_id', auth::user()->id)->get();
-        return view('dashboard.myorderproducts', compact('view_orders'));
-    } -->
+    // <!-- public function myorderproducts (){
+    //     $view_orders = Order::where('distributor_id', auth::user()->id)->get();
+    //     return view('dashboard.myorderproducts', compact('view_orders'));
+    // } -->
 
-    public function deliveredorder($ref_no){
-        $approve_order = Order::where('ref_no', $ref_no)->first();
-        $approve_order->status = 'delivered';
-        $approve_order->save();
-        return redirect()->back()->with('success', 'you have delivered the products successfully');
-    }
+    // public function deliveredorder($ref_no){
+    //     $approve_order = Order::where('ref_no', $ref_no)->first();
+    //     $approve_order->status = 'delivered';
+    //     $approve_order->save();
+    //     return redirect()->back()->with('success', 'you have delivered the products successfully');
+    // }
 
 
-    public function suspendorderadmin($ref_no){
-        $approve_order = Order::where('ref_no', $ref_no)->first();
-        $approve_order->status = 'suspend';
-        $approve_order->save();
-        return redirect()->back()->with('success', 'you have suspended the products successfully');
-    }
-    public function suspendorder($ref_no){
-        $approve_order = Order::where('ref_no', $ref_no)->first();
-        $approve_order->status = 'suspend';
-        $approve_order->save();
-        return redirect()->back()->with('success', 'you have suspended the products successfully');
-    }
+    // public function suspendorderadmin($ref_no){
+    //     $approve_order = Order::where('ref_no', $ref_no)->first();
+    //     $approve_order->status = 'suspend';
+    //     $approve_order->save();
+    //     return redirect()->back()->with('success', 'you have suspended the products successfully');
+    // }
+    // public function suspendorder($ref_no){
+    //     $approve_order = Order::where('ref_no', $ref_no)->first();
+    //     $approve_order->status = 'suspend';
+    //     $approve_order->save();
+    //     return redirect()->back()->with('success', 'you have suspended the products successfully');
+    // }
 
-    public function viewsingleorder($ref_no){
-        $view_order = Order::where('ref_no', $ref_no)->first();
-        return view('dashboard.viewsingleorder', compact('view_order'));
-    }
+    // public function viewsingleorder($ref_no){
+    //     $view_order = Order::where('ref_no', $ref_no)->first();
+    //     return view('dashboard.viewsingleorder', compact('view_order'));
+    // }
 
-    public function viewsingleorderadmin($ref_no){
-        $view_order = Order::where('ref_no', $ref_no)->first();
-        return view('dashboard.admin.viewsingleorderadmin', compact('view_order'));
-    }
+    // public function viewsingleorderadmin($ref_no){
+    //     $view_order = Order::where('ref_no', $ref_no)->first();
+    //     return view('dashboard.admin.viewsingleorderadmin', compact('view_order'));
+    // }
     
-    public function deleteorder($ref_no){
-        $delete_order = Order::where('ref_no', $ref_no)->delete();
-        return redirect()->back()->with('success', 'You have deleted successfully');
-    }
+    // public function deleteorder($ref_no){
+    //     $delete_order = Order::where('ref_no', $ref_no)->delete();
+    //     return redirect()->back()->with('success', 'You have deleted successfully');
+    // }
 
 
-    public function deleteorderadmin($ref_no){
-        $delete_order = Order::where('ref_no', $ref_no)->delete();
-        return redirect()->back()->with('success', 'You have deleted successfully');
-    }
+    // public function deleteorderadmin($ref_no){
+    //     $delete_order = Order::where('ref_no', $ref_no)->delete();
+    //     return redirect()->back()->with('success', 'You have deleted successfully');
+    // }
 
      
    
 
-    public function myproductliners(){
-        $franchise_products = Order::where('franchise_id', auth::guard('web')->user()->id)->latest()->get();
-      return view('dashboard.myproductliners', compact('franchise_products'));
-    }
+    // public function myproductliners(){
+    //     $franchise_products = Order::where('franchise_id', auth::guard('web')->user()->id)->latest()->get();
+    //   return view('dashboard.myproductliners', compact('franchise_products'));
+    // }
 
     // public function myvendorproducts(){
     //     $franchise_products = Order::where('status', 'delivered')->get();

@@ -66,61 +66,61 @@
                   <div class="alert alert-danger">
                   {{ Session::get('fail') }}
                   @endif
-                  @foreach ($view_orders as $view_order)
+                  @foreach ($distributor_sales as $distributor_sale)
                     <tr>
-                        <td>{{ $view_order->ref_no }}</td>
-                        <td>{{ $view_order->first_name }} {{ $view_order->last_name }}</td>
-                        <td>{{ $view_order->productname }}</td>
+                        <td>{{ $distributor_sale->ref_no }}</td>
+                        <td>{{ $distributor_sale->first_name }} {{ $distributor_sale->last_name }}</td>
+                        <td>{{ $distributor_sale->productname }}</td>
                         
-                        <td>{{ $view_order->quantity }}</td>
-                        <td>NGN {{ $view_order->amount }}</td>
+                        <td>{{ $distributor_sale->quantity }}</td>
+                        <td>NGN {{ $distributor_sale->amount }}</td>
                         
-                        <td><img style="width: auto; height: 30px;" src="{{ URL::asset("/public/../$view_order->images1")}}" alt=""></td>
+                        <td><img style="width: auto; height: 30px;" src="{{ URL::asset("/public/../$distributor_sale->images1")}}" alt=""></td>
 
-                        <td><a href="{{ url('admin/viewsingleorderadmin/'.$view_order->ref_no) }}"
+                        <td><a href="{{ url('admin/viewsingleorderadmin/'.$distributor_sale->ref_no) }}"
                           class='btn btn-info'>
                            <i class="far fa-eye"></i>
                        </a></td>
-                       <td>@if ($view_order->status == 'pending')
+                       <td>@if ($distributor_sale->status == 'pending')
                         <span class="badge badge-warning"> Pending</span>
-                      @elseif($view_order->status == 'success')
+                      @elseif($distributor_sale->status == 'success')
                       <span class="badge badge-info">Paid</span>
-                      @elseif($view_order->status == 'declined')
+                      @elseif($distributor_sale->status == 'declined')
                       <span class="badge badge-danger"> Declined</span>
-                      @elseif($view_order->status == 'delivered')
+                      @elseif($distributor_sale->status == 'delivered')
                       <span class="badge badge-success"> Delivered</span>
-                      @elseif($view_order->status == 'admitted')
+                      @elseif($distributor_sale->status == 'admitted')
                       
                       <span class="badge badge-success">Admitted</span>
                       @endif</td>
                         
-                        <td><a href="{{ url('admin/deliveredorder/'.$view_order->ref_no) }}"
+                        <td><a href="{{ url('admin/deliveredorder/'.$distributor_sale->ref_no) }}"
                           class='btn btn-success'>
                            <i class="far fa-user"></i>
                        </a></td>
-                       <td><a href="{{ url('admin/suspendorderadmin/'.$view_order->ref_no) }}"
+                       <td><a href="{{ url('admin/suspendorderadmin/'.$distributor_sale->ref_no) }}"
                         class='btn btn-warning'>
                          <i class="far fa-bell"></i>
                      </a></td>
                        
-                     <td>@if ($view_order->productstatus == null)
+                     <td>@if ($distributor_sale->productstatus == null)
                       <span class="badge badge-warning"> Pending</span>
-                    @elseif($view_order->productstatus == 'received')
+                    @elseif($distributor_sale->productstatus == 'received')
                     <span class="badge badge-info">Received</span>
-                    @elseif($view_order->productstatus == 'declined')
+                    @elseif($distributor_sale->productstatus == 'declined')
                     <span class="badge badge-danger"> Declined</span>
-                    @elseif($view_order->productstatus == 'delivered')
+                    @elseif($distributor_sale->productstatus == 'delivered')
                     <span class="badge badge-success"> Delivered</span>
-                    @elseif($view_order->productstatus == 'admitted')
+                    @elseif($distributor_sale->productstatus == 'admitted')
                     
                     <span class="badge badge-success">Admitted</span>
                     @endif</td>
                          
-                       <td><a href="{{ url('admin/deleteorderadmin/'.$view_order->ref_no) }}"
+                       <td><a href="{{ url('admin/deleteorderadmin/'.$distributor_sale->ref_no) }}"
                         class='btn btn-danger'>
                          <i class="far fa-trash-alt"></i>
                      </a></td>
-                     <td>{{ $view_order->created_at->format('D d, M Y, H:i')}}</td>
+                     <td>{{ $distributor_sale->created_at->format('D d, M Y, H:i')}}</td>
                     </tr>
                     @endforeach
                   </tbody>

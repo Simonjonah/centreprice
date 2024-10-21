@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Subscription extends Model
 {
     use HasFactory;
@@ -22,10 +23,12 @@ class Subscription extends Model
         return $this->belongsTo(Plan::class);
     }
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
+
+   
 
     public function transactions()
     {

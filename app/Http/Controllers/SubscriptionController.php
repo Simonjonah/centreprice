@@ -6,6 +6,7 @@ use App\Models\Subscription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use App\Models\Transaction;
+use App\Models\User;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Illuminate\Support\Facades\Auth;
@@ -42,10 +43,19 @@ class SubscriptionController extends Controller
         $viewsubscriptions = Subscription::latest()->get();
         return view('dashboard.admin.distributorsubcription', compact('viewsubscriptions'));
     }
-    public function viewsubscriptionpayment($user_id){
-        $view_transactions = Subscription::where('user_id', $user_id)->first();
-        $view_transactions = Transaction::where('user_id', $user_id)->get();
+    public function viewsubscriptionpayment($id){
+
+        $view_transactions = Subscription::find($id);
+        if ($view_transactions) {
+            return view('dashboard.admin.viewsubscriptionpayment', compact('view_transactions'));
+
+        } else {
+            // Handle the case where the user isn't found
+            echo "User not found";
+        }
+        // $view_transactionsyoy = Transaction::where('user_id', $id)->get();
         return view('dashboard.admin.viewsubscriptionpayment', compact('view_transactions'));
+
     }
 
     
@@ -53,6 +63,11 @@ class SubscriptionController extends Controller
     public function editsubscription($id){
         $edit_subscriptions = Subscription::find($id);
         return view('dashboard.admin.editsubscription', compact('edit_subscriptions'));
+    }
+
+    public function printsub($reference){
+        $print_subscriptions = Subscription::where('reference', $reference)->first();
+        return view('dashboard.admin.printsub', compact('print_subscriptions'));
     }
   
     

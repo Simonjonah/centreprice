@@ -10,7 +10,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>DataTables</h1>
+            <h1 style="color: red; font-weight: bold; text-transform: capitalize;">{{ $distributor->fname }} {{ $distributor->lname }} Vendors. <b style="color: brown">Total Sales: {{ $distributorsalecount }}</b> <b style="color: green;">  Paid Sales: {{ $distributorpaidsalecount }}</b> <b style="color: black">Unpaid Sales: {{ $distributorunsalecount }}</b> <a class="btn btn-primary" href="{{ url('admin/viewdistributorsale/'.$distributor->id)}}">Sales </a> </h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -31,7 +31,7 @@
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">DataTable with default features</h3>
+                <h3 class="card-title"></h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -41,13 +41,13 @@
                     <th>Tract ID</th>
                     <th>First name</th>
                     <th>Last name</th>
-                    {{-- <th>Subription Fee</th> --}}
+                    <th>City</th>
                     <th>Role</th>
                     <th>Phone</th>
                     <th>Email</th>
                     <th>Image</th>
-                    {{-- <th>Amount</th>
-                    <th>Percent</th> --}}
+                    <th>Dob</th>
+                    <th>Gender</th>
                     <th>State</th>
                     <th>Districts</th>
                     <th>LGA</th>
@@ -72,63 +72,63 @@
                   <div class="alert alert-danger">
                   {{ Session::get('fail') }}
                   @endif
-                  @foreach ($view_distributors as $view_distributor)
+                  @foreach ($view_myvendors as $view_myvendor)
                     <tr>
-                        <td>{{ $view_distributor->ref_no }}</td>
-                        <td><a href="{{ url('admin/viewsubscriptionpaymentprint/'.$view_distributor->id) }}">{{ $view_distributor->fname }} View Payment</a></td>
-                        <td>{{ $view_distributor->lname }}</td>
-                        {{-- <td>{{ $view_distributor->subscription_fee }}</td> --}}
-                        <td>@if ($view_distributor->user_type == 'Distributor')
-                            <span class="badge badge-info"> Distributor</span>
+                        <td>{{ $view_myvendor->ref_no3 }}</td>
+                        <td>{{ $view_myvendor->fname }}</td>
+                        <td>{{ $view_myvendor->lname }}</td>
+                        <td>{{ $view_myvendor->city }}</td>
+                        <td>@if ($view_myvendor->user_type == 'Vendor')
+                            <span class="badge badge-info"> Vendor</span>
                           @else
                           <span class="badge badge-success">Admin</span>
                           @endif</td>
-                        <td>{{ $view_distributor->phone }}</td>
-                        <td>{{ $view_distributor->email }}</td>
-                        <td><img style="width: 50px; height: 50px;" src="{{ URL::asset("/public/../$view_distributor->images")}}" alt=""></td>
+                        <td>{{ $view_myvendor->phone }}</td>
+                        <td>{{ $view_myvendor->email }}</td>
+                        <td><img style="width: 50px; height: 50px;" src="{{ URL::asset("/public/../$view_myvendor->images")}}" alt=""></td>
                         
                         
-                        {{-- <td>{{ $view_distributor->amount }}</td>
-                        <td>{{ $view_distributor->percent }}</td> --}}
-                        <td>{{ $view_distributor->ngstate['state'] }}</td>
-                        <td>{{ $view_distributor->Lga->district['districts'] }}</td>
-                        <td>{{ $view_distributor->Lga['lga'] }}</td>
+                        <td>{{ $view_myvendor->dob }}</td>
+                        <td>{{ $view_myvendor->gender }}</td>
+                        <td>{{ $view_myvendor->ngstate['state'] }}</td>
+                        <td>{{ $view_myvendor->Lga->district['districts'] }}</td>
+                        <td>{{ $view_myvendor->Lga['lga'] }}</td>
 
-                        <td><a href="{{ url('admin/viewsingledistributor/'.$view_distributor->ref_no) }}"
+                        <td><a href="{{ url('admin/viewsinglevendors/'.$view_myvendor->ref_no3) }}"
                           class='btn btn-info'>
                            <i class="far fa-eye"></i>
                        </a></td>
-                        <td>@if ($view_distributor->status == 'pending')
-                            <span class="badge badge-warning"> Pending</span>
-                          @elseif($view_distributor->status == 'suspend')
+                        <td>@if ($view_myvendor->status == null)
+                            <span class="badge badge-warning"> Not Approved Yet</span>
+                          @elseif($view_myvendor->status == 'suspend')
                           <span class="badge badge-danger"> Suspended</span>
-                          @elseif($view_distributor->status == 'reject')
+                          @elseif($view_myvendor->status == 'reject')
                           <span class="badge badge-danger"> Rejected</span>
-                          @elseif($view_distributor->status == 'success')
+                          @elseif($view_myvendor->status == 'success')
                           <span class="badge badge-success"> Verified</span>
-                          @elseif($view_distributor->status == 'admitted')
+                          @elseif($view_myvendor->status == 'pending')
                           
-                          <span class="badge badge-success">Admitted</span>
+                          <span class="badge badge-warning">Pending</span>
                           @endif</td>
-                        <td><a href="{{ url('admin/approvedistributor/'.$view_distributor->ref_no) }}"
+                        <td><a href="{{ url('admin/approvevendors/'.$view_myvendor->ref_no3) }}"
                           class='btn btn-success'>
                            <i class="far fa-user"></i>
                        </a></td>
-                       <td><a href="{{ url('admin/suspenddistributor/'.$view_distributor->ref_no) }}"
+                       <td><a href="{{ url('admin/suspendvendors/'.$view_myvendor->ref_no3) }}"
                         class='btn btn-warning'>
                          <i class="far fa-bell"></i>
                      </a></td>
-                       <td><a href="{{ url('admin/editdistributor/'.$view_distributor->ref_no) }}"
+                       <td><a href="{{ url('admin/editvendors/'.$view_myvendor->ref_no3) }}"
                         class='btn btn-info'>
                          <i class="far fa-edit"></i>
                      </a></td>
                        
                          
-                       <td><a href="{{ url('admin/deletedistributor/'.$view_distributor->ref_no) }}"
+                       <td><a href="{{ url('admin/deletevendors/'.$view_myvendor->ref_no3) }}"
                         class='btn btn-danger'>
                          <i class="far fa-trash-alt"></i>
                      </a></td>
-                     <td>{{ $view_distributor->created_at->format('D d, M Y, H:i')}}</td>
+                     <td>{{ $view_myvendor->created_at->format('D d, M Y, H:i')}}</td>
                     </tr>
                     @endforeach
                   </tbody>
@@ -137,12 +137,13 @@
                       <th>Tract ID</th>
                       <th>First name</th>
                       <th>Last name</th>
-                      {{-- <th>Subription Fee</th> --}}
-                      <th>user_type</th>                      <th>Phone</th>
+                      <th>City</th>
+                      <th>Role</th>
+                      <th>Phone</th>
                       <th>Email</th>
                       <th>Image</th>
-                      {{-- <th>Amount</th>
-                      <th>Percent</th> --}}
+                      <th>Amount</th>
+                      <th>Percent</th>
                       <th>State</th>
                       <th>Districts</th>
                       <th>LGA</th>
@@ -151,7 +152,6 @@
                       <th>Approve</th>
                       <th>Suspend</th>
                       <th>Edit</th>
-  
                       <th>Delete</th>
                       <th>Date</th>
                     </tr>

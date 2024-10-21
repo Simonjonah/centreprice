@@ -357,5 +357,26 @@ public function myorderproducts (){
     return view('dashboard.myorderproducts', compact('view_orders'));
 }
     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+public function myproductliners(){
+    $franchise_products = Order::where('franchise_id', auth::guard('web')->user()->id)->latest()->get();
+  return view('dashboard.myproductliners', compact('franchise_products'));
+}
 }
 

@@ -7,6 +7,8 @@ use App\Models\Ngstate;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Sale;
+use App\Models\Subaccount;
+use App\Models\Subscription;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -230,7 +232,7 @@ class UserController extends Controller
 
     public function approvefranchise($ref_no){
         $approve_franchise = User::where('ref_no', $ref_no)->first();
-        $approve_franchise->status = 'approved';
+        $approve_franchise->status = 'success';
         $approve_franchise->save();
         return redirect()->back()->with('success', 'you have approved successfully');
     }
@@ -244,7 +246,7 @@ class UserController extends Controller
 
     public function approvedistributor($ref_no2){
         $suspend_franchise = User::where('ref_no2', $ref_no2)->first();
-        $suspend_franchise->status = 'approved';
+        $suspend_franchise->status = 'success';
         $suspend_franchise->save();
         return redirect()->back()->with('success', 'you have approved successfully');
     }
@@ -502,9 +504,14 @@ class UserController extends Controller
 
     public function viewsingledistributor($ref_no){
         $view_distributors = User::where('ref_no', $ref_no)->first();
+        $countvendors = User::where('ref_no', $ref_no)
+        ->where('user_type', 'Vendor')
+        ->count();
         $view_states = Ngstate::orderBy('state')->get();
         $view_lgas = Lga::orderBy('lga')->get();
-        return view('dashboard.admin.viewsingledistributor', compact('view_states', 'view_lgas', 'view_distributors'));
+        // $view_lgas = Sale::orderBy('lga')->get();
+
+        return view('dashboard.admin.viewsingledistributor', compact('countvendors', 'view_states', 'view_lgas', 'view_distributors'));
     }
     
     public function viewsinglevendors($ref_no3){
@@ -654,7 +661,7 @@ class UserController extends Controller
 
     public function approvevendors($ref_no3){
         $suspend_franchise = User::where('ref_no3', $ref_no3)->first();
-        $suspend_franchise->status = 'approved';
+        $suspend_franchise->status = 'success';
         $suspend_franchise->save();
         return redirect()->back()->with('success', 'you have approved successfully');
     }
@@ -704,16 +711,34 @@ class UserController extends Controller
         return view('dashboard.viewmyvendorsales', compact('view_purchases'));
     }
 
+  public function viewmyonlyvendors($id){
+    $distributor = User::where('id', $id)->first();
+    $distributorsalecount = Sale::where('distributor_id', $id)->count();
+    $distributorpaidsalecount = Sale::where('distributor_id', $id)->where('status', 'success')->count();
+    $distributorunsalecount = Sale::where('distributor_id', $id)->where('status', 'pending')->count();
+    // $distributorwallet = Subaccount::where('distributor_id', $id)->sum('wallet');
     
+    $view_myvendors = User::where('user_id', $id)->latest()->get();
+    return view('dashboard.admin.viewmyonlyvendors', compact('distributorunsalecount', 'distributorpaidsalecount', 'distributorsalecount', 'distributor', 'view_myvendors'));
+  }
 
-    // public function registervendor($lga, $state, $referral)
-    // {
-     
+  public function viewdistributorsale($id){
+    $distributor = User::where('id', $id)->first();
+    $distributor_sales = Sale::where('distributor_id', $id)->latest()->get();
+    
+    return view('dashboard.admin.viewdistributorsale', compact('distributor_sales', 'distributor'));
+  }
+  
+  
+  public function viewsubscriptionpaymentprint($id){
 
-    //     return view('auth.register', [
-    //         'lga' => $lga,
-    //         'state' => $state,
-    //         'referral' => $referral
-    //     ]);
-    // }
+    $view_user = User::find($id);
+    $view_admintransactions = Subscription::where('user_id', $id)->get();
+
+   
+    // $view_transactionsyoy = Transaction::where('user_id', $id)->get();
+    return view('dashboard.admin.viewsubscriptionpaymentprint', compact('view_admintransactions'));
+
+}
+  
 }

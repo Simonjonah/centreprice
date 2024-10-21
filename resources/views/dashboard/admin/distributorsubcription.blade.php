@@ -70,15 +70,15 @@
                   {{ Session::get('fail') }}
                   @endif
                   @foreach ($viewsubscriptions as $viewsubscription)
-                    @if ($viewsubscription->user['role'] === '2')
+                    @if ($viewsubscription->user_type == 'Distributor')
                     <tr>
                       <td>{{ $viewsubscription->user['ref_no'] }}</td>
                       <td>{{ $viewsubscription->user['fname'] }}</td>
                       <td>{{ $viewsubscription->user['lname'] }}</td>
-                      <td>{{ $viewsubscription->plan['amount'] }}</td>
-                      <td>@if ($viewsubscription->user['role'] === '1')
-                          <span class="badge badge-info"> Franchise</span>
-                          @elseif ($viewsubscription->user['role'] === '2')
+                      <td>{{ $viewsubscription->amount }}</td>
+                      <td>@if ($viewsubscription->user['user_type'] === 'Distributor')
+                          <span class="badge badge-info"> Distributor</span>
+                          @elseif ($viewsubscription->user['user_type'] === 'Vendor')
                           <span class="badge badge-primary"> Distributor</span>
 
                         @else
@@ -98,7 +98,7 @@
                      </a></td>
 
 
-                     <td><a href="{{ url('admin/viewsubscriptionpayment/'.$viewsubscription->user_id) }}"
+                     <td><a href="{{ url('admin/viewsubscriptionpayment/'.$viewsubscription->id) }}"
                         class='btn btn-success'>
                          <i class="far fa-eye">View Payment</i>
                      </a></td>
@@ -110,9 +110,9 @@
                         <span class="badge badge-danger"> Rejected</span>
                         @elseif($viewsubscription->status == 'approved')
                         <span class="badge badge-success"> Approved</span>
-                        @elseif($viewsubscription->status == 'admitted')
+                        @elseif($viewsubscription->status == 'success')
                         
-                        <span class="badge badge-success">Admitted</span>
+                        <span class="badge badge-success">Paid</span>
                         @endif</td>
                      
                  

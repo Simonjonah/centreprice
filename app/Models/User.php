@@ -126,6 +126,12 @@ public function ngstate(): BelongsTo
         return $this->hasMany(Sale::class);
     }
 
+
+    public function subscriptions(): HasMany
+    {
+        return $this->hasMany(Subscription::class);
+    }
+   
     public function isExpired()
     {
         return Carbon::now()->gt($this->end_date);

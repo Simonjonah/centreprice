@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\Testimony;
+use App\Models\Testimony;
 use Illuminate\Http\Request;
 use App\Models\Admin;
 use App\Models\Advert;
@@ -14,6 +14,7 @@ use App\Models\Event;
 use App\Models\Lga;
 use App\Models\Ngstate;
 use App\Models\Order;
+use App\Models\Product;
 use App\Models\Root;
 use App\Models\Sale;
 use App\Models\Subcategory;
@@ -91,8 +92,17 @@ class AdminController extends Controller
        $countblog = Blog::count();
        $display_distributors = User::where('user_type', 'Distributor')->take(10)->get();
        $display_vendors = User::where('user_type', 'Vendor')->take(10)->get();
+       $view_teams = Team::latest()->take(10)->get();
+       $view_sales = Sale::latest()->take(10)->get();
+       $view_products = Product::latest()->take(10)->get();
+       $view_adverts = Advert::latest()->take(10)->get();
+       $countsalesuccess = Sale::where('status', 'success')->count();
+       $countunpaidproduct = Sale::where('status', 'pending')->count();
+       $failreg = User::where('status', 'pending')->count();
+       $countestimony = Testimony::count();
        
-        return view('dashboard.admin.home', compact('display_vendors', 'display_distributors', 'countblog', 'countransport', 'countteam', 'countorder', 'countcontact', 'countadvert', 'countdistributor', 'countvendor', 'countsales', 'countsub', 'countproduct', 'countsubcategory', 'countcategory', 'countroot', 'countdistrict', 'countstate', 'countlga'));
+       
+        return view('dashboard.admin.home', compact('countestimony', 'failreg', 'countunpaidproduct', 'countsalesuccess', 'view_adverts', 'view_products', 'view_sales', 'view_teams', 'display_vendors', 'display_distributors', 'countblog', 'countransport', 'countteam', 'countorder', 'countcontact', 'countadvert', 'countdistributor', 'countvendor', 'countsales', 'countsub', 'countproduct', 'countsubcategory', 'countcategory', 'countroot', 'countdistrict', 'countstate', 'countlga'));
     }
 
     public function profile() {

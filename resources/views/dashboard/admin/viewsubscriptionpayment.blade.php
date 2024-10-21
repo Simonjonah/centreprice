@@ -1,7 +1,5 @@
 @include('dashboard.admin.header')
-
 @include('dashboard.admin.sidebar')
-
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -10,137 +8,135 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>DataTables</h1>
+            <h1>Invoice</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">DataTables</li>
+              <li class="breadcrumb-item active">Invoice</li>
             </ol>
           </div>
         </div>
       </div><!-- /.container-fluid -->
     </section>
 
-    <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
             
-
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">DataTable with default features</h3>
+            <div class="invoice p-3 mb-3">
+              <!-- title row -->
+              <div class="row">
+                <div class="col-12">
+                  <h4>
+                    <i class="fas fa-globe"></i> Center Prices.
+                    <small class="float-right">Date: {{ $view_transactions->created_at->format('D m, Y, h:a') }}</small>
+                  </h4>
+                </div>
+                <!-- /.col -->
               </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
-                  <thead>
-                  <tr>
-                    <th>Tract ID</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Subscription Fee</th>
-                    <th>Role</th>
-                    <th>Phone</th>
-                    <th>Email</th>
-                    <th>Expired Date</th>
-                    <th>View</th>
-                    <th>Status</th>
-                    <th>Delete</th> 
-                    <th>Date</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  @if (Session::get('success'))
-                  <div class="alert alert-success">
-                      {{ Session::get('success') }}
-                  </div>
-                  @endif
+              <!-- info row -->
+              <div class="row invoice-info">
+                <div class="col-sm-4 invoice-col">
+                  From
+                  <address>
+                    <strong>CenterPrices.</strong><br>
+                    B3 Shelter Afrique Shopping Complex, Mbiaobong, Uyo. Akwa Ibom State. <br>
+                    Call:+234 806 833 3055 <br>
+                    Email:centerpricesng@gmail.com <br>
+                  </address>
+                </div>
+                <!-- /.col -->
+                {{-- <div class="col-sm-4 invoice-col">
+                  To
+                  <address>
+                    <strong>John Doe</strong><br>
+                    795 Folsom Ave, Suite 600<br>
+                    San Francisco, CA 94107<br>
+                    Phone: (555) 539-1037<br>
+                    Email: john.doe@example.com
+                  </address>
+                </div> --}}
+                <!-- /.col -->
+                {{-- <div class="col-sm-4 invoice-col">
+                  <b>Invoice #007612</b><br>
+                  <br>
+                  <b>Order ID:</b> 4F3S8J<br>
+                  <b>Payment Due:</b> 2/22/2014<br>
+                  <b>Account:</b> 968-34567
+                </div> --}}
+                <!-- /.col -->
+              </div>
+              <!-- /.row -->
 
-                  @if (Session::get('fail'))
-                  <div class="alert alert-danger">
-                  {{ Session::get('fail') }}
-                  @endif
-                  @foreach ($view_transactions as $view_transaction)
-
+              <!-- Table row -->
+              <div class="row">
+                <div class="col-12 table-responsive">
+                  <table class="table table-striped">
+                    <thead>
                     <tr>
-                      <td>{{ $view_transaction->user['ref_no'] }}</td>
-                      <td>{{ $view_transaction->user['fname'] }}</td>
-                      <td>{{ $view_transaction->user['lname'] }}</td>
-                      <td>{{ $view_transaction->subscription->plan['amount'] }}</td>
-                      <td>@if ($view_transaction->user['role'] === '1')
-                          <span class="badge badge-info"> Franchise</span>
-                          @elseif ($view_transaction->user['role'] === '2')
-                          <span class="badge badge-primary"> Distributor</span>
-
-                        @else
-                        <span class="badge badge-success">Vendor</span>
-                        @endif</td>
-                      <td>{{ $view_transaction->user['phone'] }}</td>
-                      <td>{{ $view_transaction->user['email'] }}</td>
+                      <th>Name</th>
+                      <th>Expired Date</th>
+                      <th>Plan</th>
+                      <th>Registered Date</th>
+                      <th>Amount</th>
+                      <th>Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                      <td>{{ $view_transactions->user['fname'] }} {{ $view_transactions->lname }}</td>
+                      <td>{{ $view_transactions->end_date }}</td>
+                      <td>{{ $view_transactions->user_type }}</td>
+                      <td>{{ $view_transactions->start_date }}</td>
+                      <td> N {{ $view_transactions->amount }}</td>
+                      <td>@if ($view_transactions->status == null)
+                        <span class="badge badge-warning"> Not Approved Yet</span>
+                      @elseif($view_transactions->status == 'suspend')
+                      <span class="badge badge-danger"> Suspended</span>
+                      @elseif($view_transactions->status == 'reject')
+                      <span class="badge badge-danger"> Rejected</span>
+                      @elseif($view_transactions->status == 'success')
+                      <span class="badge badge-success"> Paid</span>
+                      @elseif($view_transactions->status == 'pending')
                       
-                      <td>{{ $view_transaction->subscription['end_date'] }}</td>
-                      <td><a href="{{ url('admin/viewsinglepayment/'.$view_transaction->id) }}"
-                        class='btn btn-info'>
-                         <i class="far fa-eye"></i>
-                     </a></td>
-
-                      <td>@if ($view_transaction->status == 'success')
-                          <span class="badge badge-success"> Success</span>
-                        @elseif($view_transaction->status == 'canceled')
-                        <span class="badge badge-danger"> Canceled</span>
-                        @elseif($view_transaction->status == 'reject')
-                        <span class="badge badge-danger"> Rejected</span>
-                        @elseif($view_transaction->status == 'pending')
-                        <span class="badge badge-warning"> Pending</span>
-                        @elseif($view_transaction->status == 'admitted')
-                        
-                        <span class="badge badge-success">Admitted</span>
-                        @endif</td>
-                     
-                     <td><a href="{{ url('admin/deletesubscriber/'.$view_transaction->ref_no) }}"
-                      class='btn btn-danger'>
-                       <i class="far fa-trash-alt"></i>
-                   </a></td> 
-                   <td>{{ $view_transaction->created_at->format('D d, M Y, H:i')}}</td>
-                  </tr>
+                      <span class="badge badge-warning">Pending</span>
+                      @endif</td>
+                    </tr>
                    
-                    @endforeach
-                  </tbody>
-                  <tfoot>
-                    <tr>
-                        <th>Tract ID</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Subscription Fee</th>
-                        <th>Role</th>
-                        <th>Phone</th>
-                        <th>Email</th>
-                        <th>Expired Date</th>
-                        <th>View</th>
-                        <th>Status</th>
-                        <th>Delete</th> 
-                        <th>Date</th>
-                      </tr>
-                  </tfoot>
-                </table>
+                    </tbody>
+                  </table>
+                </div>
+                <!-- /.col -->
               </div>
-              <!-- /.card-body -->
+              <!-- /.row -->
+
+                <!-- /.col -->
+              </div>
+              <!-- /.row -->
+
+              <!-- this row will not appear when printing -->
+              <div class="row no-print">
+                <div class="col-12">
+                      
+                  <a href="{{ url('admin/printsub/'.$view_transactions->reference) }}" target="_blank" class="btn btn-primary"><i class="fas fa-print"></i> Print</a>
+                  {{-- <button type="button" class="btn btn-success float-right"><i class="far fa-credit-card"></i> Submit
+                    Payment
+                  </button> --}}
+                  {{-- <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
+                    <i class="fas fa-download"></i> Generate PDF
+                  </button> --}}
+                </div>
+              </div>
             </div>
-            <!-- /.card -->
-          </div>
-          <!-- /.col -->
-        </div>
-        <!-- /.row -->
-      </div>
-      <!-- /.container-fluid -->
+            <!-- /.invoice -->
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
   </div>
- 
-</div>
-<!-- ./wrapper -->
-
+  
 @include('dashboard.admin.footer')
+  

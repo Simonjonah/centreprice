@@ -203,7 +203,7 @@ class TransactionController extends Controller
                         'end_date' => $endDate,
                         'password' => \Hash::make($request->password),
                         'ref_no2' => substr(rand(0,time()),0, 9),
-                        // 'ref_no3' => substr(rand(0,time()),0, 9),
+                        'ref_no3' => substr(rand(0,time()),0, 9),
                     ]);
                 }else{
 
