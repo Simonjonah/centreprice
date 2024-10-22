@@ -58,6 +58,9 @@ class SaleController extends Controller
                     ],
 
                     'callback_url' => route('payment.callback'), 
+                
+            
+                    
                     // 'split' => [
                     //     'type' => 'percentage', 
                     //     'subaccounts' => [
@@ -153,27 +156,11 @@ class SaleController extends Controller
             
             if ($result['status'] && $result['status'] == 'success') {
             $payment = Sale::where('reference', $reference)->first();
-            $product = Product::findOrFail($payment->product_id)->first();
+            $product = Product::find($payment->product_id);
+            
             $product->quantity -= $payment->quantity;
             $product->update();
            
-            // dd($payment->product_id);
-            // if (isset($payment->product_id)) {
-            //     // dd($product);
-            //     $result->update([
-            //         'quantity' => $product->quantity,
-            //     ]);
-            // } else {
-            //     // Handle the case where product_id is missing
-            //     $product = Product::find($result['data']['metadata']['custom_fields']['product_id']);
-            //     dd($product);
-
-            //     $result->update([
-            //         'quantity' => $product['data']['metadata']['custom_fields']['quantity'],
-            //     ]);
-            // }
-            
-             
                $payment->update([
                     'status' => 'success',
                     'domain' => $result['data']['domain'],
@@ -184,9 +171,7 @@ class SaleController extends Controller
                     'ip_address' => $result['data']['ip_address'],
                     'channel' => $result['data']['channel'],
                     'ip_address' => $result['data']['ip_address'],
-                    // 
-                    
-                    
+
                     'authorization_code' => $result['data']['authorization']['authorization_code'],
                     'bin' => $result['data']['authorization']['bin'],
                     'last4' => $result['data']['authorization']['last4'],
@@ -230,21 +215,29 @@ class SaleController extends Controller
 
                    
                ]);
-            //    return response()->json([
-            //         'result' => $result
-            //    ]);
-            //    dd($result);
-
-
-             // Update the customer wallet with their share
+            
                 $customer = Subaccount::where('email', $result['data']['customer']['email'])
-                ->where('distributor_email', $result['data']['customer']['email'])
-                ->where('venemail', $result['data']['customer']['email'])->first();
                 
-                $customer->wallet += $product->vendors_commission; 
-                // $customer->wallet += $result['data']['amount'] / 100; 
-                // $customer->wallet += $result['data']['amount'] / 100; 
+                ->first();
+                // dd($payment->vendors_commission);
+                
+                $customer->wallet += $payment->vendors_commission; 
                 $customer->save();
+
+                // dd();
+
+                $customer = Subaccount::where('email', Auth::guard('web')->user()->distributor_email)
+                
+                ->first();
+                $customer->wallet += $payment->distributors_commission; 
+                $customer->save();
+
+                $customer = Subaccount::where('email', Auth::guard('web')->user()->vendor_email)
+                ->first();
+                // dd(Auth::guard('web')->user()->vendor_email);
+                $customer->wallet += $payment->subvendor_commission; 
+                $customer->save();
+
                return redirect()->route('thankyou')->with('success', 'Payment successful!');
             // return redirect()->route('payment.success')->with('success', 'Payment successful!');
             } else {
@@ -372,7 +365,22 @@ public function myorderproducts (){
 
 
  
+public function viewpaidorders(){
+    $received_products = Sale::where('status', 'success')->latest()->get();
+  return view('dashboard.admin.viewpaidorders', compact('received_products'));
+}
 
+public function viewpendingorders(){
+    $received_products = Sale::where('status', 'pending')->latest()->get();
+  return view('dashboard.admin.viewpendingorders', compact('received_products'));
+}
+
+
+public function viewdeliveredorders(){
+    $received_products = Sale::orWhere('productstatus', 'received')
+    ->orWhere('productstatus', 'delivered')->latest()->get();
+  return view('dashboard.admin.viewdeliveredorders', compact('received_products'));
+}
 
 public function myproductliners(){
     $franchise_products = Order::where('franchise_id', auth::guard('web')->user()->id)->latest()->get();

@@ -4,6 +4,7 @@ use App\Http\Controllers\AboutController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdvertController;
+use App\Http\Controllers\BankController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\LgaController;
@@ -27,6 +28,7 @@ use App\Http\Controllers\SubaccountController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\TestimonyController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\TransferController;
 use App\Http\Controllers\TransportController;
 use App\Models\Admin;
 use App\Models\Advert;
@@ -427,6 +429,12 @@ Route::prefix('admin')->name('admin.')->group(function() {
         Route::put('/updateroles/{ref_no}', [AdminController::class, 'updateroles'])->name('updateroles');
        
         Route::get('/viewmyonlyvendors/{id}', [UserController::class, 'viewmyonlyvendors'])->name('viewmyonlyvendors');
+        Route::get('/viewpaidorders', [SaleController::class, 'viewpaidorders'])->name('viewpaidorders');
+        Route::get('/viewpendingorders', [SaleController::class, 'viewpendingorders'])->name('viewpendingorders');
+        Route::get('/viewdeliveredorders', [SaleController::class, 'viewdeliveredorders'])->name('viewdeliveredorders');
+        Route::get('/viewundistributorsadmin', [UserController::class, 'viewundistributorsadmin'])->name('viewundistributorsadmin');
+        Route::get('/viewunvendorsadmin', [UserController::class, 'viewunvendorsadmin'])->name('viewunvendorsadmin');
+        Route::get('/viewmyonlyvendorvendors/{id}', [UserController::class, 'viewmyonlyvendorvendors'])->name('viewmyonlyvendorvendors');
         
         Route::get('/viewsubscriptionpaymentprint/{id}', [UserController::class, 'viewsubscriptionpaymentprint'])->name('viewsubscriptionpaymentprint');
         Route::get('/viewsubscriptionpayment/{id}', [SubscriptionController::class, 'viewsubscriptionpayment'])->name('viewsubscriptionpayment');
@@ -437,6 +445,9 @@ Route::prefix('admin')->name('admin.')->group(function() {
         Route::get('/editlga/{id}', [LgaController::class, 'editlga'])->name('editlga');
         Route::get('/deletelga/{id}', [LgaController::class, 'deletelga'])->name('deletelga');
         Route::put('/updatetelga/{id}', [LgaController::class, 'updatetelga'])->name('updatetelga');
+        Route::post('/createbank', [BankController::class, 'fetchBanks'])->name('fetchBanks');
+        Route::get('/viewbank', [BankController::class, 'viewbank'])->name('viewbank');
+        Route::get('/createTransferRecipient', [TransferController::class, 'createTransferRecipient'])->name('createTransferRecipient');
         
         Route::get('/logout', [AdminController::class, 'logout'])->name('logout'); 
         

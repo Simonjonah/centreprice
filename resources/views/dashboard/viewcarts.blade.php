@@ -181,7 +181,7 @@
                 @php
                     $reference = substr(rand(0,time()),0, 9);
                 @endphp
-              <div class="mt-4">
+              {{-- <div class="mt-4">
                   <td id="cartTotal">
                     <span id="totalAmount">
                     
@@ -191,39 +191,39 @@
                       </select>
                     </span>
                    
-                </td>
+                </td> --}}
 
                 
-                  {{-- <input type="text" name="amount" class="form-control" value="{{ $total }}"> --}}
+                  <input type="hidden" name="amount" class="form-control" value="{{ $total }}">
 
-                  <input type="text" class="form-control"  name="product_id" value="{{ $details['product_id'] }}">
-                  {{-- <input type="text" class="form-control"  name="franchise_id" value="{{ $details['franchise_id'] }}"> --}}
-                  <input type="text" class="form-control"  name="distributor_id" value="{{ $details['distributor_id'] }} ">
-                  <input type="text" class="form-control"  name="email" value="{{ Auth::guard('web')->user()->email }}" placeholder="Quantity">
-                  <input type="text" class="form-control"  name="first_name" value="{{ Auth::guard('web')->user()->fname }}" placeholder="Quantity">
-                  <input type="text" class="form-control"  name="last_name" value="{{ Auth::guard('web')->user()->lname }}" placeholder="Quantity">
-                  <input type="text" class="form-control"  name="vendor_id" value="{{ Auth::guard('web')->user()->id }}" placeholder="Quantity">
-                  {{-- <input type="text" class="form-control"  name="user_id" value="{{ $details['user_id']  }}" placeholder="Quantity"> --}}
-                  <input type="text" class="form-control"  name="phone" value="{{ Auth::guard('web')->user()->phone }}" placeholder="Quantity">
-                  <input type="text" class="form-control"  name="reference" value="{{ $reference }}" placeholder="Quantity">
-                  {{-- <input type="text" class="form-control"  name="franchise_commission" value="{{ $details['franchise_commission'] }}" placeholder="Quantity"> --}}
-                  <input type="text" class="form-control"  name="distributors_commission" value="{{ $details['distributors_commission'] }}" placeholder="Quantity">
-                  <input type="text" class="form-control"  name="vendors_commission" value="{{ $details['vendors_commission'] }}" placeholder="Quantity">
-                  <input type="text" class="form-control"  name="subvendor_commission" value="{{ $details['subvendor_commission'] }}" placeholder="Quantity">
-                  <input type="text" class="form-control"  name="quantity" value="{{ $details['quantity'] }}" placeholder="Quantity">
-                  <input type="text" class="form-control"  name="productname" value="{{ $details['productname'] }}" placeholder="Quantity">
-                  {{-- <input type="text" class="form-control"  name="order_id" value="{{ $details['order_id'] }}" placeholder="Quantity"> --}}
-                  {{-- <input type="text" class="form-control"  name="" value="{{ $details['quantity'] }}" placeholder="Quantity"> --}}
+                  <input type="hidden" class="form-control"  name="product_id" value="{{ $details['product_id'] }}">
+                  {{-- <input type="hidden" class="form-control"  name="franchise_id" value="{{ $details['franchise_id'] }}"> --}}
+                  <input type="hidden" class="form-control"  name="distributor_id" value="{{ $details['distributor_id'] }} ">
+                  <input type="hidden" class="form-control"  name="email" value="{{ Auth::guard('web')->user()->email }}" placeholder="Quantity">
+                  <input type="hidden" class="form-control"  name="first_name" value="{{ Auth::guard('web')->user()->fname }}" placeholder="Quantity">
+                  <input type="hidden" class="form-control"  name="last_name" value="{{ Auth::guard('web')->user()->lname }}" placeholder="Quantity">
+                  <input type="hidden" class="form-control"  name="vendor_id" value="{{ Auth::guard('web')->user()->id }}" placeholder="Quantity">
+                  {{-- <input type="hidden" class="form-control"  name="user_id" value="{{ $details['user_id']  }}" placeholder="Quantity"> --}}
+                  <input type="hidden" class="form-control"  name="phone" value="{{ Auth::guard('web')->user()->phone }}" placeholder="Quantity">
+                  <input type="hidden" class="form-control"  name="reference" value="{{ $reference }}" placeholder="Quantity">
+                  {{-- <input type="hidden" class="form-control"  name="franchise_commission" value="{{ $details['franchise_commission'] }}" placeholder="Quantity"> --}}
+                  <input type="hidden" class="form-control"  name="distributors_commission" value="{{ $details['distributors_commission'] }}" placeholder="Quantity">
+                  <input type="hidden" class="form-control"  name="vendors_commission" value="{{ $details['vendors_commission'] }}" placeholder="Quantity">
+                  <input type="hidden" class="form-control"  name="subvendor_commission" value="{{ $details['subvendor_commission'] }}" placeholder="Quantity">
+                  <input type="hidden" class="form-control"  name="quantity" value="{{ $details['quantity'] }}" placeholder="Quantity">
+                  <input type="hidden" class="form-control"  name="productname" value="{{ $details['productname'] }}" placeholder="Quantity">
+                  {{-- <input type="hidden" class="form-control"  name="order_id" value="{{ $details['order_id'] }}" placeholder="Quantity"> --}}
+                  {{-- <input type="hidden" class="form-control"  name="" value="{{ $details['quantity'] }}" placeholder="Quantity"> --}}
                   
-                  <input type="text" class="form-control"  name="distributor_email" value="{{ Auth::guard('web')->user()->distributor_email }}" placeholder="Quantity">
-                  <input type="text" class="form-control"  name="subvendor_email" value="{{ Auth::guard('web')->user()->subvendor_email }}" placeholder="Quantity">
+                  <input type="hidden" class="form-control"  name="distributor_email" value="{{ Auth::guard('web')->user()->distributor_email }}" placeholder="Quantity">
+                  <input type="hidden" class="form-control"  name="subvendor_email" value="{{ Auth::guard('web')->user()->subvendor_email }}" placeholder="Quantity">
                   
                   
-                  <input type="text" class="form-control"  name="images1" value="{{ $details['images1'] }}" placeholder="Quantity">
-                  <input type="text" class="form-control"  name="images2" value="{{ $details['images2'] }}" placeholder="Quantity">
-                  <input type="text" class="form-control"  name="images3" value="{{ $details['images3'] }}" placeholder="Quantity">
-                  <input type="text" class="form-control"  name="images4" value="{{ $details['images4'] }}" placeholder="Quantity">
-                  <input type="text" class="form-control"  name="images5" value="{{ $details['images5'] }}" placeholder="Quantity">
+                  <input type="hidden" class="form-control"  name="images1" value="{{ $details['images1'] }}" placeholder="Quantity">
+                  <input type="hidden" class="form-control"  name="images2" value="{{ $details['images2'] }}" placeholder="Quantity">
+                  <input type="hidden" class="form-control"  name="images3" value="{{ $details['images3'] }}" placeholder="Quantity">
+                  <input type="hidden" class="form-control"  name="images4" value="{{ $details['images4'] }}" placeholder="Quantity">
+                  <input type="hidden" class="form-control"  name="images5" value="{{ $details['images5'] }}" placeholder="Quantity">
                   
                   
                   <div class="form-group" style="margin-top: 20px">

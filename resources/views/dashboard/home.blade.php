@@ -723,7 +723,7 @@
 
               <div class="info-box-content">
                 <span class="info-box-text">Fund Wallet</span>
-                <span class="info-box-number"> NGN 0</span>
+                <span class="info-box-number"> NGN {{ $countvendorsommission }}</span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -833,6 +833,7 @@
                 <span class="info-box-text">Withdrawal</span>
                 <span class="info-box-number">NGN 0</span>
               </div>
+              <a href="{{ url('web/withdraw') }}" class="btn btn-primary">Withdraw</a>
               <!-- /.info-box-content -->
             </div>
             <!-- /.info-box -->
@@ -891,8 +892,6 @@
                       @endforeach
                       
 
-
-                     
                     </ul>
                     <!-- /.users-list -->
                   </div>

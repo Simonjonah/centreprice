@@ -48,12 +48,13 @@ class Subaccount extends Model
         'expired_at',
         'account_type',
        
-        
+        'subvendor_commission',
        'distributor_email', 
        'vendor_email', 
        'distributor_id',
        'vendor_id',
        'user_id',
+       'wallet',
 
 
     ];

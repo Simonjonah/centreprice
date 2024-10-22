@@ -39,30 +39,30 @@
 
                 <h3 class="profile-username text-center">{{ $view_vendors->fname }} {{ $view_vendors->lname }}</h3>
 
-                <p class="text-muted text-center">@if ($view_vendors->role == '1')
+                <p class="text-muted text-center">@if ($view_vendors->user_type == '1')
                     <a href="#" class="btn btn-success btn-block"><b>Franchise</b></a>
 
-                @elseif ($view_vendors->role == '2')
-                <a href="#" class="btn btn-success btn-block"><b>Distributor</b></a>
+                @elseif ($view_vendors->user_type == 'Distributor')
+                <a href="{{ url('admin/viewmyonlyvendorvendors/'.$view_vendors->id) }}" class="btn btn-success btn-block"><b>Distributor</b></a>
 
                 @else
-                <a href="#" class="btn btn-success btn-block"><b>Vendor</b></a>
+                <a href="{{ url('admin/viewmyonlyvendorvendors/'.$view_vendors->id) }}" class="btn btn-success btn-block"><b>Vendor</b></a>
 
                 @endif</p>
 
                 <ul class="list-group list-group-unbordered mb-3">
-                  <li class="list-group-item">
+                  {{-- <li class="list-group-item">
                     <b>Distributors</b> <a class="float-right">1,322</a>
-                  </li>
-                  <li class="list-group-item">
-                    <b>Vendors</b> <a class="float-right">543</a>
-                  </li>
-                  <li class="list-group-item">
+                  </li> --}}
+                  {{-- <li class="list-group-item">
+                    <b>My Vendors</b> <a class="float-right">543</a>
+                  </li> --}}
+                  {{-- <li class="list-group-item">
                     <b>Bonuses</b> <a class="float-right">13,287</a>
-                  </li>
+                  </li> --}}
                 </ul>
 
-                <a href="#" class="btn btn-primary btn-block"><b>View Analysis</b></a>
+                <a href="{{ url('admin/viewmyonlyvendorvendors/'.$view_vendors->id) }}" class="btn btn-primary btn-block"><b>View Analysis</b></a>
               </div>
               <!-- /.card-body -->
             </div>
@@ -85,9 +85,9 @@
                 <strong><i class="fas fa-pencil-alt mr-1"></i> Position</strong>
 
                 <p class="text-muted">
-                  @if ($view_vendors->role == '1')
+                  @if ($view_vendors->user_type == '1')
                   <span class="tag tag-danger">Franchise</span>
-                @elseif ($view_vendors->role == '2')
+                @elseif ($view_vendors->user_type == '2')
                 <span class="tag tag-danger">Distributor</span>
                 @else
                 <span class="tag tag-danger">Vendor</span>

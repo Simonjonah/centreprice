@@ -8,7 +8,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FlutterwaveController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\SubscriptionController;
-
+use App\Http\Controllers\TransferController;
 use App\Models\Subscription;
 
 /*
@@ -39,6 +39,7 @@ Route::apiResource('post', PostController::class);
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 Route::post('logout', [AuthController::class, 'logout']);
+Route::post('/createTransferRecipient', [TransferController::class, 'createTransferRecipient'])->name('createTransferRecipient');
 
 Route::post('buy', [SubscriptionController::class, 'makeApiRequest']);
 // Route::get('/payment/callback', [SaleController::class, 'paymentCallback']);

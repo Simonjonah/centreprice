@@ -25,6 +25,7 @@ class Sale extends Model
         'order_id', 
         'product_id', 
         'franchise_id', 
+        'subvendor_commission',
         'distributor_id', 
         'vendor_id', 
         'franchise_id', 

@@ -135,8 +135,8 @@ class UserController extends Controller
         $view_latestproductssignup = Order::where('franchise_id', auth::guard('web')->id())->get();
         $approvedproducts = Order::where('franchise_id', auth::guard('web')->id())->where('status', 'delivered')->count();
         $countsales = Sale::where('vendor_id', auth::guard('web')->id())->where('status', 'success')->sum('quantity');
-        $countsubvendors = User::where('subvendor_id', auth::guard('web')->id())->count();
-        $viewsubvendors = User::where('subvendor_id', auth::guard('web')->id())->latest()->take(6)->get();
+        $countsubvendors = User::where('vendor_id', auth::guard('web')->id())->count();
+        $viewsubvendors = User::where('vendor_id', auth::guard('web')->id())->latest()->take(6)->get();
         $viewvendororders = Sale::where('vendor_id', auth::guard('web')->id())->latest()->take(10)->get();
         
 
@@ -145,8 +145,8 @@ class UserController extends Controller
         $count_quantitysales = Sale::where('distributor_id', auth::guard('web')->id())->where('status', 'success')->sum('quantity');
         $countdistributors_ommission = Sale::where('distributor_id', auth::guard('web')->id())->where('status', 'success')->sum('distributors_commission');
 
-        $countvendorsommission = Sale::where('vendor_id', auth::guard('web')->id())
-        ->where('status', 'success')->sum('vendors_commission');
+        $countvendorsommission = Subaccount::where('user_id', auth::guard('web')->id())
+        ->sum('wallet');
         
         $franchise_earnings = Sale::all();
         $franchise_sales = Sale::all();
@@ -340,7 +340,7 @@ class UserController extends Controller
     public function profile3(){
         $view_states = Ngstate::orderBy('state')->get();
         $view_lgas = Lga::orderBy('lga')->get();
-        $countsubvendor = User::where('subvendor_id', auth()->user()->id)->count();
+        $countsubvendor = User::where('vendor_id', auth()->user()->id)->count();
         
         return view('dashboard.profile3', compact('countsubvendor', 'view_lgas', 'view_states'));
     }
@@ -518,6 +518,7 @@ class UserController extends Controller
         $view_vendors = User::where('ref_no3', $ref_no3)->first();
         $view_states = Ngstate::orderBy('state')->get();
         $view_lgas = Lga::orderBy('lga')->get();
+        $view_lgas = Lga::orderBy('lga')->get();
         return view('dashboard.admin.viewsinglevendors', compact('view_states', 'view_lgas', 'view_vendors'));
     }
 
@@ -575,13 +576,13 @@ class UserController extends Controller
             'city' => ['required', 'max:233'],
             'dob' => ['required', 'max:233'],
             'gender' => ['required', 'max:233'],
-            'subvendor_id' => ['required', 'max:233'],
+            'vendor_id' => ['required', 'max:233'],
             'password' => 'required|string|max:30|min:3',
             'confirm_password' => 'required|min:3|max:30|same:password',
             'terms' => ['required', 'max:233'],
         ]);
         $add_franchise = new User();
-        $add_franchise->subvendor_id = $request->subvendor_id;
+        $add_franchise->vendor_id = $request->vendor_id;
         $add_franchise->lname = $request->lname;
         $add_franchise->fname = $request->fname;
         $add_franchise->role = 3;
@@ -724,21 +725,44 @@ class UserController extends Controller
 
   public function viewdistributorsale($id){
     $distributor = User::where('id', $id)->first();
-    $distributor_sales = Sale::where('distributor_id', $id)->latest()->get();
+    $distributor_sales = Sale::orwhere('distributor_id', $id)->orwhere('vendor_id', $id)->latest()->get();
+
+
+
     
     return view('dashboard.admin.viewdistributorsale', compact('distributor_sales', 'distributor'));
   }
   
-  
+public function viewundistributorsadmin(){
+    $view_unusers = User::where('user_type', 'Distributor')->where('status', 'pending')->latest()->get();
+    return view('dashboard.admin.viewundistributorsadmin', compact('view_unusers'));
+}
+
+
+public function viewunvendorsadmin(){
+    $view_unusers = User::where('user_type', 'Vendor')->where('status', 'pending')->latest()->get();
+    return view('dashboard.admin.viewunvendorsadmin', compact('view_unusers'));
+}
   public function viewsubscriptionpaymentprint($id){
 
     $view_user = User::find($id);
     $view_admintransactions = Subscription::where('user_id', $id)->get();
 
-   
-    // $view_transactionsyoy = Transaction::where('user_id', $id)->get();
     return view('dashboard.admin.viewsubscriptionpaymentprint', compact('view_admintransactions'));
 
 }
+
+
+
+public function viewmyonlyvendorvendors($id){
+    $distributor = User::where('id', $id)->first();
+    $distributorsalecount = Sale::where('vendor_id', $id)->count();
+    $distributorpaidsalecount = Sale::where('vendor_id', $id)->where('status', 'success')->count();
+    $distributorunsalecount = Sale::where('vendor_id', $id)->where('status', 'pending')->count();
+    // $distributorwallet = Subaccount::where('distributor_id', $id)->sum('wallet');
+    
+    $view_myvendors = User::where('vendor_id', $id)->latest()->get();
+    return view('dashboard.admin.viewmyonlyvendorvendors', compact('distributorunsalecount', 'distributorpaidsalecount', 'distributorsalecount', 'distributor', 'view_myvendors'));
+  }
   
 }

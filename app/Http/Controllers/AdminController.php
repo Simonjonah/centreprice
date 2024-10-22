@@ -100,9 +100,14 @@ class AdminController extends Controller
        $countunpaidproduct = Sale::where('status', 'pending')->count();
        $failreg = User::where('status', 'pending')->count();
        $countestimony = Testimony::count();
-       
-       
-        return view('dashboard.admin.home', compact('countestimony', 'failreg', 'countunpaidproduct', 'countsalesuccess', 'view_adverts', 'view_products', 'view_sales', 'view_teams', 'display_vendors', 'display_distributors', 'countblog', 'countransport', 'countteam', 'countorder', 'countcontact', 'countadvert', 'countdistributor', 'countvendor', 'countsales', 'countsub', 'countproduct', 'countsubcategory', 'countcategory', 'countroot', 'countdistrict', 'countstate', 'countlga'));
+       $countavailableproduct = Product::where('status', 'approved')->count();
+       $unavailbleproduct = Product::where('status', 'suspend')->count();
+       $countundistributor = User::where('user_type', 'Distributor')->where('status', 'pending')->count();
+       $countsucessdistributor = User::where('user_type', 'Distributor')->where('status', 'success')->count();
+       $countundvendors = User::where('user_type', 'Vendor')->where('status', 'pending')->count();
+       $countsuccessdvendors = User::where('user_type', 'Vendor')->where('status', 'pending')->count();
+       $countadmin = Admin::count();
+        return view('dashboard.admin.home', compact('countadmin', 'countsuccessdvendors', 'countundvendors', 'countsucessdistributor', 'countundistributor', 'unavailbleproduct', 'countavailableproduct', 'countestimony', 'failreg', 'countunpaidproduct', 'countsalesuccess', 'view_adverts', 'view_products', 'view_sales', 'view_teams', 'display_vendors', 'display_distributors', 'countblog', 'countransport', 'countteam', 'countorder', 'countcontact', 'countadvert', 'countdistributor', 'countvendor', 'countsales', 'countsub', 'countproduct', 'countsubcategory', 'countcategory', 'countroot', 'countdistrict', 'countstate', 'countlga'));
     }
 
     public function profile() {
