@@ -447,7 +447,6 @@ Route::prefix('admin')->name('admin.')->group(function() {
         Route::put('/updatetelga/{id}', [LgaController::class, 'updatetelga'])->name('updatetelga');
         Route::post('/createbank', [BankController::class, 'fetchBanks'])->name('fetchBanks');
         Route::get('/viewbank', [BankController::class, 'viewbank'])->name('viewbank');
-        Route::get('/createTransferRecipient', [TransferController::class, 'createTransferRecipient'])->name('createTransferRecipient');
         
         Route::get('/logout', [AdminController::class, 'logout'])->name('logout'); 
         
@@ -486,6 +485,8 @@ Route::prefix('web')->name('web.')->group(function() {
         Route::get('/home', [UserController::class, 'home'])->name('home');
         Route::get('/resetmypassword', [UserController::class, 'resetmypassword'])->name('resetmypassword');
         Route::put('/changepassword/{id}', [UserController::class, 'changepassword'])->name('changepassword');
+        Route::get('/createTransferRecipient', [TransferController::class, 'createTransferRecipient'])->name('createTransferRecipient');
+        Route::get('/withdraw', [TransferController::class, 'withdraw'])->name('withdraw');
         
         Route::put('/updateprofile/{ref_no}', [UserController::class, 'updateprofile'])->name('updateprofile');
         Route::get('/mydistributors', [UserController::class, 'mydistributors'])->name('mydistributors'); 

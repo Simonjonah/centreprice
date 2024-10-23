@@ -55,23 +55,22 @@
                   <div class="row">
                     <div class="col-md-6">
                      <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                     <input type="hidden" name="distributor_id" value="{{ Auth::user()->user_id }}">
-                     <input type="hidden" name="vendor_id" value="{{ Auth::user()->vendor_id }}">
-                     <input type="hidden" name="distributor_email" value="{{ Auth::user()->distributor_email }}">
-                      <input type="hidden" name="vendor_email" value="{{ Auth::user()->vendor_email }}">
+                     <input type="hidden" name="phone" value="{{ Auth::user()->phone }}">
+                     <input type="hidden" name="email" value="{{ Auth::user()->email }}">
                       <div class="form-group">
-                        <input name="email" type="hidden" @error('email') is-invalid @enderror"
-                        value="{{ Auth::user()->email }}" class="form-control" id="" placeholder="Email">
+                        <label for="">Account Number</label>
+                        <input name="account_number" type="text" @error('account_number') is-invalid @enderror"
+                        value="" class="form-control" id="" placeholder="account_number">
                     </div>
-                    @error('email')
+                    @error('account_number')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
 
                         <div class="form-group">
-                        <label for="">First Name</label>
+                        <label for="">Name</label>
 
-                              <input name="first_name" type="text" @error('first_name') is-invalid @enderror"
-                              value="{{ Auth::user()->fname }}" class="form-control" id="" placeholder="first name">
+                              <input name="name" type="text" @error('first_name') is-invalid @enderror"
+                              value="{{ Auth::user()->fname }}  {{ Auth::user()->lname }}" class="form-control" id="" placeholder="name">
                           </div>
                           @error('first_name')
                               <span class="text-danger">{{ $message }}</span>
@@ -82,9 +81,11 @@
 
                     <!-- /.col -->
                     <div class="form-group">
-                        <label for="">Last Name</label>
-                        <input name="last_name" type="text" @error('last_name') is-invalid @enderror"
-                        value="{{ Auth::user()->lname }}" class="form-control" id="" placeholder="Last name">
+                        <label for="">Select Bank</label>
+                        <select name="bank_name" class="form-control">
+                          
+                            <option value=""></option>
+                        </select>
                     </div>
                     @error('last_name')
                         <span class="text-danger">{{ $message }}</span>

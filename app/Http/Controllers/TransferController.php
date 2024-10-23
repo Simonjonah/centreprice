@@ -104,7 +104,10 @@ class TransferController extends Controller
         return response()->json(['error' => $responseBody['message']], 400);
     }
     
-    
+    public function withdraw(){
+
+        return view('dashboard.withdraw');
+    }
     
     // Route::post('/create-transfer-recipient', 'YourController@createTransferRecipient');
     // Route::post('/initiate-transfer', 'YourController@initiateTransfer');
