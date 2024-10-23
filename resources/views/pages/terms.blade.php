@@ -276,6 +276,153 @@
                                     B. Terms and Conditions
                                 </p>
                             </div>
+
+
+
+
+                            <div class="text-block">
+                                <h4 class="title">Term and Conditions of Centerprices
+                                    To
+                                    Thamvos Entrepreneurs 
+                                     </h4>
+                                <p>
+                                    Thamvos Products Manufacturers Multipurpose Cooperative Society is known for her uniqueness in nature and operations. 
+
+                                    Being a products based Cooperative, we are involved in creating our own product lines through a contract production for the purpose of members participating in distribution and consumption while dividend are generated and are shared amongst members on the basis of personal and referrals purchases and sales performance. 
+                                    
+                                    Our term and conditions for membership operations on Centerprices as a Thamvos Entrepreneur is base on the production agreement with our  manufacturer:  Thamvos Products Company Limited who owns the products technology directly or indirectly and Centerprices, a subsidiary of Boldage Logistics Services Limited - a world class supply chain firm to help in the chain businesses (information, personnel, materials, and currency flow).
+                                </p>
+                            </div>
+
+
+                            <div class="text-block">
+                                <h4 class="title">MEMBERSHIP</h4>
+                                <p>
+                                    There are three categories of membership which include:
+                                </p>
+                                <p><b>FRANCHISE MEMBERSHIP -</b> this category is made of investors who put down their money  to sponsor production of a particular line of products within a state of the federation or country for an agreed dividend. 
+                                </p>
+                                <p><b>DISTRIBUTOR MEMBERSHIP -</b> this category is comprises of major cluster owners of vendors and subvendors (retailers and consumers). They create an affiliate shop online and or offline, holding stock of Thamvos Product lines in other to track sales made by his/her cluster members for Commissions Bonuses and Rewards at the  dashboard online. There is no limit as to the number of members to one's cluster. 
+                                </p>
+
+                                <p><b>VENDOR MEMBERSHIP -</b> this category is comprises of minor cluster owners of subvendors (retailers and consumers). They can track their personal and subvendors purchases performance for Commissions, Bonuses and Rewards at the  dashboard online. There is no limit as to the number of subvendors that a vendor can generate within his/her cluster. 
+                                </p>
+                                <p><b>INCENTIVES</b> 
+                                    These include cash and physical items collated and given to vendor members at their initial registration, renewal and as referrals bonus. 
+                                    </p>
+                                <p><b>INITIAL REGISTRATION</b> 
+                                    This is the first time one will join the Cooperative during the annual Thamvos Entrepreneurial Empowerment Campaign TEEC.</p>
+                                    
+                                    <p><b>GENERATIONS</b> 
+                                        The first generation is at your initial registration as a Ruby. The next generation is attained when one has grown to the highest level and start again as a Ruby
+                                    </p>
+                                    <p><b>ANNUAL MEMBERSHIP RENEWAL</b> 
+                                        Annual membership Renewal IA required of all vendor members only. A vendor can use the fund on his/her wallet for renewal. 
+                                        Distributors membership is reviewed bi-annually.</p>
+                                    
+                                        <p><b>REFERRAL</b> 
+                                            These comprise of vendors and subvendors under a particular Distributor. Every vendor has an upline and a downline members for the purpose of creating the opportunity for multiple income and teamwork. They all may have to form a cluster for their personal earnings advantage. 
+                                            </p>
+                                </div>
+
+                                <div class="text-block">
+                                    <h4 class="title">COMMISSION, BONUSES and REWARDS </h4>
+                                    <p>COMMISSION MILESTONES </p>
+                                    <ol>
+                                        <li> Ruby - First 1000 unit sales from personal and referrals purchase performance
+                                        </li>
+                                        <li> Sapphire (first 10,000 unit sales from personal and referrals purchase performance</li>
+                                        <li>Topaz (first 100,000 unit sales from personal and referrals purchase performance
+                                        </li>
+                                        <li>Gold(first 1000,000 unit sales from personal and referrals purchase performance</li>
+                                        <li> Platinum(first 10, 000,000 unit sales from personal and referrals purchase performance 
+                                        </li>
+                                        <li> Diamond(100, 000,000 unit sales from personal and referrals purchase performance</li>
+                                        <li> Crown Diamond(1, 000, 000,000 unit sales from personal and referrals purchase performance purchases) 
+                                        </li>
+                
+                                    </ol>
+                                    <p>Cashing out is not down haphazardly but only on each Milestone.</p>
+                                
+                                    <h3>BONUSES</h3>
+                                    <p>Bonus shall be given to each vendor as he or she moved from one generation to another generation.</p>
+                                    <p>Generation 1
+                                    </p>
+                                    <p>Generation 2
+                                    </p>
+                                    <p>Generation 3...
+                                    </p>
+
+
+
+                                    <h3>REWARDS</h3>
+                                    <p>
+                                        This shall depend on how fast each distributor and vendor achieve each Milestone. 
+                                        Any of our public displays reward eg Motor Vehicle, House etc shall carry Thamvos and Centerprices logos for at least one year. </p>
+                                <h3>Shopping</h3>
+                                <p> 
+                                    All shoppings are done and are tracked online for the purposes of Commission, Bonuses and Rewards. 
+                                    </p>
+                        
+                                <p>Only Vendors are considered retailers or consumers member of the cooperative. A vendor can use the fund on his/her wallet for shopping. Every checked out order is to be handled according to the delivery specifications as specified by the vendor based on volume and locations.</p>
+                                
+                                <h4>MEMBERSHIP INCENTIVES INCLUDE:
+                                    
+                                    </h4>
+                                    <ul>
+                                        <li>* Sign Up/Renewal Incentive: </li>
+                                        <li>   - One unit of our amazing products </li>
+                                            
+                                        <li>   * Referral Incentives:</li>
+                                        <li>   - Every 5 persons you refer = Product items or N15,000.00</li>
+                                        <li>  - Every 10 person you refer = N15,000.00 plus 1 bag of rice (25kg). </li>
+                                        <li>   - You can be upgraded to being a stockist/distributor by hard work once you have achieved a 1000 members in your cluster. </li>
+                                    </ul>
+                            
+                                    <h4>Billings</h4>
+                            <p>Every financial transaction is on our trusted partner, paystack with an end to end encrypted system to guarantee safe transactions and value for your money. 
+                                Every successful or failed transaction shall be reported to vendors via email. 
+                                </p>
+                            
+                            <h5>WHAT YOU NEED TO KNOW ABOUT THAMVOS PRODUCTS MANUFACTURERS MULTIPURPOSE COORPERATIVE SOCIETY LIMITED 
+                            </h5>
+
+                            <ul>
+                                <li>Multiple earnings beyond retirement; transgenerational! 
+                                </li>
+                                <li>Vibrant networking system that increases your networth. 
+                                </li>
+                                <li>We produce what we consume and consume what we produce while we share the profits amongst members for life
+                                </li>
+                                <li>We are committed to turning Consumers into Entrepreneurs for financial success
+                                </li>
+                                <li>Have access to our cutting edge products at amazing prices always 
+                                </li>
+                                <li>Every member of our coorperative is a potential stockist/distributor of our products
+                                </li>
+                                <li>We are all working for ourselves, because we all work for a stockist - they hold all the products 
+                                </li>
+                                <li>More cluster members, more incentives for you
+                                </li>
+                                <li>No one have access to our products but only through our members 
+                                </li>
+                                <li>We all buy, we all sell, we all share the profits</li>
+                                <li>Our network promotes your networth
+                                </li>
+                                <li>Grow your cluster and you can become a stockist and have everyone work for you 
+                                </li>
+                                <li>Once you become a member you cannot become a non member - it's a transgenerational adventure 
+                                </li>
+                                <li>Your team represents your incentives all year round
+                                </li>
+                                <li>Build now, play later!
+                                </li>
+                                <li>THAMVOS - Powder to Consumers!</li>
+                            </ul>
+                            
+                                </div>
+
+
                         </div>
                     </div>
                     

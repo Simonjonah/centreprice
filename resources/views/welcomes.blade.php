@@ -204,12 +204,19 @@
                         <div class="about-content">
                             <div class="section-title section-left" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
                                 <span class="pre-title">About Us</span>
-                                <h2 class="title">ABOUT <span class="color-secondary"> US</span> </h2>
+                                <h6 class="title" style="font-size: 13px">
+                                    Power To Consumers!   <span class="color-secondary"> Power To Consumers!!</span> Power To Consumers!!!</h6>
                                 <span class="shape-line"><i class="icon-19"></i></span>
-                                <p>Multiple earnings beyond retirement; transgenerational 
+                                <p>Join Centerprices to unlock the door to your entrepreneurial success and take control of your financial future. </p>
+                                <p>Centerprices is a global community of entrepreneurs who produce what they consume and sell their products to the world under the auspices of a Coorperative society and the profits are shared among members for life.
+                                </p>
+                                <p>Our system is coordinated by Thamvos Products Manufacturers Multipurpose Coorperative Society Limited, 
+                                    manufacturing handled by Thamvos Products Company Limited, distribution managed by Centerprices; a subsidiary of Boldage Logistics Services Limited. 
+                                </p>
+                                <p>The tripartite system is so designed to ease empowerment for the teeming population turning them into entrepreneurs while saving as a check against intermediation and adulteration. 
                                 </p>
                             </div>
-                            <ul class="features-list" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
+                            {{-- <ul class="features-list" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
                                 <li>Vibrant networking system that increases your networth. </li>
                                 <li>We produce what we consume and consume what we produce while we share the profits </li>
                                 <li>Turning Consumers into Entrepreneurs for financial success
@@ -218,7 +225,7 @@
                                 <li>Have access to cutting edge products at amazing price always
                                 </li>
                              
-                            </ul>
+                            </ul> --}}
                         </div>
                         <div class="course-view-all" data-sal-delay="150" data-sal="slide-up" data-sal-duration="1200">
                             <a href="{{ url('about') }}" class="edu-btn">About Us <i class="icon-4"></i></a>

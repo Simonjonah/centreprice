@@ -14,7 +14,7 @@
                         <div class="widget-information">
                             <ul class="information-list">
                                 <li><span>Add:</span>B3 Shelter Afrique Shopping Complex, Mbiaobong, Uyo. Akwa Ibom State.</li>
-                                <li><span>Call:</span><a href="tel:+2348068333055">+234 806 833 3055</a></li>
+                                <li><span>Call:</span><a href="tel:+23408080557395">+234 808 055 7395</a></li>
                                 <li><span>Email:</span><a href="mailto:centerpricesng@gmail.com" target="_blank">centerpricesng@gmail.com</a></li>
                             </ul>
                         </div>

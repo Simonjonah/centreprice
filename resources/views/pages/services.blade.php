@@ -38,8 +38,25 @@
                         <img src="{{ asset('front/assets/images/bg/serv.jpeg') }}" alt="">
                         <div class="privacy-policy terms-condition">
                             <div class="text-block">
-                                <h3 class="title" style="margin-top: 20px">Become a Part of Something Bigger</h3>
-                                <p>CenterPrices Supply Chain Community offers a unique opportunity to achieve financial freedom through a membership-based distribution model.</p>
+                                <h3 class="title" style="margin-top: 20px">Our Services</h3>
+                                <p>Our primary services are that we produce what we consume and consume what we produce while we present it as an opportunity for the general public to join the Cooperative - Thamvos Products Manufacturers Multipurpose Cooperative Society Limited                                </p>
+                            
+                                <p>Thamvos launches you into a successful entrepreneurial journey on a life time investment for a trans-generational dividend with minimal capital
+                                Opportunity to join awaits you via our Annual Entrepreneurial Empowerment Campaign on our e-commerce platform: <a href="www.centerprices.com ">www.centerprices.com </a>
+                                </p>
+                                {{-- <p>Are you ready to take control of your financial future 
+                                </p>
+                                <p>Are you worried about what business you can venture into</p>
+                            <p>Are you looking to have multiple streams of income.
+                            </p>
+                            <p>Thinking of earnings beyond your retirement </p>
+
+                                <p>Are you looking for capital to start up a new business </p>
+                                
+                                <p>We are here for you. </p>
+                                <p>Have access to our cutting edge products at amazing prices always</p>
+
+                                <p>You can become a Thamvos Entrepreneur too and have multiple streams of income with awesome referral benefits like no other</p> --}}
                             </div>
                             <div class="text-block">
                                 <h4 class="title">Here’s How It Works:</h4>
@@ -60,7 +77,7 @@
                             </div>
 
 
-                            <div class="text-block">
+                            {{-- <div class="text-block">
                                 <h4 class="title">The Benefits of Membership</h4>
                                 <ul>
                                     <li><b>Low Startup Costs:</b> Begin your entrepreneurial journey without a significant financial burden <a style="color: green" href="{{ url('becomemember') }}">(details on membership fees on Membership page)</a>.</li>
@@ -77,10 +94,10 @@
                                     <li>Empower yourself to achieve financial freedom and build a lasting legacy. <a style="color: green" href="{{ url('register') }}">Sign up</a> for a membership and unlock a world of opportunity. <a style="color: green" href="{{ url('register') }}">Visit the Membership Registration Page here.</a></li>
                                     
                                 </ul>
-                            </div>
-
+                            </div>--}}
                         </div>
-                    </div>
+                     
+                </div>
                     <div class="col-lg-4">
                         <div class="edu-blog-sidebar">
                            

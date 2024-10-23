@@ -37,26 +37,41 @@
         <div class="section-gap-large edu-about-area about-style-7">
             <div class="container">
                 <div class="row g-5 align-items-center">
-                    <div class="col-lg-5">
+                    <div class="col-lg-6">
                         <div class="about-content">
-                            <div class="section-title section-left" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
+                            <div class="section-title section-left" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800" style="text-align:justify">
                                 <span class="pre-title">About Us</span>
-                                {{-- <h2 class="title">We Providing The <span class="color-secondary">Best Quality</span> Online Courses.</h2> --}}
+                                <h6 class="title" style="font-size: 13px">Power To Consumers! <span class="color-secondary">Power To Consumers!!!</span> Power To Consumers!! </h6>
                                 <span class="shape-line"><i class="icon-19"></i></span>
-                                <p>Multiple earnings beyond retirement; transgenerational.</p>
-                            </div>
-                            <ul class="features-list" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
-                                <li>Vibrant networking system that increases your networth. </li>
-                                <li>We produce what we consume and consume what we produce while we share the profits </li>
-                                <li>Turning Consumers into Entrepreneurs for financial success
-                                </li>
+                                <p>Join Centerprices to unlock the door to your entrepreneurial success and take control of your financial future. </p>
+                                <p>Centerprices is a global community of entrepreneurs who produce what they consume and sell their products to the world under the auspices of a Coorperative society and the profits are shared among members for life.
+                                </p>
+                                <p>Our system is coordinated by Thamvos Products Manufacturers Multipurpose Coorperative Society Limited, 
+                                    manufacturing handled by Thamvos Products Company Limited, distribution managed by Centerprices; a subsidiary of Boldage Logistics Services Limited. 
+                                </p>
+                                <p>The tripartite system is so designed to ease empowerment for the teeming population turning them into entrepreneurs while saving as a check against intermediation and adulteration. 
+                                </p>
+                                <p>This is what it's all about; turning consumers into entrepreneurs. 
 
-                                <li>Have access to cutting edge products at amazing price always
-                                </li>
-                            </ul>
+                                    In Centerprices, we have in our product technology repertoire multiple cutting edge products already developed and Packaged for the entrepreneurial benefit of members. 
+                                    </p>
+                                <p>Our product lines include but not limited to:</p>
+                                <ul class="features-list" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
+                                    <li>Agro allied  </li>
+                                    <li>Brewery Auxiliaries</li>
+                                    <li>Coating and corrosion </li>
+                                    <li>Domestic care</li>
+                                    <li>Health and Wellness</li>
+                                    <li>Personal Care </li>
+                                    <li>Construction auxiliaries</li>
+                                 
+                                </ul>
+
+                            </div>
+                            
                         </div>
                     </div>
-                    <div class="col-lg-7">
+                    <div class="col-lg-6">
                         <div class="about-image-gallery">
                             <img class="main-img-1" src="{{ asset('front/assets/images/about/ab.jpg') }}" alt="About Image">
                             {{-- <img class="main-img-2" src="assets/images/about/about-12.webp" data-sal-delay="150" data-sal="slide-down" data-sal-duration="800" alt="About Image"> --}}
@@ -98,37 +113,39 @@
                 </div>
                 <div class="row g-5">
                     <div class="col-lg-4" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
-                        <div class="why-choose-box features-box color-primary-style">
-                            <div class="icon">
-                                <i class="icon-45"></i>
-                            </div>
-                            <div class="content">
-                                <h4 class="title">Mission</h4>
-                                <p>Our mission is to revolutionize the traditional business model by leveraging the power of community. We provide innovative products, comprehensive training, and unwavering support to our distributor network, fostering a collaborative environment for shared success.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
                         <div class="why-choose-box features-box color-secondary-style">
                             <div class="icon">
                                 <i class="icon-46"></i>
                             </div>
                             <div class="content">
                                 <h4 class="title">Vision</h4>
-                                <p><b>Simplicity:</b> We offer a straightforward business model that’s easy to understand and implement.
-                                    <b>Consistency:</b> We’re committed to providing reliable products, ongoing support, and a sustainable income opportunity.
-                                    Quality: W</p>
+                                <p>To become the largest products base Coorperative Society in the world. 
+                                </p>
                             </div>
                         </div>
                     </div>
+                    <div class="col-lg-4" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
+                        <div class="why-choose-box features-box color-primary-style">
+                            <div class="icon">
+                                <i class="icon-45"></i>
+                            </div>
+                            <div class="content">
+                                <h4 class="title">Mission</h4>
+                                <p>We are turning consumers into entrepreneurs and leading them to financial freedom.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <div class="col-lg-4" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
                         <div class="why-choose-box features-box color-extra08-style">
                             <div class="icon">
                                 <i class="icon-47"></i>
                             </div>
                             <div class="content">
-                                <h4 class="title">Our Commitment for You</h4>
-                                <p>At CSCC, your success is our priority. We’re here to equip you with the knowledge, resources, and ongoing support you need to build a thriving business and achieve your financial goals.</p>
+                                <h4 class="title">Our Core Value</h4>
+                                <p><b>Simplicity:</b> Our model and approach to wealth is friendly and non cumbersome.</p>
+                                <p><b>Consistency:</b>The community, the products and the earnings have come to stay, this is transgenerational </p>
+                                <p><b>Quality</b> Our services and tangible products are world best standards. </p>
                             </div>
                         </div>
                     </div>
@@ -157,6 +174,64 @@
         <!-- End Why Choose Area  -->
         <!--=====================================-->
         <!--=       Testimonial Area Start      =-->
+
+
+        <!--=====================================-->
+        <!-- Start Why Choose Area  -->
+        <section class="why-choose-area-3 edu-section-gap">
+            <div class="container">
+                <div class="row row--45">
+                    <div class="section-title-flex section-title" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
+                        <div class="left-content">
+                            <h2 class="title">Why <span class="color-secondary">Choose </span> Us</h2>
+                            <span class="shape-line"><i class="icon-19"></i></span>
+                        </div>
+                        <div class="right-content" style="text-align: justify">
+                            <p>We are your one-hub shop for launching a successful entrepreneurial journey.</p>
+                            <p>We’re a community built on the power of association, where we equip individuals with the tools and resources to build transgenerational wealth.
+                            </p> <br>
+                            <p>Here are some other reasons why people choose us. 
+                            </p><br>
+                            <p>Be Your Own Boss - 
+                                We provide the platform and support to establish yourself as a thriving entrepreneur.
+                            </p><br>
+                            <p>Long-Term Sustainability - 
+                                Our model is designed to foster long-term success beyond retirement for you and future generations.
+                            </p><br>
+
+                            <p>Low Startup Costs - 
+                                Get started with minimal investment capital, unlike traditional businesses requiring significant capital.
+                            </p><br>
+
+                            <p>Vibrant networking system that increases your networth. 
+                                We produce what we consume and sell our products to the world while we share the profits amongst members for life 
+                            </p><br>
+                            <p>Turning Consumers into Entrepreneurs for financial success
+                                Membership Loans
+                            </p><br>
+
+                            <p>Have access to cutting edge products at amazing prices always
+                                Upon successful registration, you’ll receive a membership sign up, renewal and referral incentive packages in products and in cash with comprehensive training/ materials, product information, and ongoing support resources
+                            </p>
+                            <p>Register now!</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <ul class="shape-group">
+                <li class="shape-1 scene">
+                    <span data-depth=".8"></span>
+                </li>
+                <li class="shape-2 scene">
+                    <img data-depth="-2" src="{{ asset('front/assets/images/about/shape-13.png') }}" alt="shape">
+                </li>
+                <li class="shape-3">
+                    <img data-parallax='{"x": 0, "y": 100}' src="{{ asset('front/assets/images/faq/shape-12.png') }}" alt="shape">
+                </li>
+            </ul>
+        </section>
+        <!-- End Why Choose Area  -->
 
         <!-- Start Team Area  -->
         <div class="edu-team-area team-area-2 edu-section-gap" style="background-color: #f0f4f5;">
